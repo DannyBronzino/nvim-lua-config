@@ -44,3 +44,7 @@ vim.api.nvim_exec(
 
 -- Y yank until the end of line  (note: this is now a default on master)
 vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
+
+-- set jj to escape insert mode
+vim.g.better_escape_shortcut = "jj"
+vim.g.better_escape_interval = 300

@@ -33,8 +33,14 @@ require("packer").startup({
 		})
 
 		use({
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			event = "BufEnter",
+		})
+
+		use({
 			"nvim-treesitter/nvim-treesitter",
-			require = "nvim-treesitter/nvim-treesitter-textobjects",
+			event = "BufEnter",
+			after = "nvim-treesitter-textobjects",
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdate",
 		})
@@ -74,138 +80,70 @@ require("packer").startup({
 		use({ "honza/vim-snippets", after = "ultisnips" })
 
 		-- Automatic insertion and deletion of a pair of characters
-		-- use({ "Raimondi/delimitMate", event = "InsertEnter" })
-
 		use({
 			"windwp/nvim-autopairs",
 			config = [[require("config.nvim-autopairs")]],
 		})
 
-		-- -- Python indent (follows the PEP8 style)
-		-- use({
-		-- "Vimjas/vim-python-pep8-indent",
-		-- ft = "python",
-		-- })
-
-		-- use({
-		-- "numirias/semshi",
-		-- ft = "python",
-		-- config = "vim.cmd [[UpdateRemotePlugins]]",
-		-- })
-
-		-- -- Python-related text object
-		-- use({
-		-- "jeetsukumaran/vim-pythonsense",
-		-- ft = "python",
-		-- })
-
-		-- -- Another markdown plugin
-		-- use({ "plasticboy/vim-markdown", ft = { "markdown" } })
-
-		-- -- Faster footnote generation
-		-- use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
-
-		-- -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-		-- use({ "godlygeek/tabular", cmd = { "Tabularize" } })
-
-		-- -- Markdown JSON header highlight plugin
-		-- use({ "elzr/vim-json", ft = { "json", "markdown" } })
-
 		-- Super fast buffer jump
 		use({
 			"phaazon/hop.nvim",
+			event = "VimEnter",
 			config = [[require('config.hop')]],
 		})
-
-		-- show keybindings
-		-- use({
-		-- "folke/which-key.nvim",
-		-- config = [[require('config.which-key')]],
-		-- })
 
 		-- Show current search term in different color
 		use({
 			"PeterRincker/vim-searchlight",
+			event = "VimEnter",
 		})
 
 		-- Clear highlight search automatically for you
 		use({
 			"romainl/vim-cool",
+			event = "VimEnter",
 		})
 
 		-- Colorschemes
-		use({ "sainnhe/edge" })
+		use({ "sainnhe/everforest", opt = true })
 
-		use({ "sainnhe/sonokai" })
+		use({ "Mofiqul/dracula.nvim", opt = true })
 
-		use({
-			"NTBBloodbath/doom-one.nvim",
-			config = function()
-				require("doom-one").setup({
-					cursor_coloring = true,
-					terminal_colors = true,
-					italic_comments = true,
-					enable_treesitter = true,
-					transparent_background = true,
-					pumblend = {
-						enable = true,
-						transparency_amount = 20,
-					},
-					plugins_integrations = {
-						neorg = true,
-						barbar = true,
-						bufferline = false,
-						gitgutter = false,
-						gitsigns = true,
-						telescope = true,
-						neogit = false,
-						nvim_tree = true,
-						dashboard = false,
-						startify = false,
-						whichkey = false,
-						indent_blankline = true,
-						vim_illuminate = false,
-						lspsaga = false,
-					},
-				})
-			end,
-		})
+		use({ "mhartington/oceanic-next", opt = true })
 
-		use({ "sainnhe/everforest" })
+		-- icons
+		use({ "kyazdani42/nvim-web-devicons" })
 
-		use({ "EdenEast/nightfox.nvim" })
-
-		use({ "Mofiqul/dracula.nvim" })
-
-		use({ "mhartington/oceanic-next" })
-
+		-- status line
 		use({
 			"hoob3rt/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
+			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.lualine")]],
 		})
 
 		-- Indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
-			config = [[require("config.indent-blankline")]],
+			event = "VimEnter",
 		})
 
-		use("tversteeg/registers.nvim")
+		-- Better register. Use " in Normal or <c-r> in insert
+		use({ "tversteeg/registers.nvim", event = "BufEnter" })
 
 		-- notification plugin
-		-- use({
-		-- "rcarriga/nvim-notify",
-		-- config = [[require("config.nvim-notify")]],
-		-- })
+		use({
+			"rcarriga/nvim-notify",
+			config = [[require("config.nvim-notify")]],
+		})
 
 		-- Escape faster with "jj" or "jk" or whatever
 		use({
 			"jdhao/better-escape.vim",
+			event = "insertEnter",
 		})
 
 		-- Syntax check and make
-		use("neomake/neomake")
+		use({ "neomake/neomake", cmd = "Neomake" })
 
 		-- Auto format tools
 		use({
@@ -284,17 +222,19 @@ require("packer").startup({
 		-- The missing auto-completion for cmdline!
 		use({
 			"gelguy/wilder.nvim",
+			setup = [[vim.cmd('packadd wilder.nvim')]],
 			requires = {
-				{ "nixprime/cpsm", run = "./install.sh" },
 				"romgrk/fzy-lua-native",
 				"kyazdani42/nvim-web-devicons",
 			},
+			run = ":UpdateRemotePlugsin",
 			config = [[require("config.wilder")]],
 		})
 
 		-- File Explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
+			event = "VimEnter",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.nvim-tree")]],
 		})
@@ -313,6 +253,7 @@ require("packer").startup({
 		-- powerful fuzzy search
 		use({
 			"nvim-telescope/telescope.nvim",
+			event = "BufEnter",
 			requires = {
 				{ "nvim-lua/popup.nvim" },
 				{ "nvim-lua/plenary.nvim" },
@@ -338,22 +279,19 @@ require("packer").startup({
 		-- Better Quickfix window
 		use({
 			"kevinhwang91/nvim-bqf",
+			event = "VimEnter",
 			config = [[require("config.bqf")]],
 		})
 
 		use({
 			"romgrk/barbar.nvim",
+			event = "VimEnter",
 			requires = { "kyazdani42/nvim-web-devicons" },
 			config = [[require("config.barbar")]],
 		})
 
 		-- show and trim trailing whitespaces
 		use({ "jdhao/whitespace.nvim", event = "VimEnter" })
-		-- -- puts list of buffers on top
-		-- use({
-		-- "akinsho/bufferline.nvim",
-		-- config = [[require("config.bufferline")]],
-		-- })
 	end,
 	config = {
 		max_jobs = nil,
