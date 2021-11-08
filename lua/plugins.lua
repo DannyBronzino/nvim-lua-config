@@ -281,22 +281,11 @@ require("packer").startup({
 			cmd = "AsyncRun",
 		})
 
-		-- Calculate statistics for visual selection
-		-- use({
-		-- "wgurecky/vimSum",
-		-- })
-
-		-- REPL for nvim
-		-- use({
-		-- "hkupty/iron.nvim",
-		-- config = [[require("config.iron")]],
-		-- })
-
 		-- The missing auto-completion for cmdline!
 		use({
 			"gelguy/wilder.nvim",
 			requires = {
-				"nixprime/cpsm",
+				{ "nixprime/cpsm", run = "./install.sh" },
 				"romgrk/fzy-lua-native",
 				"kyazdani42/nvim-web-devicons",
 			},
