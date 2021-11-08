@@ -1,0 +1,104 @@
+snippet bare "barebone code template"
+#include <iostream>
+#include <vector>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::vector;
+using std::string;
+
+
+int main()
+{
+
+  return 0;
+}
+endsnippet
+
+snippet icd "#include directive" b
+#include <$1>
+$0
+endsnippet
+
+snippet plist "print vector" w
+template <class T>
+void printList(const T& arr, const string& desc){
+  std::cout << desc << ": ";
+
+  for (auto it = arr.begin(); it != arr.end(); it++){
+    std::cout << *it << ((std::next(it) != arr.end()) ? ", " : "\n");
+  }
+}
+endsnippet
+
+snippet pmat "print list of list" w
+template <class T>
+void printMat(const vector<vector<T>>& mat, const string& desc){
+  cout << desc << ": " << endl;
+
+  for (auto it1 = mat.begin(); it1 != mat.end(); it1++){
+    auto cur_vec = *it1;
+    for (auto it2 = cur_vec.begin(); it2 != cur_vec.end(); it2++){
+      cout << *it2 << ((std::next(it2) != cur_vec.end()) ? ", " : "\n");
+    }
+  }
+}
+endsnippet
+
+snippet cout "print a variable" w
+cout << "$1: " << $2 << endl;
+endsnippet
+
+snippet random "Generate a random list" b
+// Generate a random sequence of length len, in range(low, high) (inclusive).
+// need to #include<random>
+vector<int> genRandom(int low, int high, int len){
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<int> distribution(low, high);
+
+  vector<int> arr(len, 0);
+  for (int i = 0; i != len; ++i){
+      arr[i] = distribution(gen);
+  }
+
+  return arr;
+}
+endsnippet
+
+snippet incset "Use set" b
+#include <set>
+
+using std::set;
+endsnippet
+
+snippet incmap "Use map" b
+#include <map>
+
+using std::map;
+endsnippet
+
+snippet incqueue "Use queue" b
+#include <queue>
+
+using std::queue;
+endsnippet
+
+snippet incstr "Use string" b
+#include <string>
+
+using std::string;
+endsnippet
+
+snippet incvec "Use vector" b
+#include <vector>
+
+using std::vector;
+endsnippet
+
+snippet incstack "Use stack" b
+#include <stack>
+
+using std::stack;
+endsnippet

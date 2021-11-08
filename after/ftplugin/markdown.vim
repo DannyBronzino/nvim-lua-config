@@ -1,0 +1,1 @@
+inoremap zt <esc>zta
