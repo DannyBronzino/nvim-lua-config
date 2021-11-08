@@ -48,3 +48,103 @@ vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 -- set jj to escape insert mode
 vim.g.better_escape_shortcut = "jj"
 vim.g.better_escape_interval = 300
+
+vim.o.fillchars = "fold: ,vert:│,eob: ,msgsep:‾"
+
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+vim.o.updatetime = 1000
+
+vim.o.swapfile = false
+
+vim.cmd([[
+let g:backupdir=expand(stdpath('data') . '/backup')
+if !isdirectory(g:backupdir)
+   call mkdir(g:backupdir, 'p')
+endif
+let &backupdir=g:backupdir
+
+set backup
+set backupcopy=yes
+]])
+
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.fileencoding = "utf-8"
+
+vim.cmd([[set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》]])
+
+vim.o.linebreak = true
+vim.o.showbreak = "↪"
+
+vim.o.wildmode = "list:longest"
+
+vim.o.showmode = false
+
+vim.o.fileformats = "unix"
+
+vim.cmd([[
+set wildignore+=*.o,*.obj,*.bin,*.dll,*.exe
+set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
+set wildignore+=*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico
+set wildignore+=*.pyc
+set wildignore+=*.DS_Store
+set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
+set wildignorecase
+]])
+
+vim.o.visualbell = true
+vim.o.errorbells = false
+
+vim.o.history = 500
+
+vim.cmd([[set list listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣]])
+
+vim.o.undofile = true
+
+vim.cmd([[set shortmess+=c]])
+
+vim.o.spelllang = "en"
+
+vim.o.shiftround = true
+
+vim.o.virtualedit = "block"
+
+vim.cmd([[set formatoptions+=mM]])
+
+-- use tilde as an operator
+vim.o.tildeop = true
+
+vim.o.joinspaces = false
+
+vim.o.synmaxcol = 200
+vim.o.startofline = false
+
+vim.cmd([[
+  if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+]])
+
+vim.o.signcolumn = "auto:2"
+
+vim.cmd([[set isfname-==
+set isfname-=,
+set whichwrap+=<,>,h,l
+set wrap
+set formatoptions+=t]])
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.o.numberwidth = 6
+
+vim.cmd([[set mouse+=a]])

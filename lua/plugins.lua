@@ -105,11 +105,13 @@ require("packer").startup({
 		})
 
 		-- Colorschemes
-		use({ "sainnhe/everforest", opt = true })
+		use({ "sainnhe/everforest" })
 
-		use({ "Mofiqul/dracula.nvim", opt = true })
+		use({ "Mofiqul/dracula.nvim" })
 
-		use({ "mhartington/oceanic-next", opt = true })
+		use({ "mhartington/oceanic-next" })
+
+		use({ "ntk148v/vim-horizon" })
 
 		-- icons
 		use({ "kyazdani42/nvim-web-devicons" })
