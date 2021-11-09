@@ -1,30 +1,30 @@
 --Incremental live completion (note: this is now a default on master)
-vim.o.inccommand = "nosplit"
+vim.opt.inccommand = "nosplit"
 
 --Set highlight on search
-vim.o.hlsearch = false
+vim.opt.hlsearch = false
 
 --Make line numbers default
 vim.wo.number = true
 
 --Do not save when switching buffers (note: this is now a default on master)
-vim.o.hidden = true
+vim.opt.hidden = true
 
 --Enable mouse mode
-vim.o.mouse = "a"
+vim.opt.mouse = "a"
 
 --Enable break indent
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
 --Save undo history
 vim.opt.undofile = true
 
 --Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 --Decrease update time
-vim.o.updatetime = 250
+vim.opt.updatetime = 250
 vim.wo.signcolumn = "yes"
 
 --Remap for dealing with word wrap
@@ -49,14 +49,14 @@ vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 vim.g.better_escape_shortcut = "jj"
 vim.g.better_escape_interval = 300
 
-vim.o.fillchars = "fold: ,vert:│,eob: ,msgsep:‾"
+vim.opt.fillchars = "fold: ,vert:│,eob: ,msgsep:‾"
 
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-vim.o.updatetime = 1000
+vim.opt.updatetime = 1000
 
-vim.o.swapfile = false
+vim.opt.swapfile = false
 
 vim.cmd([[
 let g:backupdir=expand(stdpath('data') . '/backup')
@@ -69,26 +69,26 @@ set backup
 set backupcopy=yes
 ]])
 
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-vim.o.fileencoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
 
 vim.cmd([[set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》]])
 
-vim.o.linebreak = true
-vim.o.showbreak = "↪"
+vim.opt.linebreak = true
+vim.opt.showbreak = "↪"
 
-vim.o.wildmode = "list:longest"
+vim.opt.wildmode = "list:longest"
 
-vim.o.showmode = false
+vim.opt.showmode = false
 
-vim.o.fileformats = "unix"
+vim.opt.fileformats = "unix"
 
 vim.cmd([[
 set wildignore+=*.o,*.obj,*.bin,*.dll,*.exe
@@ -100,32 +100,32 @@ set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
 set wildignorecase
 ]])
 
-vim.o.visualbell = true
-vim.o.errorbells = false
+vim.opt.visualbell = true
+vim.opt.errorbells = false
 
-vim.o.history = 500
+vim.opt.history = 500
 
 vim.cmd([[set list listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣]])
 
-vim.o.undofile = true
+vim.opt.undofile = true
 
 vim.cmd([[set shortmess+=c]])
 
-vim.o.spelllang = "en"
+vim.opt.spelllang = "en"
 
-vim.o.shiftround = true
+vim.opt.shiftround = true
 
-vim.o.virtualedit = "block"
+vim.opt.virtualedit = "block"
 
 vim.cmd([[set formatoptions+=mM]])
 
 -- use tilde as an operator
-vim.o.tildeop = true
+vim.opt.tildeop = true
 
-vim.o.joinspaces = false
+vim.opt.joinspaces = false
 
-vim.o.synmaxcol = 200
-vim.o.startofline = false
+vim.opt.synmaxcol = 200
+vim.opt.startofline = false
 
 vim.cmd([[
   if executable('rg')
@@ -134,17 +134,25 @@ vim.cmd([[
 endif
 ]])
 
-vim.o.signcolumn = "auto:2"
+vim.opt.signcolumn = "auto:2"
 
-vim.cmd([[set isfname-==
-set isfname-=,
-set whichwrap+=<,>,h,l
-set wrap
-set formatoptions+=t]])
+vim.opt.isfname:remove("=")
+vim.opt.isfname:remove(",")
 
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.whichwrap:append("<,>,h,l")
+vim.opt.wrap = true
 
-vim.o.numberwidth = 6
+vim.opt.formatoptions:append("t")
+-- vim.cmd([[set isfname-==
+-- set isfname-=,
+-- set whichwrap+=<,>,h,l
+-- set wrap
+-- set formatoptions+=t]])
 
-vim.cmd([[set mouse+=a]])
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.opt.numberwidth = 6
+
+-- vim.cmd([[set mouse+=a]])
+vim.opt.mouse:append("a")
