@@ -1,10 +1,10 @@
 -- sources
 require("plugins")
 require("options")
+require("globals")
 
 vim.cmd([[
 let g:config_files = [
-      \ 'globals.vim',
       \ 'autocommands.vim',
       \ 'mappings.vim',
       \ 'plugins.vim',
@@ -17,4 +17,4 @@ endfor]])
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.cmd([[colorscheme dracula]])
+vim.cmd([[colorscheme OceanicNext]])
