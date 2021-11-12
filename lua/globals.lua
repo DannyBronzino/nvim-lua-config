@@ -39,3 +39,8 @@ vim.g.loaded_tutor_mode_plugin = 1
 -- Do not use builtin matchit.vim and matchparen.vim since we use vim-matchup
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
+
+--Remap space as leader key
+vim.api.nvim_set_keymap("", "Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
