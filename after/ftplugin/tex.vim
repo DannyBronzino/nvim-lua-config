@@ -10,3 +10,9 @@ let b:delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = "$"
 
 inoremap zt <esc>zta
+
+" Expansions for book I'm writing
+iabbrev tq \tq{
+iabbrev Qing \Qing{}
+iabbrev Therese \Therese{}
+iabbrev Lakshmi \Lakshmi{}

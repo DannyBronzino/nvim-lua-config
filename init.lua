@@ -12,7 +12,7 @@ let g:config_files = [
       \ ]
 
 for s:fname in g:config_files
-  execute printf('source %s/core/%s', stdpath('config'), s:fname)
+  execute printf('source %s/vim/%s', stdpath('config'), s:fname)
 endfor]])
 
 --Set colorscheme (order is important here)
