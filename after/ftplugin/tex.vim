@@ -9,10 +9,10 @@ set colorcolumn=0
 let b:delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = "$"
 
-inoremap zt <esc>zta
+inoremap <buffer> zt <esc>zta
 
 " Expansions for book I'm writing
-iabbrev tq \tq{
-iabbrev Qing \Qing{}
-iabbrev Therese \Therese{}
-iabbrev Lakshmi \Lakshmi{}
+inoremap <buffer> tq \tq{}<left>
+iabbrev <buffer> Qing \Qing{}
+iabbrev <buffer> Therese \Therese{}
+iabbrev <buffer> Lakshmi \Lakshmi{}
