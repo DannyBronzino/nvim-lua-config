@@ -15,6 +15,11 @@ for s:fname in g:config_files
   execute printf('source %s/core/%s', stdpath('config'), s:fname)
 endfor]])
 
+-- source config.lualine when colorscheme changes
+vim.cmd([[
+autocmd colorscheme * source ./lua/config/lualine.lua
+]])
+
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.cmd([[colorscheme OceanicNext]])
+vim.cmd([[colorscheme dracula]])
