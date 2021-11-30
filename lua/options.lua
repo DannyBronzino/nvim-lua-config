@@ -2,7 +2,7 @@
 vim.opt.inccommand = "nosplit"
 
 --Set highlight on search
-vim.opt.hlsearch = false
+--vim.opt.hlsearch = false
 
 --Make line numbers default
 vim.wo.number = true
