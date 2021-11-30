@@ -1,6 +1,5 @@
 local function get_colorscheme()
 	local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
-
 	if colorscheme == "dracula" then
 		return "dracula-nvim"
 	elseif colorscheme == "OceanicNext" then

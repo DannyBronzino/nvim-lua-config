@@ -102,13 +102,42 @@ require("packer").startup({
 		})
 
 		-- Colorschemes
-		use({ "sainnhe/everforest" })
-
 		use({ "Mofiqul/dracula.nvim" })
 
 		use({ "mhartington/oceanic-next" })
 
-		use({ "ntk148v/vim-horizon" })
+		use({
+			"NTBBloodbath/doom-one.nvim",
+			config = function()
+				require("doom-one").setup({
+					cursor_coloring = true,
+					terminal_colors = true,
+					italic_comments = true,
+					enable_treesitter = true,
+					transparent_background = false,
+					pumblend = {
+						enable = true,
+						transparency_amount = 20,
+					},
+					plugins_integrations = {
+						neorg = false,
+						barbar = true,
+						bufferline = false,
+						gitgutter = false,
+						gitsigns = true,
+						telescope = true,
+						neogit = false,
+						nvim_tree = true,
+						dashboard = false,
+						startify = false,
+						whichkey = false,
+						indent_blankline = true,
+						vim_illuminate = false,
+						lspsaga = false,
+					},
+				})
+			end,
+		})
 
 		-- icons
 		use({ "kyazdani42/nvim-web-devicons" })
