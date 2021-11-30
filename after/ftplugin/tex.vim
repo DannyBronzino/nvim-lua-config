@@ -6,9 +6,6 @@ set wrapmargin=0
 set foldlevel=999
 set colorcolumn=0
 
-let b:delimitMate_matchpairs = "(:),[:],{:}"
-let delimitMate_quotes = "$"
-
 inoremap <buffer> zt <esc>zta
 
 " Expansions for book I'm writing
