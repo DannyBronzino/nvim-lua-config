@@ -1,12 +1,9 @@
-"{ Global Variable
-
-"{{ Custom variables
+" Custom variables
 let g:is_win = has('win32') || has('win64')
 let g:is_linux = has('unix') && !has('macunix')
 let g:is_mac = has('macunix')
-"}}
 
-"{{ Builtin variables
+" Builtin variables
 " Disable Python2 support
 let g:loaded_python_provider = 0
 
@@ -38,9 +35,8 @@ let mapleader = ','
 
 " Enable highlighting for lua HERE doc inside vim script
 let g:vimsyn_embed = 'l'
-"}}
 
-"{{ Disable loading certain plugins
+" Disable loading certain plugins
 " Whether to load netrw by default, see
 " https://github.com/bling/dotvim/issues/4
 let g:loaded_netrw       = 0
@@ -64,5 +60,3 @@ let g:loaded_tutor_mode_plugin = 1  " do not load the tutor plugin
 " Do not use builtin matchit.vim and matchparen.vim since we use vim-matchup
 let g:loaded_matchit = 1
 let g:loaded_matchparen = 1
-"}}
-"}
