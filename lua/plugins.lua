@@ -92,11 +92,8 @@ require("packer").startup({
 			config = [[require('config.hop')]],
 		})
 
-		-- Show current search term in different color
-		use({
-			"PeterRincker/vim-searchlight",
-			event = "VimEnter",
-		})
+		-- Show match number for search
+		use({ "kevinhwang91/nvim-hlslens", branch = "dev", event = "VimEnter" })
 
 		-- Clear highlight search automatically for you
 		use({
