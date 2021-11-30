@@ -18,16 +18,16 @@ let g:better_escape_interval = 300
 let g:better_escape_shortcut = 'jj'
 
 " Change highlight color of matching bracket for better visual effects
-augroup matchup_matchparen_highlight
-  autocmd!
-  autocmd ColorScheme * highlight MatchParen cterm=underline gui=underline
-augroup END
+" augroup matchup_matchparen_highlight
+  " autocmd!
+  " autocmd ColorScheme * highlight MatchParen cterm=underline gui=underline
+" augroup END
 
 " Show matching keyword as underlined text to reduce color clutter
-augroup matchup_matchword_highlight
-  autocmd!
-  autocmd ColorScheme * hi MatchWord cterm=underline gui=underline
-augroup END
+" augroup matchup_matchword_highlight
+  " autocmd!
+  " autocmd ColorScheme * hi MatchWord cterm=underline gui=underline
+" augroup END
 
 " Automatically open quickfix window of 6 line tall after asyncrun starts
 let g:asyncrun_open = 6
