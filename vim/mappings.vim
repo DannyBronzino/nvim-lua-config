@@ -151,3 +151,6 @@ noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR>
 
 map *  <Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>
 map #  <Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>
+
+" move current line to top of screen
+inoremap zt <esc>zta

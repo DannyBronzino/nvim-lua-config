@@ -1,4 +1,8 @@
-require("nvim-autopairs").setup({
+local npairs = require("nvim-autopairs")
+local Rule = require("nvim-autopairs.rule")
+local cond = require("nvim-autopairs.conds")
+
+npairs.setup({
 	disable_filetype = { "TelescopePrompt" },
 	ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]], "%s+", ""),
 	enable_moveright = true,
@@ -9,14 +13,18 @@ require("nvim-autopairs").setup({
 	map_c_w = true, -- map <c-w> to delete an pair if possible
 	ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
 })
-
-local Rule = require("nvim-autopairs.rule")
-local npairs = require("nvim-autopairs")
-
--- latex settings
--- inline math
+-- latex inline math
 npairs.add_rule(Rule("$", "$", { "tex", "latex" }))
 
--- I use csquotes so I don't need quotation marks paired
-npairs.remove_rule("'", "'", {"tex", "latex," })
-npairs.remove_rule('"', '"', {"tex", "latex," })
+-- disable quotation marks in latex because I use csquotes
+npairs.get_rule("'")[1]:with_pair(function()
+	if vim.bo.filetype == "tex" then
+		return false
+	end
+end)
+
+npairs.get_rule('"')[1]:with_pair(function()
+	if vim.bo.filetype == "tex" then
+		return false
+	end
+end)
