@@ -13,6 +13,10 @@ require("nvim-autopairs").setup({
 local Rule = require("nvim-autopairs.rule")
 local npairs = require("nvim-autopairs")
 
+-- latex settings
+-- inline math
 npairs.add_rule(Rule("$", "$", { "tex", "latex" }))
+
+-- I use csquotes so I don't need quotation marks paired
 npairs.remove_rule("'", "'", {"tex", "latex," })
 npairs.remove_rule('"', '"', {"tex", "latex," })
