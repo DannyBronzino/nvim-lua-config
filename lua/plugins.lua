@@ -93,7 +93,7 @@ require("packer").startup({
 		})
 
 		-- Show match number for search
-		use({ "kevinhwang91/nvim-hlslens", branch = "dev", event = "VimEnter" })
+		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
 		-- Clear highlight search automatically for you
 		use({
