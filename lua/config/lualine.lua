@@ -75,7 +75,7 @@ require("lualine").setup({
 			"diff",
 		},
 		lualine_c = { spell, "filename" },
-		lualine_x = { "encoding", "fileformat", "filetype" },
+		lualine_x = { "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = {
 			"location",

@@ -261,7 +261,7 @@ require("packer").startup({
 		use({
 			"gelguy/wilder.nvim",
 			setup = [[vim.cmd('packadd wilder.nvim')]],
-			opt = true,
+			event = "VimEnter"
 		})
 
 		-- showing keybindings
