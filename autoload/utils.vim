@@ -27,12 +27,6 @@ function! utils#HasColorscheme(name) abort
   return !empty(globpath(&runtimepath, l:pat))
 endfunction
 
-" Check if an Airline theme exists in runtimepath.
-function! utils#HasAirlinetheme(name) abort
-  let l:pat = printf('autoload/airline/themes/%s.vim', a:name)
-  return !empty(globpath(&runtimepath, l:pat))
-endfunction
-
 " Generate random integers in the range [Low, High] in pure vim script,
 " adapted from https://stackoverflow.com/a/12739441/6064933
 function! utils#RandInt(Low, High) abort
@@ -145,6 +139,15 @@ function! utils#Get_titlestr() abort
   return l:title_str
 endfunction
 
+" Output current time or unix timestamp in human-readable format.
+function! utils#iso_time(timestamp) abort
+  if a:timestamp
+    return strftime('%Y-%m-%d %H:%M:%S%z', a:timestamp)
+  endif
+
+  return strftime('%Y-%m-%d %H:%M:%S%z')
+endfunction
+
 " Check if we are inside a Git repo.
 function! utils#Inside_git_repo() abort
   let res = system('git rev-parse --is-inside-work-tree')
@@ -174,6 +177,10 @@ function! utils#CaptureCommandOutput(command) abort
   redir @m
   execute a:command
   redir END
+  call v:lua.vim.notify("command output captured to register m", "info", {'title': 'nvim-config'})
+  "create a scratch buffer for dumping the text, ref: https://vi.stackexchange.com/a/11311/15292.
+  tabnew | setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+  call nvim_buf_set_lines(0, 0, 0, 0, [@m])
 endfunction
 
 " Edit all files matching the given patterns.
@@ -183,4 +190,15 @@ function! utils#MultiEdit(patterns) abort
       execute 'edit ' . f
     endfor
   endfor
+endfunction
+
+function! utils#add_pack(name) abort
+  let l:success = v:true
+  try
+    execute printf("packadd! %s", a:name)
+  catch /^Vim\%((\a\+)\)\=:E919/
+    let l:success = v:false
+  endtry
+
+  return l:success
 endfunction

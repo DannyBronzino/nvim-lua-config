@@ -9,6 +9,7 @@ let g:config_files = [
       \ 'autocommands.vim',
       \ 'mappings.vim',
       \ 'plugins.vim',
+      \ 'wilder.vim',
       \ ]
 
 for s:fname in g:config_files

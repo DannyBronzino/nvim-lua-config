@@ -85,21 +85,25 @@ require("packer").startup({
 			config = [[require("config.nvim-autopairs")]],
 		})
 
-		-- Super fast buffer jump
+		-- Buffer jumping like EasyMotion
 		use({
 			"phaazon/hop.nvim",
 			event = "VimEnter",
-			config = [[require('config.hop')]],
+			config = function()
+				vim.defer_fn(function()
+					require("config.hop")
+				end, 2000)
+			end,
 		})
-
-		-- Show match number for search
-		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
 		-- Clear highlight search automatically for you
 		use({
 			"romainl/vim-cool",
 			event = "VimEnter",
 		})
+
+		-- Show match number for search
+		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
 		-- Colorschemes
 		use({ "Mofiqul/dracula.nvim" })
@@ -114,7 +118,7 @@ require("packer").startup({
 					terminal_colors = true,
 					italic_comments = true,
 					enable_treesitter = true,
-					transparent_background = false,
+					transparent_background = true,
 					pumblend = {
 						enable = true,
 						transparency_amount = 20,
@@ -139,13 +143,12 @@ require("packer").startup({
 			end,
 		})
 
-		-- icons
-		use({ "kyazdani42/nvim-web-devicons" })
-
 		-- status line
 		use({
-			"hoob3rt/lualine.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
+			"nvim-lualine/lualine.nvim",
+			-- event = "VimEnter",
+			-- after = { "dracula.nvim", "oceanic-next", "doom-one.nvim" },
+			requires = { "kyazdani42/nvim-web-devicons", opt = true },
 			config = [[require("config.lualine")]],
 		})
 
@@ -156,12 +159,17 @@ require("packer").startup({
 		})
 
 		-- Better register. Use " in Normal or <c-r> in insert
-		use({ "tversteeg/registers.nvim", event = "BufEnter" })
+		use({ "tversteeg/registers.nvim", event = "VimEnter" })
 
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
-			config = [[require("config.nvim-notify")]],
+			event = "BufEnter",
+			config = function()
+				vim.defer_fn(function()
+					require("config.nvim-notify")
+				end, 2000)
+			end,
 		})
 
 		-- Escape faster with "jj" or "jk" or whatever
@@ -188,10 +196,10 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive" })
+		use({ "tpope/vim-fugitive", event = "User InGitRepo" })
 
 		-- Better git log display
-		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive" })
+		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
 
 		-- Additional powerful text object for vim, this plugin should be studied
 		-- carefully to use its full power
@@ -227,6 +235,7 @@ require("packer").startup({
 		-- Add indent object for vim (useful for languages like Python)
 		use({
 			"michaeljsmith/vim-indent-object",
+			event = "VimEnter",
 		})
 
 		-- Latex stuff
@@ -238,6 +247,7 @@ require("packer").startup({
 		-- Modern matchit implementation
 		use({
 			"andymass/vim-matchup",
+			event = "VimEnter",
 		})
 
 		-- Asynchronous command execution
@@ -251,14 +261,19 @@ require("packer").startup({
 		use({
 			"gelguy/wilder.nvim",
 			setup = [[vim.cmd('packadd wilder.nvim')]],
-			requires = {
-				"romgrk/fzy-lua-native",
-				"kyazdani42/nvim-web-devicons",
-			},
-			run = ":UpdateRemotePlugsin",
-			config = [[require("config.wilder")]],
+			opt = true,
 		})
 
+		-- showing keybindings
+		use({
+			"folke/which-key.nvim",
+			event = "VimEnter",
+			config = function()
+				vim.defer_fn(function()
+					require("config.which-key")
+				end, 2000)
+			end,
+		})
 		-- File Explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
@@ -299,15 +314,10 @@ require("packer").startup({
 			end,
 		})
 
-		-- use({
-		-- "easymotion/vim-easymotion",
-		-- config = [[require("config.easymotion")]],
-		-- })
-
 		-- Better Quickfix window
 		use({
 			"kevinhwang91/nvim-bqf",
-			event = "VimEnter",
+			event = "FileType qf",
 			config = [[require("config.bqf")]],
 		})
 
