@@ -81,7 +81,7 @@ require("lualine").setup({
 			"location",
 			{
 				"diagnostics",
-				sources = { "nvim_lsp" },
+				sources = { "nvim_diagnostic" },
 			},
 			{
 				trailing_space,
