@@ -42,7 +42,7 @@ require("packer").startup({
 			event = "BufEnter",
 			after = "nvim-treesitter-textobjects",
 			config = [[require("config.treesitter")]],
-			run = ":TSUpdate",
+			run = ":TSUpdateSync",
 		})
 
 		use({ "onsails/lspkind-nvim", event = "BufEnter" })
