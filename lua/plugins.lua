@@ -159,7 +159,7 @@ require("packer").startup({
 		})
 
 		-- Better register. Use " in Normal or <c-r> in insert
-		use({ "tversteeg/registers.nvim", event = "VimEnter" })
+		-- use({ "tversteeg/registers.nvim", event = "VimEnter" })
 
 		-- notification plugin
 		use({
@@ -330,13 +330,6 @@ require("packer").startup({
 
 		-- show and trim trailing whitespaces
 		use({ "jdhao/whitespace.nvim", event = "VimEnter" })
-
-		use({
-			"nvim-neorg/neorg",
-			requires = { "nvim-lua/plenary.nvim" },
-			config = [[require("config.neorg")]],
-			after = { "nvim-treesitter", "nvim-cmp" },
-		})
 	end,
 	config = {
 		max_jobs = nil,
