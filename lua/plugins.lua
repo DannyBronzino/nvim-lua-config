@@ -196,7 +196,7 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive", event = "User InGitRepo" })
+		use({ "tpope/vim-fugitive" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
@@ -261,7 +261,7 @@ require("packer").startup({
 		use({
 			"gelguy/wilder.nvim",
 			setup = [[vim.cmd('packadd wilder.nvim')]],
-			event = "VimEnter"
+			event = "VimEnter",
 		})
 
 		-- showing keybindings
