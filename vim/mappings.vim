@@ -9,10 +9,10 @@ nnoremap <leader>p m`o<ESC>p``
 nnoremap <leader>P m`O<ESC>p``
 
 " Navigation in the location and quickfix list
-nnoremap <silent> <up> :<C-U>lprevious<CR>zv
-nnoremap <silent> <down> :<C-U>lnext<CR>zv
-nnoremap <silent> <left> :<C-U>lfirst<CR>zv
-nnoremap <silent> <right> :<C-U>llast<CR>zv
+nnoremap <silent> <m-up> :<C-U>lprevious<CR>zv
+nnoremap <silent> <m-down> :<C-U>lnext<CR>zv
+nnoremap <silent> <m-left> :<C-U>lfirst<CR>zv
+nnoremap <silent> <m-right> :<C-U>llast<CR>zv
 nnoremap <silent> <c-up> :<C-U>cprevious<CR>zv
 nnoremap <silent> <c-down> :<C-U>cnext<CR>zv
 nnoremap <silent> <c-left> :<C-U>cfirst<CR>zv
