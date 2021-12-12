@@ -6,7 +6,7 @@ function M.show_line_diagnostics()
 		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 		border = "single",
 	}
-	vim.lsp.diagnostic.show_line_diagnostics(opts)
+	vim.diagnostic.open_float(opts)
 end
 
 local custom_attach = function(client, bufnr)
