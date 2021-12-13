@@ -201,6 +201,15 @@ require("packer").startup({
 		-- Better git log display
 		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
 
+		-- Another markdown plugin
+		use({ "plasticboy/vim-markdown", ft = { "markdown" } })
+
+		-- Faster footnote generation
+		use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
+
+		-- Vim tabular plugin for manipulate tabular, required by markdown plugins
+		use({ "godlygeek/tabular", cmd = { "Tabularize" } })
+
 		-- Additional powerful text object for vim, this plugin should be studied
 		-- carefully to use its full power
 		use({
@@ -258,11 +267,7 @@ require("packer").startup({
 		})
 
 		-- The missing auto-completion for cmdline!
-		use({
-			"gelguy/wilder.nvim",
-			opt = true,
-			setup = [[vim.cmd('packadd wilder.nvim')]],
-		})
+		use({ "gelguy/wilder.nvim" })
 
 		-- showing keybindings
 		use({
