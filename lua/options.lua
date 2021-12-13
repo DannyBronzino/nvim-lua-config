@@ -28,7 +28,7 @@ vim.opt.smartcase = true
 -- Decrease update time
 vim.opt.updatetime = 250
 -- Timeout length for which-key
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 1000
 
 vim.wo.signcolumn = "yes"
 
