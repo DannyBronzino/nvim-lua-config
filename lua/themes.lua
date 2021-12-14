@@ -6,3 +6,4 @@ vim.o.termguicolors = true
 vim.cmd([[colorscheme doom-one]])
 vim.cmd([[hi WhichKeyValue guifg=Normal]])
 vim.cmd([[hi Comment guifg=darkgrey]])
+vim.cmd([[hi LineNr guifg=lightmagenta]])
