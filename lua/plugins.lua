@@ -196,7 +196,7 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive", cmd = "Git" })
+		use({ "tpope/vim-fugitive" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
