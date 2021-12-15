@@ -35,15 +35,12 @@ vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true,
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 -- Highlight on yank
-vim.api.nvim_exec(
-	[[
+vim.cmd([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]],
-	false
-)
+]])
 
 -- Y yank until the end of line  (note: this is now a default on master)
 vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
@@ -61,6 +58,7 @@ vim.opt.updatetime = 1000
 
 vim.opt.swapfile = false
 
+-- sets up backup
 vim.cmd([[
 let g:backupdir=expand(stdpath('data') . '/backup')
 if !isdirectory(g:backupdir)
@@ -82,7 +80,7 @@ vim.opt.smartcase = true
 
 vim.opt.fileencoding = "utf-8"
 
-vim.cmd([[set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》]])
+vim.opt.matchpairs:append({ "<:>", "「:」", "『:』", "【:】", "“:”", "‘:’", "《:》" })
 
 vim.opt.linebreak = true
 vim.opt.showbreak = "↪"
@@ -93,26 +91,28 @@ vim.opt.showmode = false
 
 vim.opt.fileformats = "unix"
 
-vim.cmd([[
-set wildignore+=*.o,*.obj,*.bin,*.dll,*.exe
-set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
-set wildignore+=*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico
-set wildignore+=*.pyc
-set wildignore+=*.DS_Store
-set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
-set wildignorecase
-]])
+vim.opt.wildignore:append({
+	[[*.o,*.obj,*.bin,*.dll,*.exe,*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**,*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico,*.pyc,*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv]],
+})
+vim.opt.wildignorecase = true
 
 vim.opt.visualbell = true
 vim.opt.errorbells = false
 
 vim.opt.history = 500
 
-vim.cmd([[set list listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣]])
+vim.opt.list = true
+
+vim.opt.listchars = {
+	extends = "❯",
+	nbsp = "␣",
+	precedes = "❮",
+	tab = "▸ ",
+}
 
 vim.opt.undofile = true
 
-vim.cmd([[set shortmess+=c]])
+vim.opt.shortmess:append({ c = true })
 
 vim.opt.spelllang = "en"
 
@@ -120,7 +120,7 @@ vim.opt.shiftround = true
 
 vim.opt.virtualedit = "block"
 
-vim.cmd([[set formatoptions+=mM]])
+vim.opt.formatoptions:append({ m = true, M = true })
 
 -- use tilde as an operator
 vim.opt.tildeop = true
@@ -131,7 +131,7 @@ vim.opt.synmaxcol = 200
 vim.opt.startofline = false
 
 vim.cmd([[
-  if executable('rg')
+if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
   set grepformat=%f:%l:%c:%m
 endif
@@ -146,16 +146,10 @@ vim.opt.whichwrap:append("<,>,h,l")
 vim.opt.wrap = true
 
 vim.opt.formatoptions:append("t")
--- vim.cmd([[set isfname-==
--- set isfname-=,
--- set whichwrap+=<,>,h,l
--- set wrap
--- set formatoptions+=t]])
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.opt.numberwidth = 6
 
--- vim.cmd([[set mouse+=a]])
 vim.opt.mouse:append("a")
