@@ -1,3 +1,9 @@
+" executes local lua option file
+augroup local_init.lua
+  autocmd!
+  autocmd BufEnter * :runtime lua/local_init.lua
+augroup END
+
 " Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
 augroup dynamic_smartcase
   autocmd!
