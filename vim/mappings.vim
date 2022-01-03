@@ -150,3 +150,6 @@ map #  <Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>
 " move current line to (almost) top of screen
 nnoremap zt ztkkjj
 inoremap zt <esc>ztkkjja
+
+" run git commit
+nnoremap <F12> :Git commit %<cr>
