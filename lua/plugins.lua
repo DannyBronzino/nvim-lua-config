@@ -110,41 +110,43 @@ require("packer").startup({
 
 		use({ "mhartington/oceanic-next" })
 
-		use({
-			"NTBBloodbath/doom-one.nvim",
-			config = function()
-				require("doom-one").setup({
-					cursor_coloring = true,
-					terminal_colors = true,
-					italic_comments = true,
-					enable_treesitter = true,
-					transparent_background = true,
-					pumblend = {
-						enable = true,
-						transparency_amount = 20,
-					},
-					plugins_integrations = {
-						neorg = false,
-						barbar = true,
-						bufferline = false,
-						gitgutter = false,
-						gitsigns = true,
-						telescope = true,
-						neogit = false,
-						nvim_tree = true,
-						dashboard = false,
-						startify = false,
-						whichkey = false,
-						indent_blankline = true,
-						vim_illuminate = false,
-						lspsaga = false,
-					},
-				})
-				vim.cmd([[hi WhichKeyValue guifg=Normal]])
-				vim.cmd([[hi Comment guifg=darkgrey]])
-				vim.cmd([[hi LineNr guifg=lightmagenta]])
-			end,
-		})
+		use({ "rebelot/kanagawa.nvim" })
+
+		-- use({
+		-- 	"NTBBloodbath/doom-one.nvim",
+		-- 	config = function()
+		-- 		require("doom-one").setup({
+		-- 			cursor_coloring = true,
+		-- 			terminal_colors = true,
+		-- 			italic_comments = true,
+		-- 			enable_treesitter = true,
+		-- 			transparent_background = true,
+		-- 			pumblend = {
+		-- 				enable = true,
+		-- 				transparency_amount = 20,
+		-- 			},
+		-- 			plugins_integrations = {
+		-- 				neorg = false,
+		-- 				barbar = true,
+		-- 				bufferline = false,
+		-- 				gitgutter = false,
+		-- 				gitsigns = true,
+		-- 				telescope = true,
+		-- 				neogit = false,
+		-- 				nvim_tree = true,
+		-- 				dashboard = false,
+		-- 				startify = false,
+		-- 				whichkey = false,
+		-- 				indent_blankline = true,
+		-- 				vim_illuminate = false,
+		-- 				lspsaga = false,
+		-- 			},
+		-- 		})
+		-- 		vim.cmd([[hi WhichKeyValue guifg=Normal]])
+		-- 		vim.cmd([[hi Comment guifg=darkgrey]])
+		-- 		vim.cmd([[hi LineNr guifg=lightmagenta]])
+		-- 	end,
+		-- })
 
 		-- status line
 		use({
