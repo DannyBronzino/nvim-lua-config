@@ -11,6 +11,7 @@ local default_colors = require("kanagawa.colors").setup()
 local overrides = {
 	WhichKeyValue = { fg = default_colors.crystalBlue, bg = "NONE" },
 	LineNr = { fg = default_colors.dragonBlue, bg = "NONE" },
+  Comment = { fg = default_colors.springBlue },
 }
 
 require("kanagawa").setup({
