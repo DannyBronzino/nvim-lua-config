@@ -35,8 +35,8 @@ function! s:wilder_init() abort
     let l:hl = wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}])
     call wilder#set_option('renderer', wilder#popupmenu_renderer({
           \ 'highlighter': wilder#basic_highlighter(),
-          \ 'winblend': 5,
-          \ 'max_height': 15,
+          \ 'winblend': 10,
+          \ 'max_height': 7,
           \ 'highlights': {
           \   'accent': l:hl,
           \ },
