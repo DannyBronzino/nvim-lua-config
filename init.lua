@@ -3,6 +3,7 @@ require("plugins")
 require("options")
 require("globals")
 require("themes")
+require("utils")
 
 vim.cmd([[
 let g:config_files = [
