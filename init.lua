@@ -2,7 +2,7 @@
 require("plugins")
 require("options")
 require("globals")
-require("themes")
+require("colorschemes")
 require("utils")
 
 vim.cmd([[
