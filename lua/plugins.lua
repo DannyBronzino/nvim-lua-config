@@ -105,6 +105,9 @@ require("packer").startup({
 		-- Show match number for search
 		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
+    -- colorizer
+    use({ "norcalli/nvim-colorizer.lua" })
+
 		-- Colorschemes
 		use({ "Mofiqul/dracula.nvim" })
 
