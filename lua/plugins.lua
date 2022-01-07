@@ -37,6 +37,9 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
+		-- breaks stuff like camelCase into two words
+		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
+
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			event = "BufEnter",
@@ -105,8 +108,8 @@ require("packer").startup({
 		-- Show match number for search
 		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
-    -- colorizer
-    use({ "norcalli/nvim-colorizer.lua" })
+		-- colorizer
+		use({ "norcalli/nvim-colorizer.lua" })
 
 		-- Colorschemes
 		use({ "Mofiqul/dracula.nvim" })
@@ -154,8 +157,7 @@ require("packer").startup({
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
-			-- event = "VimEnter",
-			-- after = { "dracula.nvim", "oceanic-next", "doom-one.nvim" },
+			event = "VimEnter",
 			requires = { "kyazdani42/nvim-web-devicons", opt = true },
 			config = [[require("config.lualine")]],
 		})
@@ -167,7 +169,7 @@ require("packer").startup({
 		})
 
 		-- Better register. Use " in Normal or <c-r> in insert
-		-- use({ "tversteeg/registers.nvim", event = "VimEnter" })
+		use({ "tversteeg/registers.nvim", event = "VimEnter" })
 
 		-- notification plugin
 		use({
@@ -277,16 +279,16 @@ require("packer").startup({
 		-- The missing auto-completion for cmdline!
 		use({ "gelguy/wilder.nvim" })
 
-		-- showing keybindings
-		use({
-			"folke/which-key.nvim",
-			event = "VimEnter",
-			config = function()
-				vim.defer_fn(function()
-					require("config.which-key")
-				end, 2000)
-			end,
-		})
+		-- show keybindings
+		-- use({
+		-- "folke/which-key.nvim",
+		-- event = "VimEnter",
+		-- config = function()
+		-- vim.defer_fn(function()
+		-- require("config.which-key")
+		-- end, 2000)
+		-- end,
+		-- })
 		-- File Explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
