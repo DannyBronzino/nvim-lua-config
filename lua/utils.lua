@@ -1,3 +1,4 @@
+-- pretty print inspections
 function _G.put(...)
   local objects = {}
   for i = 1, select('#', ...) do
