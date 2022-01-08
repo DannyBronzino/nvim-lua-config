@@ -1,3 +1,4 @@
+-- checks project directory for file containing custom settings
 local scan = require("plenary.scandir")
 
 local files = scan.scan_dir(".", { depth = 0 })
