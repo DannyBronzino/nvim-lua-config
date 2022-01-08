@@ -1,23 +1,24 @@
 local fn = vim.fn
 
--- Install packer
+-- install packer
 local packer_install_dir = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(packer_install_dir)) > 0 then
 	fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_dir)
 end
 
+-- allows faster downloading if on linux
 local plug_url_format = ""
--- if vim.g.is_linux > 0 then
--- plug_url_format = "https://hub.fastgit.org/%s"
--- else
-plug_url_format = "https://github.com/%s"
--- end
+if vim.g.is_linux then
+	plug_url_format = "https://hub.fastgit.org/%s"
+else
+	plug_url_format = "https://github.com/%s"
+end
 
 local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
 local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
 
--- Auto-install packer in case it hasn't been installed.
+-- automatically install packer on first start up
 if fn.glob(packer_install_dir) == "" then
 	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
 	vim.cmd(install_cmd)
@@ -28,17 +29,20 @@ vim.cmd([[packadd packer.nvim]])
 
 require("packer").startup({
 	function(use)
+		-- packer itself
 		use({
 			"wbthomason/packer.nvim",
+			opt = true, -- can be optional
 		})
 
+		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
+
+    -- treesitter for syntax highlighting and folding and more
 		use({
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			event = "BufEnter",
 		})
-
-		-- breaks stuff like camelCase into two words
-		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -48,6 +52,7 @@ require("packer").startup({
 			run = ":TSUpdateSync",
 		})
 
+    -- lsp stuff
 		use({ "onsails/lspkind-nvim", event = "BufEnter" })
 
 		use({
@@ -108,51 +113,8 @@ require("packer").startup({
 		-- Show match number for search
 		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
 
-		-- colorizer
-		use({ "norcalli/nvim-colorizer.lua" })
-
-		-- Colorschemes
-		use({ "Mofiqul/dracula.nvim" })
-
-		use({ "mhartington/oceanic-next" })
-
+		-- colorscheme
 		use({ "rebelot/kanagawa.nvim" })
-
-		-- use({
-		-- 	"NTBBloodbath/doom-one.nvim",
-		-- 	config = function()
-		-- 		require("doom-one").setup({
-		-- 			cursor_coloring = true,
-		-- 			terminal_colors = true,
-		-- 			italic_comments = true,
-		-- 			enable_treesitter = true,
-		-- 			transparent_background = true,
-		-- 			pumblend = {
-		-- 				enable = true,
-		-- 				transparency_amount = 20,
-		-- 			},
-		-- 			plugins_integrations = {
-		-- 				neorg = false,
-		-- 				barbar = true,
-		-- 				bufferline = false,
-		-- 				gitgutter = false,
-		-- 				gitsigns = true,
-		-- 				telescope = true,
-		-- 				neogit = false,
-		-- 				nvim_tree = true,
-		-- 				dashboard = false,
-		-- 				startify = false,
-		-- 				whichkey = false,
-		-- 				indent_blankline = true,
-		-- 				vim_illuminate = false,
-		-- 				lspsaga = false,
-		-- 			},
-		-- 		})
-		-- 		vim.cmd([[hi WhichKeyValue guifg=Normal]])
-		-- 		vim.cmd([[hi Comment guifg=darkgrey]])
-		-- 		vim.cmd([[hi LineNr guifg=lightmagenta]])
-		-- 	end,
-		-- })
 
 		-- status line
 		use({
@@ -197,6 +159,7 @@ require("packer").startup({
 			cmd = "Neoformat",
 		})
 
+    -- git in the gutter
 		use({
 			"lewis6991/gitsigns.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -215,13 +178,12 @@ require("packer").startup({
 		use({ "plasticboy/vim-markdown", ft = { "markdown" } })
 
 		-- Faster footnote generation
-		use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
+		-- use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
 
 		-- Vim tabular plugin for manipulate tabular, required by markdown plugins
 		use({ "godlygeek/tabular", cmd = { "Tabularize" } })
 
-		-- Additional powerful text object for vim, this plugin should be studied
-		-- carefully to use its full power
+		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
 		})
@@ -289,7 +251,8 @@ require("packer").startup({
 		-- end, 2000)
 		-- end,
 		-- })
-		-- File Explorer
+
+		-- file explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
 			event = "VimEnter",
@@ -336,6 +299,7 @@ require("packer").startup({
 			config = [[require("config.bqf")]],
 		})
 
+    -- nice tab bar
 		use({
 			"romgrk/barbar.nvim",
 			event = "VimEnter",
