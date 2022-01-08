@@ -152,4 +152,4 @@ nnoremap zt ztkkjj
 inoremap zt <esc>ztkkjja
 
 " run git commit
-nnoremap <F12> :Git add % <bar> Git commit %<cr>
+nnoremap <F12> <cmd>Git add % <bar> Git commit %<cr>
