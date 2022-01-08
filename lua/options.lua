@@ -24,9 +24,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 100
 -- Timeout length for which-key
-vim.opt.timeoutlen = 1000
+vim.opt.timeoutlen = 500
 
 vim.wo.signcolumn = "yes"
 
@@ -53,8 +53,6 @@ vim.opt.fillchars = "fold: ,vert:│,eob: ,msgsep:‾"
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
-vim.opt.updatetime = 1000
 
 vim.opt.swapfile = false
 
