@@ -2,7 +2,7 @@
 augroup wilder_init
   autocmd!
   " CursorHold is suggested here: https: //github.com/gelguy/wilder.nvim/issues/89#issuecomment-934465957.
-  autocmd CursorHold * ++once call s:wilder_init()
+  autocmd CursorHold * ++once call s:wilder_init() " hold time determined by :set updatetime
 augroup END
 
 function! s:wilder_init() abort
