@@ -1,7 +1,8 @@
 " executes local lua option file
 augroup local_init_lua
   autocmd!
-  autocmd BufEnter * :runtime lua/local_init.lua
+  autocmd BufEnter * silent! lcd %:p:h " changes to directory first
+  autocmd BufEnter * :runtime lua/local_init.lua " runs local_init_lua
 augroup END
 
 " Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
@@ -32,10 +33,6 @@ augroup resume_edit_position
         \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' | execute "normal! g`\"zvzz" | endif
 augroup END
 
-" Display a message when the current file is not in utf-8 format.
-" Note that we need to use `unsilent` command here because of this issue:
-" https://github.com/vim/vim/issues/4379
-
 " Automatically reload the file if it is changed outside of Nvim, see
 " https://unix.stackexchange.com/a/383044/221410. It seems that `checktime`
 " command does not work in command line. We need to check if we are in command
@@ -53,29 +50,6 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
 augroup END
 
-" highlight yanked region, see `:h lua-highlight`
-" augroup custom_highlight
-  " autocmd!
-  " autocmd ColorScheme * highlight YankColor ctermfg=59 ctermbg=41 guifg=#34495E guibg=#2ECC71
-" augroup END
-
-" augroup highlight_yank
-  " autocmd!
-  " au TextYankPost * silent! lua vim.highlight.on_yank{higroup="YankColor", timeout=300}
-" augroup END
-
-" Highlight groups for cursor color
-" augroup cursor_color
-  " autocmd!
-  " autocmd ColorScheme * highlight Cursor cterm=bold gui=bold guibg=#00c918 guifg=black
-  " autocmd ColorScheme * highlight Cursor2 guifg=red guibg=red
-" augroup END
-
-" augroup float_border_color
-  " autocmd!
-  " autocmd ColorScheme * highlight FloatBorder guifg=LightGreen guibg=NONE
-" augroup END
-
 augroup auto_close_win
   autocmd!
   autocmd BufEnter * call s:quit_current_win()
@@ -90,4 +64,3 @@ function! s:quit_current_win() abort
   endif
 endfunction
 
-autocmd BufEnter * silent! lcd %:p:h
