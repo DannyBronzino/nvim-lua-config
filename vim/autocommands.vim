@@ -1,5 +1,5 @@
 " executes local lua option file
-augroup local_init.lua
+augroup local_init_lua
   autocmd!
   autocmd BufEnter * :runtime lua/local_init.lua
 augroup END
