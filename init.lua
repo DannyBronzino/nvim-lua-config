@@ -1,10 +1,11 @@
--- sources
+-- lua sources
 require("plugins")
 require("options")
 require("globals")
 require("colorschemes")
 require("utils")
 
+-- vimscript sources
 vim.cmd([[
 let g:config_files = [
       \ 'autocommands.vim',
