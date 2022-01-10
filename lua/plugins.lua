@@ -32,13 +32,12 @@ require("packer").startup({
 		-- packer itself
 		use({
 			"wbthomason/packer.nvim",
-			opt = true, -- can be optional
 		})
 
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
-    -- treesitter for syntax highlighting and folding and more
+		-- treesitter for syntax highlighting and folding and more
 		use({
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			event = "BufEnter",
@@ -52,7 +51,7 @@ require("packer").startup({
 			run = ":TSUpdateSync",
 		})
 
-    -- lsp stuff
+		-- lsp stuff
 		use({ "onsails/lspkind-nvim", event = "BufEnter" })
 
 		use({
@@ -159,7 +158,7 @@ require("packer").startup({
 			cmd = "Neoformat",
 		})
 
-    -- git in the gutter
+		-- git in the gutter
 		use({
 			"lewis6991/gitsigns.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -299,7 +298,7 @@ require("packer").startup({
 			config = [[require("config.bqf")]],
 		})
 
-    -- nice tab bar
+		-- nice tab bar
 		use({
 			"romgrk/barbar.nvim",
 			event = "VimEnter",
