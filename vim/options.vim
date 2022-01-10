@@ -4,7 +4,7 @@ set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 
 set splitbelow splitright
 
-set updatetime=1000
+set updatetime=100
 
 " if !empty(provider#clipboard#Executable())
 "   set clipboard+=unnamedplus
