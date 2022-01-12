@@ -92,16 +92,18 @@ require("packer").startup({
 			config = [[require("config.nvim-autopairs")]],
 		})
 
-		-- Buffer jumping like EasyMotion
-		use({
-			"phaazon/hop.nvim",
-			event = "VimEnter",
-			config = function()
-				vim.defer_fn(function()
-					require("config.hop")
-				end, 2000)
-			end,
-		})
+		-- Buffer jumping like EasyMotion or Sneak
+		-- use({
+		-- 	"phaazon/hop.nvim",
+		-- 	event = "VimEnter",
+		-- 	config = function()
+		-- 		vim.defer_fn(function()
+		-- 			require("config.hop")
+		-- 		end, 2000)
+		-- 	end,
+		-- })
+
+		use("ggandor/lightspeed.nvim")
 
 		-- Clear highlight search automatically for you
 		use({
