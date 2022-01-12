@@ -314,6 +314,7 @@ require("packer").startup({
 		use("bakpakin/fennel.vim")
 
 		-- aniseed for neovim configs and REPL
+		use("Olical/aniseed")
 		use("Olical/conjure")
 	end,
 	config = {
