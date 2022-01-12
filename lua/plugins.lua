@@ -308,14 +308,6 @@ require("packer").startup({
 
 		-- show and trim trailing whitespaces
 		use({ "jdhao/whitespace.nvim", event = "VimEnter" })
-
-		-- fennel language stuff
-		-- add syntax
-		use("bakpakin/fennel.vim")
-
-		-- aniseed for neovim configs and REPL
-		use("Olical/aniseed")
-		use("Olical/conjure")
 	end,
 	config = {
 		max_jobs = nil,
