@@ -130,7 +130,7 @@ require("packer").startup({
 		})
 
 		-- Better register. Use " in Normal or <c-r> in insert
-		use({ "tversteeg/registers.nvim", event = "VimEnter" })
+		-- use({ "tversteeg/registers.nvim", event = "VimEnter" })
 
 		-- notification plugin
 		use({
@@ -241,15 +241,15 @@ require("packer").startup({
 		use({ "gelguy/wilder.nvim" })
 
 		-- show keybindings
-		-- use({
-		-- "folke/which-key.nvim",
-		-- event = "VimEnter",
-		-- config = function()
-		-- vim.defer_fn(function()
-		-- require("config.which-key")
-		-- end, 2000)
-		-- end,
-		-- })
+		use({
+			"folke/which-key.nvim",
+			event = "VimEnter",
+			config = function()
+				vim.defer_fn(function()
+					require("config.which-key")
+				end, 2000)
+			end,
+		})
 
 		-- file explorer
 		use({
@@ -308,6 +308,13 @@ require("packer").startup({
 
 		-- show and trim trailing whitespaces
 		use({ "jdhao/whitespace.nvim", event = "VimEnter" })
+
+		-- fennel language stuff
+		-- add syntax
+		use("bakpakin/fennel.vim")
+
+		-- aniseed for neovim configs and REPL
+		use("Olical/conjure")
 	end,
 	config = {
 		max_jobs = nil,
