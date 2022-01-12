@@ -207,7 +207,7 @@ require("packer").startup({
 							{ "$", "$" },
 						},
 					},
-					prefix = "s",
+					prefix = "<leader>s",
 				})
 			end,
 		})
