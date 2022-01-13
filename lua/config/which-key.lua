@@ -3,8 +3,8 @@ require("which-key").setup({
 		marks = true, -- shows a list of your marks on ' and `
 		registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
 		spelling = {
-			enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-			suggestions = 9, -- how many suggestions should be shown in the list?
+			enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+			suggestions = 12, -- how many suggestions should be shown in the list?
 		},
 		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
 		-- No actual key bindings are created
@@ -33,28 +33,33 @@ require("which-key").setup({
 		separator = "➜", -- symbol used between a key and it's label
 		group = "+", -- symbol prepended to a group
 	},
+	popup_mappings = {
+		scroll_down = "<c-n>", -- binding to scroll down inside the popup
+		scroll_up = "<c-p>", -- binding to scroll up inside the popup
+	},
 	window = {
 		border = "none", -- none, single, double, shadow
 		position = "bottom", -- bottom, top
-		margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
-		padding = { 1, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
+		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		winblend = 0,
 	},
 	layout = {
-		height = { min = 1, max = 9 }, -- min and max height of the columns
-		width = { min = 20, max = 50 }, -- min and max width of the columns
-		spacing = 1, -- spacing between columns
-		align = "center", -- align columns left, center or right
+		height = { min = 3, max = 9 }, -- min and max height of the columns
+		width = { min = 100, max = 100 }, -- min and max width of the columns
+		spacing = 3, -- spacing between columns
+		align = "left", -- align columns left, center or right
 	},
 	ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
 	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
 	show_help = true, -- show help message on the command line when the popup is visible
 	triggers = "auto", -- automatically setup triggers
 	-- triggers = {"<leader>"} -- or specify a list manually
-
 	triggers_blacklist = {
 		-- list of mode / prefixes that should never be hooked by WhichKey
 		-- this is mostly relevant for key maps that start with a native binding
 		-- most people should not need to change this
-		n = { "o", "O" },
+		i = { "j", "k" },
+		v = { "j", "k" },
 	},
 })
