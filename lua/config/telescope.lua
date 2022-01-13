@@ -1,11 +1,25 @@
--- Telescope Setup
+local actions = require("telescope.actions")
+
 require("telescope").setup({
 	defaults = {
+		layout_strategy = "horizontal",
+		layout_config = {
+			height = 0.95,
+			preview_cutoff = 40,
+			prompt_position = "top",
+			width = 0.95,
+		},
 		mappings = {
 			i = {
 				["<C-u>"] = false,
 				["<C-d>"] = false,
+        ["<c-j>"] = actions.move_selection_next,
+        ["<c-k>"] = actions.move_selection_previous,
+        ["<c-l>"] = actions.toggle_selection,
 			},
+      n = {
+        ["l"] = actions.toggle_selection,
+      },
 		},
 	},
 })
