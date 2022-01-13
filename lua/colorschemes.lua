@@ -10,6 +10,7 @@ local overrides = {
 	WhichKeyValue = { fg = kanagawa_colors.crystalBlue, bg = "NONE" },
 	LineNr = { fg = kanagawa_colors.dragonBlue, bg = "NONE" },
 	Comment = { fg = kanagawa_colors.springBlue },
+  Visual = { bg = kanagawa_colors.fujiGray},
 }
 
 require("kanagawa").setup({
