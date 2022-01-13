@@ -44,6 +44,7 @@ function! s:wilder_init() abort
           \ ],
           \ 'pumblend': 50,
           \ 'min_width': 100,
+          \ 'min_height': 2,
           \ 'max_height': 7,
           \ 'highlights': {
           \   'accent': l:hl,
