@@ -12,7 +12,6 @@ let g:config_files = [
       \ 'mappings.vim',
       \ 'plugins.vim',
       \ 'wilder.vim',
-      \ 'registers.nvim.vim',
       \ ]
 
 for s:fname in g:config_files
