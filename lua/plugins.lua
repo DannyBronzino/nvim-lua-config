@@ -91,6 +91,7 @@ require("packer").startup({
 
 		use({
 			"L3MON4D3/LuaSnip",
+			config = [[require("config.luasnip")]],
 		})
 
 		use("rafamadriz/friendly-snippets")
