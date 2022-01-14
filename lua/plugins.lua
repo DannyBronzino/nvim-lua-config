@@ -131,9 +131,6 @@ require("packer").startup({
 			event = "VimEnter",
 		})
 
-		-- Better register. Use " in Normal or <c-r> in insert
-		-- use({ "tversteeg/registers.nvim", event = "VimEnter" })
-
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
