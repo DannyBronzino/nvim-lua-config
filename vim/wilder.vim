@@ -42,10 +42,10 @@ function! s:wilder_init() abort
           \ 'right': [
           \   ' ', wilder#popupmenu_scrollbar(),
           \ ],
-          \ 'pumblend': 50,
+          \ 'pumblend': 21,
           \ 'min_width': 100,
           \ 'min_height': 2,
-          \ 'max_height': 7,
+          \ 'max_height': 9,
           \ 'highlights': {
           \   'accent': l:hl,
           \ },
