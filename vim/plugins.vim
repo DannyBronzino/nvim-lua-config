@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 " Plugin installation
-lua require('plugins')
+" lua require('plugins')
 
 " Neomake
 let g:neomake_open_list=2
@@ -32,10 +32,10 @@ let g:better_escape_shortcut = 'jj'
 " Automatically open quickfix window of 6 line tall after asyncrun starts
 let g:asyncrun_open = 6
 
-" Visual Multi Cursor
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+" " Visual Multi Cursor
+" let g:VM_maps = {}
+" let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+" let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
 
 " TOC settings
 let g:vimtex_toc_config = {
@@ -67,28 +67,17 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 "neoformat settings
 let g:neoformat_enabled_python = ['black', 'yapf']
-let g:neoformat_cpp_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-let g:neoformat_c_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-let g:neoformat_enabled_cpp = ['clangformat']
-let g:neoformat_enabled_c = ['clangformat']
+" " UltiSnips settings
+" " Trigger configuration. Do not use <tab> if you use YouCompleteMe
+" let g:UltiSnipsExpandTrigger='<c-j>'
 
-" UltiSnips settings
-" Trigger configuration. Do not use <tab> if you use YouCompleteMe
-let g:UltiSnipsExpandTrigger='<c-j>'
+" " Do not look for SnipMate snippets
+" let g:UltiSnipsEnableSnipMate = 0
 
-" Do not look for SnipMate snippets
-let g:UltiSnipsEnableSnipMate = 0
+" " Shortcut to jump forward and backward in tabstop positions
+" let g:UltiSnipsJumpForwardTrigger='<c-j>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
-" Shortcut to jump forward and backward in tabstop positions
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
-" Configuration for custom snippets directory, see
-" https://jdhao.github.io/2019/04/17/neovim_snippet_s1/ for details.
-let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
+" " Configuration for custom snippets directory, see
+" " https://jdhao.github.io/2019/04/17/neovim_snippet_s1/ for details.
+" let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
