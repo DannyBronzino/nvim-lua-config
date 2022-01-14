@@ -74,17 +74,26 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 		-- use {"hrsh7th/cmp-cmdline", after = "nvim-cmp"}
+		-- use({
+		-- "quangnguyen30192/cmp-nvim-ultisnips",
+		-- after = { "nvim-cmp", "ultisnips" },
+		-- })
+
+		-- -- Snippet engine and snippet template
+		-- use({
+		-- "SirVer/ultisnips",
+		-- event = "InsertEnter",
+		-- })
 		use({
-			"quangnguyen30192/cmp-nvim-ultisnips",
-			after = { "nvim-cmp", "ultisnips" },
+			"saadparwaiz1/cmp_luasnip",
+			after = { "nvim-cmp" },
 		})
 
-		-- Snippet engine and snippet template
 		use({
-			"SirVer/ultisnips",
-			event = "InsertEnter",
+			"L3MON4D3/LuaSnip",
 		})
-		use({ "honza/vim-snippets", after = "ultisnips" })
+
+		use("rafamadriz/friendly-snippets")
 
 		-- Automatic insertion and deletion of a pair of characters
 		use({
@@ -96,11 +105,7 @@ require("packer").startup({
 		-- use({
 		-- 	"phaazon/hop.nvim",
 		-- 	event = "VimEnter",
-		-- 	config = function()
-		-- 		vim.defer_fn(function()
-		-- 			require("config.hop")
-		-- 		end, 2000)
-		-- 	end,
+		-- 	config =  [[require("config.hop")]]
 		-- })
 
 		use("ggandor/lightspeed.nvim")
@@ -243,11 +248,7 @@ require("packer").startup({
 		use({
 			"folke/which-key.nvim",
 			event = "VimEnter",
-			config = function()
-				vim.defer_fn(function()
-					require("config.which-key")
-				end, 2000)
-			end,
+			config = [[require("config.which-key")]],
 		})
 
 		-- file explorer
