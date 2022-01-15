@@ -7,15 +7,16 @@ vim.o.termguicolors = true
 local kanagawa_colors = require("kanagawa.colors").setup()
 
 local overrides = {
--- new highlights
+	-- new highlights
 	carpYellow = { fg = kanagawa_colors.carpYellow, bg = "NONE", style = "NONE" },
 
--- overide existing highlights
+	-- overide existing highlights
 	WhichKeyValue = { fg = kanagawa_colors.crystalBlue, bg = "NONE" },
 	LineNr = { fg = kanagawa_colors.dragonBlue, bg = "NONE" },
 	Comment = { fg = kanagawa_colors.springBlue },
 	Visual = { bg = kanagawa_colors.waveBlue2 },
-  IncSearch = { bg = kanagawa_colors.oniViolet },
+	IncSearch = { bg = kanagawa_colors.oniViolet },
+	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" },
 }
 
 require("kanagawa").setup({
