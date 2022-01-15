@@ -236,11 +236,11 @@ require("packer").startup({
 		})
 
 		-- Asynchronous command execution
-		use({
-			"skywind3000/asyncrun.vim",
-			opt = true,
-			cmd = "AsyncRun",
-		})
+		-- use({
+		-- 	"skywind3000/asyncrun.vim",
+		-- 	opt = true,
+		-- 	cmd = "AsyncRun",
+		-- })
 
 		-- The missing auto-completion for cmdline!
 		use({ "gelguy/wilder.nvim" })
