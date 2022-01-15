@@ -40,6 +40,9 @@ vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 
+-- Matchup floating match
+vim.g.matchup_matchparen_offscreen = { method = "popup" }
+
 -- Set leader to comma
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = ","
