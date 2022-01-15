@@ -51,6 +51,8 @@ require("packer").startup({
 			run = ":TSUpdateSync",
 		})
 
+		use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+
 		-- lsp stuff
 		use({ "onsails/lspkind-nvim", event = "BufEnter" })
 
