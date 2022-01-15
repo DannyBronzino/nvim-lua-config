@@ -224,10 +224,10 @@ require("packer").startup({
 		})
 
 		-- Latex stuff
-		use({
-			"lervag/vimtex",
-			ft = { "tex", "bib" },
-		})
+		-- use({
+		-- 	"lervag/vimtex",
+		-- 	ft = { "tex", "bib" },
+		-- })
 
 		-- Modern matchit implementation
 		use({
