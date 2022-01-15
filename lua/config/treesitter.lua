@@ -33,7 +33,15 @@ require("nvim-treesitter.configs").setup({
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = nil, -- Do not enable for files with more than n lines, int
-		-- colors = {}, -- table of hex strings
+		colors = {
+			"#7AA89F",
+			"#98BB6C",
+			"#938056",
+			"#C0A36E",
+			"#E6C384",
+			"#D27E99",
+			"#E46876",
+		},
 		-- termcolors = {} -- table of colour name strings
 	},
 })
