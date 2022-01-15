@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "latex" },
+	ensure_installed = { "lua", "latex", "bibtex" },
 	highlight = {
 		enable = true,
 		custom_captures = {
