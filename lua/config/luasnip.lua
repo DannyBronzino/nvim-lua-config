@@ -18,5 +18,9 @@ ls.config.set_config({ enable_autosnippets = true })
 ls.autosnippets = {
 	tex = {
 		s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}" }, t("\\ldots{}")),
+
+		s({ trig = "\\tq{", name = "Text Quote", dscr = "\\textquote" }, t("\\textquote{"), i(1), i(0), t("}")),
+
+		s({ trig = "\\cq{", name = "Chinese Quote", dscr = "\\chinesequote" }, t("\\chinesequote{"), i(1), i(0), t("}")),
 	},
 }
