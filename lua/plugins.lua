@@ -73,27 +73,20 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
-		-- use {"hrsh7th/cmp-cmdline", after = "nvim-cmp"}
-		-- use({
-		-- "quangnguyen30192/cmp-nvim-ultisnips",
-		-- after = { "nvim-cmp", "ultisnips" },
-		-- })
-
-		-- -- Snippet engine and snippet template
-		-- use({
-		-- "SirVer/ultisnips",
-		-- event = "InsertEnter",
-		-- })
+		-- wilder replacement possibly
+		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 		use({
 			"saadparwaiz1/cmp_luasnip",
 			after = { "nvim-cmp" },
 		})
 
+		-- snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
 			config = [[require("config.luasnip")]],
 		})
 
+		-- snippets in vscode format
 		use("rafamadriz/friendly-snippets")
 
 		-- Automatic insertion and deletion of a pair of characters
@@ -109,16 +102,16 @@ require("packer").startup({
 		-- 	config =  [[require("config.hop")]]
 		-- })
 
-		use("ggandor/lightspeed.nvim")
+		use({ "ggandor/lightspeed.nvim", event = "BufEnter" })
 
 		-- Clear highlight search automatically for you
 		use({
 			"romainl/vim-cool",
-			event = "VimEnter",
+			event = "BufEnter",
 		})
 
 		-- Show match number for search
-		use({ "kevinhwang91/nvim-hlslens", event = "VimEnter" })
+		use({ "kevinhwang91/nvim-hlslens", event = "BufEnter" })
 
 		-- colorscheme
 		use({ "rebelot/kanagawa.nvim" })
@@ -134,7 +127,7 @@ require("packer").startup({
 		-- Indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
-			event = "VimEnter",
+			event = "BufEnter",
 		})
 
 		-- notification plugin
@@ -184,9 +177,6 @@ require("packer").startup({
 		-- Faster footnote generation
 		-- use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
 
-		-- Vim tabular plugin for manipulate tabular, required by markdown plugins
-		use({ "godlygeek/tabular", cmd = { "Tabularize" } })
-
 		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
@@ -224,26 +214,16 @@ require("packer").startup({
 		})
 
 		-- Latex stuff
-		-- use({
-		-- 	"lervag/vimtex",
-		-- 	ft = { "tex", "bib" },
-		-- })
+		use({
+			"lervag/vimtex",
+			ft = { "tex", "bib" },
+		})
 
 		-- Modern matchit implementation
 		use({
 			"andymass/vim-matchup",
 			event = "VimEnter",
 		})
-
-		-- Asynchronous command execution
-		-- use({
-		-- 	"skywind3000/asyncrun.vim",
-		-- 	opt = true,
-		-- 	cmd = "AsyncRun",
-		-- })
-
-		-- The missing auto-completion for cmdline!
-		use({ "gelguy/wilder.nvim" })
 
 		-- show keybindings
 		use({

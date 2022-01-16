@@ -53,7 +53,7 @@ cmp.setup({
 		completeopt = "menu,noselect",
 	},
 	experimental = {
-		ghost_text = false,
+		ghost_text = true, -- adds ghost text that completes the word in buffer
 	},
 	formatting = {
 		format = lspkind.cmp_format({
@@ -66,6 +66,25 @@ cmp.setup({
 				buffer = "[Buffer]",
 			},
 		}),
+	},
+})
+
+require("cmp").setup.cmdline(":", {
+	sources = {
+		{ name = "cmdline" },
+		{ name = "path" },
+	},
+})
+
+require("cmp").setup.cmdline("/", {
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+require("cmp").setup.cmdline("?", {
+	sources = {
+		{ name = "buffer" },
 	},
 })
 
