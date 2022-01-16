@@ -37,39 +37,59 @@ require("packer").startup({
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
+		-- Modern matchit implementation
+		use({
+			"andymass/vim-matchup",
+			event = "BufEnter",
+		})
+
 		-- treesitter for syntax highlighting and folding and more
 		use({
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			event = "BufEnter",
+			after = "vim-matchup",
 		})
 
 		use({
 			"nvim-treesitter/nvim-treesitter",
-			event = "BufEnter",
-			after = "nvim-treesitter-textobjects",
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
+			after = "nvim-treesitter-textobjects",
+		})
+
+		-- snippys
+		-- needs to be loaded before LuaSnip
+		-- vscode format snippets
+		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
+
+		use({
+			"L3MON4D3/LuaSnip",
+			config = [[require("config.luasnip")]],
+			after = "friendly-snippets",
 		})
 
 		-- lsp stuff
-		use({ "onsails/lspkind-nvim", event = "BufEnter" })
+		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
 
+		-- Automatic insertion and deletion of a pair of characters
+		use({
+			"windwp/nvim-autopairs",
+			config = [[require("config.nvim-autopairs")]],
+			after = "lspkind-nvim",
+			event = "InsertEnter",
+		})
 		use({
 			"hrsh7th/nvim-cmp",
-			after = "lspkind-nvim",
 			config = [[require('config.nvim-cmp')]],
+			after = { "nvim-autopairs" },
 		})
-
 		-- nvim-cmp completion sources
 		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
-
 		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
 		use({
 			"neovim/nvim-lspconfig",
-			after = "cmp-nvim-lsp",
 			config = [[require('config.lsp')]],
+			after = "cmp-nvim-lsp",
 		})
-
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
@@ -77,41 +97,26 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 		use({
 			"saadparwaiz1/cmp_luasnip",
-			after = { "nvim-cmp" },
-		})
-
-		-- snippet engine
-		use({
-			"L3MON4D3/LuaSnip",
-			config = [[require("config.luasnip")]],
-		})
-
-		-- snippets in vscode format
-		use("rafamadriz/friendly-snippets")
-
-		-- Automatic insertion and deletion of a pair of characters
-		use({
-			"windwp/nvim-autopairs",
-			config = [[require("config.nvim-autopairs")]],
+			after = "nvim-cmp",
 		})
 
 		-- Buffer jumping like EasyMotion or Sneak
-		-- use({
-		-- 	"phaazon/hop.nvim",
-		-- 	event = "VimEnter",
-		-- 	config =  [[require("config.hop")]]
-		-- })
+		use({
+			"phaazon/hop.nvim",
+			config = [[require("config.hop")]],
+			event = "BufEnter",
+		})
 
-		use({ "ggandor/lightspeed.nvim", event = "BufEnter" })
+		use({ "ggandor/lightspeed.nvim", event = "BufEnter", disable = true })
 
 		-- Clear highlight search automatically for you
 		use({
 			"romainl/vim-cool",
-			event = "BufEnter",
+			event = "CursorMoved",
 		})
 
 		-- Show match number for search
-		use({ "kevinhwang91/nvim-hlslens", event = "BufEnter" })
+		use({ "kevinhwang91/nvim-hlslens", event = "CmdLineEnter" })
 
 		-- colorscheme
 		use({ "rebelot/kanagawa.nvim" })
@@ -119,26 +124,26 @@ require("packer").startup({
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
-			event = "VimEnter",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
+			requires = { "kyazdani42/nvim-web-devicons" },
 			config = [[require("config.lualine")]],
+			event = "VimEnter",
 		})
 
 		-- Indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
-			event = "BufEnter",
+			event = "BufRead",
 		})
 
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
-			event = "BufEnter",
 			config = function()
 				vim.defer_fn(function()
 					require("config.nvim-notify")
 				end, 2000)
 			end,
+			event = "VimEnter",
 		})
 
 		-- Escape faster with "jj" or "jk" or whatever
@@ -163,23 +168,22 @@ require("packer").startup({
 			config = function()
 				require("gitsigns").setup()
 			end,
+			event = "BufRead",
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive" })
+		use({ "tpope/vim-fugitive", cmd = "Git" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
 
 		-- Another markdown plugin
-		use({ "plasticboy/vim-markdown", ft = { "markdown" } })
-
-		-- Faster footnote generation
-		-- use({ "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } })
+		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
 
 		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
+			even = "BufEnter",
 		})
 
 		-- manipulate surrounds ()""{}
@@ -190,7 +194,7 @@ require("packer").startup({
 					context_offset = 100,
 					load_autogroups = false,
 					mappings_style = "sandwich",
-					map_insert_mode = true,
+					map_insert_mode = false,
 					quotes = { "'", '"' },
 					brackets = { "(", "{", "[" },
 					pairs = {
@@ -205,12 +209,13 @@ require("packer").startup({
 					prefix = "<leader>s",
 				})
 			end,
+			event = "BufEnter",
 		})
 
 		-- Add indent object for vim (useful for languages like Python)
 		use({
 			"michaeljsmith/vim-indent-object",
-			event = "VimEnter",
+			event = "BufEnter",
 		})
 
 		-- Latex stuff
@@ -219,48 +224,47 @@ require("packer").startup({
 			ft = { "tex", "bib" },
 		})
 
-		-- Modern matchit implementation
-		use({
-			"andymass/vim-matchup",
-			event = "VimEnter",
-		})
-
 		-- show keybindings
 		use({
 			"folke/which-key.nvim",
-			event = "VimEnter",
 			config = [[require("config.which-key")]],
+			event = "VimEnter",
 		})
 
 		-- file explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
-			event = "VimEnter",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.nvim-tree")]],
+			event = "VimEnter",
+			disable = true,
 		})
 
 		-- Fixes scroll in middle of page
-		-- use({
-		-- 	"vim-scripts/scrollfix",
-		-- })
+		use({
+			"vim-scripts/scrollfix",
+			event = "BufEnter",
+			disable = true,
+		})
 
 		-- Window Sizer
-		-- use {
-		-- "dm1try/golden_size",
-		-- config = [[require("config.golden_size")]]
-		-- }
+		use({
+			"dm1try/golden_size",
+			config = [[require("config.golden_size")]],
+			event = "VimEnter",
+			disable = true,
+		})
 
 		-- powerful fuzzy search
 		use({
 			"nvim-telescope/telescope.nvim",
-			event = "BufEnter",
 			requires = {
 				{ "nvim-lua/popup.nvim" },
 				{ "nvim-lua/plenary.nvim" },
 				{ "telescope-fzf-native.nvim" },
 			},
 			config = [[require("config.telescope")]],
+			event = "VimEnter",
 		})
 
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -275,20 +279,20 @@ require("packer").startup({
 		-- Better Quickfix window
 		use({
 			"kevinhwang91/nvim-bqf",
-			event = "FileType qf",
 			config = [[require("config.bqf")]],
+			ft = "qf",
 		})
 
 		-- nice tab bar
 		use({
 			"romgrk/barbar.nvim",
-			event = "VimEnter",
-			requires = { "kyazdani42/nvim-web-devicons" },
 			config = [[require("config.barbar")]],
+			requires = { "kyazdani42/nvim-web-devicons" },
+			event = "VimEnter",
 		})
 
 		-- show and trim trailing whitespaces
-		use({ "jdhao/whitespace.nvim", event = "VimEnter" })
+		use({ "jdhao/whitespace.nvim", event = "BufRead" })
 	end,
 	config = {
 		max_jobs = nil,
