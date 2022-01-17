@@ -175,7 +175,7 @@ require("packer").startup({
 		use({ "tpope/vim-fugitive", cmd = "Git" })
 
 		-- Better git log display
-		use({ "rbong/vim-flog", requires = "tpope/vim-fugitive", cmd = { "flog" } })
+		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
 
 		-- Another markdown plugin
 		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
