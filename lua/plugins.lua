@@ -1,37 +1,38 @@
+local utils = require("utils")
 local fn = vim.fn
 
--- install packer
-local packer_install_dir = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+vim.g.package_home = fn.stdpath("data") .. "/site/pack/packer/"
+local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
 
-if fn.empty(fn.glob(packer_install_dir)) > 0 then
-	fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_dir)
-end
-
--- allows faster downloading if on linux
 local plug_url_format = ""
 if vim.g.is_linux then
-	plug_url_format = "https://hub.fastgit.org/%s"
+  plug_url_format = "https://hub.fastgit.org/%s"
 else
-	plug_url_format = "https://github.com/%s"
+  plug_url_format = "https://github.com/%s"
 end
 
 local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
 local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
 
--- automatically install packer on first start up
+-- Auto-install packer in case it hasn't been installed.
 if fn.glob(packer_install_dir) == "" then
-	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-	vim.cmd(install_cmd)
-	vim.cmd("packadd packer.nvim")
+  vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
+  vim.cmd(install_cmd)
 end
 
-vim.cmd([[packadd packer.nvim]])
+-- Load packer.nvim
+vim.cmd("packadd packer.nvim")
+local util = require('packer.util')
 
 require("packer").startup({
 	function(use)
-		-- packer itself
+		-- it is recommened to put impatient.nvim before any other plugins
+		use({ "lewis6991/impatient.nvim", config = [[require('impatient')]] })
+
+		-- packer itself, can be optional
 		use({
 			"wbthomason/packer.nvim",
+			opt = true,
 		})
 
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
@@ -295,16 +296,15 @@ require("packer").startup({
 		use({ "jdhao/whitespace.nvim", event = "BufRead" })
 	end,
 	config = {
-		max_jobs = nil,
+		max_jobs = 16,
+		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
 		},
 	},
 })
 
--- vim.cmd([[
--- augroup packer_auto_compile
--- autocmd!
--- autocmd BufWritePost */nvim/lua/plugins.lua source <afile> | PackerCompile
--- augroup END
--- ]])
+local status, _ = pcall(require, 'packer_compiled')
+if not status then
+  vim.notify("Error requiring packer_compiled.lua: run PackerSync to fix!")
+end
