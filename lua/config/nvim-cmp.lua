@@ -24,7 +24,10 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, {
+			"i",
+			"s",
+		}),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -34,7 +37,10 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, {
+			"i",
+			"s",
+		}),
 
 		["<Esc>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -46,7 +52,7 @@ cmp.setup({
 		{ name = "luasnip" }, -- For luasnips user.
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "path" }, -- for path completion
-		{ name = "buffer", keyword_length = 4 }, -- for buffer word completion
+		{ name = "buffer" }, -- for buffer word completion
 	},
 	completion = {
 		keyword_length = 1,
