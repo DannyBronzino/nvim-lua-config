@@ -229,6 +229,7 @@ require("packer").startup({
 		use({
 			"lervag/vimtex",
 			ft = { "tex", "bib" },
+			disable = true,
 		})
 
 		-- show keybindings
