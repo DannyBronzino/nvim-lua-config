@@ -53,7 +53,7 @@ vim.g.bufferline = {
 	clickable = true,
 
 	-- Excludes buffers from the tabline
-	exclude_ft = { "qf", "NvimTree" },
+	exclude_ft = { "qf", "NvimTree", "gitcommit" },
 	exclude_name = { "package.json" },
 
 	-- Enable/disable icons
