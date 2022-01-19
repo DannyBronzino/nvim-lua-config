@@ -102,6 +102,7 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 		-- wilder replacement possibly
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
+		use({ "f3fora/cmp-spell", after = "nvim-cmp" })
 		use({
 			"saadparwaiz1/cmp_luasnip",
 			after = "nvim-cmp",
@@ -112,9 +113,11 @@ require("packer").startup({
 			"phaazon/hop.nvim",
 			config = [[require("config.hop")]],
 			event = "BufEnter",
+			disable = true,
 		})
 
-		use({ "ggandor/lightspeed.nvim", event = "BufEnter", disable = true })
+		-- or use this for buffer jumping
+		use({ "ggandor/lightspeed.nvim", event = "BufEnter", disable = false })
 
 		-- Clear highlight search automatically for you
 		use({
@@ -235,11 +238,7 @@ require("packer").startup({
 		-- show keybindings
 		use({
 			"folke/which-key.nvim",
-			config = function()
-				vim.defer_fn(function()
-					require("config.which-key")
-				end, 2000)
-			end,
+			config = [[require("config.which-key")]],
 			event = "VimEnter",
 		})
 
