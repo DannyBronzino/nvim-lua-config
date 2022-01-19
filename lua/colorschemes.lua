@@ -11,12 +11,13 @@ local overrides = {
 	carpYellow = { fg = kanagawa_colors.carpYellow, bg = "NONE", style = "NONE" },
 
 	-- overide existing highlights
-	WhichKeyValue = { fg = kanagawa_colors.crystalBlue, bg = "NONE" },
-	LineNr = { fg = kanagawa_colors.dragonBlue, bg = "NONE" },
+	WhichKeyValue = { fg = kanagawa_colors.crystalBlue },
+	LineNr = { fg = kanagawa_colors.dragonBlue },
 	Comment = { fg = kanagawa_colors.springBlue },
 	Visual = { bg = kanagawa_colors.waveBlue2 },
 	IncSearch = { bg = kanagawa_colors.oniViolet },
 	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" },
+	SpellBad = { fg = kanagawa_colors.peachRed, style = "bold" },
 }
 
 require("kanagawa").setup({
