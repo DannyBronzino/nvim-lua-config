@@ -235,8 +235,12 @@ require("packer").startup({
 		-- show keybindings
 		use({
 			"folke/which-key.nvim",
-			config = [[require("config.which-key")]],
-			event = "BufEnter",
+			config = function()
+				vim.defer_fn(function()
+					require("config.which-key")
+				end, 2000)
+			end,
+			event = "VimEnter",
 		})
 
 		-- file explorer
