@@ -5,3 +5,4 @@ vim.opt.textwidth = 0
 vim.opt.wrapmargin = 0
 vim.opt.foldlevel = 999
 vim.opt.colorcolumn = "0"
+vim.opt.spell = true
