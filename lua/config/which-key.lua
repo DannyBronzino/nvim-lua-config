@@ -3,7 +3,7 @@ require("which-key").setup({
 		marks = true, -- shows a list of your marks on ' and `
 		registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
 		spelling = {
-			enabled = yes, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+			enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
 			suggestions = 9, -- how many suggestions should be shown in the list?
 		},
 		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
@@ -40,15 +40,15 @@ require("which-key").setup({
 	window = {
 		border = "none", -- none, single, double, shadow
 		position = "bottom", -- bottom, top
-		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-		winblend = 0,
+		margin = { 1, 1, 1, 1 }, -- extra window margin [top, right, bottom, left]
+		padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+		winblend = 33,
 	},
 	layout = {
-		height = { min = 3, max = 9 }, -- min and max height of the columns
+		height = { min = 6, max = 12 }, -- min and max height of the columns
 		width = { min = 100, max = 100 }, -- min and max width of the columns
 		spacing = 3, -- spacing between columns
-		align = "left", -- align columns left, center or right
+		align = "center", -- align columns left, center or right
 	},
 	ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
 	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
