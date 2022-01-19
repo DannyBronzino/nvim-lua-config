@@ -16,7 +16,7 @@ local overrides = {
 	Comment = { fg = kanagawa_colors.springBlue },
 	Visual = { bg = kanagawa_colors.waveBlue2 },
 	IncSearch = { bg = kanagawa_colors.oniViolet },
-	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" },
+	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" }, -- for vim-matchup
 	SpellBad = { fg = kanagawa_colors.peachRed, style = "bold" },
 }
 
