@@ -17,7 +17,7 @@ ls.config.set_config({ enable_autosnippets = true })
 
 ls.autosnippets = {
 	tex = {
-		s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}" }, t("\\ldots{}")),
+		s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots{}")),
 
 		-- use csquotes package
 		s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
