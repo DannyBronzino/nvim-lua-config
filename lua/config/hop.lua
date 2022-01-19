@@ -22,6 +22,6 @@ map("v", "f", "<cmd>lua require'hop'.hint_char1({inclusive_jump = true})<cr>", o
 -- map("v", "W", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 
 -- two character search
-map("n", "T", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-map("o", "T", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-map("v", "T", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+map("n", "s", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+map("o", "s", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+map("v", "s", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
