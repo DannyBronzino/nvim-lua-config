@@ -18,6 +18,9 @@ local overrides = {
 	IncSearch = { bg = kanagawa_colors.oniViolet },
 	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" }, -- for vim-matchup
 	SpellBad = { fg = kanagawa_colors.peachRed, style = "bold" },
+	SpellCap = { fg = kanagawa_colors.peachRed, style = "bold" },
+	SpellRare = { fg = kanagawa_colors.peachRed, style = "bold" },
+	SpellLocal = { fg = kanagawa_colors.peachRed, style = "bold" },
 }
 
 require("kanagawa").setup({
