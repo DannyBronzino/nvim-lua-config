@@ -5,6 +5,11 @@ augroup local_init_lua
   autocmd BufEnter * :runtime lua/local_init.lua " runs local_init_lua
 augroup END
 
+" change lualine colorscheme
+augroup change_colorscheme
+  autocmd!
+  autocmd Colorscheme * :runtime lua/change_colorscheme.lua
+augroup END
 " Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
 augroup dynamic_smartcase
   autocmd!
@@ -63,4 +68,3 @@ function! s:quit_current_win() abort
     quit
   endif
 endfunction
-
