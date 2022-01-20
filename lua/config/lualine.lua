@@ -1,7 +1,7 @@
 -- new functions from jdhao
 local function spell()
 	if vim.o.spell then
-		return string.format("[SPELL]")
+		return string.format("spell")
 	end
 
 	return ""
@@ -52,8 +52,10 @@ local function get_colorscheme()
 	local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
 	if colorscheme == "dracula" then
 		return "dracula-nvim"
-	elseif colorscheme == "OceanicNext" then
-		return "OceanicNext"
+	elseif colorscheme == "nightfly" then
+		return "nightfly"
+	elseif colorscheme == "tokyonight" then
+		return "tokyonight"
 	else
 		return "auto"
 	end
@@ -74,7 +76,7 @@ require("lualine").setup({
 			"branch",
 			"diff",
 		},
-		lualine_c = { spell, "filename" },
+		lualine_c = { "filename" },
 		lualine_x = { "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = {
