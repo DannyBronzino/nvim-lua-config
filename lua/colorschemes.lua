@@ -31,6 +31,6 @@ require("kanagawa").setup({
 vim.g.tokynight_style = "night"
 vim.g.tokyonight_transparent = true
 
-vim.g.nightflytransparent = "1"
+vim.g.nightflyTransparent = "1"
 
 vim.cmd([[colorscheme kanagawa]])
