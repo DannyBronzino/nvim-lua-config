@@ -16,5 +16,3 @@ let g:config_files = [
 for s:fname in g:config_files
   execute printf('source %s/vim/%s', stdpath('config'), s:fname)
 endfor]])
-
--- \ 'wilder.vim',
