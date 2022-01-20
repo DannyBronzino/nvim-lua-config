@@ -130,6 +130,8 @@ require("packer").startup({
 
 		-- colorscheme
 		use({ "rebelot/kanagawa.nvim" })
+		use("bluz71/vim-nightfly-guicolors")
+		use("folke/tokyonight.nvim")
 
 		-- status line
 		use({
