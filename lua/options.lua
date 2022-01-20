@@ -112,8 +112,6 @@ vim.opt.undofile = true
 
 vim.opt.shortmess:append({ c = true })
 
-vim.opt.spelllang = "en"
-
 vim.opt.shiftround = true
 
 vim.opt.virtualedit = "block"
@@ -151,3 +149,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.numberwidth = 6
 
 vim.opt.mouse:append("a")
+
+-- the following are necessary fro cmp-spell
+vim.opt.spell = true
+vim.opt.spelllang = { "en" }
