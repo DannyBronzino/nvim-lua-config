@@ -28,4 +28,9 @@ require("kanagawa").setup({
 	overrides = overrides,
 })
 
+vim.g.tokynight_style = "night"
+vim.g.tokyonight_transparent = true
+
+vim.g.nightflytransparent = "1"
+
 vim.cmd([[colorscheme kanagawa]])
