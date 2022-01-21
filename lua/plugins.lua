@@ -41,6 +41,18 @@ require("packer").startup({
 			opt = true,
 		})
 
+		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
+		use({
+			"wellle/targets.vim",
+			even = "BufEnter",
+		})
+
+		-- Add indent object for vim (useful for languages like Python)
+		use({
+			"michaeljsmith/vim-indent-object",
+			event = "BufEnter",
+		})
+
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
@@ -100,7 +112,6 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
-		-- wilder replacement possibly
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" })
 		use({
@@ -150,12 +161,10 @@ require("packer").startup({
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
-			config = function()
-				vim.defer_fn(function()
-					require("config.nvim-notify")
-				end, 2000)
-			end,
-			event = "VimEnter",
+      config = function()
+        vim.defer_fn(function() require('config.nvim-notify') end, 2000)
+      end,
+			event = "BufEnter",
 		})
 
 		-- Escape faster with "jj" or "jk" or whatever
@@ -184,7 +193,7 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive", cmd = "Git" })
+		use({ "tpope/vim-fugitive" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
@@ -192,11 +201,6 @@ require("packer").startup({
 		-- Another markdown plugin
 		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
 
-		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
-		use({
-			"wellle/targets.vim",
-			even = "BufEnter",
-		})
 
 		-- manipulate surrounds ()""{}
 		use({
@@ -221,12 +225,6 @@ require("packer").startup({
 					prefix = "<leader>s",
 				})
 			end,
-			event = "BufEnter",
-		})
-
-		-- Add indent object for vim (useful for languages like Python)
-		use({
-			"michaeljsmith/vim-indent-object",
 			event = "BufEnter",
 		})
 
@@ -277,7 +275,7 @@ require("packer").startup({
 				{ "telescope-fzf-native.nvim" },
 			},
 			config = [[require("config.telescope")]],
-			event = "BufEnter",
+			event = "VimEnter",
 		})
 
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -308,7 +306,7 @@ require("packer").startup({
 		use({ "jdhao/whitespace.nvim", event = "BufRead" })
 	end,
 	config = {
-		max_jobs = 16,
+		max_jobs = nil,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
