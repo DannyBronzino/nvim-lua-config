@@ -128,7 +128,12 @@ require("packer").startup({
 		})
 
 		-- or use this for buffer jumping
-		use({ "ggandor/lightspeed.nvim", event = "BufEnter", disable = false })
+		use({
+			"ggandor/lightspeed.nvim",
+			config = [[require("config.lightspeed")]],
+			event = "BufEnter",
+			disable = false,
+		})
 
 		-- Clear highlight search automatically for you
 		use({
@@ -161,9 +166,11 @@ require("packer").startup({
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
-      config = function()
-        vim.defer_fn(function() require('config.nvim-notify') end, 2000)
-      end,
+			config = function()
+				vim.defer_fn(function()
+					require("config.nvim-notify")
+				end, 2000)
+			end,
 			event = "BufEnter",
 		})
 
@@ -200,7 +207,6 @@ require("packer").startup({
 
 		-- Another markdown plugin
 		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
-
 
 		-- manipulate surrounds ()""{}
 		use({
