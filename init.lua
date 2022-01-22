@@ -2,6 +2,7 @@
 require("plugins")
 require("options")
 require("globals")
+require("plugin_settings")
 require("colorschemes")
 require("utils")
 
@@ -10,7 +11,6 @@ vim.cmd([[
 let g:config_files = [
       \ 'autocommands.vim',
       \ 'mappings.vim',
-      \ 'plugins.vim',
       \ ]
 
 for s:fname in g:config_files
