@@ -47,12 +47,6 @@ require("packer").startup({
 			even = "BufEnter",
 		})
 
-		-- Add indent object for vim (useful for languages like Python)
-		use({
-			"michaeljsmith/vim-indent-object",
-			event = "BufEnter",
-		})
-
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
