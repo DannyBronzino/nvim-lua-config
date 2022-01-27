@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 --Incremental live completion (note: this is now a default on master)
 vim.opt.inccommand = "nosplit"
 
@@ -126,12 +128,11 @@ vim.opt.joinspaces = false
 vim.opt.synmaxcol = 200
 vim.opt.startofline = false
 
-vim.cmd([[
-if executable('rg')
-  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-  set grepformat=%f:%l:%c:%m
-endif
-]])
+-- enable rg if available
+if utils.executable("rg") then
+	vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+	vim.opt.grepformat = { "%f:%l:%c:%m" }
+end
 
 vim.opt.signcolumn = "auto:2"
 
@@ -149,7 +150,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.opt.numberwidth = 6
 
-vim.opt.mouse:append("a")
+vim.opt.mouse:append({ a = true })
 
 -- the following are necessary fro cmp-spell
 -- default to off because it's annoying
