@@ -1,10 +1,3 @@
-" executes local lua option file
-augroup local_init_lua
-  autocmd!
-  autocmd BufEnter * silent! lcd %:p:h " changes to directory first
-  autocmd BufEnter * :runtime lua/local_init.lua " runs local_init_lua
-augroup END
-
 " change lualine colorscheme
 augroup change_colorscheme
   autocmd!
