@@ -143,6 +143,7 @@ vim.opt.wrap = true
 
 vim.opt.formatoptions:append("t")
 
+-- let treesitter handle folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
