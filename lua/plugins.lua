@@ -174,13 +174,15 @@ require("packer").startup({
 			event = "insertEnter",
 		})
 
+		-- LSP covers what the next two plugins do
 		-- Syntax check and make
-		use({ "neomake/neomake", cmd = "Neomake" })
+		use({ "neomake/neomake", cmd = "Neomake", disable = true })
 
 		-- Auto format tools
 		use({
 			"sbdchd/neoformat",
 			cmd = "Neoformat",
+			disable = false,
 		})
 
 		-- git in the gutter
