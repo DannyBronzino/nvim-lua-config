@@ -151,5 +151,6 @@ vim.opt.numberwidth = 6
 vim.opt.mouse:append("a")
 
 -- the following are necessary fro cmp-spell
-vim.opt.spell = true
+-- default to off because it's annoying
+vim.opt.spell = false
 vim.opt.spelllang = { "en" }
