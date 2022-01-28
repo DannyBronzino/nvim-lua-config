@@ -50,6 +50,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" }, -- For nvim-lsp
 		{ name = "nvim_lua" }, -- for nvim lua function
+		{ name = "latex_symbols" },
 		{ name = "luasnip" }, -- For luasnips user.
 		{ name = "buffer" }, -- for buffer word completion
 		{ name = "spell" }, -- for spelling
@@ -67,8 +68,9 @@ cmp.setup({
 			with_text = false,
 			menu = {
 				nvim_lsp = "[LSP]",
-				luasnip = "[Snip]",
 				nvim_lua = "[Lua]",
+				latex_symbols = "[LaTeX]",
+				luasnip = "[Snip]",
 				path = "[Path]",
 				buffer = "[Buffer]",
 				spell = "[Spell]",
