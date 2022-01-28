@@ -92,7 +92,7 @@ require("packer").startup({
 		})
 		use({
 			"hrsh7th/nvim-cmp",
-			config = [[require('config.nvim-cmp')]],
+			config = [[require("config.nvim-cmp")]],
 			after = { "nvim-autopairs" },
 		})
 		-- nvim-cmp completion sources
@@ -100,9 +100,10 @@ require("packer").startup({
 		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
 		use({
 			"neovim/nvim-lspconfig",
-			config = [[require('config.lsp')]],
+			config = [[require("config.lsp")]],
 			after = "cmp-nvim-lsp",
 		})
+		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
