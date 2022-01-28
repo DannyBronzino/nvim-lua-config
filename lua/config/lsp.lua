@@ -76,9 +76,9 @@ local lspconfig = require("lspconfig")
 lspconfig.texlab.setup({
 	on_attach = custom_attach,
 	capabilities = capabilities,
-	flags = {
-		debounce_text_changes = 500,
-	},
+	-- flags = {
+		-- debounce_text_changes = 500,
+	-- },
 	settings = {
 		texlab = {
 			chktex = {
@@ -93,9 +93,9 @@ lspconfig.texlab.setup({
 lspconfig.vimls.setup({
 	on_attach = custom_attach,
 	capabilities = capabilities,
-	flags = {
-		debounce_text_changes = 500,
-	},
+	-- flags = {
+		-- debounce_text_changes = 500,
+	-- },
 })
 
 -- Sumneko Lua LSP
