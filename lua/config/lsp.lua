@@ -35,9 +35,9 @@ local custom_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setqflist({open = true})<CR>", opts)
 	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 
-	vim.cmd([[
-    autocmd CursorHold <buffer> lua require('config.lsp').show_line_diagnostics()
-  ]])
+	-- vim.cmd([[
+	-- autocmd CursorHold <buffer> lua require('config.lsp').show_line_diagnostics()
+	-- ]])
 
 	-- Set some key bindings conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
@@ -78,6 +78,14 @@ lspconfig.texlab.setup({
 	capabilities = capabilities,
 	flags = {
 		debounce_text_changes = 500,
+	},
+	settings = {
+		texlab = {
+			chktex = {
+				onEdit = true,
+				onOpenAndSave = true,
+			},
+		},
 	},
 })
 
@@ -136,7 +144,7 @@ vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagno
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	underline = false,
-	virtual_text = false,
+	virtual_text = true,
 	signs = true,
 	update_in_insert = false,
 })
