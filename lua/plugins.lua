@@ -110,10 +110,8 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" })
 		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" })
-		use({
-			"saadparwaiz1/cmp_luasnip",
-			after = "nvim-cmp",
-		})
+		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" })
+		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
 
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
