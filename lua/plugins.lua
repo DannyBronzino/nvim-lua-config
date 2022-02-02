@@ -4,6 +4,7 @@ local fn = vim.fn
 vim.g.package_home = fn.stdpath("data") .. "/site/pack/packer/"
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
 
+-- github alternate
 local plug_url_format = ""
 if vim.g.is_linux then
 	plug_url_format = "https://hub.fastgit.org/%s"
@@ -14,7 +15,7 @@ end
 local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
 local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
 
--- Auto-install packer in case it hasn't been installed.
+-- auto-install packer in case it hasn't been installed
 if fn.glob(packer_install_dir) == "" then
 	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
 	vim.cmd(install_cmd)
@@ -41,7 +42,7 @@ require("packer").startup({
 			opt = true,
 		})
 
-		-- Additional powerful text object for vim, this plugin should be studied carefully to use its full power
+		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
 			even = "BufEnter",
@@ -50,18 +51,19 @@ require("packer").startup({
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
-		-- Modern matchit implementation
+		-- modern matchit implementation
 		use({
 			"andymass/vim-matchup",
 			event = "BufEnter",
 		})
 
-		-- treesitter for syntax highlighting and folding and more
+		-- textobjects for treesitter
 		use({
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			after = "vim-matchup",
 		})
 
+		-- syntax highlighting, folding, and more
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			config = [[require("config.treesitter")]],
@@ -69,49 +71,61 @@ require("packer").startup({
 			after = "nvim-treesitter-textobjects",
 		})
 
-		-- snippys
-		-- needs to be loaded before LuaSnip
-		-- vscode format snippets
+		-- vscode format snippets, must be loaded before LuaSnip
 		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
 
+		-- snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
 			config = [[require("config.luasnip")]],
 			after = "friendly-snippets",
 		})
 
-		-- lsp stuff
+		-- LSP icons
 		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
 
-		-- Automatic insertion and deletion of a pair of characters
+		-- automatic insertion and deletion of a pair of characters
 		use({
 			"windwp/nvim-autopairs",
 			config = [[require("config.nvim-autopairs")]],
 			after = "lspkind-nvim",
 			event = "InsertEnter",
 		})
+
+		-- completion engine
 		use({
 			"hrsh7th/nvim-cmp",
 			config = [[require("config.nvim-cmp")]],
 			after = { "nvim-autopairs" },
 		})
+
 		-- nvim-cmp completion sources
-		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
-		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
+		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }) -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
+
+		-- easy LSP configuration using builtin LSP
 		use({
 			"neovim/nvim-lspconfig",
 			config = [[require("config.lsp")]],
 			after = "cmp-nvim-lsp",
 		})
-		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
-		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
-		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
-		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
-		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
-		use({ "f3fora/cmp-spell", after = "nvim-cmp" })
-		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" })
-		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" })
-		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
+
+		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" }) -- nicer LSP experience
+
+		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
+
+		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
+
+		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp", disable = true }) -- completion for buffer, rg is more useful
+
+		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for
+
+		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
+
+		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }) -- completion for latex symvols
+
+		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
+
+		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
@@ -138,7 +152,7 @@ require("packer").startup({
 		-- Show match number for search
 		use({ "kevinhwang91/nvim-hlslens", event = "CmdLineEnter" })
 
-		-- colorscheme
+		-- colorschemes
 		use({ "rebelot/kanagawa.nvim" })
 		use("bluz71/vim-nightfly-guicolors")
 		use("folke/tokyonight.nvim")
@@ -151,7 +165,7 @@ require("packer").startup({
 			event = "VimEnter",
 		})
 
-		-- Indent markers
+		-- indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
 			event = "BufRead",
@@ -168,17 +182,17 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- Escape faster with "jj" or "jk" or whatever
+		-- escape insert quickly with "jj" or "jk" or whatever
 		use({
 			"jdhao/better-escape.vim",
 			event = "insertEnter",
 		})
 
-		-- LSP covers what the next two plugins do
+		-- LSP covers what this plugin does
 		-- Syntax check and make
 		use({ "neomake/neomake", cmd = "Neomake", disable = true })
 
-		-- Auto format tools
+		-- LSP doesn't do formatting on some languages so use this
 		use({
 			"sbdchd/neoformat",
 			cmd = "Neoformat",
@@ -201,7 +215,7 @@ require("packer").startup({
 		-- Better git log display
 		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
 
-		-- Another markdown plugin
+		-- markdown plugin
 		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
 
 		-- manipulate surrounds ()""{}
@@ -224,20 +238,20 @@ require("packer").startup({
 							{ "$", "$" },
 						},
 					},
-					prefix = "<leader>s",
+					prefix = "<leader>s", -- I use mapping because lightspeed uses "S"
 				})
 			end,
 			event = "BufEnter",
 		})
 
-		-- Latex stuff
+		-- latex stuff
 		use({
 			"lervag/vimtex",
 			ft = { "tex", "bib" },
 			disable = true,
 		})
 
-		-- show keybindings
+		-- show keybindings and registers and marks and more
 		use({
 			"folke/which-key.nvim",
 			config = [[require("config.which-key")]],
@@ -260,7 +274,7 @@ require("packer").startup({
 			disable = true,
 		})
 
-		-- Window Sizer
+		-- automatic window sizing
 		use({
 			"dm1try/golden_size",
 			config = [[require("config.golden_size")]],
@@ -268,7 +282,7 @@ require("packer").startup({
 			disable = true,
 		})
 
-		-- powerful fuzzy search
+		-- very nice fuzzy search
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
@@ -280,6 +294,7 @@ require("packer").startup({
 			event = "VimEnter",
 		})
 
+		-- needed for fzf integration
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 		use({
@@ -289,7 +304,7 @@ require("packer").startup({
 			end,
 		})
 
-		-- Better Quickfix window
+		-- better quickfix window
 		use({
 			"kevinhwang91/nvim-bqf",
 			config = [[require("config.bqf")]],
