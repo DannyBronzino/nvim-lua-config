@@ -100,9 +100,9 @@ require("packer").startup({
 		})
 
 		-- nvim-cmp completion sources
-		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }) -- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
+		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }) -- nvim-lsp completion
 
-		-- easy LSP configuration using builtin LSP
+		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
 		use({
 			"neovim/nvim-lspconfig",
 			config = [[require("config.lsp")]],
