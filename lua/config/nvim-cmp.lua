@@ -67,7 +67,7 @@ cmp.setup({
 	},
 	formatting = {
 		format = lspkind.cmp_format({
-			with_text = false,
+			mode = "symbol_text",
 			menu = {
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
