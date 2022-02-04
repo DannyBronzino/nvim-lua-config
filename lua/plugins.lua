@@ -239,7 +239,7 @@ require("packer").startup({
 							{ "$", "$" },
 						},
 					},
-					prefix = "<leader>s", -- I use mapping because lightspeed uses "S"
+					prefix = "<leader>s", -- I use this mapping because lightspeed uses "s"
 				})
 			end,
 			event = "BufEnter",
