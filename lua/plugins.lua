@@ -115,6 +115,8 @@ require("packer").startup({
 
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
 
+		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
+
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp", disable = true }) -- completion for buffer, rg is more useful
 
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
@@ -122,8 +124,6 @@ require("packer").startup({
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
 
 		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }) -- completion for latex symvols
-
-		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
 
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 
