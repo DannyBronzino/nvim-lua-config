@@ -127,6 +127,8 @@ require("packer").startup({
 
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 
+		use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- calculator completion source
+
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
 			"phaazon/hop.nvim",
