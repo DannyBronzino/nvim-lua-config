@@ -52,10 +52,11 @@ cmp.setup({
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "latex_symbols" }, -- easy enter latex symbols
 		{ name = "luasnip" }, -- For luasnips user.
-		{ name = "rg" }, -- ripgrep
-		-- { name = "buffer" }, -- for buffer word completion
+		{ name = "rg" }, -- ripgrep completion
+		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
 		{ name = "spell" }, -- for spelling
 		{ name = "path" }, -- for path completion
+		{ name = "calc" }, -- calculator
 	},
 	completion = {
 		keyword_length = 1,
@@ -76,11 +77,13 @@ cmp.setup({
 				rg = "[RG]",
 				buffer = "[Buffer]",
 				spell = "[Spell]",
+				calc = "[Calc}",
 			},
 		}),
 	},
 })
 
+-- cmdline completion like wilder
 require("cmp").setup.cmdline(":", {
 	sources = {
 		{ name = "cmdline" },
@@ -88,12 +91,14 @@ require("cmp").setup.cmdline(":", {
 	},
 })
 
+-- search completion
 require("cmp").setup.cmdline("/", {
 	sources = {
 		{ name = "buffer" },
 	},
 })
 
+-- reverse search completion
 require("cmp").setup.cmdline("?", {
 	sources = {
 		{ name = "buffer" },
