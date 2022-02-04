@@ -117,7 +117,7 @@ require("packer").startup({
 
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp", disable = true }) -- completion for buffer, rg is more useful
 
-		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for
+		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
 
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
 
