@@ -155,7 +155,7 @@ require("packer").startup({
 		use({ "kevinhwang91/nvim-hlslens", event = "CmdLineEnter" })
 
 		-- colorschemes
-		use({ "rebelot/kanagawa.nvim" })
+		use("rebelot/kanagawa.nvim")
 		use("bluz71/vim-nightfly-guicolors")
 		use("folke/tokyonight.nvim")
 
