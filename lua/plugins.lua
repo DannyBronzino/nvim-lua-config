@@ -269,6 +269,7 @@ require("packer").startup({
 		})
 
 		-- Fixes scroll in middle of page
+		-- works poorly with soft wrapping
 		use({
 			"vim-scripts/scrollfix",
 			event = "BufEnter",
