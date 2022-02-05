@@ -51,6 +51,7 @@ cmp.setup({
 		{ name = "nvim_lsp" }, -- For nvim-lsp
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "latex_symbols" }, -- easy enter latex symbols
+		{ name = "digraphs" },
 		{ name = "luasnip" }, -- For luasnips user.
 		{ name = "rg" }, -- ripgrep completion
 		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
@@ -72,6 +73,7 @@ cmp.setup({
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
 				latex_symbols = "[LaTeX]",
+				digraphs = "[Digraph]",
 				luasnip = "[Snip]",
 				path = "[Path]",
 				rg = "[RG]",

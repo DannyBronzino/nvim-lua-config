@@ -150,6 +150,8 @@ require("packer").startup({
 
 		use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- calculator completion source
 
+		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
+
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
 			"phaazon/hop.nvim",
