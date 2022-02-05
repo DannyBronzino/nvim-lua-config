@@ -1,5 +1,10 @@
-# run julia snippet_converter.jl language.snippets to
-# output a json file rename json file and add to package.json
+#=
+run 'julia snippet_converter.jl [language].snippets' to
+output a json file rename json file and add to package.json
+taken from here:
+https://github.com/L3MON4D3/LuaSnip/issues/201#issuecomment-950132369
+=#
+
 using JSON
 
 function convert_snip(snippet::Vector{String})
