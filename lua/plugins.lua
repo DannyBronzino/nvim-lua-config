@@ -1,6 +1,24 @@
 local utils = require("utils")
 local fn = vim.fn
 
+local hotpot_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/hotpot.nvim"
+
+-- You can automatically install hotpot if it is missing (i.e for fresh
+-- nvim setups). Don't forget to add hotpot to your package manager or
+-- it may uninstall hotpot!
+if vim.fn.empty(vim.fn.glob(hotpot_path)) > 0 then
+	print("Could not find hotpot.nvim, cloning new copy to", hotpot_path)
+	vim.fn.system({ "git", "clone", "https://github.com/rktjmp/hotpot.nvim", hotpot_path })
+end
+
+-- Bootstrap .fnl support
+require("hotpot")
+
+-- Now you can load fennel code, so you could put the rest of your
+-- config in a separate `~/.config/nvim/fnl/fenneled_init.fnl` or
+-- `~/.config/nvim/fnl/plugins.fnl`, etc.
+-- require("fenneled_init")
+
 vim.g.package_home = fn.stdpath("data") .. "/site/pack/packer/"
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
 
@@ -41,6 +59,9 @@ require("packer").startup({
 			"wbthomason/packer.nvim",
 			opt = true,
 		})
+
+		-- fennel transpiler
+		use({ "rktjmp/hotpot.nvim" })
 
 		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
