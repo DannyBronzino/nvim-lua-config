@@ -24,14 +24,14 @@ ls.autosnippets = {
 		-- use csquotes package
 		s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
 
-    -- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
+		-- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
 		s(
 			{ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" },
 			{ t("\\mentalquote{"), i(1), i(0), t("}") }
 		),
 
-		s({ trig = "Qing", name = "Qing", dscr = "\\Qing{}", wordTrig = false }, t("Qīng")),
+		s({ trig = "Qing", name = "Qīng", dscr = "Qīng", wordTrig = false }, t("Qīng")),
 
-		s({ trig = "Therese", name = "Thérèse", dscr = "\\Therese{}", wordTrig = false }, t("\\Therese{}")),
+		s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
 	},
 }
