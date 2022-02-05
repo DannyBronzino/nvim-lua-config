@@ -31,9 +31,9 @@ ls.autosnippets = {
 		),
 
 		-- add this to preamble: \newcommand{\Qing}{Q\={\i}ng}
-		s({ trig = "Qing", name = "Qing", dscr = "\\Qing{}", wordTrig = false }, t("\\Qing{}")),
+		s({ trig = "Qing", name = "Qing", dscr = "\\Qing{}", wordTrig = false }, t("Qīng")),
 
 		-- add this to preampble: add this to preampble: Th\'{e}r\`{e}se
-		s({ trig = "Therese", name = "Therese", dscr = "\\Therese{}", wordTrig = false }, t("\\Therese{}")),
+		s({ trig = "Therese", name = "Thérèse", dscr = "\\Therese{}", wordTrig = false }, t("\\Therese{}")),
 	},
 }
