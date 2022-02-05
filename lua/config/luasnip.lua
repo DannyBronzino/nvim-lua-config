@@ -24,15 +24,14 @@ ls.autosnippets = {
 		-- use csquotes package
 		s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
 
+    -- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
 		s(
 			{ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" },
 			{ t("\\mentalquote{"), i(1), i(0), t("}") }
 		),
 
-		-- add this to preamble: \newcommand{\Qing}{Q\={\i}ng}
 		s({ trig = "Qing", name = "Qing", dscr = "\\Qing{}", wordTrig = false }, t("Qīng")),
 
-		-- add this to preampble: add this to preampble: Th\'{e}r\`{e}se
 		s({ trig = "Therese", name = "Thérèse", dscr = "\\Therese{}", wordTrig = false }, t("\\Therese{}")),
 	},
 }
