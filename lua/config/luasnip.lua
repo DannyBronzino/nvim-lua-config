@@ -24,10 +24,9 @@ ls.autosnippets = {
 		-- use csquotes package
 		s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
 
-		-- add this to preamble: \newcommand{\chinesequote}[1]{$\lceil${#1}$\rfloor$}
 		s(
-			{ trig = "\\cq", name = "Chinese Quote", dscr = "\\chinesequote" },
-			{ t("\\chinesequote{"), i(1), i(0), t("}") }
+			{ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" },
+			{ t("\\mentalquote{"), i(1), i(0), t("}") }
 		),
 
 		-- add this to preamble: \newcommand{\Qing}{Q\={\i}ng}
