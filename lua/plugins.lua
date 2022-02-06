@@ -130,7 +130,18 @@ require("packer").startup({
 			after = "cmp-nvim-lsp",
 		})
 
+		-- easy to use lsp commands
 		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" }) -- nicer LSP experience
+
+		-- diagnostic list
+		use({
+			"folke/trouble.nvim",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = function()
+				require("trouble").setup()
+			end,
+			after = "nvim-lspconfig",
+		})
 
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
 
