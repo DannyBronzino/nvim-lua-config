@@ -10,6 +10,7 @@ local custom_attach = function(client, bufnr)
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
+	buf_set_keymap("n", "gs", "<cmd>Lspsaga signature_help<cr>", opts)
 	buf_set_keymap("n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts)
 	buf_set_keymap("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
 	buf_set_keymap("n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
@@ -80,12 +81,6 @@ lspconfig.vimls.setup({
 })
 
 -- Sumneko Lua LSP
--- https://gitub.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)h
-local sumneko_root_path = vim.fn.getenv("HOME") .. "/repos/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
--- end
-
--- Make runtime files discoverable to the server
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -93,6 +88,9 @@ table.insert(runtime_path, "lua/?/init.lua")
 require("lspconfig").sumneko_lua.setup({
 	on_attach = custom_attach,
 	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 500,
+	},
 	settings = {
 		Lua = {
 			runtime = {
