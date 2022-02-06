@@ -138,7 +138,7 @@ require("packer").startup({
 
 		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
 
-		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp", disable = true }) -- completion for buffer, rg is more useful
+		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- completion for buffer, rg is more useful
 
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
 
@@ -176,12 +176,12 @@ require("packer").startup({
 		})
 
 		-- Show match number and index for search
-    use {
-      'kevinhwang91/nvim-hlslens',
-      branch = 'main',
-      event = "CmdLineEnter",
-      config = [[require('config.hlslens')]]
-    }
+		use({
+			"kevinhwang91/nvim-hlslens",
+			branch = "main",
+			event = "CmdLineEnter",
+			config = [[require('config.hlslens')]],
+		})
 
 		-- colorschemes
 		use("rebelot/kanagawa.nvim")
