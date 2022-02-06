@@ -189,10 +189,12 @@ require("packer").startup({
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
-			branch = "main",
-			event = "CmdLineEnter",
 			config = [[require('config.hlslens')]],
+			after = "vim-asterisk",
 		})
+
+		-- asterisk improved
+		use({ "haya14busa/vim-asterisk", event = "VimEnter" })
 
 		-- colorschemes
 		use("rebelot/kanagawa.nvim")
