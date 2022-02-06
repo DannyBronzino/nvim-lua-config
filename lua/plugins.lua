@@ -178,18 +178,10 @@ require("packer").startup({
 			"ggandor/lightspeed.nvim",
 			config = [[require("config.lightspeed")]],
 			event = "BufEnter",
-			disable = false,
-		})
-
-		-- Clear highlight search automatically for you
-		use({
-			"romainl/vim-cool",
-			event = "CursorMoved",
-			disable = true,
 		})
 
 		-- asterisk improved
-		use({ "haya14busa/vim-asterisk", event = "VimEnter" })
+		use({ "haya14busa/vim-asterisk", event = "BufEnter" })
 
 		-- Show match number and index for search
 		use({
@@ -233,15 +225,10 @@ require("packer").startup({
 			event = "insertEnter",
 		})
 
-		-- LSP covers what this plugin does
-		-- Syntax check and make
-		use({ "neomake/neomake", cmd = "Neomake", disable = true })
-
 		-- LSP doesn't do formatting on some languages so use this
 		use({
 			"sbdchd/neoformat",
 			cmd = "Neoformat",
-			disable = false,
 		})
 
 		-- git in the gutter
@@ -255,13 +242,10 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive" })
+		use({ "tpope/vim-fugitive", event = "BufEnter" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
-
-		-- markdown plugin
-		use({ "plasticboy/vim-markdown", ft = "markdown", disable = true })
 
 		-- manipulate surrounds ()""{}
 		use({
@@ -360,8 +344,8 @@ require("packer").startup({
 		-- nice tab bar
 		use({
 			"romgrk/barbar.nvim",
-			config = [[require("config.barbar")]],
 			requires = { "kyazdani42/nvim-web-devicons" },
+			config = [[require("config.barbar")]],
 			event = "VimEnter",
 		})
 
