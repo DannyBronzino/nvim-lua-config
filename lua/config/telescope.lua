@@ -13,8 +13,8 @@ require("telescope").setup({
 			i = {
 				["<C-u>"] = false,
 				["<C-d>"] = false,
-        ["<c-j>"] = actions.move_selection_next,
-        ["<c-k>"] = actions.move_selection_previous,
+        ["<c-n>"] = actions.move_selection_next,
+        ["<c-p>"] = actions.move_selection_previous,
         ["<c-l>"] = actions.toggle_selection,
 			},
       n = {
