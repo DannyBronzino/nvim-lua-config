@@ -172,10 +172,16 @@ require("packer").startup({
 		use({
 			"romainl/vim-cool",
 			event = "CursorMoved",
+			disable = true,
 		})
 
-		-- Show match number for search
-		use({ "kevinhwang91/nvim-hlslens", event = "CmdLineEnter" })
+		-- Show match number and index for search
+    use {
+      'kevinhwang91/nvim-hlslens',
+      branch = 'main',
+      event = "CmdLineEnter",
+      config = [[require('config.hlslens')]]
+    }
 
 		-- colorschemes
 		use("rebelot/kanagawa.nvim")
