@@ -132,20 +132,6 @@ nnoremap J mzJ`z
 for ch in [',', '.', '!', '?', ';', ':']
   execute printf('inoremap %s %s<C-g>u', ch, ch)
 endfor
-"}
-
-" move to insert mode with drop-down menu of spelling suggestions
-" under the cursor
-nnoremap <Leader>sp a<C-X>s
-
-" hlslens mappings
-noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-
-map *  <Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>
-map #  <Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>
 
 " move current line to (almost) top of screen
 nnoremap zt ztkkjj
