@@ -29,7 +29,7 @@ lspsaga.setup({
 		scroll_up = "<C-p>",
 	},
 	code_action_keys = {
-		quit = "q",
+		quit = "<esc>",
 		exec = "<CR>",
 	},
 	rename_action_keys = {
