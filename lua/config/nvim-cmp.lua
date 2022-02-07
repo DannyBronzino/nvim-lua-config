@@ -55,7 +55,7 @@ cmp.setup({
 		{ name = "luasnip" }, -- For luasnips user.
 		{ name = "conjure" },
 		{ name = "rg" }, -- ripgrep completion
-		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
+		{ name = "buffer" }, -- for buffer word completion (try rg instead)
 		{ name = "spell" }, -- for spelling
 		{ name = "path" }, -- for path completion
 		{ name = "calc" }, -- calculator
