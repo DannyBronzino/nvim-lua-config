@@ -54,7 +54,7 @@ cmp.setup({
 		{ name = "digraphs" },
 		{ name = "luasnip" }, -- For luasnips user.
 		{ name = "rg" }, -- ripgrep completion
-		{ name = "buffer" }, -- for buffer word completion (try rg instead)
+		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
 		{ name = "spell" }, -- for spelling
 		{ name = "path" }, -- for path completion
 		{ name = "calc" }, -- calculator
@@ -91,6 +91,9 @@ require("cmp").setup.cmdline(":", {
 		{ name = "cmdline" },
 		{ name = "path" },
 	},
+	view = {
+		entries = "wildmenu",
+	},
 })
 
 -- search completion
@@ -98,12 +101,18 @@ require("cmp").setup.cmdline("/", {
 	sources = {
 		{ name = "buffer" },
 	},
+	view = {
+		entries = "wildmenu",
+	},
 })
 
 -- reverse search completion
 require("cmp").setup.cmdline("?", {
 	sources = {
 		{ name = "buffer" },
+	},
+	view = {
+		entries = "wildmenu",
 	},
 })
 
