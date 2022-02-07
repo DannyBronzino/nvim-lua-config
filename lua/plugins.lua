@@ -63,8 +63,6 @@ require("packer").startup({
 		-- fennel transpiler
 		use({ "rktjmp/hotpot.nvim" })
 
-		use({ "Olical/conjure", ft = "fennel", after = "hotpot.nvim" })
-
 		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
