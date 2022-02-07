@@ -53,6 +53,7 @@ cmp.setup({
 		{ name = "latex_symbols" }, -- easy enter latex symbols
 		{ name = "digraphs" },
 		{ name = "luasnip" }, -- For luasnips user.
+		{ name = "conjure" },
 		{ name = "rg" }, -- ripgrep completion
 		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
 		{ name = "spell" }, -- for spelling
@@ -75,6 +76,7 @@ cmp.setup({
 				latex_symbols = "[LaTeX]",
 				digraphs = "[Digraph]",
 				luasnip = "[Snip]",
+				conjure = "[Conjure]",
 				path = "[Path]",
 				rg = "[RG]",
 				buffer = "[Buffer]",
