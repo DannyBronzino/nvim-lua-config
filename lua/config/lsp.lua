@@ -54,17 +54,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lspconfig = require("lspconfig")
 
--- racketlang server
-require("lspconfig").clojure_lsp.setup({
-	on_attach = custom_attach,
-	capabilities = capabilities,
-	flags = {
-		debounce_text_changes = 500,
-	},
-	settings = {
-		filetypes = { "clojure", "edn", "fnl" },
-	},
-})
 -- set up texlab for latex
 lspconfig.texlab.setup({
 	on_attach = custom_attach,
