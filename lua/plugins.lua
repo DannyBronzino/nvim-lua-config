@@ -42,12 +42,6 @@ require("packer").startup({
 			opt = true,
 		})
 
-		use({
-			"Olical/conjure",
-			ft = "fennel",
-			event = "BufEnter",
-		})
-
 		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
@@ -138,7 +132,6 @@ require("packer").startup({
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 		use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- calculator completion source
 		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
-		use({ "PaterJason/cmp-conjure", after = "nvim-cmp" }) -- completion for conjure/fennel
 
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
