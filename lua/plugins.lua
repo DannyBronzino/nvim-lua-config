@@ -42,10 +42,16 @@ require("packer").startup({
 			opt = true,
 		})
 
+		use({
+			"Olical/conjure",
+			ft = "fennel",
+			event = "BufEnter",
+		})
+
 		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 		use({
 			"wellle/targets.vim",
-			even = "BufEnter",
+			event = "BufEnter",
 		})
 
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
