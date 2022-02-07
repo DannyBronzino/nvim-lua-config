@@ -54,6 +54,14 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lspconfig = require("lspconfig")
 
+-- racketlang server
+require("lspconfig").racket_langserver.setup({
+	on_attach = custom_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 500,
+	},
+})
 -- set up texlab for latex
 lspconfig.texlab.setup({
 	on_attach = custom_attach,
