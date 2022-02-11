@@ -1,5 +1,9 @@
 local utils = require("utils")
 
+vim.cmd([[
+	filetype plugin indent on
+	syntax enable
+]])
 --Incremental live completion (note: this is now a default on master)
 vim.opt.inccommand = "nosplit"
 
