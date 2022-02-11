@@ -33,4 +33,4 @@ vim.g.tokyonight_transparent = true
 
 vim.g.nightflyTransparent = "1"
 
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme kanagawa]])
