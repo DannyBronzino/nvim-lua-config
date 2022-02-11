@@ -92,7 +92,7 @@ require("cmp").setup.cmdline(":", {
 		{ name = "path" },
 	},
 	view = {
-		entries = "wildmenu",
+		-- entries = "wildmenu",
 	},
 })
 
