@@ -1,9 +1,9 @@
 local utils = require("utils")
 
-vim.cmd([[
-	filetype plugin indent on
-	syntax enable
-]])
+-- vim.cmd([[
+-- filetype plugin indent on
+-- syntax enable
+-- ]])
 --Incremental live completion (note: this is now a default on master)
 vim.opt.inccommand = "nosplit"
 
@@ -150,7 +150,7 @@ vim.opt.formatoptions:append("t")
 
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.opt.numberwidth = 6
 
