@@ -4,7 +4,7 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		custom_captures = {
 			-- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-			["foo.bar"] = "Identifier",
+			-- ["foo.bar"] = "Identifier",
 		},
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -13,7 +13,7 @@ require("nvim-treesitter.configs").setup({
 		additional_vim_regex_highlighting = true,
 	},
 	indent = {
-		enable = false,
+		enable = true,
 	},
 	textobjects = {
 		select = {
