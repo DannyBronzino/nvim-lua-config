@@ -130,7 +130,6 @@ require("packer").startup({
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
 		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }) -- completion for latex symvols
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
-		use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- calculator completion source
 		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
 
 		-- Buffer jumping like EasyMotion or Sneak
