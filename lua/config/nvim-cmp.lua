@@ -48,19 +48,18 @@ cmp.setup({
 		["<C-n>"] = cmp.mapping.scroll_docs(3),
 	},
 	sources = {
-		{ name = "nvim_lsp" }, -- For nvim-lsp
-		{ name = "nvim_lua" }, -- for nvim lua function
-		{ name = "latex_symbols" }, -- easy enter latex symbols
-		{ name = "digraphs" },
-		{ name = "luasnip" }, -- For luasnips user.
-		{ name = "rg" }, -- ripgrep completion
+		{ name = "nvim_lsp", keyword_length = 2, priority = 99 }, -- For nvim-lsp
+		{ name = "nvim_lua", keyword_length = 2, priority = 100 }, -- for nvim lua function
+		{ name = "latex_symbols", keyword_length = 2, max_item_count = 3, priority = 10 }, -- easy enter latex symbols
+		{ name = "digraphs", keyword_length = 2, priority = 80 },
+		{ name = "luasnip", keyword_length = 2, priority = 90 }, -- For luasnips user.
+		{ name = "rg", keyword_length = 2, max_item_count = 5, priority = 80 }, -- ripgrep completion
 		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
-		{ name = "spell" }, -- for spelling
-		{ name = "path" }, -- for path completion
-		{ name = "calc" }, -- calculator
+		{ name = "spell", keyword_length = 3 }, -- for spelling
+		{ name = "path", keyword_length = 1 }, -- for path completion
 	},
 	completion = {
-		keyword_length = 1,
+		-- keyword_length = 2,
 		completeopt = "menu,noselect",
 	},
 	experimental = {
@@ -79,7 +78,6 @@ cmp.setup({
 				rg = "[RG]",
 				buffer = "[Buffer]",
 				spell = "[Spell]",
-				calc = "[Calc}",
 			},
 		}),
 	},
@@ -91,15 +89,15 @@ require("cmp").setup.cmdline(":", {
 		{ name = "cmdline" },
 		{ name = "path" },
 	},
-	view = {
-		-- entries = "wildmenu",
-	},
+	-- view = {
+	-- entries = "wildmenu",
+	-- },
 })
 
 -- search completion
 require("cmp").setup.cmdline("/", {
 	sources = {
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 3 },
 	},
 	view = {
 		entries = "wildmenu",
@@ -109,7 +107,7 @@ require("cmp").setup.cmdline("/", {
 -- reverse search completion
 require("cmp").setup.cmdline("?", {
 	sources = {
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 3 },
 	},
 	view = {
 		entries = "wildmenu",
