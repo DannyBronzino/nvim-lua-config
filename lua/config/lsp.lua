@@ -10,7 +10,7 @@ local custom_attach = function(client, bufnr)
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
-	buf_set_keymap("n", "gS", "<cmd>Lspsaga signature_help<cr>", opts)
+	buf_set_keymap("n", "gs", "<cmd>Lspsaga signature_help<cr>", opts)
 	buf_set_keymap("n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts)
 	buf_set_keymap("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
 	buf_set_keymap("n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
