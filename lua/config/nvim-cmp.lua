@@ -48,15 +48,15 @@ cmp.setup({
 		["<C-n>"] = cmp.mapping.scroll_docs(3),
 	},
 	sources = {
-		{ name = "nvim_lsp", keyword_length = 2, priority = 99 }, -- For nvim-lsp
-		{ name = "nvim_lua", keyword_length = 2, priority = 100 }, -- for nvim lua function
-		{ name = "latex_symbols", keyword_length = 2, max_item_count = 3, priority = 10 }, -- easy enter latex symbols
-		{ name = "digraphs", keyword_length = 2, priority = 80 },
-		{ name = "luasnip", keyword_length = 2, priority = 90 }, -- For luasnips user.
-		{ name = "rg", keyword_length = 2, max_item_count = 5, priority = 80 }, -- ripgrep completion
+		{ name = "luasnip" }, -- for luasnip
+		{ name = "nvim_lua" }, -- for nvim lua function
+		{ name = "nvim_lsp" }, -- for nvim-lsp
+		{ name = "rg" }, -- ripgrep completion
+		{ name = "digraphs" },
 		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
-		{ name = "spell", keyword_length = 3 }, -- for spelling
-		{ name = "path", keyword_length = 1 }, -- for path completion
+		{ name = "path" }, -- for path completion
+		-- { name = "latex_symbols", keyword_length = 4, max_item_count = 3 }, -- easy enter latex symbols
+		{ name = "spell" }, -- for spelling
 	},
 	completion = {
 		-- keyword_length = 2,
@@ -67,16 +67,16 @@ cmp.setup({
 	},
 	formatting = {
 		format = lspkind.cmp_format({
-			with_text = false,
+			with_text = true,
 			menu = {
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
-				latex_symbols = "[LaTeX]",
+				-- latex_symbols = "[LaTeX]",
 				digraphs = "[Digraph]",
 				luasnip = "[Snip]",
 				path = "[Path]",
 				rg = "[RG]",
-				buffer = "[Buffer]",
+				-- buffer = "[Buffer]",
 				spell = "[Spell]",
 			},
 		}),
@@ -84,7 +84,7 @@ cmp.setup({
 })
 
 -- cmdline completion like wilder
-require("cmp").setup.cmdline(":", {
+cmp.setup.cmdline(":", {
 	sources = {
 		{ name = "cmdline" },
 		{ name = "path" },
@@ -95,27 +95,45 @@ require("cmp").setup.cmdline(":", {
 })
 
 -- search completion
-require("cmp").setup.cmdline("/", {
+cmp.setup.cmdline("/", {
 	sources = {
-		{ name = "buffer", keyword_length = 3 },
+		{ name = "buffer" },
 	},
-	view = {
-		entries = "wildmenu",
-	},
+	-- view = {
+	-- entries = "wildmenu",
+	-- },
 })
 
--- reverse search completion
-require("cmp").setup.cmdline("?", {
+cmp.setup.cmdline("?", {
 	sources = {
-		{ name = "buffer", keyword_length = 3 },
+		{ name = "buffer" },
 	},
-	view = {
-		entries = "wildmenu",
-	},
+	-- view = {
+	-- entries = "wildmenu",
+	-- },
 })
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
-vim.cmd("hi link CmpItemMenu Comment")
+--  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
+vim.cmd([[
+  highlight! link CmpItemMenu Comment
+  " gray
+  highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+  " blue
+  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+  highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+  " light blue
+  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+  highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+  highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+  " pink
+  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+  " front
+  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+  highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+  highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+]])
