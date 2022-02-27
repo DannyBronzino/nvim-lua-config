@@ -72,7 +72,7 @@ require("packer").startup({
 		})
 
 		-- vscode format snippets, must be loaded before LuaSnip
-		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
+		use({ "rafamadriz/friendly-snippets", event = "VimEnter" })
 
 		-- snippet engine
 		use({
@@ -89,7 +89,6 @@ require("packer").startup({
 			"windwp/nvim-autopairs",
 			config = [[require("config.nvim-autopairs")]],
 			after = "lspkind-nvim",
-			event = "InsertEnter",
 		})
 
 		-- completion engine
@@ -209,10 +208,10 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive", after = "gitsigns.nvim" })
+		use({ "tpope/vim-fugitive", cmd = "Git" })
 
 		-- Better git log display
-		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
+		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = "flog" })
 
 		-- manipulate surrounds ()""{}
 		use({
