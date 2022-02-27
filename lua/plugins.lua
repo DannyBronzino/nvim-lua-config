@@ -209,7 +209,7 @@ require("packer").startup({
 		})
 
 		-- Git command inside vim
-		use({ "tpope/vim-fugitive", event = "BufEnter" })
+		use({ "tpope/vim-fugitive", after = "gitsigns.nvim" })
 
 		-- Better git log display
 		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = { "flog" } })
@@ -268,7 +268,7 @@ require("packer").startup({
 		use({
 			"vim-scripts/scrollfix",
 			event = "BufEnter",
-			disable = true,
+			disable = false,
 		})
 
 		-- automatic window sizing
