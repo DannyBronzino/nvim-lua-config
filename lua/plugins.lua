@@ -110,7 +110,7 @@ require("packer").startup({
 		})
 
 		-- easy to use lsp commands
-		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" }) -- nicer LSP experience
+		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
 
 		-- diagnostic list
 		use({
