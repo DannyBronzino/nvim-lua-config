@@ -72,7 +72,7 @@ require("packer").startup({
 		})
 
 		-- vscode format snippets, must be loaded before LuaSnip
-		use({ "rafamadriz/friendly-snippets", event = "VimEnter" })
+		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
 
 		-- snippet engine
 		use({
@@ -267,7 +267,7 @@ require("packer").startup({
 		use({
 			"vim-scripts/scrollfix",
 			event = "BufEnter",
-			disable = false,
+			disable = true,
 		})
 
 		-- automatic window sizing
