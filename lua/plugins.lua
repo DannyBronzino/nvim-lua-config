@@ -284,8 +284,8 @@ require("packer").startup({
 			requires = {
 				{ "nvim-lua/popup.nvim" },
 				{ "nvim-lua/plenary.nvim" },
-				{ "telescope-fzf-native.nvim" },
 			},
+			wants = "telescope-fzf-native.nvim",
 			config = [[require("config.telescope")]],
 			event = "VimEnter",
 		})
