@@ -61,3 +61,5 @@ function! s:quit_current_win() abort
     quit
   endif
 endfunction
+
+autocmd User TelescopePreviewerLoaded setlocal wrap
