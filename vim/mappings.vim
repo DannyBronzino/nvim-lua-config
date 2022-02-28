@@ -134,8 +134,8 @@ for ch in [',', '.', '!', '?', ';', ':']
 endfor
 
 " move current line to (almost) top of screen
-nnoremap zt ztkkjj
-inoremap zt <esc>ztkkjja
+" nnoremap zt ztkkjj " use zz instead?
+" inoremap zt <esc>ztkkjja " use <c-o>zz instead
 
 " run git commit
 nnoremap <F12> <cmd>Git add % <bar> Git commit %<cr>
