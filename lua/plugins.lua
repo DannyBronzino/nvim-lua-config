@@ -278,6 +278,22 @@ require("packer").startup({
 			disable = true,
 		})
 
+		-- fuzzy search engine
+		use({
+			"junegunn/fzf",
+			run = function()
+				vim.fn["fzf#install"]()
+			end,
+			event = "BufEnter",
+		})
+
+		-- needed for fzf integration
+		use({
+			"nvim-telescope/telescope-fzf-native.nvim",
+			run = "make",
+			after = "fzf",
+		})
+
 		-- very nice fuzzy search
 		use({
 			"nvim-telescope/telescope.nvim",
@@ -285,19 +301,8 @@ require("packer").startup({
 				{ "nvim-lua/popup.nvim" },
 				{ "nvim-lua/plenary.nvim" },
 			},
-			wants = "telescope-fzf-native.nvim",
 			config = [[require("config.telescope")]],
-			event = "VimEnter",
-		})
-
-		-- needed for fzf integration
-		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-		use({
-			"junegunn/fzf",
-			run = function()
-				vim.fn["fzf#install"]()
-			end,
+			after = "telescope-fzf-native.nvim",
 		})
 
 		-- better quickfix window
