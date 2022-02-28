@@ -239,6 +239,9 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
+		-- fallback if surround.nvim never comes back
+		use({ "machakann/vim-sandwich", event = "BufEnter", disable = true })
+
 		-- latex stuff
 		use({
 			"lervag/vimtex",
