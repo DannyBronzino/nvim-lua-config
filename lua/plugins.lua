@@ -58,17 +58,18 @@ require("packer").startup({
 		})
 
 		-- textobjects for treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			after = "vim-matchup",
-		})
+		-- use({
+		-- "nvim-treesitter/nvim-treesitter-textobjects",
+		-- after = "vim-matchup",
+		-- })
 
 		-- syntax highlighting, folding, and more
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			after = "nvim-treesitter-textobjects",
+			-- after = "nvim-treesitter-textobjects",
+			after = "vim-matchup",
 		})
 
 		-- vscode format snippets, must be loaded before LuaSnip
