@@ -141,7 +141,3 @@ endfor
 nnoremap <F12> <cmd>Git add % <bar> Git commit %<cr>
 
 nnoremap \t <cmd>TroubleToggle<cr>
-
-" for vim-sandwich
-nmap s <Nop>
-omap s <Nop>
