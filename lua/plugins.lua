@@ -166,7 +166,7 @@ require("packer").startup({
 		use({
 			"lukas-reineke/indent-blankline.nvim",
 			ft = { "lua", "python" },
-			event = "BufRead",
+			-- event = "BufRead",
 		})
 
 		-- notification plugin
