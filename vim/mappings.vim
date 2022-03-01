@@ -139,5 +139,3 @@ endfor
 
 " run git commit
 nnoremap <F12> <cmd>Git add % <bar> Git commit %<cr>
-
-nnoremap \t <cmd>TroubleToggle<cr>
