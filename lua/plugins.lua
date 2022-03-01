@@ -294,8 +294,8 @@ require("packer").startup({
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
-				{ "nvim-lua/popup.nvim" },
-				{ "nvim-lua/plenary.nvim" },
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
 			},
 			config = [[require("config.telescope")]],
 			after = "telescope-fzf-native.nvim",
