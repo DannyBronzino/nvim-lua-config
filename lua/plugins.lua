@@ -53,71 +53,62 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- textobjects for treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			after = "vim-matchup",
-			disable = true,
-		})
-
 		-- syntax highlighting, folding, and more
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
 			-- after = "nvim-treesitter-textobjects",
-			after = "vim-matchup",
+			wants = "vim-matchup",
 		})
 
 		-- vscode format snippets, must be loaded before LuaSnip
-		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
+		use({ "rafamadriz/friendly-snippets", event = "InsertEnter" })
 
 		-- snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
 			config = [[require("config.luasnip")]],
-			after = "friendly-snippets",
+			wants = "friendly-snippets",
+			event = "InsertEnter",
 		})
-
-		-- LSP icons
-		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
 
 		-- automatic insertion and deletion of a pair of characters
 		use({
 			"windwp/nvim-autopairs",
 			config = [[require("config.nvim-autopairs")]],
-			after = "lspkind-nvim",
+			event = "InsertEnter",
 		})
 
 		-- completion engine
 		use({
 			"hrsh7th/nvim-cmp",
+			requires = "onsails/lspkind-nvim",
 			config = [[require("config.nvim-cmp")]],
-			after = { "nvim-autopairs" },
+			wants = "nvim-autopairs",
+			event = { "InsertEnter", "CmdLineEnter" },
 		})
 
 		-- nvim-cmp completion sources
-		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }) -- nvim-lsp completion
+		use({ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" }) -- nvim-lsp completion
 
-		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
+		-- nvim-lsp configuration
 		use({
 			"neovim/nvim-lspconfig",
+			requires = { { "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]] } },
 			config = [[require("config.lsp")]],
-			after = "cmp-nvim-lsp",
+			wants = "cmp-nvim-lsp",
 		})
 
-		-- easy to use lsp commands
-		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
-
-		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
-		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
-		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
-		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- completion for buffer, rg is more useful
-		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
-		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
-		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp", disable = true }) -- completion for latex symvols
-		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
-		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
+		use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter" }) -- completion for nvim-lua
+		use({ "hrsh7th/cmp-path", event = "InsertEnter" }) -- completion for paths
+		use({ "lukas-reineke/cmp-rg", event = "InsertEnter" }) -- completion using ripgrep, requires installing ripgrep
+		use({ "hrsh7th/cmp-buffer", event = "InsertEnter" }) -- completion for buffer, rg is more useful
+		use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline and search
+		use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for nvim spell-checker
+		use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter", disable = true }) -- completion for latex symvols
+		use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion using luasnip
+		use({ "dmitmel/cmp-digraphs", event = "InsertEnter" }) -- digraph completion
 
 		-- Buffer jumping like EasyMotion or Sneak
 		use({
@@ -135,13 +126,13 @@ require("packer").startup({
 		})
 
 		-- asterisk improved
-		use({ "haya14busa/vim-asterisk", event = "BufEnter" })
 
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
+			requires = "haya14busa/vim-asterisk",
 			config = [[require('config.hlslens')]],
-			after = "vim-asterisk",
+			wants = "vim-asterisk",
 		})
 
 		-- colorschemes
@@ -149,13 +140,13 @@ require("packer").startup({
 		use("folke/tokyonight.nvim")
 
 		-- icons for everything
-		use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
+		use({ "kyazdani42/nvim-web-devicons" })
 
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
 			config = [[require("config.lualine")]],
-			after = "nvim-web-devicons",
+			wants = "nvim-web-devicons",
 		})
 
 		-- indent markers
@@ -244,14 +235,13 @@ require("packer").startup({
 		use({
 			"folke/which-key.nvim",
 			config = [[require("config.which-key")]],
-			event = "VimEnter",
 		})
 
 		-- file explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
 			config = [[require("config.nvim-tree")]],
-			after = "nvim-web-devicons",
+			wants = "nvim-web-devicons",
 			disable = true,
 		})
 
@@ -309,7 +299,7 @@ require("packer").startup({
 		use({
 			"romgrk/barbar.nvim",
 			config = [[require("config.barbar")]],
-			after = "nvim-web-devicons",
+			wants = "nvim-web-devicons",
 		})
 
 		-- show and trim trailing whitespaces
