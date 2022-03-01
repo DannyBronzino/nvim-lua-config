@@ -199,7 +199,7 @@ require("packer").startup({
 			config = function()
 				require("gitsigns").setup()
 			end,
-			event = "BufRead",
+			event = "BufEnter",
 		})
 
 		-- Git command inside vim
