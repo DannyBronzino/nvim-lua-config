@@ -165,6 +165,7 @@ require("packer").startup({
 		-- indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
+			ft = { "lua", "python" },
 			event = "BufRead",
 		})
 
