@@ -58,10 +58,11 @@ require("packer").startup({
 		})
 
 		-- textobjects for treesitter
-		-- use({
-		-- "nvim-treesitter/nvim-treesitter-textobjects",
-		-- after = "vim-matchup",
-		-- })
+		use({
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			after = "vim-matchup",
+			disable = true,
+		})
 
 		-- syntax highlighting, folding, and more
 		use({
@@ -120,6 +121,7 @@ require("packer").startup({
 				require("trouble").setup()
 			end,
 			after = "nvim-lspconfig",
+			disable = true,
 		})
 
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
