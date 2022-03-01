@@ -125,14 +125,11 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- asterisk improved
-
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
 			requires = "haya14busa/vim-asterisk",
 			config = [[require('config.hlslens')]],
-			wants = "vim-asterisk",
 		})
 
 		-- colorschemes
