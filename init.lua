@@ -1,3 +1,6 @@
+-- load impatient first
+require("impatient")
+
 -- lua sources
 require("plugins")
 require("options")

@@ -30,10 +30,6 @@ require("packer").startup({
 		-- it is recommened to put impatient.nvim before any other plugins
 		use({
 			"lewis6991/impatient.nvim",
-			config = function()
-				require("impatient")
-				require("impatient").enable_profile()
-			end,
 		})
 
 		-- packer itself, can be optional
