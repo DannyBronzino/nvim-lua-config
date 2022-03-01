@@ -212,7 +212,7 @@ require("packer").startup({
 		use({ "tpope/vim-fugitive", cmd = "Git" })
 
 		-- Better git log display
-		use({ "rbong/vim-flog", require = "vim-fugitive", cmd = "flog" })
+		use({ "rbong/vim-flog", wants = "vim-fugitive", cmd = "Flog" })
 
 		-- manipulate surrounds ()""{}
 		use({
