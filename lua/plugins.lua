@@ -113,17 +113,6 @@ require("packer").startup({
 		-- easy to use lsp commands
 		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
 
-		-- diagnostic list
-		use({
-			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("trouble").setup()
-			end,
-			after = "nvim-lspconfig",
-			disable = true,
-		})
-
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
 		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
@@ -163,12 +152,14 @@ require("packer").startup({
 		use("rebelot/kanagawa.nvim")
 		use("folke/tokyonight.nvim")
 
+		-- icons for everything
+		use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
+
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
 			config = [[require("config.lualine")]],
-			event = "VimEnter",
+			after = "nvim-web-devicons",
 		})
 
 		-- indent markers
@@ -262,9 +253,8 @@ require("packer").startup({
 		-- file explorer
 		use({
 			"kyazdani42/nvim-tree.lua",
-			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.nvim-tree")]],
-			event = "VimEnter",
+			after = "nvim-web-devicons",
 			disable = true,
 		})
 
@@ -321,9 +311,8 @@ require("packer").startup({
 		-- nice tab bar
 		use({
 			"romgrk/barbar.nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
 			config = [[require("config.barbar")]],
-			event = "VimEnter",
+			after = "nvim-web-devicons",
 		})
 
 		-- show and trim trailing whitespaces
