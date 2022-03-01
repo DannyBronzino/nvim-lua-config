@@ -1,5 +1,5 @@
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+-- local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
 	defaults = {
@@ -19,11 +19,11 @@ require("telescope").setup({
 				["<tab>"] = actions.move_selection_next,
 				["<S-tab>"] = actions.move_selection_previous,
 				["<c-l>"] = actions.toggle_selection,
-				["<c-t>"] = trouble.smart_open_with_trouble, -- if no selection, opens everything
+				-- ["<c-t>"] = trouble.smart_open_with_trouble, -- if no selection, opens everything
 			},
 			n = {
 				["l"] = actions.toggle_selection,
-				["<c-t>"] = trouble.smart_open_with_trouble,
+				-- ["<c-t>"] = trouble.smart_open_with_trouble,
 			},
 		},
 	},
