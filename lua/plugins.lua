@@ -133,7 +133,8 @@ require("packer").startup({
 		})
 
 		-- colorschemes
-		use("rebelot/kanagawa.nvim")
+		use({ "rebelot/kanagawa.nvim", config = [[require("config.kanagawa")]] })
+
 		use("folke/tokyonight.nvim")
 
 		-- icons for everything
