@@ -16,9 +16,6 @@ vim.wo.number = true
 --Do not save when switching buffers (note: this is now a default on master)
 vim.opt.hidden = true
 
---Enable mouse mode
-vim.opt.mouse = "a"
-
 --Enable break indent
 vim.opt.breakindent = true
 
