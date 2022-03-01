@@ -128,7 +128,7 @@ require("packer").startup({
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- completion for buffer, rg is more useful
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
-		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" }) -- completion for latex symvols
+		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp", disable = true }) -- completion for latex symvols
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
 
