@@ -174,13 +174,18 @@ endfunction
 " Redirect command output to a register for later processing.
 " Ref: https://stackoverflow.com/q/2573021/6064933 and https://unix.stackexchange.com/q/8101/221410 .
 function! utils#CaptureCommandOutput(command) abort
+  let l:tmp = @m
   redir @m
-  execute a:command
+  silent! execute a:command
   redir END
-  call v:lua.vim.notify("command output captured to register m", "info", {'title': 'nvim-config'})
+
   "create a scratch buffer for dumping the text, ref: https://vi.stackexchange.com/a/11311/15292.
   tabnew | setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
-  call nvim_buf_set_lines(0, 0, 0, 0, [@m])
+
+  let l:lines = split(@m, '\n')
+  call nvim_buf_set_lines(0, 0, 0, 0, l:lines)
+
+  let @m = l:tmp
 endfunction
 
 " Edit all files matching the given patterns.
@@ -193,12 +198,12 @@ function! utils#MultiEdit(patterns) abort
 endfunction
 
 function! utils#add_pack(name) abort
-  let l:success = v:true
+  let l:status = v:true
   try
     execute printf("packadd! %s", a:name)
   catch /^Vim\%((\a\+)\)\=:E919/
-    let l:success = v:false
+    let l:status = v:false
   endtry
 
-  return l:success
+  return l:status
 endfunction
