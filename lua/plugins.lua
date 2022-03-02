@@ -134,20 +134,14 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-<<<<<<< HEAD
-=======
 		-- asterisk improved
 		use({ "haya14busa/vim-asterisk", event = "BufEnter" })
 
->>>>>>> parent of 752a628... massive re-sequencing
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
 			config = [[require('config.hlslens')]],
-<<<<<<< HEAD
-=======
 			after = "vim-asterisk",
->>>>>>> parent of 752a628... massive re-sequencing
 		})
 
 		-- colorschemes
