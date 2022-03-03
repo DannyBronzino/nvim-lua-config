@@ -322,11 +322,11 @@ require("packer").startup({
 		git = {
 			default_url_format = plug_url_format,
 		},
-		display = {
-			open_fn = function()
-				return require("packer.util").float({ border = "none" })
-			end,
-		},
+		-- display = {
+			-- open_fn = function()
+				-- return require("packer.util").float({ border = "none" })
+			-- end,
+		-- },
 	},
 })
 
