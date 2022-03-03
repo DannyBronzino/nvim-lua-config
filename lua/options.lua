@@ -1,9 +1,5 @@
 local utils = require("utils")
 
--- vim.cmd([[
--- filetype plugin indent on
--- syntax enable
--- ]])
 --Incremental live completion (note: this is now a default on master)
 vim.opt.inccommand = "nosplit"
 
@@ -18,6 +14,11 @@ vim.opt.hidden = true
 
 --Enable break indent
 vim.opt.breakindent = true
+
+--Enable linebreaks and options
+vim.opt.linebreak = true
+vim.opt.showbreak = "↪"
+vim.opt.breakindentopt = { "shift:1" }
 
 --Save undo history
 vim.opt.undofile = true
@@ -82,9 +83,6 @@ vim.opt.smartcase = true
 vim.opt.fileencoding = "utf-8"
 
 vim.opt.matchpairs:append({ "<:>", "「:」", "『:』", "【:】", "“:”", "‘:’", "《:》" })
-
-vim.opt.linebreak = true
-vim.opt.showbreak = "↪"
 
 vim.opt.wildmode = "list:longest"
 
