@@ -1,38 +1,34 @@
 local utils = require("utils")
 
---Incremental live completion (note: this is now a default on master)
-vim.opt.inccommand = "nosplit"
+-- set highlight on search
+-- vim.opt.hlsearch = true -- unnecessary with hlslens
 
---Set highlight on search
-vim.opt.hlsearch = true
+-- make line numbers default
+vim.opt.number = true
 
---Make line numbers default
-vim.wo.number = true
-
---Do not save when switching buffers (note: this is now a default on master)
-vim.opt.hidden = true
-
---Enable break indent
+-- enable break indent
 vim.opt.breakindent = true
 
---Enable linebreaks and options
+-- enable linebreaks and options
 vim.opt.linebreak = true
 vim.opt.showbreak = "↪"
 vim.opt.breakindentopt = { "shift:1" }
 
---Save undo history
+-- save undo history
 vim.opt.undofile = true
 
---Case insensitive searching UNLESS /C or capital in search
+-- case insensitive searching UNLESS /C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Decrease update time
+-- decrease update time
 vim.opt.updatetime = 100
--- Timeout length for which-key
-vim.opt.timeoutlen = 500
 
-vim.wo.signcolumn = "yes"
+-- timeout length for which-key
+vim.opt.timeoutlen = 1000
+
+-- display signs in number column
+vim.opt.signcolumn = "auto:1-3"
 
 -- Remap for dealing with word wrap
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -77,9 +73,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
 vim.opt.fileencoding = "utf-8"
 
 vim.opt.matchpairs:append({ "<:>", "「:」", "『:』", "【:】", "“:”", "‘:’", "《:》" })
@@ -109,15 +102,13 @@ vim.opt.listchars = {
 	tab = "▸ ",
 }
 
-vim.opt.undofile = true
-
 vim.opt.shortmess:append({ c = true })
 
 vim.opt.shiftround = true
 
 vim.opt.virtualedit = "block"
 
-vim.opt.formatoptions:append({ m = true, M = true })
+vim.opt.formatoptions:append({ m = true, M = true, t = true })
 
 -- use tilde as an operator
 vim.opt.tildeop = true
@@ -133,25 +124,21 @@ if utils.executable("rg") then
 	vim.opt.grepformat = { "%f:%l:%c:%m" }
 end
 
-vim.opt.signcolumn = "auto:2"
-
 vim.opt.isfname:remove("=")
 vim.opt.isfname:remove(",")
 
 vim.opt.whichwrap:append("<,>,h,l")
 vim.opt.wrap = true
 
-vim.opt.formatoptions:append("t")
-
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.opt.numberwidth = 6
+vim.opt.numberwidth = 4
 
 vim.opt.mouse:append({ a = true })
 
--- the following are necessary fro cmp-spell
--- default to off because it's annoying
+-- the following are necessary for cmp-spell
+-- set to off because it's annoying
 vim.opt.spell = false
 vim.opt.spelllang = { "en" }
