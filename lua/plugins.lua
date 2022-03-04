@@ -152,6 +152,13 @@ require("packer").startup({
 		-- icons for everything
 		use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
 
+		-- nice tab bar
+		use({
+			"romgrk/barbar.nvim",
+			config = [[require("config.barbar")]],
+			after = "nvim-web-devicons",
+		})
+
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
@@ -199,10 +206,10 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- Git command inside vim
+		-- git command inside vim
 		use({ "tpope/vim-fugitive", cmd = "Git" })
 
-		-- Better git log display
+		-- better git log display
 		use({ "rbong/vim-flog", wants = "vim-fugitive", cmd = "Flog" })
 
 		-- manipulate surrounds ()""{}
@@ -256,8 +263,7 @@ require("packer").startup({
 			disable = true,
 		})
 
-		-- Fixes scroll in middle of page
-		-- works poorly with soft wrapping
+		-- Fixes scroll in middle of page (works poorly with soft wrapping)
 		use({
 			"vim-scripts/scrollfix",
 			event = "BufEnter",
@@ -272,7 +278,7 @@ require("packer").startup({
 			disable = true,
 		})
 
-		-- fuzzy search engine
+		-- fuzzy search engine for following plugins
 		use({
 			"junegunn/fzf",
 			run = function()
@@ -281,14 +287,14 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- needed for fzf integration
+		-- needed for telescope/fzf integration
 		use({
 			"nvim-telescope/telescope-fzf-native.nvim",
 			run = "make",
 			after = "fzf",
 		})
 
-		-- very nice fuzzy search
+		-- very nice fuzzy search utilizing fzf
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
@@ -306,15 +312,16 @@ require("packer").startup({
 			ft = "qf",
 		})
 
-		-- nice tab bar
-		use({
-			"romgrk/barbar.nvim",
-			config = [[require("config.barbar")]],
-			after = "nvim-web-devicons",
-		})
-
 		-- show and trim trailing whitespaces
 		use({ "jdhao/whitespace.nvim", event = "BufRead" })
+
+		-- creates missing directories when saving a new file
+		use({
+			"jghauser/mkdir.nvim",
+			config = function()
+				require("mkdir")
+			end,
+		})
 	end,
 	config = {
 		max_jobs = nil,
@@ -323,9 +330,9 @@ require("packer").startup({
 			default_url_format = plug_url_format,
 		},
 		-- display = {
-			-- open_fn = function()
-				-- return require("packer.util").float({ border = "none" })
-			-- end,
+		-- open_fn = function()
+		-- return require("packer.util").float({ border = "none" })
+		-- end,
 		-- },
 	},
 })
