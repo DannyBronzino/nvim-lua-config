@@ -305,6 +305,12 @@ require("packer").startup({
 			after = "telescope-fzf-native.nvim",
 		})
 
+		-- cheatsheet that displays using telescope, if available
+		use {
+			'sudormrfbin/cheatsheet.nvim',
+			cmd = "Cheatsheet",
+		}
+
 		-- better quickfix window
 		use({
 			"kevinhwang91/nvim-bqf",
