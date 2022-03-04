@@ -324,7 +324,7 @@ require("packer").startup({
 		})
 	end,
 	config = {
-		max_jobs = nil,
+		max_jobs = 16,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
