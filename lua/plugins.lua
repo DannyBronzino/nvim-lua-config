@@ -91,8 +91,28 @@ require("packer").startup({
 
 		use({
 			"ZhiyuanLck/smart-pairs",
-			config = [[require("config.smart-pairs")]],
-			after = "lspkind-nvim",
+			config = function()
+				require("pairs"):setup({
+					enter = {
+						enable_mapping = false,
+					},
+					pairs = {
+						tex = {
+							{ "'", "'", { ignore_pre = "\\a" } },
+						},
+						markdown = {
+							{ "'", "'", { ignore_pre = "\\a" } },
+						},
+					},
+					mapping = {
+						jump_left_in_any = "<m-{>",
+						jump_right_in_any = "<m-}>",
+						jump_left_out_any = "<m-[>",
+						jump_right_out_any = "<m-]>",
+					},
+				})
+			end,
+			wants = "lspkind-nvim",
 			event = "InsertEnter",
 		})
 
