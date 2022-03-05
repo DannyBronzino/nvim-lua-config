@@ -83,17 +83,24 @@ require("packer").startup({
 		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
 
 		-- automatic insertion and deletion of a pair of characters
+		-- use({
+		-- "windwp/nvim-autopairs",
+		-- config = [[require("config.nvim-autopairs")]],
+		-- after = "lspkind-nvim",
+		-- })
+
 		use({
-			"windwp/nvim-autopairs",
-			config = [[require("config.nvim-autopairs")]],
+			"ZhiyuanLck/smart-pairs",
+			config = [[require("config.smart-pairs")]],
 			after = "lspkind-nvim",
+			event = "InsertEnter",
 		})
 
 		-- completion engine
 		use({
 			"hrsh7th/nvim-cmp",
 			config = [[require("config.nvim-cmp")]],
-			after = { "nvim-autopairs" },
+			after = { "smart-pairs" },
 		})
 
 		-- nvim-cmp completion sources
@@ -306,10 +313,10 @@ require("packer").startup({
 		})
 
 		-- cheatsheet that displays using telescope, if available
-		use {
-			'sudormrfbin/cheatsheet.nvim',
+		use({
+			"sudormrfbin/cheatsheet.nvim",
 			cmd = "Cheatsheet",
-		}
+		})
 
 		-- better quickfix window
 		use({

@@ -1,6 +1,7 @@
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local kind = cmp.lsp.CompletionItemKind
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -43,7 +44,11 @@ cmp.setup({
 		}),
 
 		["<Esc>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<CR>"] = cmp.mapping(function(fallback)
+			if not cmp.confirm({ select = false }) then
+				require("pairs.enter").type()
+			end
+		end),
 		["<C-p>"] = cmp.mapping.scroll_docs(-3),
 		["<C-n>"] = cmp.mapping.scroll_docs(3),
 	},
@@ -82,6 +87,13 @@ cmp.setup({
 		}),
 	},
 })
+cmp.event:on("confirm_done", function(event)
+	local item = event.entry:get_completion_item()
+	local parensDisabled = item.data and item.data.funcParensDisabled or false
+	if not parensDisabled and (item.kind == kind.Method or item.kind == kind.Function) then
+		require("pairs.bracket").type_left("(")
+	end
+end)
 
 -- cmdline completion like wilder
 cmp.setup.cmdline(":", {
@@ -114,8 +126,8 @@ cmp.setup.cmdline("?", {
 })
 
 -- If you want insert `(` after select function or method item
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
 --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
 vim.cmd([[
