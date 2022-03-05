@@ -53,20 +53,12 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		-- textobjects for treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			after = "vim-matchup",
-			disable = true,
-		})
-
 		-- syntax highlighting, folding, and more
 		use({
 			"nvim-treesitter/nvim-treesitter",
+			after = "vim-matchup",
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			-- after = "nvim-treesitter-textobjects",
-			after = "vim-matchup",
 		})
 
 		-- vscode format snippets, must be loaded before LuaSnip
@@ -75,19 +67,12 @@ require("packer").startup({
 		-- snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
-			config = [[require("config.luasnip")]],
 			after = "friendly-snippets",
+			config = [[require("config.luasnip")]],
 		})
 
 		-- LSP icons
 		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
-
-		-- automatic insertion and deletion of a pair of characters
-		-- use({
-		-- "windwp/nvim-autopairs",
-		-- config = [[require("config.nvim-autopairs")]],
-		-- after = "lspkind-nvim",
-		-- })
 
 		use({
 			"ZhiyuanLck/smart-pairs",
@@ -112,15 +97,14 @@ require("packer").startup({
 					},
 				})
 			end,
-			wants = "lspkind-nvim",
-			event = "InsertEnter",
+			after = "lspkind-nvim",
 		})
 
 		-- completion engine
 		use({
 			"hrsh7th/nvim-cmp",
 			config = [[require("config.nvim-cmp")]],
-			after = { "smart-pairs" },
+			after = "smart-pairs",
 		})
 
 		-- nvim-cmp completion sources
@@ -135,14 +119,12 @@ require("packer").startup({
 
 		-- easy to use lsp commands
 		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
-
 		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
 		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
 		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
 		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- completion for buffer, rg is more useful
 		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
 		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
-		use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp", disable = true }) -- completion for latex symvols
 		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
 		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
 
@@ -151,7 +133,7 @@ require("packer").startup({
 			"phaazon/hop.nvim",
 			config = [[require("config.hop")]],
 			event = "BufEnter",
-			disable = true,
+			disable = false,
 		})
 
 		-- or use this for buffer jumping
@@ -159,6 +141,7 @@ require("packer").startup({
 			"ggandor/lightspeed.nvim",
 			config = [[require("config.lightspeed")]],
 			event = "BufEnter",
+			disable = true,
 		})
 
 		-- asterisk improved
@@ -167,8 +150,8 @@ require("packer").startup({
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
-			config = [[require('config.hlslens')]],
 			after = "vim-asterisk",
+			config = [[require('config.hlslens')]],
 		})
 
 		-- colorschemes
