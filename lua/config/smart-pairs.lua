@@ -3,7 +3,7 @@ require("pairs"):setup({
 		enable_mapping = false,
 	},
 	pairs = {
-		tex = {
+		['*'] = {
 			{ "'", "'", { ignore_pre = "\\a" } },
 		},
 	},
