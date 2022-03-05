@@ -57,14 +57,12 @@ cmp.setup({
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "nvim_lsp" }, -- for nvim-lsp
 		{ name = "rg" }, -- ripgrep completion
-		{ name = "digraphs" },
-		-- { name = "buffer" }, -- for buffer word completion (try rg instead)
+		{ name = "digraphs", keyword_length = 1 }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
-		-- { name = "latex_symbols", keyword_length = 4, max_item_count = 3 }, -- easy enter latex symbols
 		{ name = "spell" }, -- for spelling
 	},
 	completion = {
-		-- keyword_length = 2,
+		keyword_length = 2,
 		completeopt = "menu,noselect",
 	},
 	experimental = {
