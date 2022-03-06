@@ -3,6 +3,8 @@ require("hop").setup({
 	char2_fallback_key = "<CR>",
 })
 
+vim.opt.virtualedit:append("onemore") -- enables operations to end of line
+
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
