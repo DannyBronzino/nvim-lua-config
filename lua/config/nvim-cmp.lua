@@ -98,6 +98,7 @@ cmp.setup.cmdline(":", {
 	sources = {
 		{ name = "cmdline" },
 		{ name = "path" },
+		{ name = "nvim_lua"}
 	},
 	-- view = {
 	-- entries = "wildmenu",
