@@ -39,101 +39,88 @@ require("packer").startup({
 		})
 
 		-- additional powerful text object for vim, this plugin should be studied carefully to use its full power
-		use({
-			"wellle/targets.vim",
-			event = "BufEnter",
-		})
+		use({ "wellle/targets.vim", event = "BufEnter" })
 
 		-- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
 		use({ "chaoren/vim-wordmotion", event = "BufEnter" })
 
-		-- modern matchit implementation
-		use({
-			"andymass/vim-matchup",
-			event = "BufEnter",
-		})
-
 		-- syntax highlighting, folding, and more
 		use({
 			"nvim-treesitter/nvim-treesitter",
-			after = "vim-matchup",
+			requires = "andymass/vim-matchup", -- highlights matching brackets
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
+			event = "BufEnter",
 		})
 
-		-- vscode format snippets, must be loaded before LuaSnip
-		use({ "rafamadriz/friendly-snippets", event = "BufEnter" })
-
-		-- snippet engine
-		use({
-			"L3MON4D3/LuaSnip",
-			after = "friendly-snippets",
-			config = [[require("config.luasnip")]],
-		})
-
-		-- LSP icons
-		use({ "onsails/lspkind-nvim", after = "LuaSnip" })
-
-		use({
-			"ZhiyuanLck/smart-pairs",
-			config = function()
-				require("pairs"):setup({
-					enter = {
-						enable_mapping = false,
-					},
-					pairs = {
-						tex = {
-							{ "'", "'", { ignore_pre = "\\a" } },
-						},
-						markdown = {
-							{ "'", "'", { ignore_pre = "\\a" } },
-						},
-					},
-					mapping = {
-						jump_left_in_any = "<m-{>",
-						jump_right_in_any = "<m-}>",
-						jump_left_out_any = "<m-[>",
-						jump_right_out_any = "<m-]>",
-					},
-				})
-			end,
-			after = "lspkind-nvim",
-		})
-
-		-- completion engine
-		use({
-			"hrsh7th/nvim-cmp",
-			config = [[require("config.nvim-cmp")]],
-			after = "smart-pairs",
-		})
-
-		-- nvim-cmp completion sources
-		use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }) -- nvim-lsp completion
-
-		-- nvim-lsp configuration (it relies on cmp-nvim-lsp, so it should be loaded after cmp-nvim-lsp).
+		-- interface for easy LSP configs
 		use({
 			"neovim/nvim-lspconfig",
+			requires = {
+				-- easy LSP commands
+				{
+					"tami5/lspsaga.nvim",
+					config = [[require("config.lspsaga")]],
+				},
+				-- completion engine
+				{
+					"hrsh7th/nvim-cmp",
+					requires = {
+						-- snippets
+						{
+							"L3MON4D3/LuaSnip",
+							requires = "rafamadriz/friendly-snippets",
+							config = [[require("config.luasnip")]],
+						},
+						{ "onsails/lspkind-nvim" }, -- vscode pictograms
+						{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
+						{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
+						{ "hrsh7th/cmp-path" }, -- completion for path
+						{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
+						{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
+						{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
+						{ "f3fora/cmp-spell" }, -- completion for spell
+						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
+						{ "dmitmel/cmp-digraphs" }, -- completion for digraphs
+						-- automatically creates pairs, like ""{}[]()''
+						{
+							"ZhiyuanLck/smart-pairs",
+							config = function()
+								require("pairs"):setup({
+									enter = {
+										enable_mapping = false,
+									},
+									pairs = {
+										tex = {
+											{ "'", "'", { ignore_pre = "\\a" } },
+										},
+										markdown = {
+											{ "'", "'", { ignore_pre = "\\a" } },
+										},
+									},
+									mapping = {
+										jump_left_in_any = "<m-{>",
+										jump_right_in_any = "<m-}>",
+										jump_left_out_any = "<m-[>",
+										jump_right_out_any = "<m-]>",
+									},
+								})
+							end,
+						},
+					},
+					config = [[require("config.nvim-cmp")]],
+				},
+			},
 			config = [[require("config.lsp")]],
-			after = "cmp-nvim-lsp",
+			event = "BufEnter",
 		})
 
-		-- easy to use lsp commands
-		use({ "tami5/lspsaga.nvim", config = [[require("config.lspsaga")]], after = "nvim-lspconfig" })
-		use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }) -- completion for nvim-lua
-		use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- completion for paths
-		use({ "lukas-reineke/cmp-rg", after = "nvim-cmp" }) -- completion using ripgrep, requires installing ripgrep
-		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- completion for buffer, rg is more useful
-		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- completion for cmdline and search
-		use({ "f3fora/cmp-spell", after = "nvim-cmp" }) -- completion for nvim spell-checker
-		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }) -- completion using luasnip
-		use({ "dmitmel/cmp-digraphs", after = "nvim-cmp" }) -- digraph completion
-
-		-- Buffer jumping like EasyMotion or Sneak
+		-- buffer jumping like EasyMotion or Sneak
 		use({
 			"phaazon/hop.nvim",
 			config = [[require("config.hop")]],
 			event = "BufEnter",
-			disable = false,
+			disable = true,
 		})
 
 		-- or use this for buffer jumping
@@ -141,46 +128,46 @@ require("packer").startup({
 			"ggandor/lightspeed.nvim",
 			config = [[require("config.lightspeed")]],
 			event = "BufEnter",
-			disable = true,
+			disable = false,
 		})
-
-		-- asterisk improved
-		use({ "haya14busa/vim-asterisk", event = "BufEnter" })
 
 		-- Show match number and index for search
 		use({
 			"kevinhwang91/nvim-hlslens",
-			after = "vim-asterisk",
+			requires = "haya14busa/vim-asterisk", -- asterisk improved
 			config = [[require('config.hlslens')]],
+			event = "BufEnter",
 		})
 
 		-- colorschemes
-		use({ "rebelot/kanagawa.nvim", config = [[require("config.kanagawa")]] })
+		use({
+			{
+				"rebelot/kanagawa.nvim",
+				config = [[require("config.kanagawa")]],
+			},
+			{
+				"folke/tokyonight.nvim",
+			},
+		})
 
-		use("folke/tokyonight.nvim")
-
-		-- icons for everything
-		use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
-
-		-- nice tab bar
+		-- tab bar and buffer switching
 		use({
 			"romgrk/barbar.nvim",
+			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.barbar")]],
-			after = "nvim-web-devicons",
 		})
 
 		-- status line
 		use({
 			"nvim-lualine/lualine.nvim",
+			requires = "kyazdani42/nvim-web-devicons",
 			config = [[require("config.lualine")]],
-			after = "nvim-web-devicons",
 		})
 
 		-- indent markers
 		use({
 			"lukas-reineke/indent-blankline.nvim",
 			ft = { "lua", "python" },
-			-- event = "BufRead",
 		})
 
 		-- notification plugin
@@ -209,7 +196,7 @@ require("packer").startup({
 		-- git in the gutter
 		use({
 			"lewis6991/gitsigns.nvim",
-			requires = "nvim-lua/plenary.nvim",
+			requires = "nvim-lua/plenary.nvim", -- extra neovim functions
 			config = function()
 				require("gitsigns").setup()
 			end,
@@ -219,7 +206,7 @@ require("packer").startup({
 		-- git command inside vim
 		use({ "tpope/vim-fugitive", cmd = "Git" })
 
-		-- better git log display
+		-- git and git log inside (neo)vim
 		use({ "rbong/vim-flog", wants = "vim-fugitive", cmd = "Flog" })
 
 		-- manipulate surrounds ()""{}
@@ -249,7 +236,11 @@ require("packer").startup({
 		})
 
 		-- fallback if surround.nvim never comes back
-		use({ "machakann/vim-sandwich", event = "BufEnter", disable = true })
+		use({
+			"machakann/vim-sandwich",
+			event = "BufEnter",
+			disable = true,
+		})
 
 		-- latex stuff
 		use({
@@ -288,31 +279,27 @@ require("packer").startup({
 			disable = true,
 		})
 
-		-- fuzzy search engine for following plugins
-		use({
-			"junegunn/fzf",
-			run = function()
-				vim.fn["fzf#install"]()
-			end,
-			event = "BufEnter",
-		})
-
-		-- needed for telescope/fzf integration
-		use({
-			"nvim-telescope/telescope-fzf-native.nvim",
-			run = "make",
-			after = "fzf",
-		})
-
 		-- very nice fuzzy search utilizing fzf
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
-				"nvim-lua/popup.nvim",
-				"nvim-lua/plenary.nvim",
+				{ "nvim-lua/popup.nvim" }, -- api for popups
+				{ "nvim-lua/plenary.nvim" }, -- extra neovim functions
+				-- fuzzy search
+				{
+					"junegunn/fzf",
+					run = function()
+						fn["fzf#install"]()
+					end,
+				},
+				-- interface for fzf
+				{
+					"nvim-telescope/telescope-fzf-native.nvim",
+					run = "make",
+				},
 			},
 			config = [[require("config.telescope")]],
-			after = "telescope-fzf-native.nvim",
+			event = "BufEnter",
 		})
 
 		-- cheatsheet that displays using telescope, if available
@@ -341,7 +328,7 @@ require("packer").startup({
 	end,
 	config = {
 		max_jobs = 16,
-		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
+		compile_path = util.join_paths(fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
 		},
