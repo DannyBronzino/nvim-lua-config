@@ -5,7 +5,6 @@ require("impatient")
 require("plugins")
 require("options")
 require("globals")
-require("plugin-settings")
 require("colorschemes")
 require("utils")
 
