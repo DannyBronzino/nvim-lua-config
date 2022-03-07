@@ -156,6 +156,10 @@ require("packer").startup({
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
 			"jdhao/better-escape.vim",
+			config = function()
+				vim.g.better_escape_shortcut = "jj"
+				vim.g.better_escape_interval = 300
+			end,
 			event = "InsertEnter",
 		})
 
