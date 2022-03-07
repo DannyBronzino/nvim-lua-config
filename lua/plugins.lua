@@ -108,10 +108,10 @@ require("packer").startup({
 							end,
 						},
 					},
-					config = [[require("config.nvim-cmp")]],
+					config = [[require("config.cmp")]],
 				},
 			},
-			config = [[require("config.lsp")]],
+			config = [[require("config.lspconfig")]],
 			event = "BufEnter",
 		})
 
@@ -175,7 +175,7 @@ require("packer").startup({
 			"rcarriga/nvim-notify",
 			config = function()
 				vim.defer_fn(function()
-					require("config.nvim-notify")
+					require("config.notify")
 				end, 2000)
 			end,
 			event = "BufEnter",
@@ -209,59 +209,11 @@ require("packer").startup({
 		-- git and git log inside (neo)vim
 		use({ "rbong/vim-flog", wants = "vim-fugitive", cmd = "Flog" })
 
-		-- manipulate surrounds ()""{}
-		use({
-			"blackCauldron7/surround.nvim",
-			config = function()
-				require("surround").setup({
-					context_offset = 100,
-					load_autogroups = false,
-					mappings_style = "sandwich",
-					map_insert_mode = false,
-					quotes = { "'", '"' },
-					brackets = { "(", "{", "[" },
-					pairs = {
-						nestable = { { "(", ")" }, { "[", "]" }, { "{", "}" } },
-						linear = {
-							{ "'", "'" },
-							{ "`", "`" },
-							{ '"', '"' },
-							{ "$", "$" },
-						},
-					},
-					prefix = "<leader>s", -- I use this mapping because lightspeed uses "s"
-				})
-			end,
-			event = "BufEnter",
-		})
-
-		-- fallback if surround.nvim never comes back
-		use({
-			"machakann/vim-sandwich",
-			event = "BufEnter",
-			disable = true,
-		})
-
-		-- latex stuff
-		use({
-			"lervag/vimtex",
-			ft = { "tex", "bib" },
-			disable = true,
-		})
-
 		-- show keybindings and registers and marks and more
 		use({
 			"folke/which-key.nvim",
 			config = [[require("config.which-key")]],
 			event = "VimEnter",
-		})
-
-		-- file explorer
-		use({
-			"kyazdani42/nvim-tree.lua",
-			config = [[require("config.nvim-tree")]],
-			after = "nvim-web-devicons",
-			disable = true,
 		})
 
 		-- Fixes scroll in middle of page (works poorly with soft wrapping)
