@@ -1,10 +1,6 @@
 -- automatically open list after neomake
 vim.g.neomake_open_list = 2
 
--- use jj to escape insert mode.
-vim.g.better_escape_shortcut = "jj"
-vim.g.better_escape_interval = 300
-
 -- vim-matchup settings
 -- improve performance
 vim.g.matchup_matchparen_deferred = 1
