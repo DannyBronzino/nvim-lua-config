@@ -173,12 +173,8 @@ require("packer").startup({
 		-- notification plugin
 		use({
 			"rcarriga/nvim-notify",
-			config = function()
-				vim.defer_fn(function()
-					require("config.notify")
-				end, 2000)
-			end,
-			event = "BufEnter",
+			config = [[require("config.notify")]],
+			event = "VimEnter",
 		})
 
 		-- escape insert quickly with "jj" or "jk" or whatever
