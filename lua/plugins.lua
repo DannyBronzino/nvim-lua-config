@@ -45,7 +45,18 @@ require("packer").startup({
 
 		use({ -- syntax highlighting, folding, and more
 			"nvim-treesitter/nvim-treesitter",
-			requires = "andymass/vim-matchup", -- highlights matching brackets
+			requires = {
+				{ -- highlights matching brackets
+					"andymass/vim-matchup",
+					setup = function()
+						vim.g.matchup_matchparen_deferred = 1 -- improve performance
+						vim.g.matchup_matchparen_timeout = 100 -- improve performance
+						vim.g.matchup_matchparen_insert_timeout = 30 -- improve performance
+						vim.g.matchup_delim_noskips = 0 -- whether to enable matching inside comment or string
+						vim.g.matchup_matchparen_offscreen = { method = "popup" } -- show offscreen match pair in popup window
+					end,
+				},
+			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
 			event = "BufEnter",
@@ -156,7 +167,7 @@ require("packer").startup({
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
 			"jdhao/better-escape.vim",
-			config = function()
+			setup = function()
 				vim.g.better_escape_shortcut = "jj"
 				vim.g.better_escape_interval = 300
 			end,
