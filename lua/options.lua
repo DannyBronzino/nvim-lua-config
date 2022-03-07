@@ -1,8 +1,5 @@
 local utils = require("utils")
 
--- set highlight on search
--- vim.opt.hlsearch = true -- unnecessary with hlslens
-
 -- make line numbers default
 vim.opt.number = true
 
@@ -23,9 +20,6 @@ vim.opt.smartcase = true
 
 -- decrease update time
 vim.opt.updatetime = 100
-
--- timeout length for which-key
-vim.opt.timeoutlen = 1000
 
 -- display signs in number column
 vim.opt.signcolumn = "auto:1-3"
