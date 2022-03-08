@@ -257,19 +257,15 @@ require("packer").startup({
 			config = function()
 				require("mkdir")
 			end,
+			event = "CmdLineEnter",
 		})
 	end,
 	config = {
-		max_jobs = 16,
+		max_jobs = nil,
 		compile_path = util.join_paths(fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
 		},
-		-- display = {
-		-- open_fn = function()
-		-- return require("packer.util").float({ border = "none" })
-		-- end,
-		-- },
 	},
 })
 
