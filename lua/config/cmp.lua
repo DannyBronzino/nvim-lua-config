@@ -56,7 +56,15 @@ cmp.setup({
 		{ name = "luasnip" }, -- for luasnip
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "nvim_lsp" }, -- for nvim-lsp
-		{ name = "rg" }, -- ripgrep completion
+		{ -- ripgrep completion
+			name = "rg",
+			max_item_count = 9,
+			option = {
+				additional_arguments = "--smart-case",
+				context_before = 2,
+				context_after = 4,
+			},
+		},
 		{ name = "digraphs", keyword_length = 1 }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
 		{ name = "spell" }, -- for spelling
@@ -72,14 +80,12 @@ cmp.setup({
 		format = lspkind.cmp_format({
 			with_text = true,
 			menu = {
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[Lua]",
-				-- latex_symbols = "[LaTeX]",
-				digraphs = "[Digraph]",
 				luasnip = "[Snip]",
-				path = "[Path]",
+				nvim_lua = "[Lua]",
+				nvim_lsp = "[LSP]",
 				rg = "[RG]",
-				-- buffer = "[Buffer]",
+				digraphs = "[Digraphs]",
+				path = "[Path]",
 				spell = "[Spell]",
 			},
 		}),
@@ -93,20 +99,18 @@ cmp.event:on("confirm_done", function(event)
 	end
 end)
 
--- cmdline completion like wilder
-cmp.setup.cmdline(":", {
+cmp.setup.cmdline(":", { -- cmdline completion like wilder
 	sources = {
-		{ name = "cmdline" },
+		{ name = "cmdline", keyword_length = 2 },
 		{ name = "path" },
-		{ name = "nvim_lua"}
+		{ name = "nvim_lua" },
 	},
 	-- view = {
 	-- entries = "wildmenu",
 	-- },
 })
 
--- search completion
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline("/", { -- search completion
 	sources = {
 		{ name = "buffer" },
 	},
@@ -115,7 +119,7 @@ cmp.setup.cmdline("/", {
 	-- },
 })
 
-cmp.setup.cmdline("?", {
+cmp.setup.cmdline("?", { -- reverse search completion
 	sources = {
 		{ name = "buffer" },
 	},
