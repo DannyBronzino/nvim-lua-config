@@ -1,30 +1,25 @@
 local utils = require("utils")
 
--- make line numbers default
-vim.opt.number = true
+vim.opt.number = true -- make line numbers default
 
--- enable break indent
-vim.opt.breakindent = true
+vim.opt.breakindent = true -- enable break indent
 
 -- enable linebreaks and options
 vim.opt.linebreak = true
 vim.opt.showbreak = "↪"
 vim.opt.breakindentopt = { "shift:1" }
 
--- save undo history
-vim.opt.undofile = true
+vim.opt.undofile = true -- save undo history
 
 -- case insensitive searching UNLESS /C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- decrease update time
-vim.opt.updatetime = 100
+vim.opt.updatetime = 100 -- decrease update time
 
--- display signs in number column
-vim.opt.signcolumn = "auto:1-3"
+vim.opt.signcolumn = "auto:1-3" -- display signs in number column
 
--- Remap for dealing with word wrap
+-- allows for use of "j" and "k" over wrapped lines
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
@@ -36,12 +31,11 @@ vim.cmd([[
   augroup end
 ]])
 
-vim.opt.fillchars = "fold: ,vert:│,eob: ,msgsep:‾"
-
+-- where to open new splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.swapfile = false
+vim.opt.swapfile = false -- turn off swapfile
 
 -- sets up backup
 vim.cmd([[
@@ -55,77 +49,52 @@ set backup
 set backupcopy=yes
 ]])
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+-- vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.opt.expandtab = true
 
-vim.opt.fileencoding = "utf-8"
+vim.opt.fileencoding = "utf-8" -- sets file encoding
 
-vim.opt.matchpairs:append({ "<:>", "「:」", "『:』", "【:】", "“:”", "‘:’", "《:》" })
+vim.opt.fileformats = "unix" -- sets file format
 
-vim.opt.wildmode = "list:longest"
+vim.opt.matchpairs:append({ "<:>", "「:」", "『:』", "【:】", "“:”", "‘:’", "《:》" }) -- sets pairs for "%"
 
-vim.opt.showmode = false
+vim.opt.showmode = false -- show mode
 
-vim.opt.fileformats = "unix"
+vim.opt.list = true -- show listchars
 
-vim.opt.wildignore:append({
-	[[*.o,*.obj,*.bin,*.dll,*.exe,*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**,*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico,*.pyc,*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv]],
-})
-vim.opt.wildignorecase = true
-
-vim.opt.visualbell = true
-vim.opt.errorbells = false
-
-vim.opt.history = 500
-
-vim.opt.list = true
-
-vim.opt.listchars = {
+vim.opt.listchars = { -- characters for visually representing blank space
 	extends = "❯",
 	nbsp = "␣",
 	precedes = "❮",
 	tab = "▸ ",
 }
 
-vim.opt.shortmess:append({ c = true })
+vim.opt.shortmess:append({ c = true }) -- eliminate incsearch messages
 
-vim.opt.shiftround = true
+vim.opt.shiftround = true -- round indent to multiple of shiftwidth
 
-vim.opt.virtualedit = "block"
+vim.opt.virtualedit = "block" -- allows for positioning of cursor on non-character space in visualblock mode
 
-vim.opt.formatoptions:append({ m = true, M = true, t = true })
+vim.opt.tildeop = true -- use tilde as an operator
 
--- use tilde as an operator
-vim.opt.tildeop = true
+vim.opt.joinspaces = false -- use only one space after ".", "?", "!" on join
 
-vim.opt.joinspaces = false
-
-vim.opt.synmaxcol = 200
-vim.opt.startofline = false
-
--- enable rg if available
+-- use rg for grepping, if available
 if utils.executable("rg") then
 	vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 	vim.opt.grepformat = { "%f:%l:%c:%m" }
 end
 
+-- remove characters from possible filenames
 vim.opt.isfname:remove("=")
 vim.opt.isfname:remove(",")
 
-vim.opt.whichwrap:append("<,>,h,l")
-vim.opt.wrap = true
+vim.opt.wrap = true -- softwrap
 
--- let treesitter handle folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.numberwidth = 4 -- width of number gutter
 
-vim.opt.numberwidth = 4
+vim.opt.mouse:append({ a = true }) -- enable mouse for all modes
 
-vim.opt.mouse:append({ a = true })
-
--- the following are necessary for cmp-spell
--- set to off because it's annoying
-vim.opt.spell = false
-vim.opt.spelllang = { "en" }
+vim.opt.spelllang = { "en" } -- set language for spell
