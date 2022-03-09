@@ -49,10 +49,10 @@ set backup
 set backupcopy=yes
 ]])
 
--- vim.opt.tabstop = 4
--- vim.opt.softtabstop = 4
--- vim.opt.shiftwidth = 4
--- vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 
 vim.opt.fileencoding = "utf-8" -- sets file encoding
 
@@ -90,8 +90,6 @@ end
 -- remove characters from possible filenames
 vim.opt.isfname:remove("=")
 vim.opt.isfname:remove(",")
-
-vim.opt.wrap = true -- softwrap
 
 vim.opt.numberwidth = 4 -- width of number gutter
 
