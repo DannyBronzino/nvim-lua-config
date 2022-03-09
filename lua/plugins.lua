@@ -259,8 +259,6 @@ require("packer").startup({
 			end,
 			event = "CmdLineEnter",
 		})
-
-		use({ "tpope/vim-sleuth" }) -- automatically sets buffer options
 	end,
 	config = {
 		max_jobs = nil,
