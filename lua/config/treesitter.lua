@@ -1,11 +1,12 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "latex", "bibtex", "markdown", "python" },
+	ensure_installed = "maintained",
+	sync_install = true,
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {
-		enable = false,
+		enable = true,
 	},
 	matchup = {
 		enable = enable, -- mandatory, false will disable the whole extension
