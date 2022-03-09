@@ -1,12 +1,12 @@
--- load impatient first
-require("impatient")
+require("impatient") -- load impatient first
 
 -- lua sources
 require("plugins")
 require("options")
 require("globals")
-require("colorschemes")
+require("mappings")
 require("utils")
+require("colorschemes")
 
 -- vimscript sources
 vim.cmd([[
