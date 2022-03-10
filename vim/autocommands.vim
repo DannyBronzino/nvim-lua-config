@@ -3,26 +3,6 @@ augroup change_colorscheme
   autocmd!
   autocmd Colorscheme * :runtime lua/change_colorscheme.lua
 augroup END
-" Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
-augroup dynamic_smartcase
-  autocmd!
-  autocmd CmdLineEnter : set nosmartcase
-  autocmd CmdLineLeave : set smartcase
-augroup END
-
-augroup term_settings
-  autocmd!
-" Do not use number and relative number for terminal inside nvim
-  autocmd TermOpen * setlocal norelativenumber nonumber
-  " Go to insert mode by default to start typing command
-  autocmd TermOpen * startinsert
-augroup END
-
-" More accurate syntax highlighting? (see `:h syn-sync`)
-" augroup accurate_syn_highlight
-  " autocmd!
-  " autocmd BufEnter * :syntax sync fromstart
-" augroup END
 
 " Return to last edit position when opening a file
 augroup resume_edit_position
@@ -48,18 +28,4 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
 augroup END
 
-augroup auto_close_win
-  autocmd!
-  autocmd BufEnter * call s:quit_current_win()
-augroup END
-
-" Quit Neovim if we have only one window, and its filetype match our pattern.
-function! s:quit_current_win() abort
-  let quit_filetypes = ['qf', 'vista']
-  let buftype = getbufvar(bufnr(), '&filetype')
-  if winnr('$') == 1 && index(quit_filetypes, buftype) != -1
-    quit
-  endif
-endfunction
-
-autocmd User TelescopePreviewerLoaded setlocal wrap
+" autocmd User TelescopePreviewerLoaded setlocal wrap
