@@ -19,10 +19,6 @@ vim.opt.updatetime = 100 -- decrease update time
 
 vim.opt.signcolumn = "auto:1-3" -- display signs in number column
 
--- allows for use of "j" and "k" over wrapped lines
-vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
-
 -- Highlight on yank
 vim.cmd([[
   augroup YankHighlight
@@ -97,3 +93,7 @@ vim.opt.numberwidth = 4 -- width of number gutter
 vim.opt.mouse:append({ a = true }) -- enable mouse for all modes
 
 vim.opt.spelllang = { "en" } -- set language for spell
+
+vim.cmd([[syntax enable]]) -- enable syntax
+vim.opt.background = "dark" -- background color
+vim.opt.termguicolors = true -- use full color palette
