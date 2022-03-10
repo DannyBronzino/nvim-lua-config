@@ -22,40 +22,10 @@ nnoremap <silent> <c-right> :<C-U>clast<CR>zv
 " see https://superuser.com/q/355325/736190
 nnoremap<silent> \x :<C-U>windo lclose <bar> cclose<CR>
 
-" Close a buffer and switching to another buffer, do not close the
-" window, see https://stackoverflow.com/q/4465095/6064933
-nnoremap <silent> \d :<C-U>bprevious <bar> bdelete #<CR>
-
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
 nnoremap <expr> <space>o printf('m`%so<ESC>``', v:count1)
 nnoremap <expr> <space>O printf('m`%sO<ESC>``', v:count1)
-
-" Insert a space after current character
-nnoremap <space><space> a<space><ESC>h
-
-" Yank from current cursor position to the end of the line (make it
-" consistent with the behavior of D, C)
-nnoremap Y y$
-
-" Move the cursor based on physical lines, not the actual lines.
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap ^ g^
-nnoremap 0 g0
-
-" Do not include white space characters when using $ in visual mode,
-" see https://vi.stackexchange.com/q/12607/15292
-xnoremap $ g_
-
-" Jump to matching pairs easily in normal mode
-nnoremap <Tab> %
-
-" Go to start or end of line easier
-nnoremap H ^
-xnoremap H ^
-nnoremap L g_
-xnoremap L g_
 
 " Continuous visual shifting (does not exit Visual mode), `gv` means
 " to reselect previous visual area, see https://superuser.com/q/310417/736190
@@ -132,10 +102,3 @@ nnoremap J mzJ`z
 for ch in [',', '.', '!', '?', ';', ':']
   execute printf('inoremap %s %s<C-g>u', ch, ch)
 endfor
-
-" move current line to (almost) top of screen
-" nnoremap zt ztkkjj " use zz instead?
-" inoremap zt <esc>ztkkjja " use <c-o>zz instead
-
-" run git commit
-nnoremap <F12> <cmd>Git add % <bar> Git commit %<cr>
