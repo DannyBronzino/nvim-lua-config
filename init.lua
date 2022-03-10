@@ -5,8 +5,8 @@ require("plugins")
 require("options")
 require("globals")
 require("mappings")
+require("autocmds")
 require("utils")
-require("colorschemes")
 
 -- vimscript sources
 vim.cmd([[
@@ -18,3 +18,5 @@ let g:config_files = [
 for s:fname in g:config_files
   execute printf('source %s/vim/%s', stdpath('config'), s:fname)
 endfor]])
+
+vim.cmd([[colorscheme kanagawa]]) -- colorscheme
