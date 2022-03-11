@@ -33,3 +33,5 @@ vim.g.loaded_matchparen = 1
 vim.g.matchup_motion_enabled = 0
 
 vim.g.matchup_matchparen_offscreen = { method = "popup" } -- matchup floating match
+
+vim.g.markdown_folding = 1
