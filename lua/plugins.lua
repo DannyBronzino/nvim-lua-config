@@ -258,9 +258,6 @@ require("packer").startup({
 
 		use({ -- creates missing directories when saving a new file
 			"jghauser/mkdir.nvim",
-			config = function()
-				require("mkdir")
-			end,
 			event = "CmdLineEnter",
 		})
 	end,
