@@ -1,7 +1,7 @@
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.textwidth = 0
-vim.opt.foldlevel = 999
+vim.opt.foldlevel = 99
 
 -- tabs
 vim.opt.tabstop = 4
