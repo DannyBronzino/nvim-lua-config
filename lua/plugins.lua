@@ -160,7 +160,6 @@ require("packer").startup({
 
 		use({ -- indent markers
 			"lukas-reineke/indent-blankline.nvim",
-			ft = { "lua", "python" },
 		})
 
 		use({ -- notification plugin
