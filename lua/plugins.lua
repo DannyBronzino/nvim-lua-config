@@ -160,6 +160,7 @@ require("packer").startup({
 
 		use({ -- indent markers
 			"lukas-reineke/indent-blankline.nvim",
+			event = "BufEnter",
 		})
 
 		use({ -- notification plugin
