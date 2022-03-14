@@ -1,13 +1,10 @@
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.textwidth = 0
-vim.opt.foldlevel = 99
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true
+vim.opt_local.textwidth = 0
+vim.opt_local.foldlevel = 99
 
 -- tabs
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
--- folding
-vim.g.markdown_folding = 1
+vim.opt_local.tabstop = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.shiftwidth = 4
+vim.opt_local.expandtab = true

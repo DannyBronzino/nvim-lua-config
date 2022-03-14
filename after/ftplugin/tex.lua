@@ -1,8 +1,7 @@
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.textwidth = 0
-vim.opt.foldlevel = 99
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true
+vim.opt_local.textwidth = 0
+vim.opt_local.foldlevel = 99
 
 -- folding
-vim.g.tex_fold_enabled = 1
-vim.opt.foldmethod = "syntax"
+vim.opt_local.foldmethod = "syntax"
