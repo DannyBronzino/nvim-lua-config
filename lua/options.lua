@@ -2,12 +2,11 @@ local utils = require("utils")
 
 vim.opt.number = true -- make line numbers default
 
-vim.opt.breakindent = true -- enable break indent
-
 -- enable linebreaks and options
 vim.opt.linebreak = true
 vim.opt.showbreak = "↪"
-vim.opt.breakindentopt = { "shift:1" }
+vim.opt.breakindent = true -- enable break indent
+vim.opt.breakindentopt = { "shift:1" } -- move wrapped line over 1 space
 
 vim.opt.undofile = true -- save undo history
 
