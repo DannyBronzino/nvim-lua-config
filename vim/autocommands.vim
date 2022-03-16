@@ -16,16 +16,16 @@ augroup END
 " command does not work in command line. We need to check if we are in command
 " line before executing this command. See also
 " https://vi.stackexchange.com/a/20397/15292.
-augroup auto_read
-  autocmd!
-  autocmd FileChangedShellPost * call v:lua.vim.notify("File changed on disk. Buffer reloaded!", 'warn', {'title': 'nvim-config'})
-  autocmd FocusGained,CursorHold * if getcmdwintype() == '' | checktime | endif
-augroup END
+" augroup auto_read
+  " autocmd!
+  " autocmd FileChangedShellPost * call v:lua.vim.notify("File changed on disk. Buffer reloaded!", 'warn', {'title': 'nvim-config'})
+  " autocmd FocusGained,CursorHold * if getcmdwintype() == '' | checktime | endif
+" augroup END
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-augroup END
+" augroup numbertoggle
+  " autocmd!
+  " autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+  " autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+" augroup END
 
 " autocmd User TelescopePreviewerLoaded setlocal wrap

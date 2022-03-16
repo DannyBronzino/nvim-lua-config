@@ -11,7 +11,6 @@ require("utils")
 -- vimscript sources
 vim.cmd([[
 let g:config_files = [
-      \ 'autocommands.vim',
       \ 'mappings.vim',
       \ ]
 
