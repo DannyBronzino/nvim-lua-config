@@ -1,8 +1,8 @@
 " change lualine colorscheme
-augroup change_colorscheme
-  autocmd!
-  autocmd Colorscheme * :runtime lua/change_colorscheme.lua
-augroup END
+" augroup change_colorscheme
+  " autocmd!
+  " autocmd Colorscheme * :runtime lua/change_colorscheme.lua
+" augroup END
 
 " Return to last edit position when opening a file
 augroup resume_edit_position
