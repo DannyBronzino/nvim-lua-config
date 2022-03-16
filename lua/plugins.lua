@@ -65,6 +65,9 @@ require("packer").startup({
 		use({ -- interface for easy LSP configs
 			"neovim/nvim-lspconfig",
 			requires = {
+				{ -- adds emmylua and docs for neovim
+					"folke/lua-dev.nvim",
+				},
 				{ -- easy LSP commands
 					"tami5/lspsaga.nvim",
 					config = [[require("config.lspsaga")]],
