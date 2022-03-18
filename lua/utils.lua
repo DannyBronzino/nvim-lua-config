@@ -4,6 +4,26 @@ function inspect(item)
 	print(vim.inspect(item))
 end
 
+function move_line(up)
+	local current_line = vim.api.nvim_get_current_line()
+	local current_row = vim.api.nvim_win_get_cursor(0)[1]
+
+	if up == true then
+		current_row = current_row - 2
+	end
+
+	-- prevents crash if you try to move the top line up
+	if current_row < 0 then
+		do
+			return
+		end
+	end
+
+	vim.api.nvim_del_current_line()
+	vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { current_line })
+	vim.api.nvim_win_set_cursor(0, { current_row + 1, 0 })
+end
+
 local M = {}
 
 -- does the executable exist?
