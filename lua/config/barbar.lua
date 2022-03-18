@@ -4,6 +4,9 @@ local opts = { noremap = true, silent = true }
 -- Move to previous/next
 map("n", "<A-,>", ":BufferPrevious<CR>", opts)
 map("n", "<A-.>", ":BufferNext<CR>", opts)
+-- nostalgic combo
+map("n", "gB", ":BufferPrevious<CR>", opts)
+map("n", "gb", ":BufferNext<CR>", opts)
 -- Re-order to previous/next
 map("n", "<A-<>", ":BufferMovePrevious<CR>", opts)
 map("n", "<A->>", " :BufferMoveNext<CR>", opts)
