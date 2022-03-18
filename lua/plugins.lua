@@ -1,7 +1,4 @@
-local utils = require("utils")
-local fn = vim.fn
-
-vim.g.package_home = fn.stdpath("data") .. "/site/pack/packer/"
+vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/"
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
 
 -- github alternate
@@ -16,7 +13,7 @@ local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
 local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
 
 -- auto-install packer in case it hasn't been installed
-if fn.glob(packer_install_dir) == "" then
+if vim.fn.glob(packer_install_dir) == "" then
 	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
 	vim.cmd(install_cmd)
 end
@@ -234,7 +231,7 @@ require("packer").startup({
 				{ -- fuzzy search
 					"junegunn/fzf",
 					run = function()
-						fn["fzf#install"]()
+						vim.fn["fzf#install"]()
 					end,
 				},
 				{ -- interface for fzf
@@ -266,7 +263,7 @@ require("packer").startup({
 	end,
 	config = {
 		max_jobs = nil,
-		compile_path = util.join_paths(fn.stdpath("config"), "lua", "packer_compiled.lua"),
+		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		git = {
 			default_url_format = plug_url_format,
 		},
