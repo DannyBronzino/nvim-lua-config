@@ -11,8 +11,6 @@ vim.g.maplocalleader = ","
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
-map("n", "<Tab>", "%", opts) -- easier matchit movement
-
 -- move to beginning of wrapped line
 map("n", "H", "g^", opts)
 map("x", "H", "g^", opts)
@@ -24,3 +22,38 @@ map("x", "L", "g$", opts)
 map("n", "Y", "y$", opts) -- yank until end of line
 
 map("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>", opts) -- commit current file
+
+-- Paste non-linewise text above or below current cursor
+map("n", "<leader>p", "m`o<ESC>p``", opts)
+map("n", "<leader>P", "m`O<ESC>p``", opts)
+
+-- use <tab> to indent or dedent in normal mode
+map("n", "<tab>", ">>", opts)
+map("n", "<s-tab>", "<<", opts)
+
+-- continuous visual shifting (does not exit Visual mode), `gv` means to reselect previous visual area
+map("x", "<tab>", ">gv", opts)
+map("x", "<s-tab>", "<gv", opts)
+
+-- Insert a blank line below or above current line (do not move the cursor),
+map("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
+map("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
+
+-- Decrease indent level in insert mode with shift+tab
+map("i", "<S-Tab>", "<ESC><<i", opts)
+
+-- do not move cursor when joining lines
+map("n", "J", "mzJ`z", opts)
+
+-- change text without putting it in the register
+map("n", "c", '"_c', opts)
+map("n", "C", '"_C', opts)
+map("n", "cc", '"_cc', opts)
+map("x", "c", '"_c', opts)
+
+-- copy entire buffer
+map("n", "<leader>y", ":<C-U>%y<CR>", opts)
+
+-- move line up and down
+map("n", "<m-j>", [[<cmd>lua move_line(false)<cr>]], opts)
+map("n", "<m-k>", [[<cmd>lua move_line(true)<cr>]], opts)
