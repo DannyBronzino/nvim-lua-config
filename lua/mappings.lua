@@ -57,3 +57,24 @@ map("n", "<leader>y", ":<C-U>%y<CR>", opts)
 -- move line up and down
 map("n", "<m-j>", [[<cmd>lua move_line(false)<cr>]], opts)
 map("n", "<m-k>", [[<cmd>lua move_line(true)<cr>]], opts)
+
+-- Navigation in the location and quickfix list
+map("n", "<m-up>", ":<C-U>lprevious<CR>zv", opts)
+map("n", "<m-down>", ":<C-U>lnext<CR>zv", opts)
+map("n", "<m-left>", ":<C-U>lfirst<CR>zv", opts)
+map("n", "<m-right>", ":<C-U>llast<CR>zv", opts)
+map("n", "<c-up>", ":<C-U>cprevious<CR>zv", opts)
+map("n", "<c-down>", ":<C-U>cnext<CR>zv", opts)
+map("n", "<c-left>", ":<C-U>cfirst<CR>zv", opts)
+map("n", "<c-right>", ":<C-U>clast<CR>zv", opts)
+
+vim.cmd([[
+" Break inserted text into smaller undo units.
+for ch in [',', '.', '!', '?', ';', ':']
+  execute printf('inoremap %s %s<C-g>u', ch, ch)
+endfor
+
+" Move current visual-line selection up and down
+xnoremap <silent> <A-k> :<C-U>call utils#MoveSelection('up')<CR>
+xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>
+]])
