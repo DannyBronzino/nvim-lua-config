@@ -36,11 +36,11 @@ map("x", "<tab>", ">gv", opts)
 map("x", "<s-tab>", "<gv", opts)
 
 -- Insert a blank line below or above current line (do not move the cursor),
-map("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
-map("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
+-- map("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
+-- map("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
 
 -- Decrease indent level in insert mode with shift+tab
-map("i", "<S-Tab>", "<ESC><<i", opts)
+map("i", "<s-tab>", "<ESC><<i", opts)
 
 -- do not move cursor when joining lines
 map("n", "J", "mzJ`z", opts)
@@ -55,8 +55,12 @@ map("x", "c", '"_c', opts)
 map("n", "<leader>y", ":<C-U>%y<CR>", opts)
 
 -- move line up and down
-map("n", "<m-j>", [[<cmd>lua require("utils")move_line(false)<cr>]], opts)
-map("n", "<m-k>", [[<cmd>lua require("utils")move_line(true)<cr>]], opts)
+map("n", "<m-j>", [[<cmd>lua require("utils").move_line("down")<cr>]], opts)
+map("n", "<m-k>", [[<cmd>lua require("utils").move_line("up")<cr>]], opts)
+
+-- insert blank line above or below
+map("n", "<space>O", [[<cmd>lua require("utils").insert_blank_line("above")<cr>]], opts)
+map("n", "<space>o", [[<cmd>lua require("utils").insert_blank_line("below")<cr>]], opts)
 
 -- Navigation in the location and quickfix list
 map("n", "<m-up>", ":<C-U>lprevious<CR>zv", opts)

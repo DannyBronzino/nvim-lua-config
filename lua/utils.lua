@@ -26,11 +26,12 @@ function M.may_create_dir()
 	end
 end
 
-function move_line(up)
+-- move current line up or down
+function M.move_line(Direction)
 	local current_line = vim.api.nvim_get_current_line()
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
 
-	if up == true then
+	if Direction == "up" then
 		current_row = current_row - 2
 	end
 
@@ -44,6 +45,20 @@ function move_line(up)
 	vim.api.nvim_del_current_line()
 	vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { current_line })
 	vim.api.nvim_win_set_cursor(0, { current_row + 1, 0 })
+end
+
+-- insert blank line above or below
+function M.insert_blank_line(Direction)
+	local current_row = vim.api.nvim_win_get_cursor(0)[1]
+	local offset = 0 -- to make sure cursor stays on original line after insertion
+
+  if Direction == "above" then
+    current_row = current_row - 1
+		offset = 2
+  end
+
+	vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { "" })
+	vim.api.nvim_win_set_cursor(0, { current_row + offset, 0 })
 end
 
 return M
