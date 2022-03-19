@@ -50,11 +50,11 @@ end
 -- insert blank line above or below
 function M.insert_blank_line(Direction)
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
-	local offset = 0 -- to make sure cursor stays on original line after insertion
+	local offset = 0
 
   if Direction == "above" then
     current_row = current_row - 1
-		offset = 2
+		offset = 2 -- to make sure cursor stays on original line after insertion
   end
 
 	vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { "" })
