@@ -15,11 +15,9 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -30,11 +28,9 @@ cmp.setup({
 			"s",
 		}),
 
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+		["<c-j>"] = cmp.mapping(function(fallback)
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
 			else
 				fallback()
 			end
@@ -43,14 +39,34 @@ cmp.setup({
 			"s",
 		}),
 
+		["<s-tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end, {
+			"i",
+			"s",
+		}),
+		["<c-k>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, {
+			"i",
+			"s",
+		}),
 		["<Esc>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping(function(fallback)
 			if not cmp.confirm({ select = false }) then
 				require("pairs.enter").type()
 			end
 		end),
-		["<C-p>"] = cmp.mapping.scroll_docs(-3),
-		["<C-n>"] = cmp.mapping.scroll_docs(3),
+		["<c-p>"] = cmp.mapping.scroll_docs(-3),
+		["<c-n>"] = cmp.mapping.scroll_docs(3),
 	},
 	sources = {
 		{ name = "luasnip" }, -- for luasnip
@@ -70,7 +86,7 @@ cmp.setup({
 		{ name = "spell" }, -- for spelling
 	},
 	completion = {
-		keyword_length = 2,
+		keyword_length = 1,
 		completeopt = "menu,noselect",
 	},
 	experimental = {
@@ -102,7 +118,7 @@ end)
 
 cmp.setup.cmdline(":", { -- cmdline completion like wilder
 	sources = {
-		{ name = "cmdline", keyword_length = 2 },
+		{ name = "cmdline" },
 		{ name = "path" },
 		{ name = "nvim_lua" },
 	},
