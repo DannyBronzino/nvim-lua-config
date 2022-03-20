@@ -35,10 +35,6 @@ map("n", "<s-tab>", "<<", opts)
 map("x", "<tab>", ">gv", opts)
 map("x", "<s-tab>", "<gv", opts)
 
--- Insert a blank line below or above current line (do not move the cursor),
--- map("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
--- map("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", { noremap = true, expr = true, silent = true })
-
 -- Decrease indent level in insert mode with shift+tab
 map("i", "<s-tab>", "<ESC><<i", opts)
 
