@@ -57,21 +57,5 @@
       "$0"
     ],
     "prefix": "inb"
-  },
-  "Miscellaneous reference": {
-    "body": [
-      "@misc{${1:name},",
-      "\tauthor={${2:author}},",
-      "\ttitle={${3:title}},",
-      "\thowpublished={${4:howpublished}},",
-      "\tmonth={${5:MM}},",
-      "\tyear={${6:YYYY}},",
-      "\tnote={${7:note}},",
-      "\tannote={${8:annote}},",
-      "\turl={${9:url}},",
-      "}",
-      "$0"
-    ],
-    "prefix": "misc"
   }
 }
