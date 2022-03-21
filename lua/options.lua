@@ -93,6 +93,5 @@ vim.opt.mouse:append({ a = true }) -- enable mouse for all modes
 
 vim.opt.spelllang = { "en" } -- set language for spell
 
-vim.cmd([[syntax enable]]) -- enable syntax
 vim.opt.background = "dark" -- background color
 vim.opt.termguicolors = true -- use full color palette

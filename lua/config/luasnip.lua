@@ -18,21 +18,16 @@ ls.filetype_extend("bib", { "tex" })
 
 ls.config.set_config({ enable_autosnippets = true })
 
-ls.autosnippets = {
-	tex = {
-		s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots{}")),
+ls.add_snippets("tex", {
+	s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots{}")),
 
-		-- use csquotes package
-		s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
+	-- use csquotes package
+	s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
 
-		-- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
-		s(
-			{ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" },
-			{ t("\\mentalquote{"), i(1), i(0), t("}") }
-		),
+	-- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
+	s({ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" }, { t("\\mentalquote{"), i(1), i(0), t("}") }),
 
-		s({ trig = "Qing", name = "Qīng", dscr = "Qīng", wordTrig = false }, t("Qīng")),
+	s({ trig = "Qing", name = "Qīng", dscr = "Qīng", wordTrig = false }, t("Qīng")),
 
-		s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
-	},
-}
+	s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
+}, { type = "autosnippets" })
