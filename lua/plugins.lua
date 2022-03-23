@@ -230,7 +230,8 @@ require("packer").startup({
 					"nvim-telescope/telescope-fzf-native.nvim",
 					run = "make",
 				},
-				{ "nvim-telescope/telescope-packer.nvim" } -- packer browser
+				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
+				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
 			},
 			config = [[require("config.telescope")]],
 			event = "BufEnter",

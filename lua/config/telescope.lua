@@ -87,6 +87,9 @@ require("telescope").setup({
 		registers = {
 			theme = "ivy",
 		},
+		symbols = {
+			theme = "ivy",
+		},
 	},
 })
 
@@ -152,7 +155,6 @@ vim.api.nvim_set_keymap(
 	[[<cmd>lua require("telescope.builtin").registers()<CR>]],
 	{ noremap = true, silent = true }
 )
-
 
 vim.api.nvim_set_keymap(
 	"n",
