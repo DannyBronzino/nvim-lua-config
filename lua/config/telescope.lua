@@ -1,3 +1,13 @@
+local M = {}
+
+M.project_files = function()
+	local opts = {} -- define here if you want to define something
+	local ok = pcall(require("telescope.builtin").git_files, opts)
+	if not ok then
+		require("telescope.builtin").find_files(opts)
+	end
+end
+
 local actions = require("telescope.actions")
 
 require("telescope").setup({
@@ -6,7 +16,7 @@ require("telescope").setup({
 		layout_config = {
 			height = 0.95,
 			preview_cutoff = 40,
-			prompt_position = "top",
+			prompt_position = "bottom",
 			width = 0.95,
 		},
 		mappings = {
@@ -15,8 +25,8 @@ require("telescope").setup({
 				["<C-d>"] = false,
 				["<c-n>"] = actions.move_selection_next,
 				["<c-p>"] = actions.move_selection_previous,
-				["<tab>"] = actions.move_selection_next,
-				["<S-tab>"] = actions.move_selection_previous,
+				["<tab>"] = actions.move_selection_previous,
+				["<S-tab>"] = actions.move_selection_next,
 				["<c-l>"] = actions.toggle_selection,
 			},
 			n = {
@@ -39,7 +49,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>ff",
-	[[<cmd>lua require("telescope.builtin").find_files({previewer = false})<CR>]],
+	[[<cmd>lua require("config.telescope").project_files()<CR>]],
 	{ noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap(
@@ -84,3 +94,5 @@ vim.api.nvim_set_keymap(
 	[[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
 	{ noremap = true, silent = true }
 )
+
+return M
