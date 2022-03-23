@@ -1,9 +1,3 @@
--- wrap telescope results
-vim.api.nvim_create_autocmd("User", {
-	pattern = "TelescopePreviewerLoaded",
-	command = "setlocal wrap",
-})
-
 -- change colorscheme
 local change_colorscheme = vim.api.nvim_create_augroup("change_colorscheme", { clear = true }) -- create group
 
