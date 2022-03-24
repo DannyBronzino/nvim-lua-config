@@ -15,50 +15,28 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<tab>"] = cmp.mapping(function(fallback)
+		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
 			else
 				fallback()
 			end
-		end, {
-			"i",
-			"s",
-		}),
+		end, { "i", "s" }),
 
-		["<c-j>"] = cmp.mapping(function(fallback)
-			if luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, {
-			"i",
-			"s",
-		}),
-
-		["<s-tab>"] = cmp.mapping(function(fallback)
+		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			else
-				fallback()
-			end
-		end, {
-			"i",
-			"s",
-		}),
-		["<c-k>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(-1) then
+			elseif luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
 				fallback()
 			end
-		end, {
-			"i",
-			"s",
-		}),
+		end, { "i", "s" }),
+
 		["<Esc>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping(function(fallback)
 			if not cmp.confirm({ select = false }) then
