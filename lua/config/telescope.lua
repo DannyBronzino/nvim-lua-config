@@ -25,7 +25,7 @@ require("telescope").setup({
 		layout_strategy = "horizontal",
 		layout_config = {
 			height = 0.95,
-			preview_cutoff = 40,
+			preview_cutoff = 60,
 			prompt_position = "bottom",
 			width = 0.95,
 		},
@@ -33,8 +33,6 @@ require("telescope").setup({
 			i = {
 				["<c-n>"] = actions.preview_scrolling_down,
 				["<c-p>"] = actions.preview_scrolling_up,
-				["<c-j>"] = actions.move_selection_next,
-				["<c-k>"] = actions.move_selection_previous,
 				["<tab>"] = actions.move_selection_next,
 				["<s-tab>"] = actions.move_selection_previous,
 				["<c-l>"] = actions.toggle_selection,
@@ -47,48 +45,123 @@ require("telescope").setup({
 	pickers = {
 		find_files = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		git_files = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		buffers = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		current_buffer_fuzzy_find = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		help_tags = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		tags = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		current_buffer_tags = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		grep_string = {
 			theme = "cursor",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		live_grep = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		oldfiles = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		lsp_document_symbols = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		lsp_workspace_symbols = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		lsp_dynamic_workspace_symbols = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		registers = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 		symbols = {
 			theme = "ivy",
+			layout_config = {
+				preview_width = 0.66,
+				height = 0.5,
+				width = 0.99,
+			},
 		},
 	},
 })
