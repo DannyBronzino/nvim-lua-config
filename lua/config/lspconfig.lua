@@ -10,8 +10,6 @@ local custom_attach = function(client, bufnr)
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
-	buf_set_keymap("n", "gs", "<cmd>Lspsaga signature_help<cr>", opts)
-	buf_set_keymap("n", "gh", "<cmd>Lspsaga lsp_finder<cr>", opts)
 	buf_set_keymap("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
 	buf_set_keymap("n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
 	buf_set_keymap("x", "gx", ":<c-u>Lspsaga range_code_action<cr>", opts)
@@ -19,8 +17,8 @@ local custom_attach = function(client, bufnr)
 	buf_set_keymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
 	buf_set_keymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 	buf_set_keymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-	buf_set_keymap("n", "<C-p>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
-	buf_set_keymap("n", "<C-n>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
+	buf_set_keymap("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
+	buf_set_keymap("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
 	-- Set some key bindings conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
 		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
