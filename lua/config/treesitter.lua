@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = "maintained",
+	ensure_installed = { "lua", "vim", "latex", "bibtex", "markdown" },
 	sync_install = true,
 	highlight = {
 		enable = true,
