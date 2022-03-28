@@ -49,6 +49,7 @@ cmp.setup({
 	sources = {
 		{ name = "luasnip" }, -- for luasnip
 		{ name = "nvim_lua" }, -- for nvim lua function
+		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
 		{ name = "nvim_lsp" }, -- for nvim-lsp
 		{ -- ripgrep completion
 			name = "rg",
@@ -77,6 +78,7 @@ cmp.setup({
 			menu = {
 				luasnip = "[Snip]",
 				nvim_lua = "[Lua]",
+				nvim_lsp_signature_help = "[Help]",
 				nvim_lsp = "[LSP]",
 				rg = "[RG]",
 				digraphs = "[Digraphs]",
@@ -97,35 +99,22 @@ end)
 cmp.setup.cmdline(":", { -- cmdline completion like wilder
 	sources = {
 		{ name = "cmdline" },
-		{ name = "path" },
 		{ name = "nvim_lua" },
+		{ name = "path" },
 	},
-	-- view = {
-	-- entries = "wildmenu",
-	-- },
 })
 
 cmp.setup.cmdline("/", { -- search completion
 	sources = {
 		{ name = "buffer" },
 	},
-	-- view = {
-	-- entries = "wildmenu",
-	-- },
 })
 
 cmp.setup.cmdline("?", { -- reverse search completion
 	sources = {
 		{ name = "buffer" },
 	},
-	-- view = {
-	-- entries = "wildmenu",
-	-- },
 })
-
--- If you want insert `(` after select function or method item
--- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
--- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
 --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
 vim.cmd([[
