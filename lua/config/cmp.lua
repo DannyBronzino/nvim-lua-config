@@ -66,7 +66,6 @@ cmp.setup({
 	},
 	completion = {
 		keyword_length = 1,
-		completeopt = "menu,noselect",
 	},
 	experimental = {
 		ghost_text = true, -- adds ghost text that completes the word in buffer
