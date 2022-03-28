@@ -97,3 +97,5 @@ vim.opt.background = "dark" -- background color
 vim.opt.termguicolors = true -- use full color palette
 
 vim.opt.cursorline = true -- highlight current line
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
