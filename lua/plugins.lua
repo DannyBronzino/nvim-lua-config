@@ -48,15 +48,12 @@ require("packer").startup({
 			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			event = "BufEnter",
+			event = "VimEnter",
 		})
 
 		use({ -- interface for easy LSP configs
 			"neovim/nvim-lspconfig",
 			requires = {
-				{ -- adds emmylua and docs for neovim
-					"folke/lua-dev.nvim",
-				},
 				{ -- easy LSP commands
 					"tami5/lspsaga.nvim",
 					config = [[require("config.lspsaga")]],
@@ -72,6 +69,7 @@ require("packer").startup({
 						{ "onsails/lspkind-nvim" }, -- vscode pictograms
 						{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
 						{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
+						{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 						{ "hrsh7th/cmp-path" }, -- completion for path
 						{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
 						{ "hrsh7th/cmp-buffer", event = "BufRead" }, -- completion for buffer contents
@@ -250,7 +248,7 @@ require("packer").startup({
 		})
 	end,
 	config = {
-		max_jobs = nil,
+		max_jobs = 8,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		autoremove = true,
 	},
