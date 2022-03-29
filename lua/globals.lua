@@ -30,9 +30,6 @@ vim.g.loaded_tutor_mode_plugin = 1 -- do not load the tutor plugin
 -- do not use builtin matchit.vim and matchparen.vim since we use vim-matchup
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
-vim.g.matchup_motion_enabled = 0
-
-vim.g.matchup_matchparen_offscreen = { method = "popup" } -- matchup floating match
 
 -- folding
 vim.g.markdown_folding = 1
