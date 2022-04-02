@@ -47,6 +47,11 @@ local function mixed_indent()
 	end
 end
 
+-- show word count
+local function getWords()
+	return tostring(vim.fn.wordcount().words .. " words")
+end
+
 -- ensures builtin colorschemse are NOT used
 local function get_colorscheme()
 	local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
@@ -77,9 +82,8 @@ require("lualine").setup({
 			"diff",
 		},
 		lualine_c = { "filename" },
-		lualine_x = { "filetype" },
-		lualine_y = { "progress" },
-		lualine_z = {
+		lualine_x = { { getWords }, "filetype" },
+		lualine_y = {
 			"location",
 			{
 				"diagnostics",
@@ -94,6 +98,7 @@ require("lualine").setup({
 				color = "WarningMsg",
 			},
 		},
+		lualine_z = { "progress" },
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -106,7 +111,7 @@ require("lualine").setup({
 	tabline = {},
 	extensions = {
 		"quickfix",
-		"nvim-tree",
+		-- "nvim-tree",
 		"fugitive",
 	},
 })
