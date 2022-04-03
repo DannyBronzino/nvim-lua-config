@@ -1,14 +1,14 @@
--- new functions from jdhao
+-- displays spell indicator
 local function spell()
 	if vim.o.spell then
-		return string.format("spell")
+		return string.format("SPELL")
 	end
 
 	return ""
 end
 
+-- Get the positions of trailing whitespaces from plugin 'jdhao/whitespace.nvim'.
 local function trailing_space()
-	-- Get the positions of trailing whitespaces from plugin 'jdhao/whitespace.nvim'.
 	local trailing_space_pos = vim.b.trailing_whitespace_pos
 
 	local msg = ""
@@ -21,6 +21,7 @@ local function trailing_space()
 	return msg
 end
 
+-- displays error if indents are mixed
 local function mixed_indent()
 	local space_pat = [[\v^ +]]
 	local tab_pat = [[\v^\t+]]
@@ -48,11 +49,11 @@ local function mixed_indent()
 end
 
 -- show word count
-local function getWords()
+local function get_words()
 	return tostring(vim.fn.wordcount().words .. " words")
 end
 
--- ensures builtin colorschemse are NOT used
+-- ensures builtin colorschemes are NOT used
 local function get_colorscheme()
 	local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
 	if colorscheme == "dracula" then
@@ -74,6 +75,7 @@ require("lualine").setup({
 		component_separators = { left = "", right = "" },
 		disabled_filetypes = {},
 		always_divide_middle = true,
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { "mode" },
@@ -82,9 +84,12 @@ require("lualine").setup({
 			"diff",
 		},
 		lualine_c = { "filename" },
-		lualine_x = { { getWords }, "filetype" },
+		lualine_x = {
+			{ spell, color = "WarningMsg" },
+			{ get_words },
+			"filetype",
+		},
 		lualine_y = {
-			"location",
 			{
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
@@ -97,6 +102,7 @@ require("lualine").setup({
 				mixed_indent,
 				color = "WarningMsg",
 			},
+			"location",
 		},
 		lualine_z = { "progress" },
 	},
