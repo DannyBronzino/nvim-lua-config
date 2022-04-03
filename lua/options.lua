@@ -99,3 +99,17 @@ vim.opt.termguicolors = true -- use full color palette
 vim.opt.cursorline = true -- highlight current line
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+vim.opt.laststatus = 3 -- sets status line to appear on only the last window
+
+-- window separators
+vim.opt.fillchars:append({
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┨",
+	vertright = "┣",
+	verthoriz = "╋",
+})
+

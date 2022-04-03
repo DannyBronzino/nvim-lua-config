@@ -1,20 +1,22 @@
-local kanagawa_colors = require("kanagawa.colors").setup()
+local colors = require("kanagawa.colors").setup()
 
 local overrides = {
 	-- overide existing highlights
-	WhichKeyValue = { fg = kanagawa_colors.crystalBlue },
-	LineNr = { fg = kanagawa_colors.dragonBlue },
-	Comment = { fg = kanagawa_colors.springBlue },
-	Visual = { bg = kanagawa_colors.waveBlue2 },
-	IncSearch = { bg = kanagawa_colors.oniViolet },
-	MatchParen = { fg = kanagawa_colors.sakuraPink, style = "bold" }, -- for vim-matchup
-	SpellBad = { fg = kanagawa_colors.peachRed, style = "bold" },
-	SpellCap = { fg = kanagawa_colors.peachRed, style = "bold" },
-	SpellRare = { fg = kanagawa_colors.peachRed, style = "bold" },
-	SpellLocal = { fg = kanagawa_colors.peachRed, style = "bold" },
+	WhichKeyValue = { fg = colors.crystalBlue },
+	LineNr = { fg = colors.dragonBlue },
+	Comment = { fg = colors.springBlue },
+	Visual = { bg = colors.waveBlue2 },
+	IncSearch = { bg = colors.oniViolet },
+	MatchParen = { fg = colors.sakuraPink, style = "bold" }, -- for vim-matchup
+	SpellBad = { fg = colors.peachRed, style = "bold" },
+	SpellCap = { fg = colors.peachRed, style = "bold" },
+	SpellRare = { fg = colors.peachRed, style = "bold" },
+	SpellLocal = { fg = colors.peachRed, style = "bold" },
 }
 
 require("kanagawa").setup({
-	transparent = true,
 	overrides = overrides,
+	transparent = true,
+	diminactive = true,
+	globalstatus = true,
 })
