@@ -1,9 +1,6 @@
 local kanagawa_colors = require("kanagawa.colors").setup()
 
 local overrides = {
-	-- new highlights
-	carpYellow = { fg = kanagawa_colors.carpYellow, bg = "NONE", style = "NONE" },
-
 	-- overide existing highlights
 	WhichKeyValue = { fg = kanagawa_colors.crystalBlue },
 	LineNr = { fg = kanagawa_colors.dragonBlue },
