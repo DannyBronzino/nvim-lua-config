@@ -29,8 +29,7 @@ require("telescope").setup({
 		layout_config = {
 			preview_cutoff = 60,
 			prompt_position = "top",
-			height = 0.5,
-			width = 0.8,
+			height = 0.75,
 		},
 		mappings = {
 			i = {
