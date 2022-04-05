@@ -1,6 +1,4 @@
 -- change colorscheme
-local change_colorscheme = vim.api.nvim_create_augroup("change_colorscheme", { clear = true }) -- create group
-
 vim.api.nvim_create_autocmd("Colorscheme", {
 	callback = function()
 		-- get current colorscheme
@@ -24,7 +22,6 @@ vim.api.nvim_create_autocmd("Colorscheme", {
 			},
 		})
 	end,
-	group = change_colorscheme,
 })
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
