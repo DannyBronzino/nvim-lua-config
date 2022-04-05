@@ -102,7 +102,7 @@ require("packer").startup({
 				},
 			},
 			config = [[require("config.lspconfig")]],
-			event = "BufEnter",
+			event = "VimEnter",
 		})
 
 		use({ -- buffer jumping like EasyMotion or Sneak
