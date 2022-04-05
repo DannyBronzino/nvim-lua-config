@@ -3,7 +3,9 @@ local M = {}
 -- wrap telescope results
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopePreviewerLoaded",
-	command = "setlocal wrap",
+	callback = function()
+		vim.opt_local.wrap = true
+	end,
 })
 
 -- use find_files if not in git project
