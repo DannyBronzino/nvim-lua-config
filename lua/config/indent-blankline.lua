@@ -1,6 +1,9 @@
---Map blankline
-vim.g.indent_blankline_char = "┊"
-vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
-vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-vim.g.indent_blankline_char_highlight = "LineNr"
-vim.g.indent_blankline_show_trailing_blankline_indent = false
+require("indent_blankline").setup({
+	-- U+2502 may also be a good choice, it will be on the middle of cursor.
+	-- U+250A is also a good choice
+	char = "▏",
+	show_end_of_line = false,
+	disable_with_nolist = true,
+	buftype_exclude = { "terminal" },
+	filetype_exclude = { "help", "git" },
+})
