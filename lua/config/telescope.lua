@@ -1,5 +1,3 @@
-local M = {}
-
 -- wrap telescope results
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopePreviewerLoaded",
@@ -8,12 +6,22 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
+local M = {}
+
 -- use find_files if not in git project
 M.project_files = function()
 	local opts = {} -- define here if you want to define something
 	local ok = pcall(require("telescope.builtin").git_files, opts)
 	if not ok then
 		require("telescope.builtin").find_files(opts)
+	end
+end
+
+M.symbols = function(opts)
+	if vim.lsp.client_is_stopped(1) then
+		require("telescope.builtin").tags(opts)
+	else
+		require("telescope.builtin").lsp_workspace_symbols(opts)
 	end
 end
 
@@ -79,7 +87,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>ft",
-	[[<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>]],
+	[[<cmd>lua require("config.telescope").symbols()<CR>]],
 	{ noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap(
