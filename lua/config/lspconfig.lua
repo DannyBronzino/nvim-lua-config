@@ -53,26 +53,6 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local lspconfig = require("lspconfig")
 
--- python server
-lspconfig.pylsp.setup({
-	on_attach = custom_attach,
-	settings = {
-		pylsp = {
-			plugins = {
-				pylint = { enabled = true, executable = "pylint" },
-				pyflakes = { enabled = true },
-				pycodestyle = { enabled = true },
-				jedi_completion = { fuzzy = true },
-				pyls_isort = { enabled = true },
-				pylsp_mypy = { enabled = true },
-			},
-		},
-	},
-	flags = {
-		debounce_text_changes = 200,
-	},
-	capabilities = capabilities,
-})
 -- set up texlab for latex
 lspconfig.texlab.setup({
 	on_attach = custom_attach,
