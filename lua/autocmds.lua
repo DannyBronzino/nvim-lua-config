@@ -1,5 +1,7 @@
+local au = vim.api.nvim_create_autocmd
+
 -- change colorscheme
-vim.api.nvim_create_autocmd("Colorscheme", {
+au("Colorscheme", {
 	callback = function()
 		-- get current colorscheme
 		local function get_colorscheme()
@@ -25,24 +27,40 @@ vim.api.nvim_create_autocmd("Colorscheme", {
 })
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
-local numbertoggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+local number_toggle = vim.api.nvim_create_augroup("number_toggle", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+au({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
 	callback = function()
 		if vim.opt.number:get() == true then
 			vim.opt.relativenumber = true
 		end
 	end,
-	group = numbertoggle,
+	group = number_toggle,
 })
 
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 	callback = function()
 		if vim.opt.number:get() == true then
 			vim.opt.relativenumber = false
 		end
 	end,
-	group = numbertoggle,
+	group = number_toggle,
+})
+
+local cursorline_toggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+
+au("InsertEnter", {
+	callback = function()
+		vim.opt.cursorline = true
+	end,
+	group = cursorline_toggle,
+})
+
+au("InsertLeave", {
+	callback = function()
+		vim.opt.cursorline = false
+	end,
+	group = cursorline_toggle,
 })
 
 -- resume edit position
