@@ -9,7 +9,7 @@ vim.g.loaded_node_provider = 0 -- Disable node provider
 
 vim.g.did_install_default_menus = 1 -- do not load menu
 
-vim.g.python3_host_prog = "~/miniconda3/bin/python3" -- location of python3
+vim.g.python3_host_prog = "/usr/bin/python3" -- location of python3
 
 -- Disable loading certain plugins
 -- Whether to load netrw by default, see
