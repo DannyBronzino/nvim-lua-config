@@ -54,21 +54,21 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 local lspconfig = require("lspconfig")
 
 -- set up texlab for latex
--- lspconfig.texlab.setup({
--- on_attach = custom_attach,
--- capabilities = capabilities,
--- flags = {
--- debounce_text_changes = 500,
--- },
--- settings = {
--- texlab = {
--- chktex = {
--- onEdit = true,
--- onOpenAndSave = true,
--- },
--- },
--- },
--- })
+lspconfig.texlab.setup({
+	on_attach = custom_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 500,
+	},
+	settings = {
+		texlab = {
+			chktex = {
+				onEdit = true,
+				onOpenAndSave = true,
+			},
+		},
+	},
+})
 
 -- set up vim-language-server
 lspconfig.vimls.setup({
