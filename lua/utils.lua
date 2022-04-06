@@ -30,6 +30,7 @@ end
 function M.move_line(Direction)
 	local current_line = vim.api.nvim_get_current_line()
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
+	local current_column = vim.api.nvim_win_get_cursor(0)[2]
 
 	if Direction == "up" then
 		current_row = current_row - 2
@@ -48,12 +49,13 @@ function M.move_line(Direction)
 
 	vim.api.nvim_del_current_line()
 	vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { current_line })
-	vim.api.nvim_win_set_cursor(0, { current_row + 1, 0 })
+	vim.api.nvim_win_set_cursor(0, { current_row + 1, current_column })
 end
 
 -- insert blank line above or below
 function M.insert_blank_line(Direction)
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
+	local current_column = vim.api.nvim_win_get_cursor(0)[2]
 	local offset = 0
 
 	if Direction == "above" then
@@ -62,7 +64,7 @@ function M.insert_blank_line(Direction)
 	end
 
 	vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { "" })
-	vim.api.nvim_win_set_cursor(0, { current_row + offset, 0 })
+	vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
 end
 
 return M
