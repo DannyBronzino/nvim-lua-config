@@ -2,10 +2,15 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+
 -- set leader to comma
 map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
+
+-- use control to turn backspace into delete
+-- use <C-v> followed by <c-BS> to enter keycode
+map("i", "", "<Del>", opts)
 
 -- allows for use of "j" and "k" over wrapped lines
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
