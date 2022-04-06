@@ -9,8 +9,7 @@ vim.api.nvim_create_autocmd("User", {
 local M = {}
 
 -- use find_files if not in git project
-M.project_files = function()
-	local opts = {} -- define here if you want to define something
+M.project_files = function(opts)
 	local ok = pcall(require("telescope.builtin").git_files, opts)
 	if not ok then
 		require("telescope.builtin").find_files(opts)
