@@ -3,20 +3,22 @@ require("hlslens").setup({
 	nearest_only = true,
 })
 
-vim.api.nvim_set_keymap(
-	"n",
-	"n",
-	"<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
-	{ noremap = true, silent = true }
-)
+-- easier syntax
+local function map(mode, l, r, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set(mode, l, r, opts)
+end
 
-vim.api.nvim_set_keymap(
+map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>")
+
+map(
 	"n",
 	"N",
 	"<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
-	{ noremap = true, silent = true }
+	{ remap = true }
 )
 
-vim.api.nvim_set_keymap("n", "*", "<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>", { silent = true })
+map("n", "*", "<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>", { remap = true })
 
-vim.api.nvim_set_keymap("n", "#", "<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>", { silent = true })
+map("n", "#", "<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>", { remap = true })

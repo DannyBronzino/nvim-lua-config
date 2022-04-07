@@ -1,32 +1,30 @@
 local custom_attach = function(client, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
+	-- easier syntax
+	local function map(mode, l, r, opts)
+		opts = opts or {}
+		opts.silent = true
+		opts.buffer = bufnr
+		vim.keymap.set(mode, l, r, opts)
 	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
-
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
-	local opts = { noremap = true, silent = true }
-	buf_set_keymap("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
-	buf_set_keymap("n", "gx", "<cmd>Lspsaga code_action<cr>", opts)
-	buf_set_keymap("x", "gx", ":<c-u>Lspsaga range_code_action<cr>", opts)
-	buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
-	buf_set_keymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-	buf_set_keymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-	buf_set_keymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-	buf_set_keymap("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
-	buf_set_keymap("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
+	map("n", "gr", "<cmd>Lspsaga rename<cr>")
+	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
+	map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
+	map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+	map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
+	map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
+	map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
+	map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
+	map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
 	-- Set some key bindings conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+		map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 	else
-		buf_set_keymap("n", "<space>f", "<cmd>Neoformat<CR>", opts)
+		map("n", "<space>f", "<cmd>Neoformat<CR>")
 	end
 	if client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>", opts)
+		map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
 	end
 
 	-- The blow command will highlight the current variable and its usages in the buffer.

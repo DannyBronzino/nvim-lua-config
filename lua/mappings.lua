@@ -1,77 +1,79 @@
--- Easier syntax
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
+-- easier syntax
+local function map(mode, l, r, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set(mode, l, r, opts)
+end
 
 -- set leader to comma
-map("", "<Space>", "<Nop>", opts)
+map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 -- use control to turn backspace into delete
 -- use <C-v> followed by <c-BS> to enter keycode
-map("i", "", "<Del>", opts)
+map("i", "", "<Del>")
 
 -- allows for use of "j" and "k" over wrapped lines
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true })
 
 -- move to beginning of wrapped line
-map("n", "H", "g^", opts)
-map("x", "H", "g^", opts)
+map("n", "H", "g^")
+map("x", "H", "g^")
 
 -- move to beginning of wrapped line
-map("n", "L", "g$", opts)
-map("x", "L", "g$", opts)
+map("n", "L", "g$")
+map("x", "L", "g$")
 
-map("n", "Y", "y$", opts) -- yank until end of line
+map("n", "Y", "y$") -- yank until end of line
 
-map("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>", opts) -- commit current file
+map("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
 
 -- Paste non-linewise text above or below current cursor
-map("n", "<leader>p", "m`o<ESC>p``", opts)
-map("n", "<leader>P", "m`O<ESC>p``", opts)
+map("n", "<leader>p", "m`o<ESC>p``")
+map("n", "<leader>P", "m`O<ESC>p``")
 
 -- use <tab> to indent or dedent in normal mode
-map("n", "<tab>", ">>", opts)
-map("n", "<s-tab>", "<<", opts)
+map("n", "<tab>", ">>" )
+map("n", "<s-tab>", "<<" )
 
 -- continuous visual shifting (does not exit Visual mode), `gv` means to reselect previous visual area
-map("x", "<tab>", ">gv", opts)
-map("x", "<s-tab>", "<gv", opts)
+map("x", "<tab>", ">gv" )
+map("x", "<s-tab>", "<gv" )
 
 -- Decrease indent level in insert mode with shift+tab
-map("i", "<s-tab>", "<ESC><<i", opts)
+map("i", "<s-tab>", "<ESC><<i" )
 
 -- do not move cursor when joining lines
-map("n", "J", "mzJ`z", opts)
+map("n", "J", "mzJ`z" )
 
 -- change text without putting it in the register
-map("n", "c", '"_c', opts)
-map("n", "C", '"_C', opts)
-map("n", "cc", '"_cc', opts)
-map("x", "c", '"_c', opts)
+map("n", "c", '"_c' )
+map("n", "C", '"_C' )
+map("n", "cc", '"_cc' )
+map("x", "c", '"_c' )
 
 -- copy entire buffer
-map("n", "<leader>y", ":<C-U>%y<CR>", opts)
+map("n", "<leader>y", ":<C-U>%y<CR>" )
 
 -- move line up and down
-map("n", "<m-j>", [[<cmd>lua require("utils").move_line("down")<cr>]], opts)
-map("n", "<m-k>", [[<cmd>lua require("utils").move_line("up")<cr>]], opts)
+map("n", "<m-j>", [[<cmd>lua require("utils").move_line("down")<cr>]] )
+map("n", "<m-k>", [[<cmd>lua require("utils").move_line("up")<cr>]] )
 
 -- insert blank line above or below
-map("n", "<space>O", [[<cmd>lua require("utils").insert_blank_line("above")<cr>]], opts)
-map("n", "<space>o", [[<cmd>lua require("utils").insert_blank_line("below")<cr>]], opts)
+map("n", "<space>O", [[<cmd>lua require("utils").insert_blank_line("above")<cr>]] )
+map("n", "<space>o", [[<cmd>lua require("utils").insert_blank_line("below")<cr>]] )
 
 -- Navigation in the location and quickfix list
-map("n", "<m-up>", ":<C-U>lprevious<CR>zv", opts)
-map("n", "<m-down>", ":<C-U>lnext<CR>zv", opts)
-map("n", "<m-left>", ":<C-U>lfirst<CR>zv", opts)
-map("n", "<m-right>", ":<C-U>llast<CR>zv", opts)
-map("n", "<c-up>", ":<C-U>cprevious<CR>zv", opts)
-map("n", "<c-down>", ":<C-U>cnext<CR>zv", opts)
-map("n", "<c-left>", ":<C-U>cfirst<CR>zv", opts)
-map("n", "<c-right>", ":<C-U>clast<CR>zv", opts)
+map("n", "<m-up>", ":<C-U>lprevious<CR>zv" )
+map("n", "<m-down>", ":<C-U>lnext<CR>zv" )
+map("n", "<m-left>", ":<C-U>lfirst<CR>zv" )
+map("n", "<m-right>", ":<C-U>llast<CR>zv" )
+map("n", "<c-up>", ":<C-U>cprevious<CR>zv" )
+map("n", "<c-down>", ":<C-U>cnext<CR>zv" )
+map("n", "<c-left>", ":<C-U>cfirst<CR>zv" )
+map("n", "<c-right>", ":<C-U>clast<CR>zv" )
 
 vim.cmd([[
 " Break inserted text into smaller undo units.

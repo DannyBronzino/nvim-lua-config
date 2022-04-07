@@ -58,74 +58,38 @@ require("telescope").setup({
 	},
 })
 
+-- easier syntax
+local function map(mode, l, r, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set(mode, l, r, opts)
+end
+
 -- Add leader shortcuts
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader><space>",
-	[[<cmd>lua require("telescope.builtin").buffers()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>ff",
-	[[<cmd>lua require("config.telescope").project_files()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fb",
-	[[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fh",
-	[[<cmd>lua require("telescope.builtin").help_tags()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>ft",
-	[[<cmd>lua require("config.telescope").symbols()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fd",
-	[[<cmd>lua require("telescope.builtin").grep_string()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fg",
-	[[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fo",
-	[[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>?",
-	[[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
-	{ noremap = true, silent = true }
-)
+map("n", "<leader><space>", [[<cmd>lua require("telescope.builtin").buffers()<CR>]])
 
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fr",
-	[[<cmd>lua require("telescope.builtin").registers()<CR>]],
-	{ noremap = true, silent = true }
-)
+map("n", "<leader>ff", [[<cmd>lua require("config.telescope").project_files()<CR>]])
 
-vim.api.nvim_set_keymap(
+map("n", "<leader>fb", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]])
+
+map("n", "<leader>fh", [[<cmd>lua require("telescope.builtin").help_tags()<CR>]])
+
+map("n", "<leader>ft", [[<cmd>lua require("config.telescope").symbols()<CR>]])
+
+map("n", "<leader>fd", [[<cmd>lua require("telescope.builtin").grep_string()<CR>]])
+
+map("n", "<leader>fg", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]])
+
+map("n", "<leader>fo", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]])
+
+map("n", "<leader>?", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]])
+
+map("n", "<leader>fr", [[<cmd>lua require("telescope.builtin").registers()<CR>]])
+
+map(
 	"n",
 	"<leader>fp",
-	[[<cmd>lua require("telescope").extensions.packer.packer(require("telescope.themes").get_ivy())<CR>]],
-	{ noremap = true, silent = true }
+	[[<cmd>lua require("telescope").extensions.packer.packer(require("telescope.themes").get_ivy())<CR>]]
 )
 
 return M
