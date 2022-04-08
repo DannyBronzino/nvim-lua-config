@@ -12,6 +12,7 @@ local overrides = {
 	SpellCap = { fg = colors.peachRed, style = "bold" },
 	SpellRare = { fg = colors.peachRed, style = "bold" },
 	SpellLocal = { fg = colors.peachRed, style = "bold" },
+	String = { fg = colors.lightBlue },
 }
 
 require("kanagawa").setup({
