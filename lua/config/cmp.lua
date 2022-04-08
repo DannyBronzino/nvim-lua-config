@@ -48,9 +48,9 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "luasnip" }, -- for luasnip
-		{ name = "nvim_lua" }, -- for nvim lua function
 		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
 		{ name = "nvim_lsp" }, -- for nvim-lsp
+		{ name = "nvim_lua" }, -- for nvim lua function
 		{ -- ripgrep completion
 			name = "rg",
 			max_item_count = 9,
@@ -98,7 +98,7 @@ end)
 cmp.setup.cmdline(":", { -- cmdline completion like wilder
 	sources = {
 		{ name = "cmdline" },
-		{ name = "nvim_lua" },
+		-- { name = "nvim_lua" },
 		{ name = "path" },
 	},
 })
