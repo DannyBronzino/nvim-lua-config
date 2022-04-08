@@ -204,7 +204,6 @@ require("packer").startup({
 
 		use({ -- automatic window sizing
 			"dm1try/golden_size",
-			config = [[require("config.golden_size")]],
 			event = "VimEnter",
 			disable = true,
 		})
@@ -228,7 +227,7 @@ require("packer").startup({
 				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
 			},
 			config = [[require("config.telescope")]],
-			event = "BufEnter",
+			event = "VimEnter",
 		})
 
 		use({ -- cheatsheet that displays using telescope, if available
