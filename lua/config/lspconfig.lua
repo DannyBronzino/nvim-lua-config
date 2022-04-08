@@ -8,6 +8,7 @@ local custom_attach = function(client, bufnr)
 	end
 
 	-- Mappings.
+  map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
 	map("n", "gr", "<cmd>Lspsaga rename<cr>")
 	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
 	map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
