@@ -63,6 +63,7 @@ require("packer").startup({
 				{ -- completion engine
 					"hrsh7th/nvim-cmp",
 					requires = {
+						{ "folke/lua-dev.nvim" },
 						{ -- snippets in lua, accepts vscode style and snipmate as well
 							"L3MON4D3/LuaSnip",
 							requires = "rafamadriz/friendly-snippets", -- vscode snippets
