@@ -109,6 +109,7 @@ end)
 map("n", "<m-k>", function()
 	move_line(true)
 end)
+
 -- Navigation in the location and quickfix list
 map("n", "<m-up>", ":<C-U>lprevious<CR>zv")
 map("n", "<m-down>", ":<C-U>lnext<CR>zv")
