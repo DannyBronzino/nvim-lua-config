@@ -16,8 +16,6 @@ vim.opt.smartcase = true
 
 vim.opt.updatetime = 100 -- decrease update time
 
-vim.opt.signcolumn = "auto:1-3" -- display signs in number column
-
 -- Highlight on yank
 vim.cmd([[
   augroup YankHighlight
@@ -87,7 +85,8 @@ end
 vim.opt.isfname:remove("=")
 vim.opt.isfname:remove(",")
 
-vim.opt.numberwidth = 4 -- width of number gutter
+vim.opt.numberwidth = 5 -- width of number gutter
+vim.opt.signcolumn = "auto:4-6" -- display signs before number column
 
 vim.opt.mouse:append({ a = true }) -- enable mouse for all modes
 
