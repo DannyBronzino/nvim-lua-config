@@ -90,14 +90,14 @@ map("n", "<leader>fg", function()
 	require("telescope.builtin").live_grep()
 end)
 
-map("n", "<leader>fo", function()
-	require("telescope.builtin").lsp_document_symbols()
-end)
-
 map("n", "<leader>?", function()
 	require("telescope.builtin").oldfiles()
 end)
 
 map("n", "<leader>fr", function()
 	require("telescope.builtin").registers()
+end)
+
+map("n", "<leader>fs", function()
+	require("telescope").extensions.luasnip.luasnip()
 end)
