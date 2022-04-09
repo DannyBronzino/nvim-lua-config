@@ -1,9 +1,4 @@
--- easier syntax
-local function map(mode, l, r, opts)
-	opts = opts or {}
-	opts.silent = true
-	vim.keymap.set(mode, l, r, opts)
-end
+map = require("utils").map
 
 -- Move to previous/next
 map("n", "<A-,>", ":BufferPrevious<CR>")

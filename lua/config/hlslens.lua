@@ -3,12 +3,7 @@ require("hlslens").setup({
 	nearest_only = true,
 })
 
--- easier syntax
-local function map(mode, l, r, opts)
-	opts = opts or {}
-	opts.silent = true
-	vim.keymap.set(mode, l, r, opts)
-end
+map = require("utils").map
 
 map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>")
 

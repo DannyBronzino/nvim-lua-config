@@ -1,10 +1,10 @@
 local custom_attach = function(client, bufnr)
-	-- easier syntax
-	local function map(mode, l, r, opts)
+	-- easier syntax for mapping
+	local function map(mode, lhs, rhs, opts)
 		opts = opts or {}
 		opts.silent = true
 		opts.buffer = bufnr
-		vim.keymap.set(mode, l, r, opts)
+		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
 	-- Mappings.

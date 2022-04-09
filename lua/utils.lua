@@ -67,4 +67,11 @@ function M.insert_blank_line(Direction)
 	vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
 end
 
+-- easier syntax for mapping
+function M.map(mode, lhs, rhs, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 return M
