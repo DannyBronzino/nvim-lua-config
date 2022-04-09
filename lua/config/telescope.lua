@@ -27,7 +27,7 @@ local actions = require("telescope.actions")
 -- extensions
 require("telescope").load_extension("fzf") -- FZF integration
 require("telescope").load_extension("packer") -- packer extension
-require("telescope").load_extension("neoclip") -- clipboard manager
+require("telescope").load_extension("luasnip") -- luasnip extension
 
 require("telescope").setup({
 	defaults = {
@@ -100,8 +100,4 @@ end)
 
 map("n", "<leader>fr", function()
 	require("telescope.builtin").registers()
-end)
-
-map("n", "<leader>fp", function()
-	require("telescope").extensions.neoclip.default()
 end)
