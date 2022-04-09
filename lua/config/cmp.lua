@@ -53,14 +53,14 @@ cmp.setup({
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ -- ripgrep completion
 			name = "rg",
-			max_item_count = 9,
+			max_item_count = 6,
 			option = {
 				additional_arguments = "--smart-case",
 				context_before = 2,
 				context_after = 4,
 			},
 		},
-		{ name = "digraphs", keyword_length = 1 }, -- accented characters and the like that are inputed with <c-k>
+		{ name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
 		{ name = "spell" }, -- for spelling
 	},
