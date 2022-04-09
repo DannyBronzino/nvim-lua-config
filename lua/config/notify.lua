@@ -5,7 +5,7 @@ nvim_notify.setup({
   -- Animation style
   stages = "slide",
   -- Default timeout for notifications
-  timeout = 100,
+  timeout = 300,
 })
 
 vim.notify = nvim_notify
