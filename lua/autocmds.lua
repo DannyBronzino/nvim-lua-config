@@ -47,21 +47,21 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 	group = number_toggle,
 })
 
-local cursorline_toggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+-- local cursorline_toggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 
-au("InsertEnter", {
-	callback = function()
-		vim.opt.cursorline = true
-	end,
-	group = cursorline_toggle,
-})
+-- au("InsertEnter", {
+-- 	callback = function()
+-- 		vim.opt.cursorline = true
+-- 	end,
+-- 	group = cursorline_toggle,
+-- })
 
-au("InsertLeave", {
-	callback = function()
-		vim.opt.cursorline = false
-	end,
-	group = cursorline_toggle,
-})
+-- au("InsertLeave", {
+-- 	callback = function()
+-- 		vim.opt.cursorline = false
+-- 	end,
+-- 	group = cursorline_toggle,
+-- })
 
 -- resume edit position
 vim.cmd([[
