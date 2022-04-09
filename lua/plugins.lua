@@ -226,6 +226,14 @@ require("packer").startup({
 				},
 				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
 				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
+				{ -- clipboard maanger
+					"AckslD/nvim-neoclip.lua",
+					requires = { -- sql for persistance
+						"tami5/sqlite.lua",
+						module = "sqlite",
+					},
+					config = [[require("config.neoclip")]],
+				},
 			},
 			config = [[require("config.telescope")]],
 			event = "VimEnter",
