@@ -71,6 +71,7 @@ end
 map("n", "<space>O", function()
 	insert_blank_line(true)
 end)
+
 map("n", "<space>o", function()
 	insert_blank_line(false)
 end)
