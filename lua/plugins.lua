@@ -50,7 +50,6 @@ require("packer").startup({
 			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			event = "BufEnter",
 		})
 
 		use({ -- interface for easy LSP configs
@@ -103,7 +102,6 @@ require("packer").startup({
 				},
 			},
 			config = [[require("config.lspconfig")]],
-			event = "VimEnter",
 		})
 
 		use({ -- buffer jumping like EasyMotion or Sneak
@@ -230,7 +228,6 @@ require("packer").startup({
 				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
 			},
 			config = [[require("config.telescope")]],
-			event = "BufEnter",
 		})
 
 		use({ -- cheatsheet that displays using telescope, if available
