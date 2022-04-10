@@ -7,14 +7,14 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- use find_files if not in git project
-project_files = function(opts)
+local project_files = function(opts)
 	local ok = pcall(require("telescope.builtin").git_files, opts)
 	if not ok then
 		require("telescope.builtin").find_files(opts)
 	end
 end
 
-symbols = function(opts)
+local symbols = function(opts)
 	if vim.lsp.client_is_stopped(1) then
 		require("telescope.builtin").tags(opts)
 	else
