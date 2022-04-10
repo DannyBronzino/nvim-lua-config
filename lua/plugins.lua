@@ -195,6 +195,7 @@ require("packer").startup({
 			"folke/which-key.nvim",
 			config = [[require("config.which-key")]],
 			event = "VimEnter",
+			disable = true,
 		})
 
 		use({ -- Fixes scroll in middle of page (works poorly with soft wrapping)
