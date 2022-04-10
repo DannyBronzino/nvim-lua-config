@@ -27,7 +27,12 @@ function M.may_create_dir()
 end
 
 -- easier syntax for mapping
-function M.map(mode, lhs, rhs, opts)
+function M.map(
+	mode, -- vim mode
+	lhs, -- left hand side
+	rhs, -- right hand side
+	opts -- options
+)
 	opts = opts or {}
 	opts.silent = true
 	vim.keymap.set(mode, lhs, rhs, opts)
