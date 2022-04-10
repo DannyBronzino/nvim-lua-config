@@ -50,7 +50,7 @@ require("packer").startup({
 			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			event = "VimEnter",
+			event = "BufEnter",
 		})
 
 		use({ -- interface for easy LSP configs
