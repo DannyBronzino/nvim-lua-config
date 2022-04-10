@@ -13,6 +13,7 @@ local overrides = {
 	SpellRare = { fg = colors.peachRed, style = "bold" },
 	SpellLocal = { fg = colors.peachRed, style = "bold" },
 	String = { fg = colors.lightBlue },
+	TelescopePreviewLine = { link = "Cursorline" },
 }
 
 require("kanagawa").setup({
