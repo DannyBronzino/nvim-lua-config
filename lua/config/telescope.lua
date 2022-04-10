@@ -55,6 +55,15 @@ require("telescope").setup({
 	pickers = {
 		buffers = {
 			theme = "dropdown",
+			layout_config = {
+				width = 0.5,
+			},
+		},
+		spell_suggest = {
+			theme = "cursor",
+			layout_config = {
+				width = 0.33,
+			},
 		},
 	},
 })
@@ -94,8 +103,24 @@ map("n", "<leader>?", function()
 	require("telescope.builtin").oldfiles()
 end)
 
-map("n", "<leader>fr", function()
+map("n", '"', "<Nop>") -- disable for next map
+map("n", '"', function()
 	require("telescope.builtin").registers()
+end)
+
+map("i", "<c-r>", "<Nop>") -- disable for next map
+map("i", "<c-r>", function()
+	require("telescope.builtin").registers()
+end)
+
+map("n", "z=", "<Nop>") -- disable for next map
+map("n", "z=", function()
+	require("telescope.builtin").spell_suggest()
+end)
+
+map("n", "'", "<Nop>") -- disable for next map
+map("n", "'", function()
+	require("telescope.builtin").marks()
 end)
 
 map("n", "<leader>fs", function()
