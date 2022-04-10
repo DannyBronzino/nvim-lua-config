@@ -228,6 +228,7 @@ require("packer").startup({
 				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
 			},
 			config = [[require("config.telescope")]],
+			event = "BufEnter", -- necessary for mapping to work?
 		})
 
 		use({ -- cheatsheet that displays using telescope, if available
