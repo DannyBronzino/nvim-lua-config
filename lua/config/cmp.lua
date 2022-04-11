@@ -48,12 +48,12 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "luasnip" }, -- for luasnip
-		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
 		{ name = "nvim_lsp" }, -- for nvim-lsp
+		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
 		{ name = "nvim_lua" }, -- for nvim lua function
 		{ -- ripgrep completion
 			name = "rg",
-			max_item_count = 6,
+			max_item_count = 3,
 			option = {
 				additional_arguments = "--smart-case",
 				context_before = 2,
@@ -65,7 +65,7 @@ cmp.setup({
 		{ name = "spell" }, -- for spelling
 	},
 	completion = {
-		keyword_length = 1,
+		keyword_length = 2,
 	},
 	experimental = {
 		ghost_text = true, -- adds ghost text that completes the word in buffer
