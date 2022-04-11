@@ -38,4 +38,14 @@ function M.map(
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- trim whitespace from beginning of string
+function M.ltrim(s)
+	return s:match("^%s*(.*)")
+end
+
+-- trim whitespace from end of string
+function M.rtrim(s)
+	return s:match("^(.*%S)%s*$")
+end
+
 return M
