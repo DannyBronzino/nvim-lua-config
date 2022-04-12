@@ -34,7 +34,7 @@ ls.add_snippets("tex", {
 		t("}"),
 		i(0),
 	}),
-	s({
+	s({ -- requires verse or memoir package
 		trig = "verse",
 		name = "Verse Formatting",
 	}, {
