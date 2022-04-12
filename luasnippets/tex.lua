@@ -40,11 +40,10 @@ ls.add_snippets("tex", {
 	}, {
 		t("\\settowidth{\\versewidth}["),
 		d(2, function(args)
-			results = args[1][1] -- first line
+			results = utils.rtrim(utils.ltrim(string.gsub(args[1][1], [[\\]], [[]]))) -- backslashes and trim whitespace
 
 			for count = 2, #args[1] do
-				-- remoes backslashes if present and trims whitespace
-				local old_line = utils.rtrim(utils.ltrim(string.gsub(results, [[\\]], [[]])))
+				local old_line = results
 				local new_line = utils.rtrim(utils.ltrim(string.gsub(args[1][count], [[\\]], [[]])))
 
 				-- measures length and passes longer string
