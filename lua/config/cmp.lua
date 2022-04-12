@@ -56,8 +56,8 @@ cmp.setup({
 			max_item_count = 3,
 			option = {
 				additional_arguments = "--smart-case",
-				context_before = 2,
-				context_after = 4,
+				context_before = 3,
+				context_after = 3,
 			},
 		},
 		{ name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
