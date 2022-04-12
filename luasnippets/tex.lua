@@ -35,7 +35,7 @@ ls.add_snippets("tex", {
 		i(0),
 	}),
 	s({
-		trig = "\\verse",
+		trig = "verse",
 		name = "Verse Formatting",
 	}, {
 		t("\\settowidth{\\versewidth}["),
