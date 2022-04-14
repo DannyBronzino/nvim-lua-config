@@ -1,15 +1,14 @@
 require("pairs"):setup({
-	enter = {
-		enable_mapping = false,
-	},
 	pairs = {
-		tex = {
-			{ '"', '"', { cross_line = true } },
-			{ "'", "'", { ignore_pre = "\\w", cross_line = true } },
-		},
 		markdown = {
-			{ '"', '"', { cross_line = true } },
-			{ "'", "'", { ignore_pre = "\\w", cross_line = true } },
+			-- { "'", "'", { ignore_pre = "\\w", ignore = "\\w'\\w" } },
+			{ "'", "'", { ignore_pre = "\\v(\\\\|\\S)" } }, -- use apostrophe without triggering double
 		},
+	},
+	enter = {
+		enable_mapping = false, -- for cmp
+	},
+	autojump_strategy = {
+		unbalanced = "all", -- in ( { | } ), hitting ) will jump all the way out
 	},
 })
