@@ -2,3 +2,4 @@ plugin/*
 
 workspace.code-workspace
 lua/packer_compiled.lua
+.vscode/settings.json
