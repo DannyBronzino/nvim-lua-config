@@ -60,7 +60,7 @@ cmp.setup({
 				context_after = 3,
 			},
 		},
-		{ name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
+		-- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
 		{ name = "spell" }, -- for spelling
 	},

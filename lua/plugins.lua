@@ -78,24 +78,10 @@ require("packer").startup({
 						{ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
 						{ "f3fora/cmp-spell" }, -- completion for spell
 						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
-						{ "dmitmel/cmp-digraphs" }, -- completion for digraphs
+						-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
 						{
 							"ZhiyuanLck/smart-pairs", -- automatically creates pairs, like ""{}[]()''
-							config = function()
-								require("pairs"):setup({
-									enter = {
-										enable_mapping = false,
-									},
-									pairs = {
-										tex = {
-											{ "'", "'", { ignore_pre = "\\a" } },
-										},
-										markdown = {
-											{ "'", "'", { ignore_pre = "\\a" } },
-										},
-									},
-								})
-							end,
+							config = [[require("config.smart-pairs")]],
 						},
 					},
 					config = [[require("config.cmp")]],
