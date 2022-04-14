@@ -94,6 +94,14 @@ require("packer").startup({
 			"ggandor/lightspeed.nvim",
 			config = [[require("config.lightspeed")]],
 			event = "BufEnter",
+			disable = true,
+		})
+
+		use({
+			"phaazon/hop.nvim",
+			branch = "v1",
+			config = [[require("config.hop")]],
+			event = "BufEnter",
 		})
 
 		use({ -- Show match number and index for search
