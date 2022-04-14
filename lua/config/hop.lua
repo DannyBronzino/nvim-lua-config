@@ -5,51 +5,27 @@ require("hop").setup({
 	multi_windows = true,
 })
 
-vim.opt.virtualedit:append("onemore") -- enables operations to end of line
+vim.opt.virtualedit = { "onemore" } -- enables operations to end of line
 
 local map = require("utils").map
 local opts = { silent = true }
 
 -- replace "t"
-map("n", "T", function()
-	require("hop").hint_char1()
-end, opts)
-map("o", "T", function()
-	require("hop").hint_char1()
-end, opts)
-map("v", "T", function()
+map({ "n", "o", "v" }, "T", function()
 	require("hop").hint_char1()
 end, opts)
 
 -- replace "f"
-map("n", "F", function()
-	require("hop").hint_char1({ inclusive_jump = true })
-end, opts)
-map("o", "F", function()
-	require("hop").hint_char1({ inclusive_jump = true })
-end, opts)
-map("v", "F", function()
+map({ "n", "o", "v" }, "F", function()
 	require("hop").hint_char1({ inclusive_jump = true })
 end, opts)
 
 -- word jump
-map("n", "W", function()
-	require("hop").hint_words()
-end, opts)
-map("o", "W", function()
-	require("hop").hint_words()
-end, opts)
-map("v", "W", function()
-	require("hop").hint_words()
+map({ "n", "o", "v" }, "<leader>l", function()
+	require("hop").hint_lines_skip_whitespace()
 end, opts)
 
 -- two character search
-map("n", "s", function()
-	require("hop").hint_char2()
-end, opts)
-map("o", "s", function()
-	require("hop").hint_char2()
-end, opts)
-map("v", "s", function()
+map({ "n", "o", "v" }, "s", function()
 	require("hop").hint_char2()
 end, opts)

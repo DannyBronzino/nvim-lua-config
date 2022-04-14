@@ -14,12 +14,10 @@ map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- move to beginning of wrapped line
-map("n", "H", "g^")
-map("x", "H", "g^")
+map({ "n", "x" }, "H", "g^")
 
 -- move to beginning of wrapped line
-map("n", "L", "g$")
-map("x", "L", "g$")
+map({ "n", "x" }, "L", "g$")
 
 map("n", "Y", "y$") -- yank until end of line
 
