@@ -37,7 +37,7 @@ require("packer").startup({
 			requires = {
 				{ -- highlights matching brackets
 					"andymass/vim-matchup",
-					setup = function()
+					setup = function() -- put the settings here for easy removal
 						vim.g.matchup_matchparen_deferred = 1 -- improve performance
 						vim.g.matchup_matchparen_timeout = 100 -- improve performance
 						vim.g.matchup_matchparen_insert_timeout = 30 -- improve performance
@@ -137,12 +137,11 @@ require("packer").startup({
 		use({ -- notification plugin
 			"rcarriga/nvim-notify",
 			config = [[require("config.notify")]],
-			event = "VimEnter",
 		})
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
 			"jdhao/better-escape.vim",
-			setup = function()
+			setup = function() -- settings here for easy removal
 				vim.g.better_escape_shortcut = "jj"
 				vim.g.better_escape_interval = 300
 			end,
@@ -236,7 +235,7 @@ require("packer").startup({
 		})
 	end,
 	config = {
-		max_jobs = 8,
+		max_jobs = 16,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		autoremove = true,
 	},
