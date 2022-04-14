@@ -1,4 +1,4 @@
-map = require("utils").map
+local map = require("utils").map
 
 -- Move to previous/next
 map("n", "<A-,>", ":BufferPrevious<CR>")

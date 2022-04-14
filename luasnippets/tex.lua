@@ -40,21 +40,21 @@ ls.add_snippets("tex", {
 	}, {
 		t("\\settowidth{\\versewidth}["),
 		d(2, function(args)
-			results = utils.rtrim(utils.ltrim(string.gsub(args[1][1], [[\\]], [[]]))) -- backslashes and trim whitespace
+			Results = utils.rtrim(utils.ltrim(string.gsub(args[1][1], [[\\]], [[]]))) -- backslashes and trim whitespace
 
 			for count = 2, #args[1] do
-				local old_line = results
+				local old_line = Results
 				local new_line = utils.rtrim(utils.ltrim(string.gsub(args[1][count], [[\\]], [[]])))
 
 				-- measures length and passes longer string
 				if #old_line < #new_line then
 					old_line = new_line
 				end
-				results = old_line -- the winner
+				Results = old_line -- the winner
 			end
 
 			-- snippet to return
-			local snip = sn(nil, { t(results) })
+			local snip = sn(nil, { t(Results) })
 			return snip
 		end, { 1 }),
 		t({

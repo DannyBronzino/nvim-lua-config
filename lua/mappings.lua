@@ -1,4 +1,4 @@
-map = require("utils").map
+local map = require("utils").map
 
 -- set leader to comma
 map("", "<Space>", "<Nop>")

@@ -3,7 +3,7 @@ require("hlslens").setup({
 	nearest_only = true,
 })
 
-map = require("utils").map
+local map = require("utils").map
 
 map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>")
 
