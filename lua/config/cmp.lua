@@ -80,7 +80,7 @@ cmp.setup({
 				nvim_lsp_signature_help = "[Help]",
 				nvim_lsp = "[LSP]",
 				rg = "[RG]",
-				digraphs = "[Digraphs]",
+				-- digraphs = "[Digraphs]",
 				path = "[Path]",
 				spell = "[Spell]",
 			},
