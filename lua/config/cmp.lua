@@ -38,11 +38,7 @@ cmp.setup({
 		end, { "i", "s" }),
 
 		["<Esc>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping(function(fallback)
-			if not cmp.confirm({ select = false }) then
-				require("pairs.enter").type()
-			end
-		end),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<c-p>"] = cmp.mapping.scroll_docs(-3),
 		["<c-n>"] = cmp.mapping.scroll_docs(3),
 	},
@@ -87,13 +83,6 @@ cmp.setup({
 		}),
 	},
 })
-cmp.event:on("confirm_done", function(event)
-	local item = event.entry:get_completion_item()
-	local parensDisabled = item.data and item.data.funcParensDisabled or false
-	if not parensDisabled and (item.kind == kind.Method or item.kind == kind.Function) then
-		require("pairs.bracket").type_left("(")
-	end
-end)
 
 cmp.setup.cmdline(":", { -- cmdline completion like wilder
 	sources = {

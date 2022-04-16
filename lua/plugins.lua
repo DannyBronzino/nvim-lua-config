@@ -79,15 +79,23 @@ require("packer").startup({
 						{ "f3fora/cmp-spell" }, -- completion for spell
 						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
 						-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
-						{
-							"ZhiyuanLck/smart-pairs", -- automatically creates pairs, like ""{}[]()''
-							config = [[require("config.smart-pairs")]],
-						},
 					},
 					config = [[require("config.cmp")]],
 				},
 			},
 			config = [[require("config.lspconfig")]],
+		})
+
+		use({ -- automatic pairs
+			"windwp/nvim-autopairs",
+			config = function()
+				require("nvim-autopairs").setup({})
+				-- If you want insert `(` after select function or method item
+				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+				local cmp = require("cmp")
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+			end,
+			after = "nvim-cmp",
 		})
 
 		use({ -- buffer jumping like EasyMotion or Sneak
