@@ -1,8 +1,7 @@
-vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/"
-local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
-
-local packer_repo = "https://github.com/wbthomason/packer.nvim"
-local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
+vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/" -- set directory for packages
+local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim" -- set packer installation directory
+local packer_repo = "https://github.com/wbthomason/packer.nvim" -- packer repo location
+local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir) -- installation command
 
 -- Auto-install packer in case it hasn't been installed.
 if vim.fn.glob(packer_install_dir) == "" then
@@ -32,7 +31,7 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
-		use({ -- syntax highlighting, folding, and more
+		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
 			"nvim-treesitter/nvim-treesitter",
 			requires = {
 				{ -- highlights matching brackets
@@ -74,8 +73,8 @@ require("packer").startup({
 						{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 						{ "hrsh7th/cmp-path" }, -- completion for path
 						{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
-						{ "hrsh7th/cmp-buffer", event = "BufRead" }, -- completion for buffer contents
-						{ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
+						{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
+						{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
 						{ "f3fora/cmp-spell" }, -- completion for spell
 						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
 						-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
@@ -84,6 +83,7 @@ require("packer").startup({
 				},
 			},
 			config = [[require("config.lspconfig")]],
+			event = "BufEnter",
 		})
 
 		use({ -- automatic pairs
@@ -96,6 +96,7 @@ require("packer").startup({
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 			end,
 			after = "nvim-cmp",
+			event = "InsertEnter",
 		})
 
 		use({ -- buffer jumping like EasyMotion or Sneak
@@ -181,6 +182,9 @@ require("packer").startup({
 		use({ -- git inside vim
 			{ -- git command
 				"tpope/vim-fugitive",
+				setup = function()
+					vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
+				end,
 				cmd = "Git",
 			},
 			{ -- git log
@@ -205,7 +209,7 @@ require("packer").startup({
 
 		use({ -- automatic window sizing
 			"dm1try/golden_size",
-			event = "VimEnter",
+			event = "WinEnter",
 			disable = true,
 		})
 
@@ -227,14 +231,10 @@ require("packer").startup({
 				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
 				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
 				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
+				{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
 			},
 			config = [[require("config.telescope")]],
 			event = "BufEnter", -- necessary for mapping to work?
-		})
-
-		use({ -- cheatsheet that displays using telescope, if available
-			"sudormrfbin/cheatsheet.nvim",
-			cmd = "Cheatsheet",
 		})
 
 		use({ -- better quickfix window
@@ -242,8 +242,6 @@ require("packer").startup({
 			config = [[require("config.bqf")]],
 			ft = "qf",
 		})
-
-		use({ "jdhao/whitespace.nvim", event = "BufEnter" }) -- show and trim trailing whitespaces
 
 		use({ -- creates missing directories when saving a new file
 			"jghauser/mkdir.nvim",

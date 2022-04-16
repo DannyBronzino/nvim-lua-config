@@ -21,8 +21,6 @@ map({ "n", "x" }, "L", "g$")
 
 map("n", "Y", "y$") -- yank until end of line
 
-map("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
-
 -- Paste non-linewise text above or below current cursor
 map("n", "<leader>p", "m`o<ESC>p``")
 map("n", "<leader>P", "m`O<ESC>p``")
