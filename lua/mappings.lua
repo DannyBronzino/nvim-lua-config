@@ -116,6 +116,9 @@ map("n", "<c-down>", ":<C-U>cnext<CR>zv")
 map("n", "<c-left>", ":<C-U>cfirst<CR>zv")
 map("n", "<c-right>", ":<C-U>clast<CR>zv")
 
+map("n", "zt", "zt2k2j") -- place line close to top
+map("i", "kj", "<esc>zt2k2ja") -- like zt, but works in insert
+
 vim.cmd([[
 " Break inserted text into smaller undo units.
 for ch in [',', '.', '!', '?', ';', ':']
