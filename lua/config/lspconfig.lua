@@ -8,7 +8,7 @@ local custom_attach = function(client, bufnr)
 	end
 
 	-- Mappings.
-  map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
+	map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
 	map("n", "gr", "<cmd>Lspsaga rename<cr>")
 	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
 	map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
@@ -47,8 +47,7 @@ local custom_attach = function(client, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lspconfig = require("lspconfig")
 
@@ -96,31 +95,31 @@ lspconfig.sumneko_lua.setup(luadev)
 -- table.insert(runtime_path, "lua/?/init.lua")
 
 -- require("lspconfig").sumneko_lua.setup({
-	-- on_attach = custom_attach,
-	-- capabilities = capabilities,
-	-- flags = {
-		-- debounce_text_changes = 500,
-	-- },
-	-- settings = {
-		-- Lua = {
-			-- runtime = {
-				-- -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				-- version = "LuaJIT",
-				-- -- Setup your lua path
-				-- path = runtime_path,
-			-- },
-			-- diagnostics = {
-				-- -- Get the language server to recognize the `vim` global
-				-- globals = { "vim" },
-			-- },
-			-- workspace = {
-				-- -- Make the server aware of Neovim runtime files
-				-- library = vim.api.nvim_get_runtime_file("", true),
-			-- },
-			-- -- Do not send telemetry data containing a randomized but unique identifier
-			-- telemetry = {
-				-- enable = false,
-			-- },
-		-- },
-	-- },
+-- on_attach = custom_attach,
+-- capabilities = capabilities,
+-- flags = {
+-- debounce_text_changes = 500,
+-- },
+-- settings = {
+-- Lua = {
+-- runtime = {
+-- -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+-- version = "LuaJIT",
+-- -- Setup your lua path
+-- path = runtime_path,
+-- },
+-- diagnostics = {
+-- -- Get the language server to recognize the `vim` global
+-- globals = { "vim" },
+-- },
+-- workspace = {
+-- -- Make the server aware of Neovim runtime files
+-- library = vim.api.nvim_get_runtime_file("", true),
+-- },
+-- -- Do not send telemetry data containing a randomized but unique identifier
+-- telemetry = {
+-- enable = false,
+-- },
+-- },
+-- },
 -- })

@@ -1,7 +1,6 @@
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-local kind = cmp.lsp.CompletionItemKind
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -14,7 +13,11 @@ cmp.setup({
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-	mapping = {
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -41,12 +44,10 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<c-p>"] = cmp.mapping.scroll_docs(-3),
 		["<c-n>"] = cmp.mapping.scroll_docs(3),
-	},
-	sources = {
+	}),
+	sources = cmp.config.sources({
 		{ name = "luasnip" }, -- for luasnip
 		{ name = "nvim_lsp" }, -- for nvim-lsp
-		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
-		{ name = "nvim_lua" }, -- for nvim lua function
 		{ -- ripgrep completion
 			name = "rg",
 			max_item_count = 3,
@@ -56,10 +57,11 @@ cmp.setup({
 				context_after = 3,
 			},
 		},
+		{ name = "latex_symbols" },
 		-- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
 		{ name = "spell" }, -- for spelling
-	},
+	}),
 	completion = {
 		keyword_length = 2,
 	},
@@ -76,6 +78,7 @@ cmp.setup({
 				nvim_lsp_signature_help = "[Help]",
 				nvim_lsp = "[LSP]",
 				rg = "[RG]",
+				latex_symbols = "[LaTeX]",
 				-- digraphs = "[Digraphs]",
 				path = "[Path]",
 				spell = "[Spell]",
@@ -84,24 +87,47 @@ cmp.setup({
 	},
 })
 
-cmp.setup.cmdline(":", { -- cmdline completion like wilder
-	sources = {
-		{ name = "cmdline" },
-		-- { name = "nvim_lua" },
+cmp.setup.filetype("lua", {
+	sources = cmp.config.sources({
+		{ name = "luasnip" }, -- for luasnip
+		{ name = "nvim_lua" }, -- for nvim lua function
+		{ name = "nvim_lsp" }, -- for nvim-lsp
+		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
+		{ -- ripgrep completion
+			name = "rg",
+			max_item_count = 3,
+			option = {
+				additional_arguments = "--smart-case",
+				context_before = 3,
+				context_after = 3,
+			},
+		},
+		-- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
+		{ name = "path" }, -- for path completion
+	}),
+})
+
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
 		{ name = "path" },
-	},
+	}, {
+		{ name = "cmdline" },
+	}),
 })
 
 cmp.setup.cmdline("/", { -- search completion
-	sources = {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
 		{ name = "buffer" },
-	},
+	}),
 })
 
 cmp.setup.cmdline("?", { -- reverse search completion
-	sources = {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
 		{ name = "buffer" },
-	},
+	}),
 })
 
 --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu

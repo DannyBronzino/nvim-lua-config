@@ -77,6 +77,7 @@ require("packer").startup({
 						{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
 						{ "f3fora/cmp-spell" }, -- completion for spell
 						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
+						{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
 						-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
 					},
 					config = [[require("config.cmp")]],
