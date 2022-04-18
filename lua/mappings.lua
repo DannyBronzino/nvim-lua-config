@@ -116,8 +116,24 @@ map("n", "<c-down>", ":<C-U>cnext<CR>zv")
 map("n", "<c-left>", ":<C-U>cfirst<CR>zv")
 map("n", "<c-right>", ":<C-U>clast<CR>zv")
 
-map("n", "zt", "zt2k2j") -- place line close to top
-map("i", "kj", "<esc>zt2k2ja") -- like zt, but works in insert
+-- place current line 2 down from the top
+map("n", "zt", function()
+	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
+		return ""
+	else
+		vim.api.nvim_feedkeys("zt2k2j", "n", true)
+	end
+end)
+
+-- like above, but works in insert
+map("i", "kj", function()
+	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
+		return ""
+	else
+		local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- <ESC>" will pass as the individual characters otherwise
+		vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
+	end
+end)
 
 vim.cmd([[
 " Break inserted text into smaller undo units.
