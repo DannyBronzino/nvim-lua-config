@@ -259,7 +259,6 @@ require("packer").startup({
 		})
 	end,
 	config = {
-		max_jobs = nil,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		autoremove = true,
 	},
