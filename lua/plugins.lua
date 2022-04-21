@@ -110,7 +110,7 @@ require("packer").startup({
 			requires = "tpope/vim-repeat",
 			config = function()
 				require("lightspeed").setup({
-					ignore_case = true
+					ignore_case = true,
 				})
 			end,
 			event = "BufEnter",
@@ -169,7 +169,7 @@ require("packer").startup({
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
 			"jdhao/better-escape.vim",
-			setup = function() -- settings here for easy removal
+			setup = function() -- need to set options FIRST
 				vim.g.better_escape_shortcut = "jj"
 				vim.g.better_escape_interval = 300
 			end,
@@ -208,7 +208,6 @@ require("packer").startup({
 		use({ -- show keybindings and registers and marks and more
 			"folke/which-key.nvim",
 			config = [[require("config.which-key")]],
-			event = "VimEnter",
 			disable = true,
 		})
 
@@ -260,7 +259,7 @@ require("packer").startup({
 		})
 	end,
 	config = {
-		max_jobs = 16,
+		max_jobs = nil,
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
 		autoremove = true,
 	},
