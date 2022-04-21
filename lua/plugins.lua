@@ -102,9 +102,13 @@ require("packer").startup({
 
 		use({ -- buffer jumping like EasyMotion or Sneak
 			"ggandor/lightspeed.nvim",
-			config = [[require("config.lightspeed")]],
+			requires = "tpope/vim-repeat",
+			config = function()
+				require("lightspeed").setup({
+					ignore_case = true,
+				})
+			end,
 			event = "BufEnter",
-			disable = true,
 		})
 
 		use({
@@ -112,6 +116,7 @@ require("packer").startup({
 			branch = "v1",
 			config = [[require("config.hop")]],
 			event = "BufEnter",
+			disable = true,
 		})
 
 		use({ -- Show match number and index for search
