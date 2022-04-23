@@ -14,13 +14,6 @@ local ai = require("luasnip.nodes.absolute_indexer")
 local utils = require("utils")
 
 ls.add_snippets("tex", {
-	s("trig", {
-		i(1),
-		f(function(args, snip, user_arg_1)
-			return args[1][1] .. user_arg_1
-		end, { 1 }, { user_args = { "Will be appended to text from i(0)" } }),
-		i(0),
-	}),
 	s({
 		trig = "autocite",
 		name = "Full Autocite",
