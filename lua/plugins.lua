@@ -57,39 +57,43 @@ require("packer").startup({
 		})
 
 		use({ -- interface for easy LSP configs
-			"neovim/nvim-lspconfig",
+			"williamboman/nvim-lsp-installer",
 			requires = {
 				{ -- easy LSP commands
 					"tami5/lspsaga.nvim",
 					config = [[require("config.lspsaga")]],
 				},
-				{ -- completion engine
-					"hrsh7th/nvim-cmp",
+				{
+					"neovim/nvim-lspconfig",
 					requires = {
-						{ "folke/lua-dev.nvim" }, -- adds much needed signature help and other niceties for neovim lua
-						{ -- snippets in lua, accepts vscode style and snipmate as well
-							"L3MON4D3/LuaSnip",
-							requires = "rafamadriz/friendly-snippets", -- vscode snippets
-							config = [[require("config.luasnip")]],
+						{ -- completion engine
+							"hrsh7th/nvim-cmp",
+							requires = {
+								{ "folke/lua-dev.nvim" }, -- adds much needed signature help and other niceties for neovim lua
+								{ -- snippets in lua, accepts vscode style and snipmate as well
+									"L3MON4D3/LuaSnip",
+									requires = "rafamadriz/friendly-snippets", -- vscode snippets
+									config = [[require("config.luasnip")]],
+								},
+								{ "onsails/lspkind-nvim" }, -- vscode pictograms
+								{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
+								{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
+								{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+								{ "hrsh7th/cmp-path" }, -- completion for path
+								{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
+								{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
+								{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
+								{ "f3fora/cmp-spell" }, -- completion for spell
+								{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
+								{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
+								-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
+							},
+							config = [[require("config.cmp")]],
 						},
-						{ "onsails/lspkind-nvim" }, -- vscode pictograms
-						{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
-						{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
-						{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-						{ "hrsh7th/cmp-path" }, -- completion for path
-						{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
-						{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
-						{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
-						{ "f3fora/cmp-spell" }, -- completion for spell
-						{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
-						{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
-						-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
 					},
-					config = [[require("config.cmp")]],
 				},
 			},
-			config = [[require("config.lspconfig")]],
-			event = "BufEnter",
+			config = [[require("config.lsp-installer")]],
 		})
 
 		use({ -- automatic pairs
