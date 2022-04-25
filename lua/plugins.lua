@@ -56,6 +56,33 @@ require("packer").startup({
 			run = ":TSUpdateSync",
 		})
 
+		use({ -- completion engine
+			"hrsh7th/nvim-cmp",
+			requires = {
+				{ "onsails/lspkind-nvim" }, -- vscode pictograms
+				{ -- snippets in lua, accepts vscode style and snipmate as well
+					"L3MON4D3/LuaSnip",
+					requires = "rafamadriz/friendly-snippets", -- vscode snippets
+					config = [[require("config.luasnip")]],
+				},
+				{
+					"saadparwaiz1/cmp_luasnip",
+					after = "LuaSnip",
+					event = "InsertEnter",
+				}, -- completion for LuaSnip
+				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-lspconfig", event = "InsertEnter" },
+				{ "hrsh7th/cmp-nvim-lua", ft = "lua", event = "InsertEnter" }, -- completion for neovim lua
+				{ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for path
+				{ "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
+				{ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }, -- completion for buffer contents
+				{ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
+				{ "f3fora/cmp-spell", event = "BufEnter" }, -- completion for spell
+				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }, -- easy to enter latex symbols
+				-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
+			},
+			config = [[require("config.cmp")]],
+		})
+
 		use({ -- interface for easy LSP configs
 			"williamboman/nvim-lsp-installer",
 			requires = {
@@ -65,35 +92,11 @@ require("packer").startup({
 				},
 				{
 					"neovim/nvim-lspconfig",
-					requires = {
-						{ -- completion engine
-							"hrsh7th/nvim-cmp",
-							requires = {
-								{ "folke/lua-dev.nvim" }, -- adds much needed signature help and other niceties for neovim lua
-								{ -- snippets in lua, accepts vscode style and snipmate as well
-									"L3MON4D3/LuaSnip",
-									requires = "rafamadriz/friendly-snippets", -- vscode snippets
-									config = [[require("config.luasnip")]],
-								},
-								{ "onsails/lspkind-nvim" }, -- vscode pictograms
-								{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
-								{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
-								{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-								{ "hrsh7th/cmp-path" }, -- completion for path
-								{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
-								{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
-								{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
-								{ "f3fora/cmp-spell" }, -- completion for spell
-								{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
-								{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
-								-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
-							},
-							config = [[require("config.cmp")]],
-						},
-					},
+					requires = "hrsh7th/cmp-nvim-lsp", -- completion for LSP
 				},
 			},
 			config = [[require("config.lsp-installer")]],
+			event = "VimEnter",
 		})
 
 		use({ -- automatic pairs
@@ -163,7 +166,6 @@ require("packer").startup({
 
 		use({ -- indent markers
 			"lukas-reineke/indent-blankline.nvim",
-			event = "BufEnter",
 		})
 
 		use({ -- notification plugin
@@ -191,7 +193,6 @@ require("packer").startup({
 			config = function()
 				require("gitsigns").setup()
 			end,
-			event = "BufEnter",
 		})
 
 		use({ -- git inside vim
@@ -248,7 +249,7 @@ require("packer").startup({
 				{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
 			},
 			config = [[require("config.telescope")]],
-			event = "BufEnter", -- necessary for mapping to work?
+			after = "LuaSnip",
 		})
 
 		use({ -- better quickfix window
