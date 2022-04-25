@@ -24,13 +24,6 @@ require("packer").startup({
 			opt = true,
 		})
 
-		use({ "wellle/targets.vim", event = "BufEnter" }) -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
-
-		use({ -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
-			"chaoren/vim-wordmotion",
-			event = "BufEnter",
-		})
-
 		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
 			"nvim-treesitter/nvim-treesitter",
 			requires = {
@@ -76,7 +69,7 @@ require("packer").startup({
 				{ "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
 				{ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }, -- completion for buffer contents
 				{ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
-				{ "f3fora/cmp-spell", event = "BufEnter" }, -- completion for spell
+				{ "f3fora/cmp-spell", event = "InsertEnter" }, -- completion for spell
 				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }, -- easy to enter latex symbols
 				-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
 			},
@@ -110,6 +103,13 @@ require("packer").startup({
 			end,
 			after = "nvim-cmp",
 			event = "InsertEnter",
+		})
+
+		use({ "wellle/targets.vim", event = "BufEnter" }) -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
+
+		use({ -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+			"chaoren/vim-wordmotion",
+			event = "BufEnter",
 		})
 
 		use({ -- buffer jumping like EasyMotion or Sneak
