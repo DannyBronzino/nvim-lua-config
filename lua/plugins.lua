@@ -61,7 +61,7 @@ require("packer").startup({
 				{
 					"saadparwaiz1/cmp_luasnip",
 					after = "LuaSnip",
-					event = "InsertEnter",
+					event = { "InsertEnter", "CmdLineEnter" },
 				}, -- completion for LuaSnip
 				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-lspconfig", event = "InsertEnter" },
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua", event = "InsertEnter" }, -- completion for neovim lua
