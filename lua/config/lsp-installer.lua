@@ -16,14 +16,10 @@ end
 
 local on_attach = function(client, bufnr)
 	-- easier syntax for mapping
-	local function map(mode, lhs, rhs, opts)
-		opts = opts or {}
-		opts.silent = true
-		opts.buffer = bufnr
-		vim.keymap.set(mode, lhs, rhs, opts)
-	end
+	local map = require("utils").map
 
 	-- Mappings.
+	map("n", "gi", "<cmd>Lspsaga implement<cr>")
 	map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
 	map("n", "gr", "<cmd>Lspsaga rename<cr>")
 	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
