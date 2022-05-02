@@ -111,4 +111,3 @@ vim.opt.fillchars:append({
 	vertright = "┣",
 	verthoriz = "╋",
 })
-
