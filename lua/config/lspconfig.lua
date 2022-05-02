@@ -19,17 +19,17 @@ local custom_attach = function(client, bufnr)
 	map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
 	map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
 	-- Set some key bindings conditional on server capabilities
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.document_formatting then
 		map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 	else
 		map("n", "<space>f", "<cmd>Neoformat<CR>")
 	end
-	if client.resolved_capabilities.document_range_formatting then
+	if client.server_capabilities.document_range_formatting then
 		map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
 	end
 
 	-- The blow command will highlight the current variable and its usages in the buffer.
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.cmd([[
       hi! link LspReferenceRead Visual
       hi! link LspReferenceText Visual
