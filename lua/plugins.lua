@@ -63,7 +63,6 @@ require("packer").startup({
 					after = "LuaSnip",
 					event = { "InsertEnter", "CmdLineEnter" },
 				}, -- completion for LuaSnip
-				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-lspconfig", event = "InsertEnter" },
 				{ "hrsh7th/cmp-nvim-lua", ft = "lua", event = "InsertEnter" }, -- completion for neovim lua
 				{ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for path
 				{ "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
@@ -83,13 +82,11 @@ require("packer").startup({
 					"tami5/lspsaga.nvim",
 					config = [[require("config.lspsaga")]],
 				},
-				{
-					"neovim/nvim-lspconfig",
-					requires = "hrsh7th/cmp-nvim-lsp", -- completion for LSP
-				},
+				{ "neovim/nvim-lspconfig" },
+				{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
+				{ "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
 			},
 			config = [[require("config.lsp-installer")]],
-			event = "VimEnter",
 		})
 
 		use({ -- automatic pairs
