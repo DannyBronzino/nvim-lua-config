@@ -15,6 +15,9 @@ local util = require("packer.util")
 
 require("packer").startup({
 	function(use)
+		-- NOTICE
+		-- impatient will throw an error on the the next startup if you clear the catch
+		-- run :PackerSync again and then restart to fix this
 		use({ -- it is recommened to put impatient.nvim before any other plugins
 			"lewis6991/impatient.nvim",
 		})
@@ -43,7 +46,7 @@ require("packer").startup({
 		use({ -- completion engine
 			"hrsh7th/nvim-cmp",
 			requires = "onsails/lspkind-nvim", -- vscode pictograms},
-			config = [[require("config.cmp")]],
+			config = [[require("config.cmp")]], -- contains luasnip setup as well
 			after = "LuaSnip",
 		})
 
@@ -146,15 +149,9 @@ require("packer").startup({
 			after = "kanagawa.nvim",
 		})
 
-		use({
-			"kyazdani42/nvim-tree.lua",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = [[require('config.nvim-tree')]],
-			disable = true,
-		})
-
 		use({ -- indent markers
 			"lukas-reineke/indent-blankline.nvim",
+			event = "BufEnter",
 		})
 
 		use({ -- notification plugin
@@ -192,12 +189,6 @@ require("packer").startup({
 				vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
 			end,
 			cmd = "Git",
-		})
-
-		use({ -- show keybindings and registers and marks and more
-			"folke/which-key.nvim",
-			config = [[require("config.which-key")]],
-			disable = true,
 		})
 
 		use({ -- Fixes scroll in middle of page (works poorly with soft wrapping)
