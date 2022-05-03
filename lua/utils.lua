@@ -27,15 +27,10 @@ function M.may_create_dir()
 end
 
 -- easier syntax for mapping
-function M.map(
-	mode, -- vim mode
-	lhs, -- left hand side
-	rhs, -- right hand side
-	opts -- options
-)
+function M.map(mode, left_hand_side, right_hand_side, opts)
 	opts = opts or {}
 	opts.silent = true
-	vim.keymap.set(mode, lhs, rhs, opts)
+	vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
 end
 
 -- trim whitespace from beginning of string
