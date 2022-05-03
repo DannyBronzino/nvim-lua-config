@@ -12,24 +12,10 @@ local function get_words()
 	return tostring(vim.fn.wordcount().words .. " words")
 end
 
--- ensures builtin colorschemes are NOT used
-local function get_colorscheme()
-	local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
-	if colorscheme == "dracula" then
-		return "dracula-nvim"
-	elseif colorscheme == "nightfly" then
-		return "nightfly"
-	elseif colorscheme == "tokyonight" then
-		return "tokyonight"
-	else
-		return "auto"
-	end
-end
-
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
-		theme = get_colorscheme(),
+		theme = "kanagawa",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 		disabled_filetypes = {},
@@ -69,6 +55,6 @@ require("lualine").setup({
 	extensions = {
 		"quickfix",
 		"fugitive",
-		"nvim-tree",
+		-- "nvim-tree",
 	},
 })
