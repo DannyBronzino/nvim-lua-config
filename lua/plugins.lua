@@ -27,32 +27,37 @@ require("packer").startup({
 		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
 			"nvim-treesitter/nvim-treesitter",
 			requires = {
-				{ -- highlights matching brackets
-					"andymass/vim-matchup",
-				},
+				{ "andymass/vim-matchup" }, -- matching parens
 			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
+			event = "BufEnter",
+		})
+
+		use({
+			"L3MON4D3/LuaSnip",
+			requires = "rafamadriz/friendly-snippets", -- vscode format snippets }) -- snippet engine
+			event = "BufEnter",
 		})
 
 		use({ -- completion engine
 			"hrsh7th/nvim-cmp",
-			requires = {
-				{ "onsails/lspkind-nvim" }, -- vscode pictograms
-				{ "rafamadriz/friendly-snippets" }, -- vscode format snippets
-				{ "L3MON4D3/LuaSnip" }, -- snippet engine
-				{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
-				{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
-				{ "hrsh7th/cmp-path" }, -- completion for path
-				{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
-				{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
-				{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
-				{ "f3fora/cmp-spell" }, -- completion for spell
-				{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
-				-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
-			},
+			requires = "onsails/lspkind-nvim", -- vscode pictograms},
 			config = [[require("config.cmp")]],
+			after = "LuaSnip",
 		})
+
+		use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
+		use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter" }) -- completion for neovim lua
+		use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
+		use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
+		use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
+
+		use({ "lukas-reineke/cmp-rg", event = "InsertEnter" }) -- completion for ripgrep
+
+		use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for spell
+		use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }) -- easy to enter latex symbols
+		use({ "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }) -- completion for digraphs
 
 		use({ -- interface for easy LSP configs
 			"williamboman/nvim-lsp-installer",
@@ -63,6 +68,7 @@ require("packer").startup({
 				{ "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
 			},
 			config = [[require("config.lsp-installer")]],
+			after = "nvim-cmp",
 		})
 
 		use({ -- automatic pairs
@@ -107,34 +113,37 @@ require("packer").startup({
 			"kevinhwang91/nvim-hlslens",
 			requires = "haya14busa/vim-asterisk", -- asterisk improved
 			config = [[require('config.hlslens')]],
-			event = "BufEnter",
-		})
-
-		use({ -- colorschemes
-			{
-				"rebelot/kanagawa.nvim",
-				config = [[require("config.kanagawa")]],
-			},
-			{
-				"folke/tokyonight.nvim",
-				setup = function()
-					vim.g.tokyonight_style = "night"
-					vim.g.tokyonight_transparent = true
-				end,
-				disable = true,
-			},
+			keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
+			event = "CmdLineEnter",
 		})
 
 		use({ -- tab bar and buffer switching
 			"romgrk/barbar.nvim",
 			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
 			config = [[require("config.barbar")]],
+			event = "BufEnter",
+		})
+
+		use({
+			"rebelot/kanagawa.nvim",
+			config = [[require("config.kanagawa")]],
+			event = "VimEnter",
+		})
+
+		use({
+			"folke/tokyonight.nvim",
+			setup = function()
+				vim.g.tokyonight_style = "night"
+				vim.g.tokyonight_transparent = true
+			end,
+			disable = true,
 		})
 
 		use({ -- status line
 			"nvim-lualine/lualine.nvim",
 			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
 			config = [[require("config.lualine")]],
+			after = "kanagawa.nvim",
 		})
 
 		use({
@@ -151,6 +160,7 @@ require("packer").startup({
 		use({ -- notification plugin
 			"rcarriga/nvim-notify",
 			config = [[require("config.notify")]],
+			event = "VimEnter",
 		})
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
@@ -173,6 +183,7 @@ require("packer").startup({
 			config = function()
 				require("gitsigns").setup()
 			end,
+			event = "BufEnter",
 		})
 
 		use({ -- git inside vim
