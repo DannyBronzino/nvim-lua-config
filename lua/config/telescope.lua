@@ -2,8 +2,8 @@
 require("telescope").load_extension("fzf") -- FZF integration
 require("telescope").load_extension("packer") -- packer extension
 require("telescope").load_extension("luasnip") -- luasnip extension
-
-require("telescope").load_extension("projects") -- project.nvim
+require("project_nvim").setup({})
+require("telescope").load_extension("projects")
 
 -- wrap telescope results
 vim.api.nvim_create_autocmd("User", {

@@ -39,23 +39,16 @@ require("packer").startup({
 			"hrsh7th/nvim-cmp",
 			requires = {
 				{ "onsails/lspkind-nvim" }, -- vscode pictograms
-				{ -- snippets in lua, accepts vscode style and snipmate as well
-					"L3MON4D3/LuaSnip",
-					requires = "rafamadriz/friendly-snippets", -- vscode snippets
-					config = [[require("config.luasnip")]],
-				},
-				{
-					"saadparwaiz1/cmp_luasnip",
-					after = "LuaSnip",
-					event = { "InsertEnter", "CmdLineEnter" },
-				}, -- completion for LuaSnip
-				{ "hrsh7th/cmp-nvim-lua", ft = "lua", event = "InsertEnter" }, -- completion for neovim lua
-				{ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for path
-				{ "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
-				{ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }, -- completion for buffer contents
-				{ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
-				{ "f3fora/cmp-spell", event = "InsertEnter" }, -- completion for spell
-				{ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }, -- easy to enter latex symbols
+				{ "rafamadriz/friendly-snippets" }, -- vscode format snippets
+				{ "L3MON4D3/LuaSnip" }, -- snippet engine
+				{ "saadparwaiz1/cmp_luasnip" }, -- completion for LuaSnip
+				{ "hrsh7th/cmp-nvim-lua" }, -- completion for neovim lua
+				{ "hrsh7th/cmp-path" }, -- completion for path
+				{ "lukas-reineke/cmp-rg" }, -- completion for ripgrep
+				{ "hrsh7th/cmp-buffer" }, -- completion for buffer contents
+				{ "hrsh7th/cmp-cmdline" }, -- completion for cmdline
+				{ "f3fora/cmp-spell" }, -- completion for spell
+				{ "kdheepak/cmp-latex-symbols" }, -- easy to enter latex symbols
 				-- { "dmitmel/cmp-digraphs" }, -- completion for digraphs
 			},
 			config = [[require("config.cmp")]],
@@ -64,11 +57,8 @@ require("packer").startup({
 		use({ -- interface for easy LSP configs
 			"williamboman/nvim-lsp-installer",
 			requires = {
-				{ -- easy LSP commands
-					"tami5/lspsaga.nvim",
-					config = [[require("config.lspsaga")]],
-				},
-				{ "neovim/nvim-lspconfig" },
+				{ "tami5/lspsaga.nvim" }, -- nice lsp actions
+				{ "neovim/nvim-lspconfig" }, -- easy lspconfig
 				{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
 				{ "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
 			},
@@ -84,7 +74,6 @@ require("packer").startup({
 				local cmp = require("cmp")
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 			end,
-			after = "nvim-cmp",
 			event = "InsertEnter",
 		})
 
@@ -132,6 +121,7 @@ require("packer").startup({
 					vim.g.tokyonight_style = "night"
 					vim.g.tokyonight_transparent = true
 				end,
+				disable = true,
 			},
 		})
 
@@ -186,18 +176,11 @@ require("packer").startup({
 		})
 
 		use({ -- git inside vim
-			{ -- git command
-				"tpope/vim-fugitive",
-				setup = function()
-					vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
-				end,
-				cmd = "Git",
-			},
-			{ -- git log
-				"rbong/vim-flog",
-				wants = "vim-fugitive",
-				cmd = "Flog",
-			},
+			"tpope/vim-fugitive",
+			setup = function()
+				vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
+			end,
+			cmd = "Git",
 		})
 
 		use({ -- show keybindings and registers and marks and more
@@ -236,12 +219,7 @@ require("packer").startup({
 				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
 				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
 				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
-				{
-					"ahmedkhalf/project.nvim",
-					config = function()
-						require("project_nvim").setup({})
-					end,
-				},
+				{ "ahmedkhalf/project.nvim" },
 				{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
 			},
 			config = [[require("config.telescope")]],
