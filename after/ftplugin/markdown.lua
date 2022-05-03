@@ -9,4 +9,8 @@ vim.opt_local.softtabstop = 4
 vim.opt_local.shiftwidth = 4
 vim.opt_local.expandtab = true
 
-vim.keymap.set("n", "<space>f", "<cmd>Neoformat<cr>", { silent = true }) -- format document
+vim.keymap.set("n", "<space>f", "<cmd>Neoformat<cr>") -- format document
+
+vim.keymap.set("n", "<leader>ft", function()
+	require("telescope.builtin").tags()
+end)
