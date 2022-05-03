@@ -1,3 +1,10 @@
+-- extensions
+require("telescope").load_extension("fzf") -- FZF integration
+require("telescope").load_extension("packer") -- packer extension
+require("telescope").load_extension("luasnip") -- luasnip extension
+
+require("telescope").load_extension("projects") -- project.nvim
+
 -- wrap telescope results
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopePreviewerLoaded",
@@ -23,11 +30,6 @@ local symbols = function(opts)
 end
 
 local actions = require("telescope.actions")
-
--- extensions
-require("telescope").load_extension("fzf") -- FZF integration
-require("telescope").load_extension("packer") -- packer extension
-require("telescope").load_extension("luasnip") -- luasnip extension
 
 require("telescope").setup({
 	defaults = {
@@ -68,7 +70,7 @@ require("telescope").setup({
 	},
 })
 
-local map = require("utils").map
+local map = require("utils").map -- easier mapping
 
 -- Add leader shortcuts
 map("n", "<leader><space>", function()
@@ -125,4 +127,8 @@ end)
 
 map("n", "<leader>fs", function()
 	require("telescope").extensions.luasnip.luasnip()
+end)
+
+map("n", "<leader>fp", function()
+	require("telescope").extensions.projects.projects()
 end)
