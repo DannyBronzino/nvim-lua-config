@@ -3,7 +3,6 @@ local lsp_installer = require("nvim-lsp-installer")
 -- Include the servers you want to have installed by default below
 local servers = {
 	"texlab",
-	"sumneko_lua",
 }
 
 for _, name in pairs(servers) do
@@ -16,7 +15,12 @@ end
 
 local on_attach = function(client, bufnr)
 	-- easier syntax for mapping
-	local map = require("utils").map
+	local map = function(mode, left_hand_side, right_hand_side, opts)
+		opts = opts or {}
+		opts.silent = true
+		opts.buffer = bufnr
+		vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
+	end
 
 	-- Mappings.
 	map("n", "gi", "<cmd>Lspsaga implement<cr>")
@@ -30,6 +34,10 @@ local on_attach = function(client, bufnr)
 	map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
 	map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
 	map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
+	map("n", "<leader>ft", function()
+		require("telescope.builtin").lsp_workspace_symbols()
+	end)
+
 	-- Set some key bindings conditional on server capabilities
 	if client.server_capabilities.document_formatting then
 		map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")

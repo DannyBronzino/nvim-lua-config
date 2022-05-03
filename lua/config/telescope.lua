@@ -21,14 +21,6 @@ local project_files = function(opts)
 	end
 end
 
-local symbols = function(opts)
-	if vim.lsp.client_is_stopped(1) then
-		require("telescope.builtin").tags(opts)
-	else
-		require("telescope.builtin").lsp_workspace_symbols(opts)
-	end
-end
-
 local actions = require("telescope.actions")
 
 require("telescope").setup({
@@ -87,10 +79,6 @@ end)
 
 map("n", "<leader>fh", function()
 	require("telescope.builtin").help_tags()
-end)
-
-map("n", "<leader>ft", function()
-	symbols()
 end)
 
 map("n", "<leader>fd", function()
