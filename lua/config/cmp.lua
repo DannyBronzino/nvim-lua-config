@@ -42,6 +42,7 @@ cmp.setup({
 
 		["<Esc>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<C-e>"] = cmp.mapping.abort(),
 		["<c-p>"] = cmp.mapping.scroll_docs(-3),
 		["<c-n>"] = cmp.mapping.scroll_docs(3),
 	}),
@@ -85,26 +86,6 @@ cmp.setup({
 			},
 		}),
 	},
-})
-
-cmp.setup.filetype("lua", {
-	sources = cmp.config.sources({
-		{ name = "luasnip" }, -- for luasnip
-		{ name = "nvim_lua" }, -- for nvim lua function
-		{ name = "nvim_lsp" }, -- for nvim-lsp
-		{ name = "nvim_lsp_signature_help" }, -- for lsp signature help
-		{ -- ripgrep completion
-			name = "rg",
-			max_item_count = 3,
-			option = {
-				additional_arguments = "--smart-case",
-				context_before = 3,
-				context_after = 3,
-			},
-		},
-		-- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
-		{ name = "path" }, -- for path completion
-	}),
 })
 
 cmp.setup.cmdline(":", {
