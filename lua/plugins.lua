@@ -161,6 +161,12 @@ require("packer").startup({
 			config = [[require("config.lualine")]],
 		})
 
+		use({
+			"kyazdani42/nvim-tree.lua",
+			requires = { "kyazdani42/nvim-web-devicons" },
+			config = [[require('config.nvim-tree')]],
+		})
+
 		use({ -- indent markers
 			"lukas-reineke/indent-blankline.nvim",
 		})
@@ -243,10 +249,16 @@ require("packer").startup({
 				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
 				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
 				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
+				{
+					"ahmedkhalf/project.nvim",
+					config = function()
+						require("project_nvim").setup({})
+					end,
+				},
 				{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
 			},
 			config = [[require("config.telescope")]],
-			after = "LuaSnip",
+			event = "BufEnter",
 		})
 
 		use({ -- better quickfix window
