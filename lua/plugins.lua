@@ -59,6 +59,11 @@ require("packer").startup({
 			ft = { "tex", "bib" },
 		})
 
+		use({
+			"ludovicchabant/vim-gutentags",
+			event = "BufEnter",
+		})
+
 		use({ -- completion engine
 			"hrsh7th/nvim-cmp",
 			requires = "onsails/lspkind-nvim", -- vscode pictograms,

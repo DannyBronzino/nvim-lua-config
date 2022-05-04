@@ -113,6 +113,10 @@ map("n", "'", function()
 	require("telescope.builtin").marks()
 end)
 
+map("n", "<leader>ft", function()
+	require("telescope.builtin").tags()
+end)
+
 map("n", "<leader>fs", function()
 	require("telescope").extensions.luasnip.luasnip()
 end)
