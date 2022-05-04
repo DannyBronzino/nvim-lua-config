@@ -30,6 +30,13 @@ require("packer").startup({
 			opt = true,
 		})
 
+		use({
+			"andymass/vim-matchup",
+			setup = [[require("config.matchup")]],
+			event = "BufEnter",
+			disable = true,
+		})
+
 		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
 			"nvim-treesitter/nvim-treesitter",
 			requires = {
@@ -38,6 +45,7 @@ require("packer").startup({
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
 			event = "BufEnter",
+			disable = true,
 		})
 
 		use({
@@ -46,15 +54,22 @@ require("packer").startup({
 			event = "BufEnter",
 		})
 
+		use({
+			"lervag/vimtex",
+			ft = { "tex", "bib" },
+		})
+
 		use({ -- completion engine
 			"hrsh7th/nvim-cmp",
-			requires = "onsails/lspkind-nvim", -- vscode pictograms},
+			requires = "onsails/lspkind-nvim", -- vscode pictograms,
 			config = [[require("config.cmp")]], -- contains luasnip setup as well
 			after = "LuaSnip",
 		})
 
+		use({ "hrsh7th/cmp-omni", event = "InsertEnter" }) -- omni completion for vimtex
+
 		use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
-		use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter" }) -- completion for neovim lua
+		use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter", disable = true }) -- completion for neovim lua
 		use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
 		use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
 		use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
@@ -75,17 +90,12 @@ require("packer").startup({
 			},
 			config = [[require("config.lsp-installer")]],
 			after = "nvim-cmp",
+			disable = true,
 		})
 
 		use({ -- automatic pairs
 			"windwp/nvim-autopairs",
-			config = function()
-				require("nvim-autopairs").setup({})
-				-- If you want insert `(` after select function or method item
-				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-				local cmp = require("cmp")
-				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
-			end,
+			config = [[require("config.autopairs")]],
 			event = "InsertEnter",
 		})
 
@@ -127,7 +137,7 @@ require("packer").startup({
 			"romgrk/barbar.nvim",
 			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
 			config = [[require("config.barbar")]],
-			event = "BufEnter",
+			event = "VimEnter",
 		})
 
 		use({
@@ -149,6 +159,7 @@ require("packer").startup({
 			"nvim-lualine/lualine.nvim",
 			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
 			config = [[require("config.lualine")]],
+			event = "VimEnter",
 			after = "kanagawa.nvim",
 		})
 
@@ -161,6 +172,7 @@ require("packer").startup({
 			"rcarriga/nvim-notify",
 			config = [[require("config.notify")]],
 			event = "VimEnter",
+			disable = true,
 		})
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
