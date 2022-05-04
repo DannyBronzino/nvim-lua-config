@@ -164,7 +164,6 @@ require("packer").startup({
 			"nvim-lualine/lualine.nvim",
 			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
 			config = [[require("config.lualine")]],
-			event = "VimEnter",
 			after = "kanagawa.nvim",
 		})
 
