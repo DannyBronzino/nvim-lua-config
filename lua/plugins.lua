@@ -20,6 +20,9 @@ require("packer").startup({
 		-- run :PackerSync again and then restart to fix this
 		use({ -- it is recommened to put impatient.nvim before any other plugins
 			"lewis6991/impatient.nvim",
+			config = function()
+				require("impatient") -- load impatient first
+			end,
 		})
 
 		use({ -- packer itself, can be optional
