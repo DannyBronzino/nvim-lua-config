@@ -1,0 +1,148 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/danny/.config/nvim/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+"z	lua/config/telescope.lua	/^map("n", "z=", function()$/;"	f
+0	my_snippets/bib.json	/^      "@article{${1:name},",$/;"	s	array:Article reference.body
+0	my_snippets/bib.json	/^      "@book{${1:name},",$/;"	s	array:Book reference.body
+0	my_snippets/bib.json	/^      "@inbook{${1:name},",$/;"	s	array:In Book reference.body
+0	my_snippets/bib.json	/^      "@online{${1:name},",$/;"	s	array:Online resource.body
+0	my_snippets/package.json	/^      {$/;"	o	array:contributes.snippets
+1	my_snippets/bib.json	/^      "\\tauthor={${2:author}},",$/;"	s	array:Article reference.body
+1	my_snippets/bib.json	/^      "\\tauthor={${2:author}},",$/;"	s	array:Book reference.body
+1	my_snippets/bib.json	/^      "\\tauthor={${2:author}},",$/;"	s	array:In Book reference.body
+1	my_snippets/bib.json	/^      "\\tauthor={${2:author}},",$/;"	s	array:Online resource.body
+10	my_snippets/bib.json	/^      "}",$/;"	s	array:In Book reference.body
+11	my_snippets/bib.json	/^      "$0"$/;"	s	array:In Book reference.body
+2	my_snippets/bib.json	/^      "\\ttitle={${3:title}},",$/;"	s	array:Article reference.body
+2	my_snippets/bib.json	/^      "\\ttitle={${3:title}},",$/;"	s	array:Book reference.body
+2	my_snippets/bib.json	/^      "\\ttitle={${3:title}},",$/;"	s	array:In Book reference.body
+2	my_snippets/bib.json	/^      "\\ttitle={${3:title}},",$/;"	s	array:Online resource.body
+3	my_snippets/bib.json	/^      "\\tdate={${4:date}},",$/;"	s	array:Online resource.body
+3	my_snippets/bib.json	/^      "\\tjournaltitle={${4:journal}},",$/;"	s	array:Article reference.body
+3	my_snippets/bib.json	/^      "\\tsubtitle={${4:subtitle}},",$/;"	s	array:Book reference.body
+3	my_snippets/bib.json	/^      "\\tsubtitle={${4:subtitle}},",$/;"	s	array:In Book reference.body
+4	my_snippets/bib.json	/^      "\\tbooktitle={${5:book}},",$/;"	s	array:In Book reference.body
+4	my_snippets/bib.json	/^      "\\turl={${5:url}}",$/;"	s	array:Online resource.body
+4	my_snippets/bib.json	/^      "\\tvolume={${5:NN}},",$/;"	s	array:Article reference.body
+4	my_snippets/bib.json	/^      "\\tyear={${5:YYYY}},",$/;"	s	array:Book reference.body
+5	my_snippets/bib.json	/^      "\\teditor={${6:editor}},",$/;"	s	array:In Book reference.body
+5	my_snippets/bib.json	/^      "\\tlocation={${6:somewhere}},",$/;"	s	array:Book reference.body
+5	my_snippets/bib.json	/^      "\\tnumber={${6:NN}},",$/;"	s	array:Article reference.body
+5	my_snippets/bib.json	/^      "}",$/;"	s	array:Online resource.body
+6	my_snippets/bib.json	/^      "$0"$/;"	s	array:Online resource.body
+6	my_snippets/bib.json	/^      "\\tpublisher={${7:publisher}},",$/;"	s	array:Book reference.body
+6	my_snippets/bib.json	/^      "\\tyear={${7:YYYY}},",$/;"	s	array:Article reference.body
+6	my_snippets/bib.json	/^      "\\tyear={${7:YYYY}},",$/;"	s	array:In Book reference.body
+7	my_snippets/bib.json	/^      "\\tlocation={${8:somewhere}},",$/;"	s	array:In Book reference.body
+7	my_snippets/bib.json	/^      "\\tpages={${8:NN}--${9:NN}}",$/;"	s	array:Article reference.body
+7	my_snippets/bib.json	/^      "\\tpages={${8:NN}--${9:NN}}",$/;"	s	array:Book reference.body
+8	my_snippets/bib.json	/^      "\\tpublisher={${9:publisher}},",$/;"	s	array:In Book reference.body
+8	my_snippets/bib.json	/^      "}",$/;"	s	array:Article reference.body
+8	my_snippets/bib.json	/^      "}",$/;"	s	array:Book reference.body
+9	my_snippets/bib.json	/^      "$0"$/;"	s	array:Article reference.body
+9	my_snippets/bib.json	/^      "$0"$/;"	s	array:Book reference.body
+9	my_snippets/bib.json	/^      "\\tpages={${10:NN}--${11:NN}}",$/;"	s	array:In Book reference.body
+<A-j>	vim/mappings.vim	/^xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>$/;"	m
+<A-k>	vim/mappings.vim	/^xnoremap <silent> <A-k> :<C-U>call utils#MoveSelection('up')<CR>$/;"	m
+<F9>	after/ftplugin/cpp.vim	/^nnoremap <silent> <buffer> <F9> :call <SID>compile_run_cpp()<CR>$/;"	m
+<c-down>	vim/mappings.vim	/^nnoremap <silent> <c-down> :<C-U>cnext<CR>zv$/;"	m
+<c-left>	vim/mappings.vim	/^nnoremap <silent> <c-left> :<C-U>cfirst<CR>zv$/;"	m
+<c-right>	vim/mappings.vim	/^nnoremap <silent> <c-right> :<C-U>clast<CR>zv$/;"	m
+<c-up>	vim/mappings.vim	/^nnoremap <silent> <c-up> :<C-U>cprevious<CR>zv$/;"	m
+<m-down>	vim/mappings.vim	/^nnoremap <silent> <m-down> :<C-U>lnext<CR>zv$/;"	m
+<m-left>	vim/mappings.vim	/^nnoremap <silent> <m-left> :<C-U>lfirst<CR>zv$/;"	m
+<m-right>	vim/mappings.vim	/^nnoremap <silent> <m-right> :<C-U>llast<CR>zv$/;"	m
+<m-up>	vim/mappings.vim	/^nnoremap <silent> <m-up> :<C-U>lprevious<CR>zv$/;"	m
+AdjustWindowHeight	after/ftplugin/qf.vim	/^function! AdjustWindowHeight(minheight, maxheight)$/;"	f
+Article reference	my_snippets/bib.json	/^  "Article reference": {$/;"	o
+Book reference	my_snippets/bib.json	/^  "Book reference": {$/;"	o
+In Book reference	my_snippets/bib.json	/^  "In Book reference": {$/;"	o
+Inspect	lua/utils.lua	/^function Inspect(item)$/;"	f
+M.executable	lua/utils.lua	/^function M.executable(name)$/;"	f
+M.ltrim	lua/utils.lua	/^function M.ltrim(s)$/;"	f
+M.map	lua/utils.lua	/^function M.map(mode, left_hand_side, right_hand_side, opts)$/;"	f
+M.may_create_dir	lua/utils.lua	/^function M.may_create_dir()$/;"	f
+M.rtrim	lua/utils.lua	/^function M.rtrim(s)$/;"	f
+Online resource	my_snippets/bib.json	/^  "Online resource": {$/;"	o
+["<S-Tab>"]	lua/config/cmp.lua	/^		["<S-Tab>"] = cmp.mapping(function(fallback)$/;"	f
+["<Tab>"]	lua/config/cmp.lua	/^		["<Tab>"] = cmp.mapping(function(fallback)$/;"	f
+["texlab"]	lua/config/lsp-installer.lua	/^	["texlab"] = function(opts)$/;"	f
+\\x	vim/mappings.vim	/^nnoremap<silent> \\x :<C-U>windo lclose <bar> cclose<CR>$/;"	m
+body	my_snippets/bib.json	/^    "body": [$/;"	a	object:Article reference
+body	my_snippets/bib.json	/^    "body": [$/;"	a	object:Book reference
+body	my_snippets/bib.json	/^    "body": [$/;"	a	object:In Book reference
+body	my_snippets/bib.json	/^    "body": [$/;"	a	object:Online resource
+buf_utils#GoToBuffer	autoload/buf_utils.vim	/^function! buf_utils#GoToBuffer(count, direction) abort$/;"	f
+callback	lua/autocmds.lua	/^	callback = function()$/;"	f
+callback	lua/config/telescope.lua	/^	callback = function()$/;"	f
+config	lua/plugins.lua	/^			config = function()$/;"	f
+contributes	my_snippets/package.json	/^  "contributes": {$/;"	o
+custom_attach	lua/config/lspconfig.lua	/^local custom_attach = function(client, bufnr)$/;"	f
+det_md	ftdetect/pdc.vim	/^augroup det_md$/;"	a
+det_tex	ftdetect/tex.vim	/^augroup det_tex$/;"	a
+engines	my_snippets/package.json	/^  "engines": {$/;"	o
+error_msg	lua/packer_compiled.lua	/^local no_errors, error_msg = pcall(function()$/;"	f
+expand	lua/config/cmp.lua	/^		expand = function(args)$/;"	f
+f	luasnippets/bib.lua	/^local f = ls.function_node$/;"	f
+f	luasnippets/tex.lua	/^local f = ls.function_node$/;"	f
+get_colorscheme	lua/autocmds.lua	/^		local function get_colorscheme()$/;"	f
+get_words	lua/config/lualine.lua	/^local function get_words()$/;"	f
+has_words_before	lua/config/cmp.lua	/^local has_words_before = function()$/;"	f
+insert_blank_line	lua/mappings.lua	/^local function insert_blank_line(above)$/;"	f
+language	my_snippets/package.json	/^        "language": "bib",$/;"	s	object:contributes.snippets.0
+map	lua/config/lsp-installer.lua	/^	local map = function(mode, left_hand_side, right_hand_side, opts)$/;"	f
+map	lua/config/lspconfig.lua	/^	local function map(mode, lhs, rhs, opts)$/;"	f
+move_line	lua/mappings.lua	/^local function move_line(up)$/;"	f
+name	my_snippets/package.json	/^  "name": "personal-snippets",$/;"	s
+nvim-lua-config	README.md	/^# nvim-lua-config$/;"	c
+on_attach	lua/config/lsp-installer.lua	/^local on_attach = function(client, bufnr)$/;"	f
+p	vim/mappings.vim	/^xnoremap p "_c<ESC>p$/;"	m
+path	my_snippets/package.json	/^        "path": ".\/bib.json"$/;"	s	object:contributes.snippets.0
+prefix	my_snippets/bib.json	/^    "prefix": "article"$/;"	s	object:Article reference
+prefix	my_snippets/bib.json	/^    "prefix": "book"$/;"	s	object:Book reference
+prefix	my_snippets/bib.json	/^    "prefix": "inb"$/;"	s	object:In Book reference
+prefix	my_snippets/bib.json	/^    "prefix": "online"$/;"	s	object:Online resource
+project_files	lua/config/telescope.lua	/^local project_files = function(opts)$/;"	f
+requires	lua/plugins.lua	/^			requires = "nvim-lua\/plenary.nvim", -- extra neovim functions$/;"	f
+resume_edit_position	vim/autocommands.vim	/^augroup resume_edit_position$/;"	a
+run	lua/plugins.lua	/^					run = function()$/;"	f
+s:GetBufNums	autoload/buf_utils.vim	/^function! s:GetBufNums() abort$/;"	f
+s:Single_quote	autoload/utils.vim	/^function! s:Single_quote(str) abort$/;"	f
+s:compile_run_cpp	after/ftplugin/cpp.vim	/^function! s:compile_run_cpp() abort$/;"	f
+s:create_term_buf	after/ftplugin/cpp.vim	/^function s:create_term_buf(_type, size) abort$/;"	f
+save_profiles	lua/packer_compiled.lua	/^local function save_profiles(threshold)$/;"	f
+setup	lua/plugins.lua	/^			setup = function() -- need to set options FIRST$/;"	f
+setup	lua/plugins.lua	/^			setup = function()$/;"	f
+snippets	my_snippets/package.json	/^    "snippets": [$/;"	a	object:contributes
+spell	lua/config/lualine.lua	/^local function spell()$/;"	f
+text_obj#Buffer	autoload/text_obj.vim	/^function! text_obj#Buffer() abort$/;"	f
+text_obj#MdCodeBlock	autoload/text_obj.vim	/^function! text_obj#MdCodeBlock(type) abort$/;"	f
+text_obj#URL	autoload/text_obj.vim	/^function! text_obj#URL() abort$/;"	f
+time	lua/packer_compiled.lua	/^    time = function(chunk, start) end$/;"	f
+time	lua/packer_compiled.lua	/^    time = function(chunk, start)$/;"	f
+try_loadstring	lua/packer_compiled.lua	/^local function try_loadstring(s, component, name)$/;"	f
+utils#Cabbrev	autoload/utils.vim	/^function! utils#Cabbrev(key, value) abort$/;"	f
+utils#CaptureCommandOutput	autoload/utils.vim	/^function! utils#CaptureCommandOutput(command) abort$/;"	f
+utils#GetGitBranch	autoload/utils.vim	/^function! utils#GetGitBranch()$/;"	f
+utils#Get_titlestr	autoload/utils.vim	/^function! utils#Get_titlestr() abort$/;"	f
+utils#HasColorscheme	autoload/utils.vim	/^function! utils#HasColorscheme(name) abort$/;"	f
+utils#Inside_git_repo	autoload/utils.vim	/^function! utils#Inside_git_repo() abort$/;"	f
+utils#MoveSelection	autoload/utils.vim	/^function! utils#MoveSelection(direction) abort$/;"	f
+utils#MultiEdit	autoload/utils.vim	/^function! utils#MultiEdit(patterns) abort$/;"	f
+utils#RandElement	autoload/utils.vim	/^function! utils#RandElement(seq) abort$/;"	f
+utils#RandInt	autoload/utils.vim	/^function! utils#RandInt(Low, High) abort$/;"	f
+utils#SwitchLine	autoload/utils.vim	/^function! utils#SwitchLine(src_line_idx, direction) abort$/;"	f
+utils#SynGroup	autoload/utils.vim	/^function! utils#SynGroup() abort$/;"	f
+utils#ToggleCursorCol	autoload/utils.vim	/^function! utils#ToggleCursorCol() abort$/;"	f
+utils#VimFolds	autoload/utils.vim	/^function! utils#VimFolds(lnum) abort$/;"	f
+utils#add_pack	autoload/utils.vim	/^function! utils#add_pack(name) abort$/;"	f
+utils#iso_time	autoload/utils.vim	/^function! utils#iso_time(timestamp) abort$/;"	f
+vscode	my_snippets/package.json	/^    "vscode": "^1.11.0"$/;"	s	object:engines

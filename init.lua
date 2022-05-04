@@ -5,3 +5,5 @@ require("globals")
 require("mappings")
 require("autocmds")
 require("utils")
+
+vim.cmd([[colorscheme kanagawa]])

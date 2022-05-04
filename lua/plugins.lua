@@ -145,10 +145,15 @@ require("packer").startup({
 			event = "VimEnter",
 		})
 
+		use({ -- status line
+			"nvim-lualine/lualine.nvim",
+			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
+			config = [[require("config.lualine")]],
+		})
+
 		use({
 			"rebelot/kanagawa.nvim",
 			config = [[require("config.kanagawa")]],
-			event = "VimEnter",
 		})
 
 		use({
@@ -158,13 +163,6 @@ require("packer").startup({
 				vim.g.tokyonight_transparent = true
 			end,
 			disable = true,
-		})
-
-		use({ -- status line
-			"nvim-lualine/lualine.nvim",
-			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
-			config = [[require("config.lualine")]],
-			after = "kanagawa.nvim",
 		})
 
 		use({ -- indent markers

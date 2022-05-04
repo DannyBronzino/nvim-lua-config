@@ -22,5 +22,3 @@ require("kanagawa").setup({
 	diminactive = true,
 	globalstatus = true,
 })
-
-vim.cmd([[colorscheme kanagawa]])
