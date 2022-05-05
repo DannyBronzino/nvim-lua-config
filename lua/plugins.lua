@@ -30,13 +30,6 @@ require("packer").startup({
 			opt = true,
 		})
 
-		use({
-			"andymass/vim-matchup",
-			setup = [[require("config.matchup")]],
-			event = "BufEnter",
-			disable = true,
-		})
-
 		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
 			"nvim-treesitter/nvim-treesitter",
 			requires = {
@@ -45,7 +38,6 @@ require("packer").startup({
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
 			event = "BufEnter",
-			disable = true,
 		})
 
 		use({
@@ -95,7 +87,6 @@ require("packer").startup({
 			},
 			config = [[require("config.lsp-installer")]],
 			after = "nvim-cmp",
-			disable = true,
 		})
 
 		use({ -- automatic pairs
@@ -174,7 +165,6 @@ require("packer").startup({
 			"rcarriga/nvim-notify",
 			config = [[require("config.notify")]],
 			event = "VimEnter",
-			disable = true,
 		})
 
 		use({ -- escape insert quickly with "jj" or "jk" or whatever
