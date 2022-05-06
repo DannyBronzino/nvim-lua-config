@@ -37,22 +37,11 @@ require("packer").startup({
 			},
 			config = [[require("config.treesitter")]],
 			run = ":TSUpdateSync",
-			event = "BufEnter",
 		})
 
 		use({
 			"L3MON4D3/LuaSnip",
 			requires = "rafamadriz/friendly-snippets", -- vscode format snippets }) -- snippet engine
-			event = "BufEnter",
-		})
-
-		use({
-			"lervag/vimtex",
-			ft = { "tex", "bib" },
-		})
-
-		use({
-			"ludovicchabant/vim-gutentags",
 			event = "BufEnter",
 		})
 

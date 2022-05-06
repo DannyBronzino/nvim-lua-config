@@ -43,4 +43,10 @@ function M.rtrim(s)
 	return s:match("^(.*%S)%s*$")
 end
 
+-- join all non-blank lines
+-- because I can never remember
+function M.join_lines()
+	vim.cmd([[%!fmt -999]])
+end
+
 return M

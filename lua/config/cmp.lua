@@ -55,7 +55,8 @@ cmp.setup({
 		["<c-n>"] = cmp.mapping.scroll_docs(3),
 	}),
 	sources = cmp.config.sources({
-		{ name = "omni" },
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" }, -- for luasnip
 		-- { name = "nvim_lsp" }, -- for nvim-lsp
 		{ -- ripgrep completion
@@ -67,13 +68,13 @@ cmp.setup({
 				context_after = 3,
 			},
 		},
-		{ name = "latex_symbols" },
+		{ name = "latex_symbols", max_item_count = 3 },
 		-- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
 		{ name = "path" }, -- for path completion
 		{ name = "spell" }, -- for spelling
 	}),
 	completion = {
-		keyword_length = 1,
+		keyword_length = 2,
 	},
 	experimental = {
 		ghost_text = true, -- adds ghost text that completes the word in buffer
@@ -83,11 +84,11 @@ cmp.setup({
 			-- with_text = true,
 			mode = "symbol",
 			menu = {
+				nvim_lsp = "[LSP]",
+				nvim_lsp_signature_help = "[Help]",
 				luasnip = "[Snip]",
 				-- nvim_lua = "[Lua]",
-				-- nvim_lsp_signature_help = "[Help]",
 				-- nvim_lsp = "[LSP]",
-				omni = "[Omni]",
 				rg = "[RG]",
 				latex_symbols = "[LaTeX]",
 				-- digraphs = "[Digraphs]",
