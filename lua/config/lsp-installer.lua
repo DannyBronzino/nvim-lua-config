@@ -13,7 +13,7 @@ require("lspsaga").setup({
 		enable = true,
 		sign = true,
 		sign_priority = 40,
-		virtual_text = false,
+		virtual_text = true,
 	},
 	finder_definition_icon = "  ",
 	finder_reference_icon = "  ",
@@ -41,20 +41,9 @@ require("lspsaga").setup({
 	diagnostic_prefix_format = "%d. ",
 })
 
-local lsp_installer = require("nvim-lsp-installer")
+require("nvim-lsp-installer").setup()
 
--- Include the servers you want to have installed by default below
-local servers = {
-	"texlab",
-}
-
-for _, name in pairs(servers) do
-	local server_is_found, server = lsp_installer.get_server(name)
-	if server_is_found and not server:is_installed() then
-		print("Installing " .. name)
-		server:install()
-	end
-end
+local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
 	-- easier syntax for mapping
@@ -105,6 +94,22 @@ local on_attach = function(client, bufnr)
     ]])
 	end
 
+	vim.api.nvim_create_autocmd("CursorHold", {
+		buffer = bufnr,
+		callback = function()
+			local opts = {
+				focusable = false,
+				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+				border = "single",
+				source = "always", -- show source in diagnostic popup window
+				prefix = " ",
+			}
+			vim.diagnostic.open_float(nil, opts)
+		end,
+	})
+
+	vim.diagnostic.config({ virtual_text = false }) -- turn off virtual annotation
+
 	local msg = string.format("Language server %s started!", client.name)
 	vim.notify(msg, "info", { title = "Nvim-config" })
 end
@@ -112,31 +117,19 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local enhance_server_opts = {
-	-- Provide settings that should only apply to the "eslint" server
-	["texlab"] = function(opts)
-		opts.settings = {
-			texlab = {
-				chktex = {
-					onEdit = true,
-					onOpenAndSave = true,
-				},
+-- set up texlab for latex
+lspconfig.texlab.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 500,
+	},
+	settings = {
+		texlab = {
+			chktex = {
+				onEdit = true,
+				onOpenAndSave = true,
 			},
-		}
-	end,
-}
-
-lsp_installer.on_server_ready(function(server)
-	-- Specify the default options which we'll use to setup all servers
-	local opts = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	}
-
-	if enhance_server_opts[server.name] then
-		-- Enhance the default opts with the server-specific ones
-		enhance_server_opts[server.name](opts)
-	end
-
-	server:setup(opts)
-end)
+		},
+	},
+})
