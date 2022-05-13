@@ -25,13 +25,22 @@ local actions = require("telescope.actions")
 
 require("telescope").setup({
 	defaults = {
-		layout_strategy = "bottom_pane",
-		sorting_strategy = "ascending",
+		layout_strategy = "vertical",
 		layout_config = {
-			preview_cutoff = 60,
-			prompt_position = "top",
-			height = 0.75,
+			vertical = {
+				prompt_position = "top",
+				preview_cutoff = 1,
+				preview_height = 0.45,
+				height = 0.99,
+				width = 0.99,
+			},
+			bottom_pane = {
+				preview_cutoff = 1,
+				prompt_position = "top",
+				height = 0.75,
+			},
 		},
+		sorting_strategy = "ascending",
 		dynamic_preview_title = true,
 		mappings = {
 			i = {
@@ -62,45 +71,43 @@ require("telescope").setup({
 	},
 })
 
- -- easier mapping
-
 -- Add leader shortcuts
 Map("n", "<leader><space>", function()
 	require("telescope.builtin").buffers()
 end)
 
 Map("n", "<leader>ff", function()
-	project_files()
+	project_files({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fb", function()
-	require("telescope.builtin").current_buffer_fuzzy_find()
+	require("telescope.builtin").current_buffer_fuzzy_find({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fh", function()
-	require("telescope.builtin").help_tags()
+	require("telescope.builtin").help_tags({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fd", function()
-	require("telescope.builtin").grep_string()
+	require("telescope.builtin").grep_string({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fg", function()
-	require("telescope.builtin").live_grep()
+	require("telescope.builtin").live_grep({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>?", function()
-	require("telescope.builtin").oldfiles()
+	require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", '"', "<Nop>") -- disable for next map
 Map("n", '"', function()
-	require("telescope.builtin").registers()
+	require("telescope.builtin").registers({ layout_strategy = "bottom_pane" })
 end)
 
 Map("i", "<c-r>", "<Nop>") -- disable for next map
 Map("i", "<c-r>", function()
-	require("telescope.builtin").registers()
+	require("telescope.builtin").registers({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "z=", "<Nop>") -- disable for next map
@@ -110,17 +117,17 @@ end)
 
 Map("n", "'", "<Nop>") -- disable for next map
 Map("n", "'", function()
-	require("telescope.builtin").marks()
+	require("telescope.builtin").marks({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>ft", function()
-	require("telescope.builtin").tags()
+	require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fs", function()
-	require("telescope").extensions.luasnip.luasnip()
+	require("telescope").extensions.luasnip.luasnip({ layout_strategy = "bottom_pane" })
 end)
 
 Map("n", "<leader>fp", function()
-	require("telescope").extensions.projects.projects()
+	require("telescope").extensions.projects.projects({ layout_strategy = "bottom_pane" })
 end)
