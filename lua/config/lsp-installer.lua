@@ -55,29 +55,29 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- Mappings.
-	map("n", "gi", "<cmd>Lspsaga implement<cr>")
-	map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
-	map("n", "gr", "<cmd>Lspsaga rename<cr>")
-	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
-	map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
-	map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
-	map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
-	map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
-	map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
-	map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
-	map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
-	map("n", "<leader>ft", function()
+	Map("n", "gi", "<cmd>Lspsaga implement<cr>")
+	Map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
+	Map("n", "gr", "<cmd>Lspsaga rename<cr>")
+	Map("n", "gx", "<cmd>Lspsaga code_action<cr>")
+	Map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
+	Map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+	Map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
+	Map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
+	Map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
+	Map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
+	Map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
+	Map("n", "<leader>ft", function()
 		require("telescope.builtin").lsp_workspace_symbols()
 	end)
 
 	-- Set some key bindings conditional on server capabilities
 	if client.server_capabilities.document_formatting then
-		map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+		Map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 	else
-		map("n", "<space>f", "<cmd>Neoformat<CR>")
+		Map("n", "<space>f", "<cmd>Neoformat<CR>")
 	end
 	if client.server_capabilities.document_range_formatting then
-		map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
+		Map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
 	end
 
 	-- The blow command will highlight the current variable and its usages in the buffer.

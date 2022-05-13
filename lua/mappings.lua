@@ -1,52 +1,52 @@
-local map = require("utils").map
+
 
 -- set leader to comma
-map("", "<Space>", "<Nop>")
+Map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 -- use control to turn backspace into delete
 -- use <C-v> followed by <c-BS> to enter keycode
-map("i", "", "<Del>")
+Map("i", "", "<Del>")
 
 -- allows for use of "j" and "k" over wrapped lines
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+Map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+Map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- move to beginning of wrapped line
-map({ "n", "x" }, "H", "g^")
+Map({ "n", "x" }, "H", "g^")
 
 -- move to beginning of wrapped line
-map({ "n", "x" }, "L", "g$")
+Map({ "n", "x" }, "L", "g$")
 
-map("n", "Y", "y$") -- yank until end of line
+Map("n", "Y", "y$") -- yank until end of line
 
 -- Paste non-linewise text above or below current cursor
-map("n", "<leader>p", "m`o<ESC>p``")
-map("n", "<leader>P", "m`O<ESC>p``")
+Map("n", "<leader>p", "m`o<ESC>p``")
+Map("n", "<leader>P", "m`O<ESC>p``")
 
 -- use <tab> to indent or dedent in normal mode
-map("n", "<tab>", ">>")
-map("n", "<s-tab>", "<<")
+Map("n", "<tab>", ">>")
+Map("n", "<s-tab>", "<<")
 
 -- continuous visual shifting (does not exit Visual mode), `gv` means to reselect previous visual area
-map("x", "<tab>", ">gv")
-map("x", "<s-tab>", "<gv")
+Map("x", "<tab>", ">gv")
+Map("x", "<s-tab>", "<gv")
 
 -- Decrease indent level in insert mode with shift+tab
-map("i", "<s-tab>", "<ESC><<i")
+Map("i", "<s-tab>", "<ESC><<i")
 
 -- do not move cursor when joining lines
-map("n", "J", "mzJ`z")
+Map("n", "J", "mzJ`z")
 
 -- change text without putting it in the register
-map("n", "c", '"_c')
-map("n", "C", '"_C')
-map("n", "cc", '"_cc')
-map("x", "c", '"_c')
+Map("n", "c", '"_c')
+Map("n", "C", '"_C')
+Map("n", "cc", '"_cc')
+Map("x", "c", '"_c')
 
 -- copy entire buffer
-map("n", "<leader>y", ":<C-U>%y<CR>")
+Map("n", "<leader>y", ":<C-U>%y<CR>")
 
 -- insert blank line above or below
 local function insert_blank_line(above)
@@ -64,11 +64,11 @@ local function insert_blank_line(above)
 end
 
 -- insert blank line above or below
-map("n", "<space>O", function()
+Map("n", "<space>O", function()
 	insert_blank_line(true)
 end)
 
-map("n", "<space>o", function()
+Map("n", "<space>o", function()
 	insert_blank_line(false)
 end)
 
@@ -99,25 +99,25 @@ local function move_line(up)
 end
 
 -- move line up and down
-map("n", "<m-j>", function()
+Map("n", "<m-j>", function()
 	move_line(false)
 end)
-map("n", "<m-k>", function()
+Map("n", "<m-k>", function()
 	move_line(true)
 end)
 
 -- Navigation in the location and quickfix list
-map("n", "<m-up>", ":<C-U>lprevious<CR>zv")
-map("n", "<m-down>", ":<C-U>lnext<CR>zv")
-map("n", "<m-left>", ":<C-U>lfirst<CR>zv")
-map("n", "<m-right>", ":<C-U>llast<CR>zv")
-map("n", "<c-up>", ":<C-U>cprevious<CR>zv")
-map("n", "<c-down>", ":<C-U>cnext<CR>zv")
-map("n", "<c-left>", ":<C-U>cfirst<CR>zv")
-map("n", "<c-right>", ":<C-U>clast<CR>zv")
+Map("n", "<m-up>", ":<C-U>lprevious<CR>zv")
+Map("n", "<m-down>", ":<C-U>lnext<CR>zv")
+Map("n", "<m-left>", ":<C-U>lfirst<CR>zv")
+Map("n", "<m-right>", ":<C-U>llast<CR>zv")
+Map("n", "<c-up>", ":<C-U>cprevious<CR>zv")
+Map("n", "<c-down>", ":<C-U>cnext<CR>zv")
+Map("n", "<c-left>", ":<C-U>cfirst<CR>zv")
+Map("n", "<c-right>", ":<C-U>clast<CR>zv")
 
 -- place current line 2 down from the top
-map("n", "zt", function()
+Map("n", "zt", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
 	else
@@ -126,7 +126,7 @@ map("n", "zt", function()
 end)
 
 -- like above, but works in insert
-map("i", "kj", function()
+Map("i", "kj", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
 	else

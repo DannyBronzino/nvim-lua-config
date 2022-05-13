@@ -4,6 +4,12 @@ function Inspect(item)
 	print(vim.inspect(item))
 end
 
+-- easier syntax for mapping
+function Map(mode, left_hand_side, right_hand_side, opts)
+	opts = opts or { silent = true }
+	vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
+end
+
 local M = {}
 
 -- does the executable exist?
@@ -24,13 +30,6 @@ function M.may_create_dir()
 	if res == 0 then
 		vim.fn.mkdir(parent_dir, "p")
 	end
-end
-
--- easier syntax for mapping
-function M.map(mode, left_hand_side, right_hand_side, opts)
-	opts = opts or {}
-	opts.silent = true
-	vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
 end
 
 -- trim whitespace from beginning of string

@@ -3,17 +3,35 @@ require("hlslens").setup({
 	nearest_only = true,
 })
 
-local map = require("utils").map
+local activate_hlslens = function(direction)
+	local cmd = string.format("normal! %s%szzzv", vim.v.count1, direction)
+	local status, msg = pcall(vim.fn.execute, cmd)
+	-- 13 is the index where real error message starts
+	msg = msg:sub(13)
 
-map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>")
+	if not status then
+		vim.api.nvim_echo({ { msg, "ErrorMsg" } }, false, {})
+		return
+	end
+	require("hlslens").start()
+end
 
-map(
-	"n",
-	"N",
-	"<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
-	{ remap = true }
-)
+Map("n", "n", "", {
+	noremap = true,
+	silent = true,
+	callback = function()
+		activate_hlslens("n")
+	end,
+})
 
-map("n", "*", "<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>", { remap = true })
+Map("n", "N", "", {
+	noremap = true,
+	silent = true,
+	callback = function()
+		activate_hlslens("N")
+	end,
+})
 
-map("n", "#", "<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>", { remap = true })
+Map("n", "*", "<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>")
+
+Map("n", "#", "<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>")

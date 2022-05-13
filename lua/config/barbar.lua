@@ -1,27 +1,27 @@
-local map = require("utils").map
+
 
 -- Move to previous/next
-map("n", "<A-,>", ":BufferPrevious<CR>")
-map("n", "<A-.>", ":BufferNext<CR>")
+Map("n", "<A-,>", ":BufferPrevious<CR>")
+Map("n", "<A-.>", ":BufferNext<CR>")
 -- nostalgic combo
-map("n", "gB", ":BufferPrevious<CR>")
-map("n", "gb", ":BufferNext<CR>")
+Map("n", "gB", ":BufferPrevious<CR>")
+Map("n", "gb", ":BufferNext<CR>")
 -- Re-order to previous/next
-map("n", "<A-<>", ":BufferMovePrevious<CR>")
-map("n", "<A->>", " :BufferMoveNext<CR>")
+Map("n", "<A-<>", ":BufferMovePrevious<CR>")
+Map("n", "<A->>", " :BufferMoveNext<CR>")
 -- Goto buffer in position...
-map("n", "<A-1>", ":BufferGoto 1<CR>")
-map("n", "<A-2>", ":BufferGoto 2<CR>")
-map("n", "<A-3>", ":BufferGoto 3<CR>")
-map("n", "<A-4>", ":BufferGoto 4<CR>")
-map("n", "<A-5>", ":BufferGoto 5<CR>")
-map("n", "<A-6>", ":BufferGoto 6<CR>")
-map("n", "<A-7>", ":BufferGoto 7<CR>")
-map("n", "<A-8>", ":BufferGoto 8<CR>")
-map("n", "<A-9>", ":BufferGoto 9<CR>")
-map("n", "<A-0>", ":BufferLast<CR>")
+Map("n", "<A-1>", ":BufferGoto 1<CR>")
+Map("n", "<A-2>", ":BufferGoto 2<CR>")
+Map("n", "<A-3>", ":BufferGoto 3<CR>")
+Map("n", "<A-4>", ":BufferGoto 4<CR>")
+Map("n", "<A-5>", ":BufferGoto 5<CR>")
+Map("n", "<A-6>", ":BufferGoto 6<CR>")
+Map("n", "<A-7>", ":BufferGoto 7<CR>")
+Map("n", "<A-8>", ":BufferGoto 8<CR>")
+Map("n", "<A-9>", ":BufferGoto 9<CR>")
+Map("n", "<A-0>", ":BufferLast<CR>")
 -- Close buffer
-map("n", "<A-c>", ":BufferClose<CR>")
+Map("n", "<A-c>", ":BufferClose<CR>")
 -- Wipeout buffer
 --                 :BufferWipeout<CR>
 -- Close commands
@@ -29,11 +29,11 @@ map("n", "<A-c>", ":BufferClose<CR>")
 --                 :BufferCloseBuffersLeft<CR>
 --                 :BufferCloseBuffersRight<CR>
 -- Magic buffer-picking mode
-map("n", "<C-p>", ":BufferPick<CR>")
+Map("n", "<C-p>", ":BufferPick<CR>")
 -- Sort automatically by...
-map("n", "<Space>bb", ":BufferOrderByBufferNumber<CR>")
-map("n", "<Space>bd", ":BufferOrderByDirectory<CR>")
-map("n", "<Space>bl", ":BufferOrderByLanguage<CR>")
+Map("n", "<Space>bb", ":BufferOrderByBufferNumber<CR>")
+Map("n", "<Space>bd", ":BufferOrderByDirectory<CR>")
+Map("n", "<Space>bl", ":BufferOrderByLanguage<CR>")
 
 -- Set barbar's options
 vim.g.bufferline = {

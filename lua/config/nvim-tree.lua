@@ -113,8 +113,6 @@ require("nvim-tree").setup({
 	},
 })
 
-local map = require("utils").map
-
-map("n", "<space>s", function()
+Map("n", "<space>s", function()
 	return require("nvim-tree").toggle(false, true)
 end)

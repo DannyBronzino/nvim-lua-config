@@ -4,6 +4,4 @@ vim.opt_local.shiftwidth = 2
 vim.opt_local.expandtab = true
 vim.opt_local.foldlevel = 99
 
-local map = require("utils").map
-
-map("n", "<F5>", "<cmd>luafile %<cr>") -- source file
+Map("n", "<F5>", "<cmd>luafile %<cr>") -- source file

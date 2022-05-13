@@ -62,65 +62,65 @@ require("telescope").setup({
 	},
 })
 
-local map = require("utils").map -- easier mapping
+ -- easier mapping
 
 -- Add leader shortcuts
-map("n", "<leader><space>", function()
+Map("n", "<leader><space>", function()
 	require("telescope.builtin").buffers()
 end)
 
-map("n", "<leader>ff", function()
+Map("n", "<leader>ff", function()
 	project_files()
 end)
 
-map("n", "<leader>fb", function()
+Map("n", "<leader>fb", function()
 	require("telescope.builtin").current_buffer_fuzzy_find()
 end)
 
-map("n", "<leader>fh", function()
+Map("n", "<leader>fh", function()
 	require("telescope.builtin").help_tags()
 end)
 
-map("n", "<leader>fd", function()
+Map("n", "<leader>fd", function()
 	require("telescope.builtin").grep_string()
 end)
 
-map("n", "<leader>fg", function()
+Map("n", "<leader>fg", function()
 	require("telescope.builtin").live_grep()
 end)
 
-map("n", "<leader>?", function()
+Map("n", "<leader>?", function()
 	require("telescope.builtin").oldfiles()
 end)
 
-map("n", '"', "<Nop>") -- disable for next map
-map("n", '"', function()
+Map("n", '"', "<Nop>") -- disable for next map
+Map("n", '"', function()
 	require("telescope.builtin").registers()
 end)
 
-map("i", "<c-r>", "<Nop>") -- disable for next map
-map("i", "<c-r>", function()
+Map("i", "<c-r>", "<Nop>") -- disable for next map
+Map("i", "<c-r>", function()
 	require("telescope.builtin").registers()
 end)
 
-map("n", "z=", "<Nop>") -- disable for next map
-map("n", "z=", function()
+Map("n", "z=", "<Nop>") -- disable for next map
+Map("n", "z=", function()
 	require("telescope.builtin").spell_suggest()
 end)
 
-map("n", "'", "<Nop>") -- disable for next map
-map("n", "'", function()
+Map("n", "'", "<Nop>") -- disable for next map
+Map("n", "'", function()
 	require("telescope.builtin").marks()
 end)
 
-map("n", "<leader>ft", function()
+Map("n", "<leader>ft", function()
 	require("telescope.builtin").tags()
 end)
 
-map("n", "<leader>fs", function()
+Map("n", "<leader>fs", function()
 	require("telescope").extensions.luasnip.luasnip()
 end)
 
-map("n", "<leader>fp", function()
+Map("n", "<leader>fp", function()
 	require("telescope").extensions.projects.projects()
 end)

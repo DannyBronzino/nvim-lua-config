@@ -124,8 +124,6 @@ function! utils#MoveSelection(direction) abort
     normal! gv
   endif
 endfunction
-
-
 function! utils#Get_titlestr() abort
   let l:title_str = ''
   if g:is_linux
