@@ -48,14 +48,6 @@ require("nvim-lsp-installer").setup({
 local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
-	-- easier syntax for mapping
-	local map = function(mode, left_hand_side, right_hand_side, opts)
-		opts = opts or {}
-		opts.silent = true
-		opts.buffer = bufnr
-		vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
-	end
-
 	-- Mappings.
 	Map("n", "gi", "<cmd>Lspsaga implement<cr>")
 	Map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
@@ -69,7 +61,11 @@ local on_attach = function(client, bufnr)
 	Map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
 	Map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
 	Map("n", "<leader>ft", function()
-		require("telescope.builtin").lsp_workspace_symbols()
+		require("telescope.builtin").lsp_document_symbols(require("telescope.themes").get_dropdown({
+			layout_config = {
+				width = 0.5,
+			},
+		}))
 	end)
 
 	-- Set some key bindings conditional on server capabilities
