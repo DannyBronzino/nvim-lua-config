@@ -39,6 +39,9 @@ require("telescope").setup({
 				prompt_position = "top",
 				height = 0.75,
 			},
+			center = {
+				width = 0.5,
+			},
 		},
 		sorting_strategy = "ascending",
 		dynamic_preview_title = true,
@@ -120,6 +123,8 @@ Map("n", "'", function()
 	require("telescope.builtin").marks({ layout_strategy = "bottom_pane" })
 end)
 
+-- NOTICE!!!
+-- there is an alternative for LSP enabled projects in the lsp-installer file that overides this!!!
 Map("n", "<leader>ft", function()
 	require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
 end)
