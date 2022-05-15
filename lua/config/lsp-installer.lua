@@ -49,6 +49,7 @@ local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
 	-- Mappings.
+	Map("n", "gd", "<cmd>Lspsaga lsp_finder<cr>")
 	Map("n", "gi", "<cmd>Lspsaga implement<cr>")
 	Map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
 	Map("n", "gr", "<cmd>Lspsaga rename<cr>")
