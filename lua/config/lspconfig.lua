@@ -55,14 +55,28 @@ local lspconfig = require("lspconfig")
 lspconfig.texlab.setup({
 	on_attach = custom_attach,
 	capabilities = capabilities,
-	flags = {
-		debounce_text_changes = 500,
-	},
 	settings = {
 		texlab = {
+			auxDirectory = ".",
+			bibtexFormatter = "texlab",
+			build = {
+				args = { "%f", "-lualatex" },
+				executable = "latexmk",
+				forwardSearchAfter = false,
+				onSave = false,
+			},
 			chktex = {
 				onEdit = true,
 				onOpenAndSave = true,
+			},
+			diagnosticsDelay = 500,
+			formatterLineLength = 80,
+			forwardSearch = {
+				args = {},
+			},
+			latexFormatter = "latexindent",
+			latexindent = {
+				modifyLineBreaks = false,
 			},
 		},
 	},
