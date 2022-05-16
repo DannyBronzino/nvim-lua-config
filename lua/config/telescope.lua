@@ -71,7 +71,20 @@ require("telescope").setup({
 				width = 0.33,
 			},
 		},
+		find_files = {
+			theme = "dropdown",
+			layout_config = {
+				width = 0.5,
+			},
+		},
+		projects = {
+			theme = "dropdown",
+			layout_config = {
+				width = 0.5,
+			},
+		},
 	},
+	extensions = {},
 })
 
 -- Add leader shortcuts
@@ -80,7 +93,7 @@ Map("n", "<leader><space>", function()
 end)
 
 Map("n", "<leader>ff", function()
-	project_files({ layout_strategy = "bottom_pane" })
+	project_files(require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } }))
 end)
 
 Map("n", "<leader>fb", function()
@@ -134,5 +147,7 @@ Map("n", "<leader>fs", function()
 end)
 
 Map("n", "<leader>fp", function()
-	require("telescope").extensions.projects.projects({ layout_strategy = "bottom_pane" })
+	require("telescope").extensions.projects.projects(
+		require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
+	)
 end)
