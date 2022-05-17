@@ -8,6 +8,8 @@ au("Colorscheme", {
 			local colorscheme = vim.api.nvim_exec([[colorscheme]], true)
 			if colorscheme == "dracula" then
 				return "dracula-nvim"
+			elseif colorscheme == "kanagawa" then
+				return "kanagawa"
 			elseif colorscheme == "nightfly" then
 				return "nightfly"
 			elseif colorscheme == "tokyonight" then
@@ -23,6 +25,7 @@ au("Colorscheme", {
 				theme = get_colorscheme(),
 			},
 		})
+		vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
 	end,
 })
 
