@@ -127,31 +127,12 @@ require("packer").startup({
 
 		use({ -- status line
 			"nvim-lualine/lualine.nvim",
-			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
-			config = [[require("config.lualine")]],
-		})
-
-		use({
-			"rebelot/kanagawa.nvim",
-			config = [[require("config.kanagawa")]],
-		})
-
-		use({
-			"folke/tokyonight.nvim",
-			setup = function()
-				vim.g.tokyonight_style = "night"
-				vim.g.tokyonight_transparent = true
-			end,
-		})
-
-		use({
-			"sainnhe/sonokai",
-			setup = function()
-				vim.g.sonokai_style = "andromeda"
-				vim.g.sonokai_enable_italic = 1
-				vim.g.sonokai_transparent_background = 1
-				vim.g.sonokai_better_performance = 1
-			end,
+			requires = {
+				"kyazdani42/nvim-web-devicons", -- icons, duh
+				"sainnhe/sonokai",
+				"rebelot/kanagawa.nvim",
+			},
+			config = [[require("config.ui")]],
 		})
 
 		use({ -- indent markers
