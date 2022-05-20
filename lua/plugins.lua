@@ -71,6 +71,7 @@ require("packer").startup({
 			requires = {
 				{ "tami5/lspsaga.nvim" }, -- nice lsp actions
 				{ "neovim/nvim-lspconfig" }, -- easy lspconfig
+				{ "lukas-reineke/lsp-format.nvim" },
 				{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
 				{ "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
 			},

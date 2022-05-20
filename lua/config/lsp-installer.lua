@@ -45,6 +45,8 @@ require("nvim-lsp-installer").setup({
 	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 })
 
+require("lsp-format").setup()
+
 local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
@@ -68,6 +70,10 @@ local on_attach = function(client, bufnr)
 			},
 		}))
 	end)
+
+	-- for lsp-format
+	require("lsp-format").on_attach(client)
+	vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
 
 	-- Set some key bindings conditional on server capabilities
 	if client.server_capabilities.document_formatting then
