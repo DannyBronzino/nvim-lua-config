@@ -1,5 +1,3 @@
-
-
 -- set leader to comma
 Map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
@@ -7,7 +5,7 @@ vim.g.maplocalleader = ","
 
 -- use control to turn backspace into delete
 -- use <C-v> followed by <c-BS> to enter keycode
-Map("i", "", "<Del>")
+Map("i", "<c-BS>", "<Del>")
 
 -- allows for use of "j" and "k" over wrapped lines
 Map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
