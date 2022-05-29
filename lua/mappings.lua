@@ -5,11 +5,12 @@ vim.g.maplocalleader = ","
 
 -- use control to turn backspace into delete
 -- use <C-v> followed by <c-BS> to enter keycode
-Map("i", "<c-BS>", "<Del>")
+Map("i", "<c-BS>", "<Del>", { desc = "use control-backspace to delete" })
 
 -- allows for use of "j" and "k" over wrapped lines
-Map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
-Map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+Map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "allows for use of 'k' over wrapped lines" })
+
+Map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "allows for use of 'j' over wrapped lines" })
 
 -- move to beginning of wrapped line
 Map({ "n", "x" }, "H", "g^")
