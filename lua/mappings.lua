@@ -48,60 +48,60 @@ Map("n", "<leader>y", ":<C-U>%y<CR>")
 
 -- insert blank line above or below
 local function insert_blank_line(above)
-	local current_row = vim.api.nvim_win_get_cursor(0)[1]
-	local current_column = vim.api.nvim_win_get_cursor(0)[2]
-	local offset = 0
+  local current_row = vim.api.nvim_win_get_cursor(0)[1]
+  local current_column = vim.api.nvim_win_get_cursor(0)[2]
+  local offset = 0
 
-	if above == true then
-		current_row = current_row - 1
-		offset = 2 -- to make sure cursor stays on original line after insertion
-	end
+  if above == true then
+    current_row = current_row - 1
+    offset = 2 -- to make sure cursor stays on original line after insertion
+  end
 
-	vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { "" })
-	vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
+  vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { "" })
+  vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
 end
 
 -- insert blank line above or below
 Map("n", "<space>O", function()
-	insert_blank_line(true)
+  insert_blank_line(true)
 end)
 
 Map("n", "<space>o", function()
-	insert_blank_line(false)
+  insert_blank_line(false)
 end)
 
 -- move current line up or down
 local function move_line(up)
-	local current_line = vim.api.nvim_get_current_line()
-	local current_row = vim.api.nvim_win_get_cursor(0)[1]
-	local current_column = vim.api.nvim_win_get_cursor(0)[2]
+  local current_line = vim.api.nvim_get_current_line()
+  local current_row = vim.api.nvim_win_get_cursor(0)[1]
+  local current_column = vim.api.nvim_win_get_cursor(0)[2]
 
-	if up == true then
-		current_row = current_row - 2
-	elseif current_row == vim.api.nvim_buf_line_count(0) then -- prevents error if you are on the last line
-		do
-			return
-		end
-	end
+  if up == true then
+    current_row = current_row - 2
+  elseif current_row == vim.api.nvim_buf_line_count(0) then -- prevents error if you are on the last line
+    do
+      return
+    end
+  end
 
-	-- prevents crash if you try to move the top line up
-	if current_row < 0 then
-		do
-			return
-		end
-	end
+  -- prevents crash if you try to move the top line up
+  if current_row < 0 then
+    do
+      return
+    end
+  end
 
-	vim.api.nvim_del_current_line()
-	vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { current_line })
-	vim.api.nvim_win_set_cursor(0, { current_row + 1, current_column })
+  vim.api.nvim_del_current_line()
+  vim.api.nvim_buf_set_lines(0, current_row, current_row, false, { current_line })
+  vim.api.nvim_win_set_cursor(0, { current_row + 1, current_column })
 end
 
 -- move line up and down
 Map("n", "<m-j>", function()
-	move_line(false)
+  move_line(false)
 end)
 Map("n", "<m-k>", function()
-	move_line(true)
+  move_line(true)
 end)
 
 -- Navigation in the location and quickfix list
@@ -116,21 +116,21 @@ Map("n", "<c-right>", ":<C-U>clast<CR>zv")
 
 -- place current line 2 down from the top
 Map("n", "zt", function()
-	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
-		return ""
-	else
-		vim.api.nvim_feedkeys("zt2k2j", "n", true)
-	end
+  if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
+    return ""
+  else
+    vim.api.nvim_feedkeys("zt2k2j", "n", true)
+  end
 end)
 
 -- like above, but works in insert
 Map("i", "kj", function()
-	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
-		return ""
-	else
-		local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- <ESC>" will pass as the individual characters otherwise
-		vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
-	end
+  if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
+    return ""
+  else
+    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- <ESC>" will pass as the individual characters otherwise
+    vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
+  end
 end)
 
 vim.cmd([[

@@ -12,5 +12,5 @@ vim.opt_local.expandtab = true
 vim.keymap.set("n", "<space>f", "<cmd>Neoformat<cr>") -- format document
 
 vim.keymap.set("n", "<leader>ft", function()
-	require("telescope.builtin").tags()
+  require("telescope.builtin").tags()
 end)

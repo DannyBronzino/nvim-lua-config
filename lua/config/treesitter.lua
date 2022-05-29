@@ -11,20 +11,20 @@ vim.g.matchup_delim_noskips = 0 -- whether to enable matching inside comment or 
 vim.g.matchup_matchparen_offscreen = { method = "popup" } -- show offscreen match pair in popup window
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "latex", "bibtex", "markdown" },
-	sync_install = true,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = {},
-	},
-	indent = {
-		enable = true,
-	},
-	matchup = {
-		enable = true, -- mandatory, false will disable the whole extension
-		disable = {}, -- optional, list of language that will be disabled
-		-- [options]
-	},
+  ensure_installed = { "latex", "bibtex", "markdown" },
+  sync_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = {},
+  },
+  indent = {
+    enable = true,
+  },
+  matchup = {
+    enable = true, -- mandatory, false will disable the whole extension
+    disable = {}, -- optional, list of language that will be disabled
+    -- [options]
+  },
 })
 
 -- let treesitter handle folding

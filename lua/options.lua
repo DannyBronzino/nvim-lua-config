@@ -59,10 +59,10 @@ vim.opt.showmode = false -- show mode
 vim.opt.list = true -- show listchars
 
 vim.opt.listchars = { -- characters for visually representing blank space
-	extends = "❯",
-	nbsp = "␣",
-	precedes = "❮",
-	tab = "▸ ",
+  extends = "❯",
+  nbsp = "␣",
+  precedes = "❮",
+  tab = "▸ ",
 }
 
 vim.opt.shortmess:append({ c = true }) -- eliminate incsearch messages
@@ -77,8 +77,8 @@ vim.opt.joinspaces = false -- use only one space after ".", "?", "!" on join
 
 -- use rg for grepping, if available
 if utils.executable("rg") then
-	vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
-	vim.opt.grepformat = { "%f:%l:%c:%m" }
+  vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+  vim.opt.grepformat = { "%f:%l:%c:%m" }
 end
 
 -- remove characters from possible filenames
@@ -103,11 +103,11 @@ vim.opt.laststatus = 3 -- sets status line to appear on only the last window
 
 -- window separators
 vim.opt.fillchars:append({
-	horiz = "━",
-	horizup = "┻",
-	horizdown = "┳",
-	vert = "┃",
-	vertleft = "┨",
-	vertright = "┣",
-	verthoriz = "╋",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┨",
+  vertright = "┣",
+  verthoriz = "╋",
 })
