@@ -76,14 +76,18 @@ local on_attach = function(client, bufnr)
 	vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
 
 	-- Set some key bindings conditional on server capabilities
-	if client.server_capabilities.document_formatting then
-		Map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-	else
-		Map("n", "<space>f", "<cmd>Neoformat<CR>")
-	end
-	if client.server_capabilities.document_range_formatting then
-		Map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
-	end
+	-- if client.server_capabilities.document_formatting then
+		-- Map("n", "<space>f", function()
+			-- vim.lsp.buf.format()
+		-- end)
+	-- else
+		-- Map("n", "<space>f", "<cmd>Neoformat<CR>")
+	-- end
+	-- if client.server_capabilities.document_range_formatting then
+		-- Map("x", "<space>f", function()
+			-- vim.lsp.buf.range_formatting()
+		-- end)
+	-- end
 
 	-- The blow command will highlight the current variable and its usages in the buffer.
 	if client.server_capabilities.document_highlight then
@@ -142,3 +146,41 @@ lspconfig.texlab.setup({
 		},
 	},
 })
+
+-- Sumneko Lua LSP
+require 'lspconfig'.sumneko_lua.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = 'LuaJIT',
+			},
+			format = {
+				enable = true,
+				-- Put format options here
+				-- NOTE: the value should be STRING!!
+				defaultConfig = {
+					indent_style = "space",
+					indent_size = "2",
+				},
+			},
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { 'vim' },
+				neededFileStatus = {
+					["codestyle-check"] = "Any",
+				},
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+}
