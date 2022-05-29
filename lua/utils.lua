@@ -1,5 +1,6 @@
--- inspect something
 -- Taken from https://github.com/jamestthompson3/vimConfig/blob/eeef4a8eeb5a24938f8a0969a35f69c78643fb66/lua/tt/nvim_utils.lua#L106
+---inspect something
+---@param item function|table
 function Inspect(item)
   print(vim.inspect(item))
 end
@@ -8,10 +9,13 @@ end
 ---@param mode string|table nvim mode for mapping
 ---@param left_hand_side string
 ---@param right_hand_side string
----@param opts table|nil leave empty to set silent - true
+---@param opts table|nil if silent = false not present then it will be set to true
 ---@return function vim.keymap.set
 function Map(mode, left_hand_side, right_hand_side, opts)
   opts = opts or { silent = true }
+  if opts.silent == nil then
+    opts.silent = true
+  end
   return vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
 end
 
