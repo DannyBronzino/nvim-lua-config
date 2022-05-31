@@ -11,7 +11,7 @@ vim.g.matchup_delim_noskips = 0 -- whether to enable matching inside comment or 
 vim.g.matchup_matchparen_offscreen = { method = "popup" } -- show offscreen match pair in popup window
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "latex", "bibtex", "markdown" },
+  ensure_installed = { "latex", "bibtex", "markdown", "lua" },
   sync_install = true,
   highlight = {
     enable = true,
