@@ -73,7 +73,7 @@ local on_attach = function(client, bufnr)
 
   -- for lsp-format
   require("lsp-format").on_attach(client)
-  vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
+  vim.cmd([[cabbrev wq execute "Format sync" <bar> wq]])
 
   -- Set some key bindings conditional on server capabilities
   -- if client.server_capabilities.document_formatting then
@@ -148,14 +148,14 @@ lspconfig.texlab.setup({
 })
 
 -- Sumneko Lua LSP
-require 'lspconfig'.sumneko_lua.setup {
+require("lspconfig").sumneko_lua.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
+        version = "LuaJIT",
       },
       format = {
         enable = true,
@@ -168,7 +168,7 @@ require 'lspconfig'.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = { "vim" },
         neededFileStatus = {
           ["codestyle-check"] = "Any",
         },
@@ -183,4 +183,4 @@ require 'lspconfig'.sumneko_lua.setup {
       },
     },
   },
-}
+})
