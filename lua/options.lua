@@ -85,8 +85,8 @@ end
 vim.opt.isfname:remove("=")
 vim.opt.isfname:remove(",")
 
-vim.opt.numberwidth = 4 -- width of number gutter
-vim.opt.signcolumn = "auto:1" -- display signs before number column
+vim.opt.numberwidth = 5 -- width of number gutter
+vim.opt.signcolumn = "auto:2-9" -- display signs before number column
 
 vim.opt.mouse:append({ a = true }) -- enable mouse for all modes
 
