@@ -34,6 +34,7 @@ require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       requires = {
         { "andymass/vim-matchup" }, -- matching parens
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
       },
       config = [[require("config.treesitter")]],
       run = ":TSUpdateSync",
