@@ -79,6 +79,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 	group = highlight_group,
 	pattern = "*",
+	desc = "Highlights on yank",
 })
 
 -- resume edit position
