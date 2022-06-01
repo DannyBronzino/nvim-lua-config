@@ -10,6 +10,8 @@ vim.g.matchup_matchparen_insert_timeout = 30 -- improve performance
 vim.g.matchup_delim_noskips = 0 -- whether to enable matching inside comment or string
 vim.g.matchup_matchparen_offscreen = { method = "popup" } -- show offscreen match pair in popup window
 
+require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer") -- override bibtex query
+
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "latex", "bibtex", "markdown", "lua" },
   sync_install = true,
