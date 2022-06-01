@@ -14,7 +14,7 @@ vim.opt.undofile = true -- save undo history
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.updatetime = 100 -- decrease update time
+vim.opt.updatetime = 1000 -- decrease update time
 
 -- Highlight on yank
 vim.cmd([[
