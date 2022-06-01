@@ -16,14 +16,6 @@ vim.opt.smartcase = true
 
 vim.opt.updatetime = 1000 -- decrease update time
 
--- Highlight on yank
-vim.cmd([[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]])
-
 -- where to open new splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
