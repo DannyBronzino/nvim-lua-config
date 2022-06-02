@@ -231,6 +231,11 @@ require("packer").startup({
 			"luukvbaal/nnn.nvim",
 			config = [[require("config.nnn")]],
 		})
+
+		use({
+			"folke/which-key.nvim",
+			config = [[require("config.which-key")]],
+		})
 	end,
 	config = {
 		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
