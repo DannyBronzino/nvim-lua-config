@@ -90,64 +90,42 @@ require("telescope").setup({
 -- Add leader shortcuts
 Map("n", "<leader><space>", function()
 	require("telescope.builtin").buffers()
-end)
+end, { desc = "display open buffers with telescope" })
 
 Map("n", "<leader>ff", function()
 	project_files(require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } }))
-end)
+end, { desc = "display project files with telescope" })
 
 Map("n", "<leader>fb", function()
 	require("telescope.builtin").current_buffer_fuzzy_find({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "current buffer fuzzy find with telescope" })
 
 Map("n", "<leader>fh", function()
 	require("telescope.builtin").help_tags({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "display help topics with telescope" })
 
 Map("n", "<leader>fd", function()
 	require("telescope.builtin").grep_string({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "grep string with telescope" })
 
 Map("n", "<leader>fg", function()
 	require("telescope.builtin").live_grep({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "live grep with telescope" })
 
 Map("n", "<leader>?", function()
 	require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "display recent files with telescope" })
 
--- Map("n", '"', "<Nop>") -- disable for next map
--- Map("n", '"', function()
--- require("telescope.builtin").registers({ layout_strategy = "bottom_pane" })
--- end)
-
--- Map("i", "<c-r>", "<Nop>") -- disable for next map
--- Map("i", "<c-r>", function()
--- require("telescope.builtin").registers({ layout_strategy = "bottom_pane" })
--- end)
-
--- Map("n", "z=", "<Nop>") -- disable for next map
--- Map("n", "z=", function()
--- require("telescope.builtin").spell_suggest()
--- end)
-
--- Map("n", "'", "<Nop>") -- disable for next map
--- Map("n", "'", function()
--- require("telescope.builtin").marks({ layout_strategy = "bottom_pane" })
--- end)
-
--- NOTICE!!!
--- there is an alternative for LSP enabled projects in the lsp-installer file that overides this!!!
 Map("n", "<leader>ft", function()
 	require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "display tags with telescope" })
 
 Map("n", "<leader>fs", function()
 	require("telescope").extensions.luasnip.luasnip({ layout_strategy = "bottom_pane" })
-end)
+end, { desc = "display luasnip snippets with telescope" })
 
 Map("n", "<leader>fp", function()
 	require("telescope").extensions.projects.projects(
 		require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
 	)
-end)
+end, { desc = "display projects with telescope" })

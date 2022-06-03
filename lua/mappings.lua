@@ -3,51 +3,37 @@ Map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
--- use control to turn backspace into delete
--- use <C-v> followed by <c-BS> to enter keycode
-Map("i", "<c-BS>", "<Del>", { desc = "use control-backspace to delete" })
+Map("i", "<c-BS>", "<Del>", { desc = "use <c-BS> for <DEL>" })
 
--- allows for use of "j" and "k" over wrapped lines
 Map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "allows for use of 'k' over wrapped lines" })
 
 Map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "allows for use of 'j' over wrapped lines" })
 
--- move to beginning of wrapped line
-Map({ "n", "x" }, "H", "g^")
+Map({ "n", "x" }, "H", "g^", { desc = "move to beginning of wrapped line" })
 
--- move to beginning of wrapped line
-Map({ "n", "x" }, "L", "g$")
+Map({ "n", "x" }, "L", "g$", { desc = "move to beginning of wrapped line" })
 
-Map("n", "Y", "y$") -- yank until end of line
+Map("n", "Y", "y$", { desc = "yank until end of line" })
 
--- Paste non-linewise text above or below current cursor
-Map("n", "<leader>p", "m`o<ESC>p``")
-Map("n", "<leader>P", "m`O<ESC>p``")
+Map("n", "<tab>", ">>", { desc = "use <tab> to indent in normal mode" })
+Map("n", "<s-tab>", "<<", { desc = "use <s-tab> to dedent in normal mode" })
 
--- use <tab> to indent or dedent in normal mode
-Map("n", "<tab>", ">>")
-Map("n", "<s-tab>", "<<")
+Map("x", "<tab>", ">gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
+Map("x", "<s-tab>", "<gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 
--- continuous visual shifting (does not exit Visual mode), `gv` means to reselect previous visual area
-Map("x", "<tab>", ">gv")
-Map("x", "<s-tab>", "<gv")
+Map("i", "<s-tab>", "<ESC><<i", { desc = "Decrease indent level in insert mode with shift+tab" })
 
--- Decrease indent level in insert mode with shift+tab
-Map("i", "<s-tab>", "<ESC><<i")
+Map("n", "J", "mzJ`z", { desc = "do not move cursor when joining lines" })
 
--- do not move cursor when joining lines
-Map("n", "J", "mzJ`z")
+Map("n", "c", '"_c', { desc = "change text without putting it in the register" })
+Map("n", "C", '"_C', { desc = "change text without putting it in the register" })
+Map("n", "cc", '"_cc', { desc = "change text without putting it in the register" })
+Map("x", "c", '"_c', { desc = "change text without putting it in the register" })
 
--- change text without putting it in the register
-Map("n", "c", '"_c')
-Map("n", "C", '"_C')
-Map("n", "cc", '"_cc')
-Map("x", "c", '"_c')
+Map("n", "<leader>y", ":<C-U>%y<CR>", { desc = "copy entire buffer" })
 
--- copy entire buffer
-Map("n", "<leader>y", ":<C-U>%y<CR>")
-
--- insert blank line above or below
+---insert blank line above or below
+---@param above boolean
 local function insert_blank_line(above)
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
 	local current_column = vim.api.nvim_win_get_cursor(0)[2]
@@ -62,16 +48,16 @@ local function insert_blank_line(above)
 	vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
 end
 
--- insert blank line above or below
 Map("n", "<space>O", function()
 	insert_blank_line(true)
-end)
+end, { desc = "insert blank line above" })
 
 Map("n", "<space>o", function()
 	insert_blank_line(false)
-end)
+end, { desc = "insert blank line below" })
 
--- move current line up or down
+---move current line up or down
+---@param up boolean
 local function move_line(up)
 	local current_line = vim.api.nvim_get_current_line()
 	local current_row = vim.api.nvim_win_get_cursor(0)[1]
@@ -97,24 +83,21 @@ local function move_line(up)
 	vim.api.nvim_win_set_cursor(0, { current_row + 1, current_column })
 end
 
--- move line up and down
 Map("n", "<m-j>", function()
 	move_line(false)
-end)
+end, { desc = "move line down" })
 Map("n", "<m-k>", function()
 	move_line(true)
-end)
+end, { desc = "move line up" })
 
--- place current line 2 down from the top
 Map("n", "zt", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
 	else
 		vim.api.nvim_feedkeys("zt2k2j", "n", true)
 	end
-end)
+end, { desc = "place current line 2 down from the top" })
 
--- like above, but works in insert
 Map("i", "kj", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
@@ -122,7 +105,7 @@ Map("i", "kj", function()
 		local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- <ESC>" will pass as the individual characters otherwise
 		vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
 	end
-end)
+end, { desc = "place current line 2 down from the top" })
 
 vim.cmd([[
 " Break inserted text into smaller undo units.
