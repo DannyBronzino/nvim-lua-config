@@ -69,7 +69,7 @@ local on_attach = function(client, bufnr)
 				width = 0.5,
 			},
 		}))
-	end)
+	end, { desc = "displays workspace symbols using telescope" })
 
 	-- for lsp-format
 	require("lsp-format").on_attach(client)
