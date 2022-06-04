@@ -48,4 +48,6 @@ require("nnn").setup({
 	quitcd = "tcd", -- or "cd" / "lcd", command to run if quitcd file is found
 })
 
-Map("n", "<leader>np", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
+local map = require("utils").map
+
+map("n", "<leader>np", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })

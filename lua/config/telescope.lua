@@ -89,43 +89,45 @@ require("telescope").setup({
 })
 
 -- Add leader shortcuts
-Map("n", "<leader><space>", function()
+local map = require("utils").map
+
+map("n", "<leader><space>", function()
 	require("telescope.builtin").buffers()
 end, { desc = "display open buffers with telescope" })
 
-Map("n", "<leader>ff", function()
+map("n", "<leader>ff", function()
 	project_files(require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } }))
 end, { desc = "display project files with telescope" })
 
-Map("n", "<leader>fb", function()
+map("n", "<leader>fb", function()
 	require("telescope.builtin").current_buffer_fuzzy_find({ layout_strategy = "bottom_pane" })
 end, { desc = "current buffer fuzzy find with telescope" })
 
-Map("n", "<leader>fh", function()
+map("n", "<leader>fh", function()
 	require("telescope.builtin").help_tags({ layout_strategy = "bottom_pane" })
 end, { desc = "display help topics with telescope" })
 
-Map("n", "<leader>fd", function()
+map("n", "<leader>fd", function()
 	require("telescope.builtin").grep_string({ layout_strategy = "bottom_pane" })
 end, { desc = "grep string with telescope" })
 
-Map("n", "<leader>fg", function()
+map("n", "<leader>fg", function()
 	require("telescope.builtin").live_grep({ layout_strategy = "bottom_pane" })
 end, { desc = "live grep with telescope" })
 
-Map("n", "<leader>?", function()
+map("n", "<leader>?", function()
 	require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
 end, { desc = "display recent files with telescope" })
 
-Map("n", "<leader>ft", function()
+map("n", "<leader>ft", function()
 	require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
 end, { desc = "display tags with telescope" })
 
-Map("n", "<leader>fs", function()
+map("n", "<leader>fs", function()
 	require("telescope").extensions.luasnip.luasnip({ layout_strategy = "bottom_pane" })
 end, { desc = "display luasnip snippets with telescope" })
 
-Map("n", "<leader>fp", function()
+map("n", "<leader>fp", function()
 	require("telescope").extensions.projects.projects(
 		require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
 	)

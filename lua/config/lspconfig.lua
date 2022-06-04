@@ -1,36 +1,33 @@
 local custom_attach = function(client, bufnr)
-  -- easier syntax for mapping
-  local function Map(mode, lhs, rhs, opts)
-    opts = opts or {}
-    opts.silent = true
-    opts.buffer = bufnr
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+	-- easier syntax for mapping
+	local function map(mode, lhs, rhs, opts)
+		vim.keymap.set(mode, lhs, rhs, { silent = true, buffer = bufnr })
+	end
 
-  -- Mappings.
-  Map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
-  Map("n", "gr", "<cmd>Lspsaga rename<cr>")
-  Map("n", "gx", "<cmd>Lspsaga code_action<cr>")
-  Map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
-  Map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
-  Map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
-  Map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
-  Map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
-  Map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
-  Map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
-  -- Set some key bindings conditional on server capabilities
-  if client.server_capabilities.document_formatting then
-    Map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-  else
-    Map("n", "<space>f", "<cmd>Neoformat<CR>")
-  end
-  if client.server_capabilities.document_range_formatting then
-    Map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
-  end
+	-- mappings.
+	map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
+	map("n", "gr", "<cmd>Lspsaga rename<cr>")
+	map("n", "gx", "<cmd>Lspsaga code_action<cr>")
+	map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
+	map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+	map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
+	map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
+	map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
+	map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
+	map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
+	-- Set some key bindings conditional on server capabilities
+	if client.server_capabilities.document_formatting then
+		map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+	else
+		map("n", "<space>f", "<cmd>Neoformat<CR>")
+	end
+	if client.server_capabilities.document_range_formatting then
+		map("x", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR><ESC>")
+	end
 
-  -- The blow command will highlight the current variable and its usages in the buffer.
-  if client.server_capabilities.document_highlight then
-    vim.cmd([[
+	-- The blow command will highlight the current variable and its usages in the buffer.
+	if client.server_capabilities.document_highlight then
+		vim.cmd([[
       hi! link LspReferenceRead Visual
       hi! link LspReferenceText Visual
       hi! link LspReferenceWrite Visual
@@ -40,10 +37,10 @@ local custom_attach = function(client, bufnr)
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
     ]])
-  end
+	end
 
-  local msg = string.format("Language server %s started!", client.name)
-  vim.notify(msg, "info", { title = "Nvim-config" })
+	local msg = string.format("Language server %s started!", client.name)
+	vim.notify(msg, "info", { title = "Nvim-config" })
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -53,52 +50,52 @@ local lspconfig = require("lspconfig")
 
 -- set up texlab for latex
 lspconfig.texlab.setup({
-  on_attach = custom_attach,
-  capabilities = capabilities,
-  settings = {
-    texlab = {
-      auxDirectory = ".",
-      bibtexFormatter = "texlab",
-      build = {
-        args = { "%f", "-lualatex" },
-        executable = "latexmk",
-        forwardSearchAfter = false,
-        onSave = false,
-      },
-      chktex = {
-        onEdit = true,
-        onOpenAndSave = true,
-      },
-      diagnosticsDelay = 500,
-      formatterLineLength = 80,
-      forwardSearch = {
-        args = {},
-      },
-      latexFormatter = "latexindent",
-      latexindent = {
-        modifyLineBreaks = false,
-      },
-    },
-  },
+	on_attach = custom_attach,
+	capabilities = capabilities,
+	settings = {
+		texlab = {
+			auxDirectory = ".",
+			bibtexFormatter = "texlab",
+			build = {
+				args = { "%f", "-lualatex" },
+				executable = "latexmk",
+				forwardSearchAfter = false,
+				onSave = false,
+			},
+			chktex = {
+				onEdit = true,
+				onOpenAndSave = true,
+			},
+			diagnosticsDelay = 500,
+			formatterLineLength = 80,
+			forwardSearch = {
+				args = {},
+			},
+			latexFormatter = "latexindent",
+			latexindent = {
+				modifyLineBreaks = false,
+			},
+		},
+	},
 })
 
 -- set up vim-language-server
 lspconfig.vimls.setup({
-  on_attach = custom_attach,
-  capabilities = capabilities,
-  flags = {
-    debounce_text_changes = 500,
-  },
+	on_attach = custom_attach,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 500,
+	},
 })
 
 local luadev = require("lua-dev").setup({
-  lspconfig = {
-    on_attach = custom_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 500,
-    },
-  },
+	lspconfig = {
+		on_attach = custom_attach,
+		capabilities = capabilities,
+		flags = {
+			debounce_text_changes = 500,
+		},
+	},
 })
 
 lspconfig.sumneko_lua.setup(luadev)

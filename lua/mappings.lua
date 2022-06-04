@@ -1,36 +1,37 @@
+local map = require("utils").map
 -- set leader to comma
-Map("", "<Space>", "<Nop>")
+map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-Map("i", "<c-BS>", "<Del>", { desc = "use <c-BS> for <DEL>" })
+map("i", "<c-BS>", "<Del>", { desc = "use <c-BS> for <DEL>" })
 
-Map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "allows for use of 'k' over wrapped lines" })
+map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "allows for use of 'k' over wrapped lines" })
 
-Map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "allows for use of 'j' over wrapped lines" })
+map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "allows for use of 'j' over wrapped lines" })
 
-Map({ "n", "x" }, "H", "g^", { desc = "move to beginning of wrapped line" })
+map({ "n", "x" }, "H", "g^", { desc = "move to beginning of wrapped line" })
 
-Map({ "n", "x" }, "L", "g$", { desc = "move to beginning of wrapped line" })
+map({ "n", "x" }, "L", "g$", { desc = "move to beginning of wrapped line" })
 
-Map("n", "Y", "y$", { desc = "yank until end of line" })
+map("n", "Y", "y$", { desc = "yank until end of line" })
 
-Map("n", "<tab>", ">>", { desc = "use <tab> to indent in normal mode" })
-Map("n", "<s-tab>", "<<", { desc = "use <s-tab> to dedent in normal mode" })
+map("n", "<tab>", ">>", { desc = "use <tab> to indent in normal mode" })
+map("n", "<s-tab>", "<<", { desc = "use <s-tab> to dedent in normal mode" })
 
-Map("x", "<tab>", ">gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
-Map("x", "<s-tab>", "<gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
+map("x", "<tab>", ">gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
+map("x", "<s-tab>", "<gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 
-Map("i", "<s-tab>", "<ESC><<i", { desc = "Decrease indent level in insert mode with shift+tab" })
+map("i", "<s-tab>", "<ESC><<i", { desc = "Decrease indent level in insert mode with shift+tab" })
 
-Map("n", "J", "mzJ`z", { desc = "do not move cursor when joining lines" })
+map("n", "J", "mzJ`z", { desc = "do not move cursor when joining lines" })
 
-Map("n", "c", '"_c', { desc = "change text without putting it in the register" })
-Map("n", "C", '"_C', { desc = "change text without putting it in the register" })
-Map("n", "cc", '"_cc', { desc = "change text without putting it in the register" })
-Map("x", "c", '"_c', { desc = "change text without putting it in the register" })
+map("n", "c", '"_c', { desc = "change text without putting it in the register" })
+map("n", "C", '"_C', { desc = "change text without putting it in the register" })
+map("n", "cc", '"_cc', { desc = "change text without putting it in the register" })
+map("x", "c", '"_c', { desc = "change text without putting it in the register" })
 
-Map("n", "<leader>y", ":<C-U>%y<CR>", { desc = "copy entire buffer" })
+map("n", "<leader>y", ":<C-U>%y<CR>", { desc = "copy entire buffer" })
 
 ---insert blank line above or below
 ---@param above boolean
@@ -48,11 +49,11 @@ local function insert_blank_line(above)
 	vim.api.nvim_win_set_cursor(0, { current_row + offset, current_column })
 end
 
-Map("n", "<space>O", function()
+map("n", "<space>O", function()
 	insert_blank_line(true)
 end, { desc = "insert blank line above" })
 
-Map("n", "<space>o", function()
+map("n", "<space>o", function()
 	insert_blank_line(false)
 end, { desc = "insert blank line below" })
 
@@ -83,14 +84,14 @@ local function move_line(up)
 	vim.api.nvim_win_set_cursor(0, { current_row + 1, current_column })
 end
 
-Map("n", "<m-j>", function()
+map("n", "<m-j>", function()
 	move_line(false)
 end, { desc = "move line down" })
-Map("n", "<m-k>", function()
+map("n", "<m-k>", function()
 	move_line(true)
 end, { desc = "move line up" })
 
-Map("n", "zt", function()
+map("n", "zt", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
 	else
@@ -98,7 +99,7 @@ Map("n", "zt", function()
 	end
 end, { desc = "place current line 2 down from the top" })
 
-Map("i", "kj", function()
+map("i", "kj", function()
 	if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
 		return ""
 	else
