@@ -13,7 +13,7 @@ require("nnn").setup({
 		style = {
 			width = 0.33, -- percentage relative to terminal size when < 1, absolute otherwise
 			height = 0.9, -- ^
-			xoffset = 0.1, -- ^
+			xoffset = 0.0, -- ^
 			yoffset = 0.5, -- ^
 			border = "single", -- border decoration for example "rounded"(:h nvim_open_win)
 		},
@@ -50,4 +50,4 @@ require("nnn").setup({
 
 local map = require("utils").map
 
-map("n", "<leader>np", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
+map("n", "<space>n", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
