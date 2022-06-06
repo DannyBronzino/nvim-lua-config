@@ -5,8 +5,8 @@ local install_cmd = string.format("10split |term git clone --depth=1 %s %s", pac
 
 -- Auto-install packer in case it hasn't been installed.
 if vim.fn.glob(packer_install_dir) == "" then
-	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-	vim.cmd(install_cmd)
+  vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
+  vim.cmd(install_cmd)
 end
 
 -- Load packer.nvim
@@ -14,236 +14,244 @@ vim.cmd("packadd packer.nvim")
 local util = require("packer.util")
 
 require("packer").startup({
-	function(use)
-		-- NOTICE
-		-- impatient will throw an error on the the next startup if you clear the catch
-		-- run :PackerSync again and then restart to fix this
-		use({ -- it is recommened to put impatient.nvim before any other plugins
-			"lewis6991/impatient.nvim",
-			config = function()
-				require("impatient") -- load impatient first
-			end,
-		})
+  function(use)
+    -- NOTICE
+    -- impatient will throw an error on the the next startup if you clear the catch
+    -- run :PackerSync again and then restart to fix this
+    use({ -- it is recommened to put impatient.nvim before any other plugins
+      "lewis6991/impatient.nvim",
+      config = function()
+        require("impatient") -- load impatient first
+      end,
+    })
 
-		use({ -- packer itself, can be optional
-			"wbthomason/packer.nvim",
-			opt = true,
-		})
+    use({ -- packer itself, can be optional
+      "wbthomason/packer.nvim",
+      opt = true,
+    })
 
-		use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
-			"nvim-treesitter/nvim-treesitter",
-			requires = {
-				{ "andymass/vim-matchup" }, -- matching parens
-				{ "nvim-treesitter/nvim-treesitter-textobjects" },
-			},
-			config = [[require("config.treesitter")]],
-			run = ":TSUpdateSync",
-		})
+    use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
+      "nvim-treesitter/nvim-treesitter",
+      requires = {
+        { "andymass/vim-matchup" }, -- matching parens
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
+      },
+      config = [[require("config.treesitter")]],
+      run = ":TSUpdateSync",
+    })
 
-		use({
-			"L3MON4D3/LuaSnip",
-			requires = "rafamadriz/friendly-snippets", -- vscode format snippets }) -- snippet engine
-			event = "BufEnter",
-		})
+    use({
+      "L3MON4D3/LuaSnip",
+      requires = "rafamadriz/friendly-snippets", -- vscode format snippets }) -- snippet engine
+      event = "BufEnter",
+    })
 
-		use({ -- completion engine
-			"hrsh7th/nvim-cmp",
-			requires = "onsails/lspkind-nvim", -- vscode pictograms,
-			config = [[require("config.cmp")]], -- contains luasnip setup as well
-			after = "LuaSnip",
-		})
+    use({ -- completion engine
+      "hrsh7th/nvim-cmp",
+      requires = "onsails/lspkind-nvim", -- vscode pictograms,
+      config = [[require("config.cmp")]], -- contains luasnip setup as well
+      after = "LuaSnip",
+    })
 
-		use({ "hrsh7th/cmp-omni", event = "InsertEnter" }) -- omni completion for vimtex
+    use({ "hrsh7th/cmp-omni", event = "InsertEnter" }) -- omni completion for vimtex
 
-		use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
-		use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter", disable = true }) -- completion for neovim lua
-		use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
-		use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
-		use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
+    use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
+    use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter", disable = true }) -- completion for neovim lua
+    use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
+    use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
+    use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
 
-		use({ "lukas-reineke/cmp-rg", event = "InsertEnter" }) -- completion for ripgrep
+    use({ "lukas-reineke/cmp-rg", event = "InsertEnter" }) -- completion for ripgrep
 
-		use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for spell
-		use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }) -- easy to enter latex symbols
-		use({ "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }) -- completion for digraphs
+    use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for spell
+    use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }) -- easy to enter latex symbols
+    use({ "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }) -- completion for digraphs
 
-		use({ -- interface for easy LSP configs
-			"williamboman/nvim-lsp-installer",
-			requires = {
-				{ "tami5/lspsaga.nvim" }, -- nice lsp actions
-				{ "neovim/nvim-lspconfig" }, -- easy lspconfig
-				{ "lukas-reineke/lsp-format.nvim" },
-				{ "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
-				{ "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
-			},
-			config = [[require("config.lsp-installer")]],
-			after = "nvim-cmp",
-		})
+    use({ -- interface for easy LSP configs
+      "williamboman/nvim-lsp-installer",
+      requires = {
+        { "tami5/lspsaga.nvim" }, -- nice lsp actions
+        { "neovim/nvim-lspconfig" }, -- easy lspconfig
+        { "lukas-reineke/lsp-format.nvim" },
+        { "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
+        { "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
+      },
+      config = [[require("config.lsp-installer")]],
+      after = "nvim-cmp",
+    })
 
-		use({ -- automatic pairs
-			"windwp/nvim-autopairs",
-			config = [[require("config.autopairs")]],
-			event = "InsertEnter",
-		})
+    use({ -- automatic pairs
+      "windwp/nvim-autopairs",
+      config = [[require("config.autopairs")]],
+      event = "InsertEnter",
+    })
 
-		use({ "wellle/targets.vim", event = "BufEnter" }) -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
+    use({ "wellle/targets.vim", event = "BufEnter" }) -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
 
-		use({ -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
-			"chaoren/vim-wordmotion",
-			event = "BufEnter",
-		})
+    use({ -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+      "chaoren/vim-wordmotion",
+      event = "BufEnter",
+    })
 
-		use({ -- buffer jumping like EasyMotion or Sneak
-			"ggandor/lightspeed.nvim",
-			requires = "tpope/vim-repeat",
-			config = function()
-				require("lightspeed").setup({
-					ignore_case = true,
-				})
-			end,
-			event = "BufEnter",
-		})
+    use({ -- buffer jumping like EasyMotion or Sneak
+      "ggandor/lightspeed.nvim",
+      requires = "tpope/vim-repeat",
+      config = function()
+        require("lightspeed").setup({
+          ignore_case = true,
+        })
+      end,
+      event = "BufEnter",
+    })
 
-		use({
-			"phaazon/hop.nvim",
-			branch = "v1",
-			config = [[require("config.hop")]],
-			event = "BufEnter",
-			disable = true,
-		})
+    use({
+      "phaazon/hop.nvim",
+      branch = "v1",
+      config = [[require("config.hop")]],
+      event = "BufEnter",
+      disable = true,
+    })
 
-		use({ -- Show match number and index for search
-			"kevinhwang91/nvim-hlslens",
-			requires = "haya14busa/vim-asterisk", -- asterisk improved
-			config = [[require('config.hlslens')]],
-			keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
-			event = "CmdLineEnter",
-		})
+    use({ -- Show match number and index for search
+      "kevinhwang91/nvim-hlslens",
+      requires = "haya14busa/vim-asterisk", -- asterisk improved
+      config = [[require('config.hlslens')]],
+      keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
+      event = "CmdLineEnter",
+    })
 
-		use({ -- tab bar and buffer switching
-			"romgrk/barbar.nvim",
-			requires = "kyazdani42/nvim-web-devicons", -- icons, duh
-			config = [[require("config.barbar")]],
-			event = "VimEnter",
-		})
+    use({ -- tab bar and buffer switching
+      "romgrk/barbar.nvim",
+      requires = "kyazdani42/nvim-web-devicons", -- icons, duh
+      config = [[require("config.barbar")]],
+      event = "VimEnter",
+    })
 
-		use({ -- status line
-			"nvim-lualine/lualine.nvim",
-			requires = {
-				"kyazdani42/nvim-web-devicons", -- icons, duh
-				"sainnhe/sonokai",
-				"rebelot/kanagawa.nvim",
-			},
-			config = [[require("config.ui")]],
-		})
+    use({ -- status line
+      "nvim-lualine/lualine.nvim",
+      requires = {
+        "kyazdani42/nvim-web-devicons", -- icons, duh
+        "sainnhe/sonokai",
+        "rebelot/kanagawa.nvim",
+      },
+      config = [[require("config.ui")]],
+    })
 
-		use({ -- indent markers
-			"lukas-reineke/indent-blankline.nvim",
-			event = "BufEnter",
-		})
+    use({ -- indent markers
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufEnter",
+    })
 
-		use({ -- notification plugin
-			"rcarriga/nvim-notify",
-			config = [[require("config.notify")]],
-			event = "VimEnter",
-		})
+    use({ -- notification plugin
+      "rcarriga/nvim-notify",
+      config = [[require("config.notify")]],
+      event = "VimEnter",
+    })
 
-		use({ -- escape insert quickly with "jj" or "jk" or whatever
-			"jdhao/better-escape.vim",
-			setup = function() -- need to set options FIRST
-				vim.g.better_escape_shortcut = "jj"
-				vim.g.better_escape_interval = 300
-			end,
-			event = "InsertEnter",
-		})
+    use({ -- escape insert quickly with "jj" or "jk" or whatever
+      "jdhao/better-escape.vim",
+      setup = function() -- need to set options FIRST
+        vim.g.better_escape_shortcut = "jj"
+        vim.g.better_escape_interval = 300
+      end,
+      event = "InsertEnter",
+    })
 
-		use({ -- LSP doesn't do formatting on some languages so use this
-			"sbdchd/neoformat",
-			cmd = "Neoformat",
-		})
+    use({ -- LSP doesn't do formatting on some languages so use this
+      "sbdchd/neoformat",
+      cmd = "Neoformat",
+    })
 
-		use({ -- git in the gutter
-			"lewis6991/gitsigns.nvim",
-			requires = "nvim-lua/plenary.nvim", -- extra neovim functions
-			config = function()
-				require("gitsigns").setup()
-			end,
-			event = "BufEnter",
-		})
+    use({ -- git in the gutter
+      "lewis6991/gitsigns.nvim",
+      requires = "nvim-lua/plenary.nvim", -- extra neovim functions
+      config = function()
+        require("gitsigns").setup()
+      end,
+      event = "BufEnter",
+    })
 
-		use({ -- git inside vim
-			"tpope/vim-fugitive",
-			setup = function()
-				vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
-			end,
-			cmd = "Git",
-		})
+    use({ -- git inside vim
+      "tpope/vim-fugitive",
+      setup = function()
+        vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
+      end,
+      cmd = "Git",
+    })
 
-		use({ -- Fixes scroll in middle of page (works poorly with soft wrapping)
-			"vim-scripts/scrollfix",
-			event = "BufEnter",
-			disable = true,
-		})
+    use({ -- Fixes scroll in middle of page (works poorly with soft wrapping)
+      "vim-scripts/scrollfix",
+      event = "BufEnter",
+      disable = true,
+    })
 
-		use({ -- automatic window sizing
-			"dm1try/golden_size",
-			event = "WinEnter",
-			disable = true,
-		})
+    use({ -- automatic window sizing
+      "dm1try/golden_size",
+      event = "WinEnter",
+      disable = true,
+    })
 
-		use({ -- fuzzy search utilizing fzf
-			"nvim-telescope/telescope.nvim",
-			requires = {
-				{ "nvim-lua/popup.nvim" }, -- api for popups
-				{ "nvim-lua/plenary.nvim" }, -- extra neovim functions
-				{ -- fuzzy search
-					"junegunn/fzf",
-					run = function()
-						vim.fn["fzf#install"]()
-					end,
-				},
-				{ -- interface for fzf
-					"nvim-telescope/telescope-fzf-native.nvim",
-					run = "make",
-				},
-				{ "nvim-telescope/telescope-packer.nvim" }, -- packer browser
-				{ "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
-				{ "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
-				{ "ahmedkhalf/project.nvim" },
-				{ "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
-			},
-			config = [[require("config.telescope")]],
-			event = "BufEnter",
-		})
+    use({ -- fuzzy search utilizing fzf
+      "nvim-telescope/telescope.nvim",
+      requires = {
+        { "nvim-lua/popup.nvim" }, -- api for popups
+        { "nvim-lua/plenary.nvim" }, -- extra neovim functions
+        { -- fuzzy search
+          "junegunn/fzf",
+          run = function()
+            vim.fn["fzf#install"]()
+          end,
+        },
+        { -- interface for fzf
+          "nvim-telescope/telescope-fzf-native.nvim",
+          run = "make",
+        },
+        { "nvim-telescope/telescope-packer.nvim" }, -- packer browser
+        { "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
+        { "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
+        { "ahmedkhalf/project.nvim" },
+        { "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
+      },
+      config = [[require("config.telescope")]],
+      event = "BufEnter",
+    })
 
-		use({ -- better quickfix window
-			"kevinhwang91/nvim-bqf",
-			config = [[require("config.bqf")]],
-			ft = "qf",
-		})
+    use({ -- better quickfix window
+      "kevinhwang91/nvim-bqf",
+      config = [[require("config.bqf")]],
+      ft = "qf",
+    })
 
-		use({ -- creates missing directories when saving a new file
-			"jghauser/mkdir.nvim",
-			event = "CmdLineEnter",
-		})
+    use({ -- creates missing directories when saving a new file
+      "jghauser/mkdir.nvim",
+      event = "CmdLineEnter",
+    })
 
-		use({
-			"luukvbaal/nnn.nvim",
-			config = [[require("config.nnn")]],
-		})
+    if require("utils").executable("nnn") then
+      if tonumber(vim.fn.system("nnn -V")) >= 4.3 then
+        use({
+          "luukvbaal/nnn.nvim",
+          config = [[require("config.nnn")]],
+        })
+      else
+        vim.notify("Please upgrade nnn!")
+      end
+    else
+      vim.notify("Please install nnn!")
+    end
 
-		use({
-			"folke/which-key.nvim",
-			config = [[require("config.which-key")]],
-		})
-	end,
-	config = {
-		compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
-		autoremove = true,
-	},
+    use({
+      "folke/which-key.nvim",
+      config = [[require("config.which-key")]],
+    })
+  end,
+  config = {
+    compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
+    autoremove = true,
+  },
 })
 
 local status, _ = pcall(require, "packer_compiled")
 if not status then
-	vim.notify("Error requiring packer_compiled.lua: run PackerSync to fix!")
+  vim.notify("Error requiring packer_compiled.lua: run PackerSync to fix!")
 end

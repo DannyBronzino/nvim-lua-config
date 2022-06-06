@@ -14,5 +14,5 @@ local map = require("utils").map
 map("n", "<space>f", "<cmd>Neoformat<cr>") -- format document
 
 map("n", "<leader>ft", function()
-	require("telescope.builtin").tags()
+  require("telescope.builtin").tags()
 end)
