@@ -232,6 +232,7 @@ require("packer").startup({
         use({
           "luukvbaal/nnn.nvim",
           config = [[require("config.nnn")]],
+          event = "VimEnter",
         })
       else
         vim.notify("Please upgrade nnn!")
