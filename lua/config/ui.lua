@@ -31,7 +31,7 @@ vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_better_performance = 1
 
 require("github-theme").setup({
-  theme_style = "dimmed"
+  dark_float = true,
 })
 
 vim.cmd([[colorscheme kanagawa]])
