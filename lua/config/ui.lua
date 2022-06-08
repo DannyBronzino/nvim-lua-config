@@ -1,5 +1,4 @@
 local colors = require("kanagawa.colors").setup()
-
 local overrides = {
   -- overide existing highlights
   WhichKeyValue = { fg = colors.crystalBlue },
@@ -30,6 +29,10 @@ vim.g.sonokai_style = "andromeda"
 vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_better_performance = 1
+
+require("github-theme").setup({
+  theme_style = "dimmed"
+})
 
 vim.cmd([[colorscheme kanagawa]])
 

@@ -133,6 +133,7 @@ require("packer").startup({
         "kyazdani42/nvim-web-devicons", -- icons, duh
         "sainnhe/sonokai",
         "rebelot/kanagawa.nvim",
+        "projekt0n/github-nvim-theme",
       },
       config = [[require("config.ui")]],
     })
