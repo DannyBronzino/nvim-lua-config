@@ -74,7 +74,7 @@ cmp.setup({
     { name = "spell" }, -- for spelling
   }),
   completion = {
-    keyword_length = 2,
+    keyword_length = 1,
   },
   experimental = {
     ghost_text = true, -- adds ghost text that completes the word in buffer
