@@ -34,7 +34,20 @@ require("github-theme").setup({
   dark_float = true,
 })
 
-vim.cmd([[colorscheme kanagawa]])
+vim.cmd([[colorscheme github_dimmed]])
+
+vim.api.nvim_create_autocmd("Colorscheme", {
+  callback = function()
+    -- change lualine colorscheme
+    require("lualine").setup({
+      options = {
+        theme = "auto",
+      },
+    })
+    vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
+  end,
+  desc = "changes lualine colorscheme when nvim colorscheme changes",
+})
 
 -- displays spell indicator
 local function spell()
