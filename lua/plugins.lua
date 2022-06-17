@@ -228,19 +228,26 @@ require("packer").startup({
       event = "CmdLineEnter",
     })
 
-    if require("utils").executable("nnn") then
-      if tonumber(vim.fn.system("nnn -V")) >= 4.3 then
-        use({
-          "luukvbaal/nnn.nvim",
-          config = [[require("config.nnn")]],
-          event = "VimEnter",
-        })
-      else
-        vim.notify("Please upgrade nnn!")
-      end
-    else
-      vim.notify("Please install nnn!")
-    end
+    -- if require("utils").executable("nnn") then
+    -- if tonumber(vim.fn.system("nnn -V")) >= 4.3 then
+    -- use({
+    -- "luukvbaal/nnn.nvim",
+    -- config = [[require("config.nnn")]],
+    -- event = "VimEnter",
+    -- })
+    -- else
+    -- vim.notify("Please upgrade nnn!")
+    -- end
+    -- else
+    -- vim.notify("Please install nnn!")
+    -- end
+
+    use({ -- file explorer
+      "kyazdani42/nvim-tree.lua",
+      requires = {
+        "kyazdani42/nvim-web-devicons", -- optional, for file icon
+      },
+      config = [[require("config.nvim-tree")]] })
 
     use({
       "folke/which-key.nvim",
