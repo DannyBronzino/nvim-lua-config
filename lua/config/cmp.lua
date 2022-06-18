@@ -68,9 +68,9 @@ cmp.setup({
         context_after = 3,
       },
     },
+    { name = "path" }, -- for path completion
     { name = "latex_symbols", max_item_count = 3 },
     -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
-    { name = "path" }, -- for path completion
     { name = "spell" }, -- for spelling
   }),
   completion = {
@@ -87,12 +87,10 @@ cmp.setup({
         nvim_lsp = "[LSP]",
         nvim_lsp_signature_help = "[Help]",
         luasnip = "[Snip]",
-        -- nvim_lua = "[Lua]",
-        -- nvim_lsp = "[LSP]",
         rg = "[RG]",
-        latex_symbols = "[LaTeX]",
-        -- digraphs = "[Digraphs]",
         path = "[Path]",
+        latex_symbols = "[Symbols]",
+        -- digraphs = "[Digraphs]",
         spell = "[Spell]",
       },
     }),
