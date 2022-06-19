@@ -156,7 +156,24 @@ require("packer").startup({
         vim.g.better_escape_interval = 300
       end,
       event = "InsertEnter",
+      disable = true,
     })
+
+    -- lua with packer.nvim
+    use {
+      "max397574/better-escape.nvim",
+      config = function()
+        -- lua, default settings
+        require("better_escape").setup({
+          mapping = { "jk", "jj" }, -- a table with mappings to use
+          timeout = 300, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+          clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+          keys = function()
+            return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+          end,
+        })
+      end,
+    }
 
     use({ -- LSP doesn't do formatting on some languages so use this
       "sbdchd/neoformat",
