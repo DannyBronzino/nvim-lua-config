@@ -160,7 +160,7 @@ require("packer").startup({
     })
 
     -- lua with packer.nvim
-    use {
+    use({
       "max397574/better-escape.nvim",
       config = function()
         -- lua, default settings
@@ -169,11 +169,11 @@ require("packer").startup({
           timeout = 300, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
           clear_empty_lines = false, -- clear line after escaping if there is only whitespace
           keys = function()
-            return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+            return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
           end,
         })
       end,
-    }
+    })
 
     use({ -- LSP doesn't do formatting on some languages so use this
       "sbdchd/neoformat",
@@ -264,7 +264,8 @@ require("packer").startup({
       requires = {
         "kyazdani42/nvim-web-devicons", -- optional, for file icon
       },
-      config = [[require("config.nvim-tree")]] })
+      config = [[require("config.nvim-tree")]],
+    })
 
     use({
       "folke/which-key.nvim",
