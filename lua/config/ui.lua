@@ -44,6 +44,8 @@ vim.api.nvim_create_autocmd("Colorscheme", {
         theme = "auto",
       },
     })
+    -- the lua doesn't seem to work in the autocmd
+    -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
     vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
   end,
   desc = "changes lualine colorscheme when nvim colorscheme changes",
@@ -106,6 +108,6 @@ require("lualine").setup({
   extensions = {
     "quickfix",
     "fugitive",
-    -- "nvim-tree",
+    "nvim-tree",
   },
 })
