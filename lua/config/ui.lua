@@ -25,16 +25,17 @@ require("kanagawa").setup({
   globalstatus = true,
 })
 
-vim.g.sonokai_style = "andromeda"
+vim.g.sonokai_style = "default"
 vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_better_performance = 1
 
 require("github-theme").setup({
   dark_float = true,
+  transparent = true,
 })
 
-vim.cmd([[colorscheme kanagawa]])
+vim.cmd([[colorscheme github_dark_default]])
 
 vim.api.nvim_create_autocmd("Colorscheme", {
   callback = function()
