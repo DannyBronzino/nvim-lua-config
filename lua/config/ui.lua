@@ -35,7 +35,7 @@ require("github-theme").setup({
   transparent = true,
 })
 
-vim.cmd([[colorscheme github_dark_default]])
+vim.cmd([[colorscheme kanagawa]])
 
 vim.api.nvim_create_autocmd("Colorscheme", {
   callback = function()
