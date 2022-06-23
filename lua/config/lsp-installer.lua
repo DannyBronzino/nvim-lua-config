@@ -42,7 +42,7 @@ require("lspsaga").setup({
 })
 
 require("nvim-lsp-installer").setup({
-  automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+  automatic_installation = true, -- based on which servers are set up via lspconfig
 })
 
 require("lsp-format").setup()
@@ -128,7 +128,7 @@ local on_attach = function(client, bufnr)
   vim.diagnostic.config({ virtual_text = false }) -- turn off virtual annotation
 
   local msg = string.format("Language server %s started!", client.name)
-  vim.notify(msg, "info", { title = "Nvim-config" })
+  vim.notify(msg, "info")
 end
 
 -- nvim-cmp supports additional completion capabilities
