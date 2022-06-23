@@ -61,11 +61,11 @@ local on_attach = function(client, bufnr)
   -- mappings.
   map("n", "gd", "<cmd>Lspsaga lsp_finder<cr>")
   map("n", "gi", "<cmd>Lspsaga implement<cr>")
-  map("n", "gh", "<cmd>Lspsaga signature_help<cr>")
   map("n", "<F2>", "<cmd>Lspsaga rename<cr>")
   map("n", "gx", "<cmd>Lspsaga code_action<cr>")
   map("x", "gx", ":<c-u>Lspsaga range_code_action<cr>")
   map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+  map("n", "<c-k>", "<cmd>Lspsaga signature_help<cr>")
   map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
   map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
   map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
@@ -155,8 +155,29 @@ lspconfig.texlab.setup({
   },
 })
 
+-- PyLSP for Python
+lspconfig.pylsp.setup({
+  on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        pylint = { enabled = true, executable = "pylint" },
+        pyflakes = { enabled = false },
+        pycodestyle = { enabled = false },
+        jedi_completion = { fuzzy = true },
+        pyls_isort = { enabled = true },
+        pylsp_mypy = { enabled = true },
+      },
+    },
+  },
+  flags = {
+    debounce_text_changes = 200,
+  },
+  capabilities,
+})
+
 -- Sumneko Lua LSP
-require("lspconfig").sumneko_lua.setup({
+lspconfig.sumneko_lua.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
