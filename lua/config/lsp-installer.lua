@@ -111,19 +111,19 @@ local on_attach = function(client, bufnr)
     ]])
   end
 
-  vim.api.nvim_create_autocmd("CursorHold", {
-    buffer = bufnr,
-    callback = function()
-      local opts = {
-        focusable = false,
-        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = "single",
-        source = "always", -- show source in diagnostic popup window
-        prefix = " ",
-      }
-      vim.diagnostic.open_float(nil, opts)
-    end,
-  })
+  -- vim.api.nvim_create_autocmd("CursorHold", {
+  -- buffer = bufnr,
+  -- callback = function()
+  -- local opts = {
+  -- focusable = false,
+  -- close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+  -- border = "single",
+  -- source = "always", -- show source in diagnostic popup window
+  -- prefix = " ",
+  -- }
+  -- vim.diagnostic.open_float(nil, opts)
+  -- end,
+  -- })
 
   vim.diagnostic.config({ virtual_text = false }) -- turn off virtual annotation
 
