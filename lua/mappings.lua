@@ -103,7 +103,7 @@ map("i", "kj", function()
   if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
     return ""
   else
-    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- <ESC>" will pass as the individual characters otherwise
+    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
     vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
   end
 end, { desc = "place current line 2 down from the top" })
