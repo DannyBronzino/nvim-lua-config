@@ -13,7 +13,7 @@ vim.g.matchup_matchparen_offscreen = { method = "popup" } -- show offscreen matc
 require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer") -- override bibtex query
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "latex", "bibtex", "markdown", "lua", "python" },
+  ensure_installed = { "latex", "bibtex", "markdown", "lua", "python", "bash" },
   sync_install = true,
   highlight = {
     enable = true,

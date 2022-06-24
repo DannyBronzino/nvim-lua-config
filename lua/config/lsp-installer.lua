@@ -134,6 +134,12 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- set up bashls for bashls
+require("lspconfig").bashls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
 -- set up texlab for latex
 lspconfig.texlab.setup({
   on_attach = on_attach,
