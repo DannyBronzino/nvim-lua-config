@@ -112,6 +112,24 @@ require("packer").startup({
       disable = true,
     })
 
+    use({
+      "echasnovski/mini.nvim",
+      config = function()
+        require("mini.surround").setup({
+          -- Module mappings. Use `''` (empty string) to disable one.
+          mappings = {
+            add = "ysa", -- Add surrounding in Normal and Visual modes
+            delete = "ysd", -- Delete surrounding
+            find = "", -- Find surrounding (to the right)
+            find_left = "", -- Find surrounding (to the left)
+            highlight = "", -- Highlight surrounding
+            replace = "ysr", -- Replace surrounding
+            update_n_lines = "", -- Update `n_lines`
+          },
+        })
+      end,
+    })
+
     use({ -- Show match number and index for search
       "kevinhwang91/nvim-hlslens",
       requires = "haya14busa/vim-asterisk", -- asterisk improved
