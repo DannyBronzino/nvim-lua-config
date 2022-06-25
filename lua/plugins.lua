@@ -102,14 +102,13 @@ require("packer").startup({
         })
       end,
       event = "BufEnter",
+      disable = true,
     })
 
     use({
       "phaazon/hop.nvim",
-      branch = "v1",
       config = [[require("config.hop")]],
       event = "BufEnter",
-      disable = true,
     })
 
     use({
@@ -118,12 +117,12 @@ require("packer").startup({
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
           mappings = {
-            add = "ysa", -- Add surrounding in Normal and Visual modes
-            delete = "ysd", -- Delete surrounding
+            add = "Sa", -- Add surrounding in Normal and Visual modes
+            delete = "Sd", -- Delete surrounding
             find = "", -- Find surrounding (to the right)
             find_left = "", -- Find surrounding (to the left)
             highlight = "", -- Highlight surrounding
-            replace = "ysr", -- Replace surrounding
+            replace = "Sr", -- Replace surrounding
             update_n_lines = "", -- Update `n_lines`
           },
         })
