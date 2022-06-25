@@ -117,12 +117,12 @@ require("packer").startup({
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
           mappings = {
-            add = "Sa", -- Add surrounding in Normal and Visual modes
-            delete = "Sd", -- Delete surrounding
+            add = "sa", -- Add surrounding in Normal and Visual modes
+            delete = "sd", -- Delete surrounding
             find = "", -- Find surrounding (to the right)
             find_left = "", -- Find surrounding (to the left)
             highlight = "", -- Highlight surrounding
-            replace = "Sr", -- Replace surrounding
+            replace = "sr", -- Replace surrounding
             update_n_lines = "", -- Update `n_lines`
           },
         })
