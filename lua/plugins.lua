@@ -107,6 +107,7 @@ require("packer").startup({
 
     use({
       "phaazon/hop.nvim",
+      branch = "v1",
       config = [[require("config.hop")]],
       event = "BufEnter",
     })
