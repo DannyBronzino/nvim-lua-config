@@ -134,8 +134,8 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- set up bashls for bashls
-require("lspconfig").bashls.setup({
+-- Set up racket for lisps
+require("lspconfig").racket_langserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
