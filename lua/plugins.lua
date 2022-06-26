@@ -93,6 +93,24 @@ require("packer").startup({
       event = "BufEnter",
     })
 
+    use({
+      "echasnovski/mini.nvim",
+      config = function()
+        require("mini.surround").setup({
+          -- Module mappings. Use `''` (empty string) to disable one.
+          mappings = {
+            add = "Sa", -- Add surrounding in Normal and Visual modes
+            delete = "Sd", -- Delete surrounding
+            find = "", -- Find surrounding (to the right)
+            find_left = "", -- Find surrounding (to the left)
+            highlight = "", -- Highlight surrounding
+            replace = "Sr", -- Replace surrounding
+            update_n_lines = "", -- Update `n_lines`
+          },
+        })
+      end,
+    })
+
     use({ -- buffer jumping like EasyMotion or Sneak
       "ggandor/lightspeed.nvim",
       requires = "tpope/vim-repeat",
@@ -102,7 +120,7 @@ require("packer").startup({
         })
       end,
       event = "BufEnter",
-      disable = true,
+      after = "mini.nvim",
     })
 
     use({
@@ -110,24 +128,7 @@ require("packer").startup({
       branch = "v1",
       config = [[require("config.hop")]],
       event = "BufEnter",
-    })
-
-    use({
-      "echasnovski/mini.nvim",
-      config = function()
-        require("mini.surround").setup({
-          -- Module mappings. Use `''` (empty string) to disable one.
-          mappings = {
-            add = "sa", -- Add surrounding in Normal and Visual modes
-            delete = "sd", -- Delete surrounding
-            find = "", -- Find surrounding (to the right)
-            find_left = "", -- Find surrounding (to the left)
-            highlight = "", -- Highlight surrounding
-            replace = "sr", -- Replace surrounding
-            update_n_lines = "", -- Update `n_lines`
-          },
-        })
-      end,
+      disable = true,
     })
 
     use({ -- Show match number and index for search
