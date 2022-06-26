@@ -2,19 +2,19 @@ local builtin = require("nnn").builtin
 
 require("nnn").setup({
   explorer = {
-    cmd = "nnn -eJRroC", -- command overrride (-F1 flag is implied, -a flag is invalid!)
+    cmd = "nnn", -- command overrride (-F1 flag is implied, -a flag is invalid!)
     width = 20, -- width of the vertical split
     side = "topleft", -- or "botright", location of the explorer window
     session = "shared", -- or "global" / "local" / "shared"
     tabs = true, -- seperate nnn instance per tab
   },
   picker = {
-    cmd = "nnn -eJRroC", -- command override (-p flag is implied)
+    cmd = "nnn", -- command override (-p flag is implied)
     style = {
-      width = 0.33, -- percentage relative to terminal size when < 1, absolute otherwise
+      width = 50, -- percentage relative to terminal size when < 1, absolute otherwise
       height = 0.9, -- ^
-      xoffset = 0.0, -- ^
-      yoffset = 0.5, -- ^
+      xoffset = 2, -- ^
+      yoffset = 2, -- ^
       border = "single", -- border decoration for example "rounded"(:h nvim_open_win)
     },
     session = "shared", -- or "global" / "local" / "shared"
