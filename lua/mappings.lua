@@ -22,7 +22,7 @@ map("n", "<s-tab>", "<<", { desc = "use <s-tab> to dedent in normal mode" })
 map("x", "<tab>", ">gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 map("x", "<s-tab>", "<gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 
-map("i", "<s-tab>", "<ESC><<i", { desc = "Decrease indent level in insert mode with shift+tab" })
+-- map("i", "<s-tab>", "<ESC><<i", { desc = "Decrease indent level in insert mode with shift+tab" })
 
 map("n", "J", "mzJ`z", { desc = "do not move cursor when joining lines" })
 

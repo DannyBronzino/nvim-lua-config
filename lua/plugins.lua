@@ -53,10 +53,7 @@ require("packer").startup({
       after = "LuaSnip",
     })
 
-    use({ "hrsh7th/cmp-omni", event = "InsertEnter" }) -- omni completion for vimtex
-
     use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
-    use({ "hrsh7th/cmp-nvim-lua", event = "InsertEnter", disable = true }) -- completion for neovim lua
     use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
     use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
     use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
@@ -66,6 +63,14 @@ require("packer").startup({
     use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for spell
     use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }) -- easy to enter latex symbols
     use({ "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }) -- completion for digraphs
+
+    -- Lua
+    use({
+      "abecodes/tabout.nvim",
+      requires = { "nvim-treesitter" }, -- or require if not used so far
+      config = [[require("config.tabout")]],
+      after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
+    })
 
     use({ -- interface for easy LSP configs
       "williamboman/nvim-lsp-installer",
