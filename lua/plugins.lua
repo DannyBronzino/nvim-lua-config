@@ -104,12 +104,12 @@ require("packer").startup({
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
           mappings = {
-            add = "Sa", -- Add surrounding in Normal and Visual modes
-            delete = "Sd", -- Delete surrounding
+            add = "<space>sa", -- Add surrounding in Normal and Visual modes
+            delete = "<space>sd", -- Delete surrounding
             find = "", -- Find surrounding (to the right)
             find_left = "", -- Find surrounding (to the left)
             highlight = "", -- Highlight surrounding
-            replace = "Sr", -- Replace surrounding
+            replace = "<space>sr", -- Replace surrounding
             update_n_lines = "", -- Update `n_lines`
           },
         })
@@ -117,15 +117,12 @@ require("packer").startup({
     })
 
     use({ -- buffer jumping like EasyMotion or Sneak
-      "ggandor/lightspeed.nvim",
+      "ggandor/leap.nvim",
       requires = "tpope/vim-repeat",
       config = function()
-        require("lightspeed").setup({
-          ignore_case = true,
-        })
+        require("leap").set_default_keymaps()
       end,
       event = "BufEnter",
-      after = "mini.nvim",
     })
 
     use({
