@@ -1,14 +1,6 @@
-local luasnip = require("luasnip")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-
-require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my_snippets" } })
-require("luasnip.loaders.from_lua").lazy_load()
-
-luasnip.filetype_extend("bib", { "tex" })
-
-luasnip.config.set_config({ enable_autosnippets = true })
+local luasnip = require("luasnip")
 
 -- local has_words_before = function()
 -- local line, col = unpack(vim.api.nvim_win_get_cursor(0))

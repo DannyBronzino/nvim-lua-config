@@ -21,7 +21,7 @@ require("packer").startup({
     use({ -- it is recommened to put impatient.nvim before any other plugins
       "lewis6991/impatient.nvim",
       config = function()
-        require("impatient") -- load impatient first
+        require("impatient")
       end,
     })
 
@@ -33,24 +33,42 @@ require("packer").startup({
     use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
       "nvim-treesitter/nvim-treesitter",
       requires = {
-        { "andymass/vim-matchup" }, -- matching parens
+        {
+          "andymass/vim-matchup",
+          config = function()
+            require("config.matchup")
+          end,
+        }, -- matching parens
         { "nvim-treesitter/nvim-treesitter-textobjects" },
       },
-      config = [[require("config.treesitter")]],
+      config = function()
+        require("config.treesitter")
+      end,
       run = ":TSUpdateSync",
     })
 
-    use({
+    use({ -- snippet engine
       "L3MON4D3/LuaSnip",
-      requires = "rafamadriz/friendly-snippets", -- vscode format snippets }) -- snippet engine
+      requires = "rafamadriz/friendly-snippets", -- vscode format snippets
       event = "BufEnter",
     })
 
     use({ -- completion engine
       "hrsh7th/nvim-cmp",
-      requires = "onsails/lspkind-nvim", -- vscode pictograms,
-      config = [[require("config.cmp")]], -- contains luasnip setup as well
-      after = "LuaSnip",
+      requires = {
+        "onsails/lspkind-nvim", -- vscode pictograms,
+        {
+          "L3MON4D3/LuaSnip",
+          requires = "rafamadriz/friendly-snippets", -- vscode format snippets
+          config = function()
+            require("config.luasnip")
+          end,
+        },
+      },
+      config = function()
+        require("config.cmp")
+      end,
+      event = "BufEnter",
     })
 
     use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
@@ -68,8 +86,10 @@ require("packer").startup({
     use({
       "abecodes/tabout.nvim",
       requires = { "nvim-treesitter" }, -- or require if not used so far
-      config = [[require("config.tabout")]],
-      after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
+      config = function()
+        require("config.tabout")
+      end,
+      after = "nvim-cmp", -- if a completion plugin is using tabs load it before
     })
 
     use({ -- interface for easy LSP configs
@@ -78,16 +98,23 @@ require("packer").startup({
         { "tami5/lspsaga.nvim" }, -- nice lsp actions
         { "neovim/nvim-lspconfig" }, -- easy lspconfig
         { "lukas-reineke/lsp-format.nvim" },
-        { "hrsh7th/cmp-nvim-lsp" }, -- completion for LSP
-        { "hrsh7th/cmp-nvim-lsp-signature-help" }, -- signature help in completion menu
+        { "hrsh7th/cmp-nvim-lsp", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for LSP
+        {
+          "hrsh7th/cmp-nvim-lsp-signature-help",
+          event = { "CmdLineEnter", "InsertEnter" }, -- signature help in completion menu
+        },
       },
-      config = [[require("config.lsp-installer")]],
+      config = function()
+        require("config.lsp-installer")
+      end,
       after = "nvim-cmp",
     })
 
     use({ -- automatic pairs
       "windwp/nvim-autopairs",
-      config = [[require("config.autopairs")]],
+      config = function()
+        require("config.autopairs")
+      end,
       event = "InsertEnter",
     })
 
@@ -114,6 +141,7 @@ require("packer").startup({
           },
         })
       end,
+      event = "BufEnter",
     })
 
     use({ -- buffer jumping like EasyMotion or Sneak
@@ -125,18 +153,12 @@ require("packer").startup({
       event = "BufEnter",
     })
 
-    use({
-      "phaazon/hop.nvim",
-      branch = "v1",
-      config = [[require("config.hop")]],
-      event = "BufEnter",
-      disable = true,
-    })
-
     use({ -- Show match number and index for search
       "kevinhwang91/nvim-hlslens",
       requires = "haya14busa/vim-asterisk", -- asterisk improved
-      config = [[require('config.hlslens')]],
+      config = function()
+        require("config.hlslens")
+      end,
       keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
       event = "CmdLineEnter",
     })
@@ -144,19 +166,28 @@ require("packer").startup({
     use({ -- tab bar and buffer switching
       "romgrk/barbar.nvim",
       requires = "kyazdani42/nvim-web-devicons", -- icons, duh
-      config = [[require("config.barbar")]],
-      event = "VimEnter",
+      config = function()
+        require("config.barbar")
+      end,
+      event = "BufEnter",
     })
 
     use({ -- status line
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons", -- icons, duh
-        "sainnhe/sonokai",
-        "rebelot/kanagawa.nvim",
-        "projekt0n/github-nvim-theme",
+        {
+          "rebelot/kanagawa.nvim",
+          config = function()
+            require("config.kanagawa")
+            vim.cmd([[colorscheme kanagawa]])
+          end,
+        },
       },
-      config = [[require("config.ui")]],
+      config = function()
+        require("config.ui")
+      end,
+      event = "WinEnter",
     })
 
     use({ -- indent markers
@@ -166,18 +197,20 @@ require("packer").startup({
 
     use({ -- notification plugin
       "rcarriga/nvim-notify",
-      config = [[require("config.notify")]],
-      event = "VimEnter",
-    })
+      config = function()
+        local nvim_notify = require("notify")
+        nvim_notify.setup({
+          -- Render style
+          render = "minimal",
+          -- Animation style
+          stages = "slide",
+          -- Default timeout for notifications
+          timeout = 300,
+        })
 
-    use({ -- escape insert quickly with "jj" or "jk" or whatever
-      "jdhao/better-escape.vim",
-      setup = function() -- need to set options FIRST
-        vim.g.better_escape_shortcut = "jj"
-        vim.g.better_escape_interval = 300
+        vim.notify = nvim_notify
       end,
-      event = "InsertEnter",
-      disable = true,
+      event = "VimEnter",
     })
 
     -- lua with packer.nvim
@@ -218,18 +251,6 @@ require("packer").startup({
       cmd = "Git",
     })
 
-    use({ -- Fixes scroll in middle of page (works poorly with soft wrapping)
-      "vim-scripts/scrollfix",
-      event = "BufEnter",
-      disable = true,
-    })
-
-    use({ -- automatic window sizing
-      "dm1try/golden_size",
-      event = "WinEnter",
-      disable = true,
-    })
-
     use({ -- fuzzy search utilizing fzf
       "nvim-telescope/telescope.nvim",
       requires = {
@@ -251,7 +272,9 @@ require("packer").startup({
         { "ahmedkhalf/project.nvim" },
         { "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
       },
-      config = [[require("config.telescope")]],
+      config = function()
+        require("config.telescope")
+      end,
       event = "BufEnter",
     })
 
@@ -268,7 +291,9 @@ require("packer").startup({
 
     use({
       "luukvbaal/nnn.nvim",
-      config = [[require("config.nnn")]],
+      config = function()
+        require("config.nnn")
+      end,
       event = "BufEnter",
     })
 
@@ -277,19 +302,23 @@ require("packer").startup({
       requires = {
         "kyazdani42/nvim-web-devicons", -- optional, for file icon
       },
-      config = [[require("config.nvim-tree")]],
+      config = function()
+        require("config.nvim-tree")
+      end,
       event = "BufEnter",
       disable = true,
     })
 
     use({
       "elihunter173/dirbuf.nvim",
-      event = "BufEnter",
+      cmd = { "Dirbuf", "DirbufQuit", "DirbufSync" },
     })
 
     use({
       "folke/which-key.nvim",
-      config = [[require("config.which-key")]],
+      config = function()
+        require("config.which-key")
+      end,
     })
   end,
   config = {
