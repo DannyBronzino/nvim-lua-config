@@ -1,15 +1,33 @@
 vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/" -- set directory for packages
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim" -- set packer installation directory
 local packer_repo = "https://github.com/wbthomason/packer.nvim" -- packer repo location
-local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir) -- installation command
+local packer_install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir) -- installation command
 
 -- Auto-install packer in case it hasn't been installed.
 if vim.fn.glob(packer_install_dir) == "" then
   vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-  vim.cmd(install_cmd)
+  vim.cmd(packer_install_cmd)
 end
 
--- Load packer.nvim
+local impatient_install_dir = vim.g.package_home .. "/opt/impatient.nvim" -- set packer installation directory
+local impatient_repo = "https://github.com/lewis6991/impatient.nvim" -- packer repo location
+local impatient_install_cmd = string.format(
+  "10split |term git clone --depth=1 %s %s",
+  impatient_repo,
+  impatient_install_dir
+) -- installation command
+
+-- Auto-install packer in case it hasn't been installed.
+if vim.fn.glob(impatient_install_dir) == "" then
+  vim.api.nvim_echo({ { "Installing impatient.nvim", "Type" } }, true, {})
+  vim.cmd(impatient_install_cmd)
+end
+
+-- load impatient.nvim
+vim.cmd("packadd impatient.nvim")
+require("impatient")
+
+-- load packer.nvim
 vim.cmd("packadd packer.nvim")
 local util = require("packer.util")
 
@@ -20,9 +38,7 @@ require("packer").startup({
     -- run :PackerSync again and then restart to fix this
     use({ -- it is recommened to put impatient.nvim before any other plugins
       "lewis6991/impatient.nvim",
-      config = function()
-        require("impatient")
-      end,
+      opt = true,
     })
 
     use({ -- packer itself, can be optional
