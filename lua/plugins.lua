@@ -16,7 +16,7 @@ local util = require("packer.util")
 require("packer").startup({
   function(use)
     -- NOTICE
-    -- impatient will throw an error on the the next startup if you clear the catch
+    -- impatient will throw an error on the the next startup if you clear the cache
     -- run :PackerSync again and then restart to fix this
     use({ -- it is recommened to put impatient.nvim before any other plugins
       "lewis6991/impatient.nvim",
