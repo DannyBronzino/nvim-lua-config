@@ -8,6 +8,15 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "gnn",
+      node_decremental = "grn",
+      -- scope_incremental = "gns",
+    },
+  },
   matchup = {
     enable = true, -- mandatory, false will disable the whole extension
     disable = {}, -- optional, list of language that will be disabled
