@@ -1,5 +1,3 @@
-require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer") -- override bibtex query
-
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline", "lua", "python", "scheme" },
   sync_install = true,
@@ -38,6 +36,8 @@ require("nvim-treesitter.configs").setup({
     },
   },
 })
+
+require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer") -- override bibtex query
 
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
