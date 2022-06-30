@@ -86,7 +86,7 @@ return require("packer").startup({
         { "hrsh7th/cmp-nvim-lsp", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for LSP
       },
       config = function()
-        require("config.lsp-installer")
+        require("config.lsp")
       end,
       after = "nvim-cmp",
     })
@@ -166,7 +166,7 @@ return require("packer").startup({
         },
       },
       config = function()
-        require("config.ui")
+        require("config.lualine")
       end,
       event = "BufEnter",
     })
