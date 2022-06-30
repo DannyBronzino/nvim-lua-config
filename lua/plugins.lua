@@ -1,41 +1,19 @@
-vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/" -- set directory for packages
-local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim" -- set packer installation directory
-local packer_repo = "https://github.com/wbthomason/packer.nvim" -- packer repo location
-local packer_install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir) -- installation command
+local package_home = vim.fn.stdpath("data") .. "/site/pack/packer/" -- set directory for packages
+local packer_install_path = package_home .. "/opt/packer.nvim"
+local is_bootstrap = false
 
--- Auto-install packer in case it hasn't been installed.
-if vim.fn.glob(packer_install_dir) == "" then
-  vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-  vim.cmd(packer_install_cmd)
+if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
+  is_bootstrap = true
+  vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. packer_install_path)
 end
 
-local impatient_install_dir = vim.g.package_home .. "/opt/impatient.nvim" -- set impatient installation directory
-local impatient_repo = "https://github.com/lewis6991/impatient.nvim" -- impatient repo location
-local impatient_install_cmd = string.format(
-  "10split |term git clone --depth=1 %s %s",
-  impatient_repo,
-  impatient_install_dir
-) -- installation command
+vim.cmd([[packadd packer.nvim]])
 
--- Auto-install impatient in case it hasn't been installed.
-if vim.fn.glob(impatient_install_dir) == "" then
-  vim.api.nvim_echo({ { "Installing impatient.nvim", "Type" } }, true, {})
-  vim.cmd(impatient_install_cmd)
-end
-
--- load impatient.nvim
-vim.cmd("packadd impatient.nvim")
-require("impatient")
-
--- load packer.nvim
-vim.cmd("packadd packer.nvim")
-local util = require("packer.util")
-
-require("packer").startup({
+return require("packer").startup({
   function(use)
     use({ -- impatient itself
       "lewis6991/impatient.nvim",
-      opt = true,
+      config = [[require("impatient")]],
     })
 
     use({ -- packer itself, can be optional
@@ -51,19 +29,13 @@ require("packer").startup({
           config = function()
             require("config.matchup")
           end,
-        }, -- matching parens
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
+        },
+        "nvim-treesitter/nvim-treesitter-textobjects",
       },
       config = function()
         require("config.treesitter")
       end,
-      run = ":TSUpdateSync",
-    })
-
-    use({ -- snippet engine
-      "L3MON4D3/LuaSnip",
-      requires = "rafamadriz/friendly-snippets", -- vscode format snippets
-      event = "BufEnter",
+      run = ":TSUpdate",
     })
 
     use({ -- completion engine
@@ -72,11 +44,22 @@ require("packer").startup({
         "onsails/lspkind-nvim", -- vscode pictograms,
         {
           "L3MON4D3/LuaSnip",
-          requires = "rafamadriz/friendly-snippets", -- vscode format snippets
+          requires = {
+            "rafamadriz/friendly-snippets", -- vscode format snippets
+            { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+          },
           config = function()
             require("config.luasnip")
           end,
         },
+        { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+        { "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for path
+        { "hrsh7th/cmp-buffer", event = "CmdLineEnter" }, -- completion for buffer contents
+        { "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
+        { "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
+        { "f3fora/cmp-spell", event = "InsertEnter" }, -- completion for spell
+        { "kdheepak/cmp-latex-symbols", event = "InsertEnter" }, -- easy to enter latex symbols
+        { "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }, -- completion for digraphs
       },
       config = function()
         require("config.cmp")
@@ -84,21 +67,10 @@ require("packer").startup({
       event = "BufEnter",
     })
 
-    use({ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }) -- completion for LuaSnip
-    use({ "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }) -- completion for path
-    use({ "hrsh7th/cmp-buffer", event = "CmdLineEnter" }) -- completion for buffer contents
-    use({ "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }) -- completion for cmdline
-
-    use({ "lukas-reineke/cmp-rg", event = "InsertEnter" }) -- completion for ripgrep
-
-    use({ "f3fora/cmp-spell", event = "InsertEnter" }) -- completion for spell
-    use({ "kdheepak/cmp-latex-symbols", event = "InsertEnter" }) -- easy to enter latex symbols
-    use({ "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }) -- completion for digraphs
-
     -- Lua
     use({
       "abecodes/tabout.nvim",
-      requires = { "nvim-treesitter" }, -- or require if not used so far
+      wants = "nvim-treesitter", -- or require if not used so far
       config = function()
         require("config.tabout")
       end,
@@ -112,10 +84,6 @@ require("packer").startup({
         { "neovim/nvim-lspconfig" }, -- easy lspconfig
         { "lukas-reineke/lsp-format.nvim" },
         { "hrsh7th/cmp-nvim-lsp", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for LSP
-        {
-          "hrsh7th/cmp-nvim-lsp-signature-help",
-          event = { "CmdLineEnter", "InsertEnter" }, -- signature help in completion menu
-        },
       },
       config = function()
         require("config.lsp-installer")
@@ -200,12 +168,13 @@ require("packer").startup({
       config = function()
         require("config.ui")
       end,
-      event = "WinEnter",
+      event = "BufEnter",
     })
 
     use({ -- indent markers
       "lukas-reineke/indent-blankline.nvim",
       event = "BufEnter",
+      disable = true,
     })
 
     use({ -- notification plugin
@@ -240,6 +209,7 @@ require("packer").startup({
           end,
         })
       end,
+      event = "InsertEnter",
     })
 
     use({ -- LSP doesn't do formatting on some languages so use this
@@ -269,12 +239,12 @@ require("packer").startup({
       requires = {
         { "nvim-lua/popup.nvim" }, -- api for popups
         { "nvim-lua/plenary.nvim" }, -- extra neovim functions
-        { -- fuzzy search
-          "junegunn/fzf",
-          run = function()
-            vim.fn["fzf#install"]()
-          end,
-        },
+        --{ -- fuzzy search
+        --"junegunn/fzf",
+        --run = function()
+        --vim.fn["fzf#install"]()
+        --end,
+        --},
         { -- interface for fzf
           "nvim-telescope/telescope-fzf-native.nvim",
           run = "make",
@@ -302,6 +272,7 @@ require("packer").startup({
       event = "CmdLineEnter",
     })
 
+    -- file browser/picker
     use({
       "luukvbaal/nnn.nvim",
       config = function()
@@ -333,14 +304,11 @@ require("packer").startup({
         require("config.which-key")
       end,
     })
+    if is_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = {
-    compile_path = util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
     autoremove = true,
   },
 })
-
-local status, _ = pcall(require, "packer_compiled")
-if not status then
-  vim.notify("Error requiring packer_compiled.lua: run PackerSync to fix!")
-end
