@@ -158,15 +158,16 @@ return require("packer").startup({
       requires = {
         "kyazdani42/nvim-web-devicons", -- icons, duh
         {
-          "rebelot/kanagawa.nvim",
-          -- kanagawa conf is in config.ui
+          "rebelot/kanagawa.nvim", -- kanagawa conf is in config.ui
+          config = function()
+            vim.cmd([[colorscheme kanagawa]]) -- lualine will automatically switch to whatever colorscheme is called here
+          end,
         },
       },
       config = function()
         require("config.ui")
-        vim.cmd([[colorscheme kanagawa]]) -- lualine will automatically switch to whatever colorscheme is called here
       end,
-      event = "BufEnter",
+      event = "VimEnter",
     })
 
     use({ -- indent markers

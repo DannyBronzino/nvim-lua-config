@@ -25,21 +25,6 @@ require("kanagawa").setup({
   globalstatus = true,
 })
 
-vim.api.nvim_create_autocmd("Colorscheme", {
-  callback = function()
-    -- change lualine colorscheme
-    require("lualine").setup({
-      options = {
-        theme = "auto",
-      },
-    })
-    -- the lua doesn't seem to work in the autocmd
-    -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
-    vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
-  end,
-  desc = "changes lualine colorscheme when nvim colorscheme changes",
-})
-
 -- displays spell indicator
 local function spell()
   if vim.o.spell then
@@ -99,4 +84,19 @@ require("lualine").setup({
     "fugitive",
     "nvim-tree",
   },
+})
+
+vim.api.nvim_create_autocmd("Colorscheme", {
+  callback = function()
+    -- change lualine colorscheme
+    require("lualine").setup({
+      options = {
+        theme = "auto",
+      },
+    })
+    -- the lua doesn't seem to work in the autocmd
+    -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
+    vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
+  end,
+  desc = "changes lualine colorscheme when nvim colorscheme changes",
 })
