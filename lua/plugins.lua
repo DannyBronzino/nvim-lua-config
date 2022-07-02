@@ -159,14 +159,12 @@ return require("packer").startup({
         "kyazdani42/nvim-web-devicons", -- icons, duh
         {
           "rebelot/kanagawa.nvim",
-          config = function()
-            require("config.kanagawa")
-            vim.cmd([[colorscheme kanagawa]])
-          end,
+          -- kanagawa conf is in config.ui
         },
       },
       config = function()
-        require("config.lualine")
+        require("config.ui")
+        vim.cmd([[colorscheme kanagawa]]) -- lualine will automatically switch to whatever colorscheme is called here
       end,
       event = "BufEnter",
     })
