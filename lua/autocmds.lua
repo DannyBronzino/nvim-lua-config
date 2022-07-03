@@ -43,7 +43,7 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
+au("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -52,11 +52,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlights on yank",
 })
 
--- resume edit position
-vim.cmd([[
-augroup resume_edit_position
-  autocmd!
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' | execute "normal! g`\"zvzz" | endif
-augroup END
-]])
+au({ "BufRead", "BufReadPost" }, {
+  callback = function()
+    local row, column = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+    local buf_line_count = vim.api.nvim_buf_line_count(0)
+
+    if row >= 1 and row <= buf_line_count then
+      vim.api.nvim_win_set_cursor(0, { row, column })
+    end
+  end,
+  desc = "resets cursor to last position",
+})
