@@ -1,7 +1,8 @@
 local au = vim.api.nvim_create_autocmd
+local create_augroup = vim.api.nvim.create_au_group
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
-local number_toggle = vim.api.nvim_create_augroup("number_toggle", { clear = true })
+local number_toggle = create_augroup("number_toggle", { clear = true })
 
 au({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
   callback = function()
@@ -23,7 +24,7 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   desc = "set numbers to absolute when entering Insert mode",
 })
 
--- local cursorline_toggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+-- local cursorline_toggle = create_augroup("numbertoggle", { clear = true })
 
 -- au("InsertEnter", {
 --   callback = function()
@@ -42,14 +43,14 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- })
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+local highlight_group = create_augroup("YankHighlight", { clear = true })
 au("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
   pattern = "*",
-  desc = "Highlights on yank",
+  desc = "highlights on yank",
 })
 
 au({ "BufRead", "BufReadPost" }, {
