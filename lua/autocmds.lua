@@ -60,6 +60,8 @@ au({ "BufRead", "BufReadPost" }, {
     if row >= 1 and row <= buf_line_count then
       vim.api.nvim_win_set_cursor(0, { row, column })
     end
+    -- places line two from the top
+    vim.api.nvim_feedkeys("zt2k2j", "n", true)
   end,
   desc = "resets cursor to last position",
 })
