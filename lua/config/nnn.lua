@@ -47,7 +47,3 @@ require("nnn").setup({
   buflisted = false, -- wether or not nnn buffers show up in the bufferlist
   quitcd = "tcd", -- or "cd" / "lcd", command to run if quitcd file is found
 })
-
-local map = require("utils").map
-
-map("n", "<space>n", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })

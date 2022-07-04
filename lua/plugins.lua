@@ -11,9 +11,11 @@ vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup({
   function(use)
-    use({ -- impatient itself
+    use({
       "lewis6991/impatient.nvim",
-      config = [[require("impatient")]],
+      config = function()
+        require("impatient")
+      end,
     })
 
     use({ -- packer itself, can be optional
@@ -67,28 +69,26 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    -- Lua
-    use({
-      "abecodes/tabout.nvim",
-      wants = "nvim-treesitter", -- or require if not used so far
-      config = function()
-        require("config.tabout")
-      end,
-      after = "nvim-cmp", -- if a completion plugin is using tabs load it before
-    })
-
     use({ -- interface for easy LSP configs
       "williamboman/nvim-lsp-installer",
       requires = {
         { "tami5/lspsaga.nvim" }, -- nice lsp actions
         { "neovim/nvim-lspconfig" }, -- easy lspconfig
         { "lukas-reineke/lsp-format.nvim" },
-        { "hrsh7th/cmp-nvim-lsp", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for LSP
       },
       config = function()
         require("config.lsp")
       end,
       after = "nvim-cmp",
+    })
+
+    use({
+      "abecodes/tabout.nvim",
+      wants = "nvim-treesitter", -- or require if not used so far
+      config = function()
+        require("config.tabout")
+      end,
+      event = "InsertEnter",
     })
 
     use({ -- automatic pairs
@@ -99,9 +99,11 @@ return require("packer").startup({
       event = "InsertEnter",
     })
 
-    use({ "wellle/targets.vim", event = "BufEnter" }) -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
+    -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
+    use({ "wellle/targets.vim", event = "BufEnter" })
 
-    use({ -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+    -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+    use({
       "chaoren/vim-wordmotion",
       event = "BufEnter",
     })
@@ -144,11 +146,11 @@ return require("packer").startup({
       event = "CmdLineEnter",
     })
 
-    use({ -- tab bar and buffer switching
-      "romgrk/barbar.nvim",
-      requires = "kyazdani42/nvim-web-devicons", -- icons, duh
+    -- colorscheme based on Hokusai
+    use({
+      "rebelot/kanagawa.nvim",
       config = function()
-        require("config.barbar")
+        require("config.kanagawa")
       end,
       event = "BufEnter",
     })
@@ -157,23 +159,20 @@ return require("packer").startup({
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons", -- icons, duh
-        {
-          "rebelot/kanagawa.nvim", -- kanagawa conf is in config.ui
-          config = function()
-            vim.cmd([[colorscheme kanagawa]]) -- lualine will automatically switch to whatever colorscheme is called here
-          end,
-        },
       },
       config = function()
-        require("config.ui")
+        require("config.lualine")
       end,
-      event = "VimEnter",
+      after = "kanagawa.nvim",
     })
 
-    use({ -- indent markers
-      "lukas-reineke/indent-blankline.nvim",
-      event = "BufEnter",
-      disable = true,
+    use({ -- tab bar and buffer switching
+      "romgrk/barbar.nvim",
+      requires = "kyazdani42/nvim-web-devicons", -- icons, duh
+      config = function()
+        require("config.barbar")
+      end,
+      after = "kanagawa.nvim", -- needs to be after or the colorscheme doesn't apply
     })
 
     use({ -- notification plugin
@@ -194,7 +193,7 @@ return require("packer").startup({
       event = "VimEnter",
     })
 
-    -- lua with packer.nvim
+    -- exit insert mode with jj or jk or whatever
     use({
       "max397574/better-escape.nvim",
       config = function()
@@ -211,12 +210,14 @@ return require("packer").startup({
       event = "InsertEnter",
     })
 
-    use({ -- LSP doesn't do formatting on some languages so use this
+    -- LSP doesn't do formatting on some languages so use this
+    use({
       "sbdchd/neoformat",
       cmd = "Neoformat",
     })
 
-    use({ -- git in the gutter
+    -- git in the gutter
+    use({
       "lewis6991/gitsigns.nvim",
       requires = "nvim-lua/plenary.nvim", -- extra neovim functions
       config = function()
@@ -225,7 +226,8 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    use({ -- git inside vim
+    -- git inside vim
+    use({
       "tpope/vim-fugitive",
       setup = function()
         vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
@@ -233,40 +235,76 @@ return require("packer").startup({
       cmd = "Git",
     })
 
-    use({ -- fuzzy search utilizing fzf
+    -- fuzzy search utilizing fzf
+    use({
       "nvim-telescope/telescope.nvim",
       requires = {
-        { "nvim-lua/popup.nvim" }, -- api for popups
-        { "nvim-lua/plenary.nvim" }, -- extra neovim functions
-        --{ -- fuzzy search
-        --"junegunn/fzf",
-        --run = function()
-        --vim.fn["fzf#install"]()
-        --end,
-        --},
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
         { -- interface for fzf
           "nvim-telescope/telescope-fzf-native.nvim",
           run = "make",
         },
-        { "nvim-telescope/telescope-packer.nvim" }, -- packer browser
-        { "nvim-telescope/telescope-symbols.nvim" }, -- emojis and other symbols
-        { "benfowler/telescope-luasnip.nvim" }, -- luasnip browser
-        { "ahmedkhalf/project.nvim" },
-        { "sudormrfbin/cheatsheet.nvim", cmd = "Cheatsheet" }, -- list of commands
+        "nvim-telescope/telescope-symbols.nvim", -- emojis and other symbols
       },
+      setup = function()
+        -- use find_files if not in git project
+        local project_files = function(opts)
+          local ok = pcall(require("telescope.builtin").git_files, opts)
+          if not ok then
+            require("telescope.builtin").find_files(opts)
+          end
+        end
+
+        local map = require("utils").map
+
+        map("n", "<leader><space>", function()
+          require("telescope.builtin").buffers()
+        end, { desc = "display open buffers with telescope" })
+
+        map("n", "<leader>ff", function()
+          project_files(require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } }))
+        end, { desc = "display project files with telescope" })
+
+        map("n", "<leader>fb", function()
+          require("telescope.builtin").current_buffer_fuzzy_find({ layout_strategy = "bottom_pane" })
+        end, { desc = "current buffer fuzzy find with telescope" })
+
+        map("n", "<leader>fh", function()
+          require("telescope.builtin").help_tags({ layout_strategy = "bottom_pane" })
+        end, { desc = "display help topics with telescope" })
+
+        map("n", "<leader>fd", function()
+          require("telescope.builtin").grep_string({ layout_strategy = "bottom_pane" })
+        end, { desc = "grep string with telescope" })
+
+        map("n", "<leader>fg", function()
+          require("telescope.builtin").live_grep({ layout_strategy = "bottom_pane" })
+        end, { desc = "live grep with telescope" })
+
+        map("n", "<leader>?", function()
+          require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
+        end, { desc = "display recent files with telescope" })
+
+        map("n", "<leader>ft", function()
+          require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
+        end, { desc = "display tags with telescope" })
+      end,
       config = function()
         require("config.telescope")
       end,
-      event = "BufEnter",
+      module = "telescope",
     })
 
-    use({ -- better quickfix window
+    -- better quickfix window
+    use({
       "kevinhwang91/nvim-bqf",
       config = [[require("config.bqf")]],
       ft = "qf",
     })
 
-    use({ -- creates missing directories when saving a new file
+    -- creates missing directories when saving a new file
+    use({
       "jghauser/mkdir.nvim",
       event = "CmdLineEnter",
     })
@@ -274,29 +312,24 @@ return require("packer").startup({
     -- file browser/picker
     use({
       "luukvbaal/nnn.nvim",
+      setup = function()
+        local map = require("utils").map
+
+        map("n", "<space>n", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
+      end,
       config = function()
         require("config.nnn")
       end,
-      event = "BufEnter",
+      cmd = "NnnPicker",
     })
 
-    use({ -- file explorer
-      "kyazdani42/nvim-tree.lua",
-      requires = {
-        "kyazdani42/nvim-web-devicons", -- optional, for file icon
-      },
-      config = function()
-        require("config.nvim-tree")
-      end,
-      event = "BufEnter",
-      disable = true,
-    })
-
+    -- rename files in neovim
     use({
       "elihunter173/dirbuf.nvim",
       cmd = { "Dirbuf", "DirbufQuit", "DirbufSync" },
     })
 
+    -- shows you which key comes next
     use({
       "folke/which-key.nvim",
       config = function()
@@ -309,5 +342,9 @@ return require("packer").startup({
   end,
   config = {
     autoremove = true,
+    profile = {
+      enable = true,
+      threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
   },
 })
