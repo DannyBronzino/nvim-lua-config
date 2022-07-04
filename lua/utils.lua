@@ -3,7 +3,7 @@ local M = {}
 ---easier vim.keymap.set syntax
 ---@param mode string|table nvim mode for mapping
 ---@param left_hand_side string
----@param right_hand_side string
+---@param right_hand_side string|function
 ---@param opts table|nil if silent = false not present then it will be set to true
 ---@return function vim.keymap.set
 function M.map(mode, left_hand_side, right_hand_side, opts)
