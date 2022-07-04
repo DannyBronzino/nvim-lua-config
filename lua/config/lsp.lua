@@ -134,12 +134,6 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Set up racket for lisps
-require("lspconfig").racket_langserver.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
 -- set up texlab for latex
 lspconfig.texlab.setup({
   on_attach = on_attach,
@@ -159,9 +153,12 @@ lspconfig.texlab.setup({
       },
     },
   },
+})
 
-  require("lspconfig").ltex.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }),
+require("lspconfig").ltex.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  ltex = {
+    language = "en-US",
+  },
 })
