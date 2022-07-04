@@ -320,7 +320,7 @@ return require("packer").startup({
       config = function()
         require("config.nnn")
       end,
-      cmd = "NnnPicker",
+      cmd = { "NnnPicker", "NnnExplorer" },
     })
 
     -- rename files in neovim
