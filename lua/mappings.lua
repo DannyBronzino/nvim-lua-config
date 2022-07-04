@@ -1,6 +1,5 @@
 local map = require("utils").map
 -- set leader to comma
-map("", "<Space>", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
@@ -97,7 +96,7 @@ map("n", "zt", function()
   else
     vim.api.nvim_feedkeys("zt2k2j", "n", true)
   end
-end, { desc = "place current line 2 down from the top" })
+end, { desc = "works like zt, but places line 2 lines from the top of the screen" })
 
 map("i", "kj", function()
   if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
@@ -106,7 +105,11 @@ map("i", "kj", function()
     local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
     vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
   end
-end, { desc = "place current line 2 down from the top" })
+end, { desc = "works like zt, but places line 2 lines from the top of the screen" })
+
+map("n", "G", function()
+  vim.api.nvim_feedkeys("Gzt2k2j", "n", true)
+end, { desc = "works like G, but places EOF 2 lines from the top of the screen" })
 
 vim.cmd([[
 " Break inserted text into smaller undo units.
