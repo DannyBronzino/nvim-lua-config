@@ -18,19 +18,19 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    ["<c-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-        -- elseif has_words_before() then
-        -- cmp.complete()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
     end, { "i", "s" }),
 
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<c-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -40,16 +40,14 @@ cmp.setup({
       end
     end, { "i", "s" }),
 
-    ["<Esc>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<esc>"] = cmp.mapping.close(),
+    ["<c-space>"] = cmp.mapping.confirm({ select = true }),
+    ["<c-e>"] = cmp.mapping.abort(),
     ["<c-d>"] = cmp.mapping.scroll_docs(-3),
     ["<c-f>"] = cmp.mapping.scroll_docs(3),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "luasnip" }, -- for luasnip
-    -- { name = "nvim_lsp" }, -- for nvim-lsp
     { -- ripgrep completion
       name = "rg",
       max_item_count = 3,
@@ -61,6 +59,7 @@ cmp.setup({
     },
     { name = "path" }, -- for path completion
     { name = "latex_symbols", max_item_count = 3 },
+    { name = "luasnip" }, -- for luasnip
     -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
   }),
   completion = {
