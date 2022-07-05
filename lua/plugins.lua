@@ -74,7 +74,7 @@ return require("packer").startup({
       requires = {
         { "tami5/lspsaga.nvim" }, -- nice lsp actions
         { "neovim/nvim-lspconfig" }, -- easy lspconfig
-        { "lukas-reineke/lsp-format.nvim" },
+        { "vigoux/ltex-ls.nvim" },
       },
       config = function()
         require("config.lsp")

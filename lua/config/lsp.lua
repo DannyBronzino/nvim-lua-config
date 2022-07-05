@@ -45,8 +45,6 @@ require("nvim-lsp-installer").setup({
   automatic_installation = true, -- based on which servers are set up via lspconfig
 })
 
-require("lsp-format").setup()
-
 local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
@@ -59,45 +57,42 @@ local on_attach = function(client, bufnr)
     return vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
   end
   -- mappings.
-  map("n", "gd", "<cmd>Lspsaga lsp_finder<cr>")
-  map("n", "gi", "<cmd>Lspsaga implement<cr>")
-  map("n", "<F2>", "<cmd>Lspsaga rename<cr>")
-  map("n", "ga", "<cmd>Lspsaga code_action<cr>")
-  map("x", "ga", ":<c-u>Lspsaga range_code_action<cr>")
-  map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
-  map("n", "<c-k>", "<cmd>Lspsaga signature_help<cr>")
+  if client.server_capabilities.definitionProvider then
+    map("n", "gd", "<cmd>Lspsaga preview_definition<cr>")
+  end
+
+  if client.server_capabilities.renameProvider then
+    map("n", "<F2>", "<cmd>Lspsaga rename<cr>")
+  end
+
+  if client.server_capabilities.codeActionProvider then
+    map("n", "ga", "<cmd>Lspsaga code_action<cr>")
+    map("x", "ga", ":<c-u>Lspsaga range_code_action<cr>")
+  end
+
+  if client.server_capabilities.hoverProvider then
+    map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+  end
+
+  if client.server_capabilities.signatureHelpProvider then
+    map("n", "<c-k>", "<cmd>Lspsaga signature_help<cr>")
+  end
+
   map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
   map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
   map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
-  map("n", "<c-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
-  map("n", "<c-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
-  map("n", "<leader>ft", function()
-    require("telescope.builtin").lsp_dynamic_workspace_symbols(require("telescope.themes").get_dropdown({
-      layout_config = {
-        width = 0.5,
-      },
-    }))
-  end, { desc = "displays workspace symbols using telescope" })
 
-  -- for lsp-format
-  require("lsp-format").on_attach(client)
-  vim.cmd([[cabbrev wq execute "Format sync" <bar> wq]])
+  if client.server_capabilities.workspaceSymbolProvider then
+    map("n", "<leader>ft", function()
+      require("telescope.builtin").lsp_dynamic_workspace_symbols(require("telescope.themes").get_dropdown({
+        layout_config = {
+          width = 0.5,
+        },
+      }))
+    end, { desc = "displays workspace symbols using telescope" })
+  end
 
-  -- Set some key bindings conditional on server capabilities
-  -- if client.server_capabilities.document_formatting then
-  -- map("n", "<space>f", function()
-  -- vim.lsp.buf.format()
-  -- end)
-  -- else
-  -- map("n", "<space>f", "<cmd>Neoformat<CR>")
-  -- end
-  -- if client.server_capabilities.document_range_formatting then
-  -- map("x", "<space>f", function()
-  -- vim.lsp.buf.range_formatting()
-  -- end)
-  -- end
-
-  -- The blow command will highlight the current variable and its usages in the buffer.
+  -- The below command will highlight the current variable and its usages in the buffer.
   if client.server_capabilities.document_highlight then
     vim.cmd([[
       hi! link LspReferenceRead Visual
@@ -155,10 +150,44 @@ lspconfig.texlab.setup({
   },
 })
 
-require("lspconfig").ltex.setup({
+require("ltex-ls").setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  ltex = {
-    language = "en-US",
+  use_spellfile = false,
+  settings = {
+    ltex = {
+      enabled = { "latex", "tex", "bib", "markdown" },
+      language = "en-US",
+      diagnosticSeverity = "information",
+      sentenceCacheSize = 2000,
+      additionalRules = {
+        enablePickyRules = true,
+        motherTongue = "en",
+      },
+      disabledRules = {},
+      dictionary = (function()
+        -- For dictionary, search for files in the runtime to have
+        -- and include them as externals the format for them is
+        -- dict/{LANG}.txt
+        --
+        -- Also add dict/default.txt to all of them
+        local files = {}
+        for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
+          local lang = vim.fn.fnamemodify(file, ":t:r")
+          local fullpath = vim.fs.normalize(file, ":p")
+          files[lang] = { ":" .. fullpath }
+        end
+
+        if files.default then
+          for lang, _ in pairs(files) do
+            if lang ~= "default" then
+              vim.list_extend(files[lang], files.default)
+            end
+          end
+          files.default = nil
+        end
+        return files
+      end)(),
+    },
   },
 })
