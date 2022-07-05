@@ -61,7 +61,6 @@ return require("packer").startup({
       -- vscode format snippets
       requires = {
         "rafamadriz/friendly-snippets",
-        "saadparwaiz1/cmp_luasnip",
       },
       config = function()
         require("config.luasnip")
@@ -73,6 +72,8 @@ return require("packer").startup({
     use({
       "hrsh7th/nvim-cmp",
       requires = {
+        -- completion for luasnip
+        "saadparwaiz1/cmp_luasnip",
         -- completion for paths
         {
           "hrsh7th/cmp-path",
