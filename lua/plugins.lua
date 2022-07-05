@@ -52,85 +52,102 @@ return require("packer").startup({
     -- vscode pictograms
     use({
       "onsails/lspkind-nvim",
-      event = "BufEnter",
+      module = "lspkind",
+    })
+
+    -- vscode format snippets
+    use({
+      "rafamadriz/friendly-snippets",
+      module = "luasnip.loaders.from_vscode",
     })
 
     -- snippet engine
     use({
       "L3MON4D3/LuaSnip",
-      -- vscode format snippets
-      requires = {
-        "rafamadriz/friendly-snippets",
-      },
       config = function()
         require("config.luasnip")
       end,
-      event = "BufEnter",
+      module = "luasnip",
     })
 
     -- completion engine
     use({
       "hrsh7th/nvim-cmp",
-      requires = {
-        -- completion for luasnip
-        "saadparwaiz1/cmp_luasnip",
-        -- completion for paths
-        {
-          "hrsh7th/cmp-path",
-          event = {
-            "CmdLineEnter",
-            "InsertEnter",
-          },
-        },
-        -- completion for buffer contents
-        {
-          "hrsh7th/cmp-buffer",
-          event = "CmdLineEnter",
-        },
-        -- completion for cmdline
-        {
-          "hrsh7th/cmp-cmdline",
-          event = "CmdLineEnter",
-        },
-        -- completion for ripgrep
-        {
-          "lukas-reineke/cmp-rg",
-          event = "InsertEnter",
-        },
-        -- easy to enter symbols using latex codes
-        {
-          "kdheepak/cmp-latex-symbols",
-          event = "InsertEnter",
-        },
-        -- completion for digraphs, very annoying
-        {
-          "dmitmel/cmp-digraphs",
-          event = "InsertEnter",
-          disable = true,
-        },
-      },
+      requires = {},
       config = function()
         require("config.cmp")
       end,
       event = { "InsertEnter", "CmdLineEnter" },
     })
 
+    -- completion for paths
+    use({
+      "hrsh7th/cmp-path",
+      event = {
+        "CmdLineEnter",
+        "InsertEnter",
+      },
+      after = "nvim-cmp",
+    })
+
+    -- completion for luasnip
+    use({
+      "saadparwaiz1/cmp_luasnip",
+      event = "InsertEnter",
+    })
+
+    -- completion for buffer contents
+    use({
+      "hrsh7th/cmp-buffer",
+      event = "CmdLineEnter",
+      after = "nvim-cmp",
+    })
+
+    -- completion for cmdline
+    use({
+      "hrsh7th/cmp-cmdline",
+      event = "CmdLineEnter",
+      after = "nvim-cmp",
+    })
+
+    -- completion for ripgrep
+    use({
+      "lukas-reineke/cmp-rg",
+      event = "InsertEnter",
+      after = "nvim-cmp",
+    })
+
+    -- completion for digraphs, very annoying
+    use({
+      "dmitmel/cmp-digraphs",
+      event = "InsertEnter",
+      after = "nvim-cmp",
+      disable = true,
+    })
+
+    -- easy to enter symbols using latex codes
+    use({
+      "kdheepak/cmp-latex-symbols",
+      event = "InsertEnter",
+      after = "nvim-cmp",
+    })
+
     -- easy lspconfig
     use({
       "neovim/nvim-lspconfig",
-      ft = { "tex", "bib" },
+      module = "lspconfig",
     })
 
     -- nice lsp actions
     use({
       "tami5/lspsaga.nvim",
-      after = "nvim-lspconfig",
+      module = "lspsaga",
     })
 
     -- wrapper for ltex so you can use codeactions
     use({
       "vigoux/ltex-ls.nvim",
-      after = "lspsaga.nvim",
+      module = "ltex-ls",
     })
 
     -- interface for easy LSP installation and config
@@ -146,7 +163,7 @@ return require("packer").startup({
       config = function()
         require("config.lsp")
       end,
-      after = "ltex-ls.nvim",
+      event = "BufEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
@@ -169,7 +186,10 @@ return require("packer").startup({
     })
 
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
-    use({ "wellle/targets.vim", event = "BufEnter" })
+    use({
+      "wellle/targets.vim",
+      event = "BufEnter",
+    })
 
     -- divides words into smaller chunks
     -- e.g. camelCase becomes (camel) (Case) when using w motion
