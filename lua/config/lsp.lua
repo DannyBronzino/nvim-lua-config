@@ -48,6 +48,7 @@ require("nvim-lsp-installer").setup({
 local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
+  -- mapping function
   local map = function(mode, left_hand_side, right_hand_side, opts)
     opts = opts or { silent = true }
     if opts.silent == nil then
@@ -56,32 +57,43 @@ local on_attach = function(client, bufnr)
     opts.buffer = bufnr
     return vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
   end
-  -- mappings.
+
+  -- show definition
   if client.server_capabilities.definitionProvider then
     map("n", "gd", "<cmd>Lspsaga preview_definition<cr>")
   end
 
+  -- rename
   if client.server_capabilities.renameProvider then
     map("n", "<F2>", "<cmd>Lspsaga rename<cr>")
   end
 
+  -- code actions
   if client.server_capabilities.codeActionProvider then
     map("n", "ga", "<cmd>Lspsaga code_action<cr>")
     map("x", "ga", ":<c-u>Lspsaga range_code_action<cr>")
   end
 
+  -- show hover docs
   if client.server_capabilities.hoverProvider then
     map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
   end
 
+  -- show signature help
   if client.server_capabilities.signatureHelpProvider then
     map("n", "<c-k>", "<cmd>Lspsaga signature_help<cr>")
   end
 
+  -- show diagnostic
   map("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>")
+
+  -- jump to next diagnostic and show
   map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>")
+
+  -- jump to previous diagnostic and show
   map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
 
+  -- use telescope to show workspace symbols
   if client.server_capabilities.workspaceSymbolProvider then
     map("n", "<leader>ft", function()
       require("telescope.builtin").lsp_dynamic_workspace_symbols(require("telescope.themes").get_dropdown({
@@ -106,27 +118,15 @@ local on_attach = function(client, bufnr)
     ]])
   end
 
-  -- vim.api.nvim_create_autocmd("CursorHold", {
-  -- buffer = bufnr,
-  -- callback = function()
-  -- local opts = {
-  -- focusable = false,
-  -- close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-  -- border = "single",
-  -- source = "always", -- show source in diagnostic popup window
-  -- prefix = " ",
-  -- }
-  -- vim.diagnostic.open_float(nil, opts)
-  -- end,
-  -- })
+  -- turn off virtual annotation
+  vim.diagnostic.config({ virtual_text = false })
 
-  vim.diagnostic.config({ virtual_text = false }) -- turn off virtual annotation
-
+  -- send notification on server start
   local msg = string.format("Language server %s started!", client.name)
   vim.notify(msg, "info")
 end
 
--- nvim-cmp supports additional completion capabilities
+-- add additional completion capabilities from nvim-cmp
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- set up texlab for latex
@@ -150,6 +150,7 @@ lspconfig.texlab.setup({
   },
 })
 
+-- set up ltex for prose
 require("ltex-ls").setup({
   on_attach = on_attach,
   capabilities = capabilities,
