@@ -49,28 +49,30 @@ return require("packer").startup({
       run = ":TSUpdate",
     })
 
+    -- vscode pictograms
+    use({
+      "onsails/lspkind-nvim",
+      event = "BufEnter",
+    })
+
+    -- snippet engine
+    use({
+      "L3MON4D3/LuaSnip",
+      -- vscode format snippets
+      requires = {
+        "rafamadriz/friendly-snippets",
+        "saadparwaiz1/cmp_luasnip",
+      },
+      config = function()
+        require("config.luasnip")
+      end,
+      event = "BufEnter",
+    })
+
     -- completion engine
     use({
       "hrsh7th/nvim-cmp",
       requires = {
-        -- vscode pictograms
-        {
-          "onsails/lspkind-nvim",
-        },
-        -- snippet engine
-        {
-          "L3MON4D3/LuaSnip",
-          -- vscode format snippets
-          requires = "rafamadriz/friendly-snippets",
-          config = function()
-            require("config.luasnip")
-          end,
-        },
-        -- completion for luasnip
-        {
-          "saadparwaiz1/cmp_luasnip",
-          event = "InsertEnter",
-        },
         -- completion for paths
         {
           "hrsh7th/cmp-path",
@@ -94,11 +96,6 @@ return require("packer").startup({
           "lukas-reineke/cmp-rg",
           event = "InsertEnter",
         },
-        -- completion for spelling
-        {
-          "f3fora/cmp-spell",
-          event = "InsertEnter",
-        },
         -- easy to enter symbols using latex codes
         {
           "kdheepak/cmp-latex-symbols",
@@ -114,7 +111,7 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = "BufEnter",
+      event = { "InsertEnter", "CmdLineEnter" },
     })
 
     -- easy lspconfig

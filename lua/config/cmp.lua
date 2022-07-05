@@ -2,10 +2,10 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 
--- local has_words_before = function()
--- local line, col = unpack(vim.api.nvim_win_get_cursor(0))
--- return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
--- end
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 cmp.setup({
   snippet = {
@@ -43,11 +43,10 @@ cmp.setup({
     ["<Esc>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<c-p>"] = cmp.mapping.scroll_docs(-3),
-    ["<c-n>"] = cmp.mapping.scroll_docs(3),
+    ["<c-d>"] = cmp.mapping.scroll_docs(-3),
+    ["<c-f>"] = cmp.mapping.scroll_docs(3),
   }),
   sources = cmp.config.sources({
-    { name = "spell" }, -- for spelling
     { name = "nvim_lsp" },
     { name = "luasnip" }, -- for luasnip
     -- { name = "nvim_lsp" }, -- for nvim-lsp
@@ -75,7 +74,6 @@ cmp.setup({
       -- with_text = true,
       mode = "symbol",
       menu = {
-        spell = "[Spell]",
         nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
         rg = "[RG]",
