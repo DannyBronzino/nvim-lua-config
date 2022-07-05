@@ -1,5 +1,3 @@
-require("telescope").load_extension("fzf") -- FZF integration
-
 -- wrap telescope results
 vim.api.nvim_create_autocmd("User", {
   pattern = "TelescopePreviewerLoaded",
