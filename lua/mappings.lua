@@ -103,7 +103,7 @@ map("i", "kj", function()
     return ""
   else
     local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
-    vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", true)
+    vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", false)
   end
 end, { desc = "works like zt, but places line 2 lines from the top of the screen" })
 
