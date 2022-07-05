@@ -144,6 +144,21 @@ return require("packer").startup({
       module = "lspsaga",
     })
 
+    -- nice quickfix menu for diagnostics
+    use({
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      setup = function()
+        local map = require("utils").map
+
+        map("n", "<space>t", "<cmd>Trouble<cr>")
+      end,
+      config = function()
+        require("trouble").setup()
+      end,
+      cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
+    })
+
     -- wrapper for ltex so you can use codeactions
     use({
       "vigoux/ltex-ls.nvim",
