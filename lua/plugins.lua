@@ -66,7 +66,6 @@ return require("packer").startup({
         -- snippet engine
         {
           "L3MON4D3/LuaSnip",
-          requires = {},
           config = function()
             require("config.luasnip")
           end,
