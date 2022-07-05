@@ -144,7 +144,7 @@ return require("packer").startup({
       module = "lspsaga",
     })
 
-    -- nice quickfix menu for diagnostics
+    -- nice quickfix-like menu for diagnostics
     use({
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
