@@ -1,5 +1,7 @@
-local package_home = vim.fn.stdpath("data") .. "/site/pack/packer/" -- set directory for packages
+local package_home = vim.fn.stdpath("data") .. "/site/pack/packer/"
+
 local packer_install_path = package_home .. "/opt/packer.nvim"
+
 local is_bootstrap = false
 
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
@@ -11,6 +13,7 @@ vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup({
   function(use)
+    -- speeds up loading
     use({
       "lewis6991/impatient.nvim",
       config = function()
@@ -18,50 +21,69 @@ return require("packer").startup({
       end,
     })
 
-    use({ -- packer itself, can be optional
+    -- packer itself, can be optional
+    use({
       "wbthomason/packer.nvim",
       opt = true,
     })
 
-    use({ -- syntax highlighting, folding, and more... doesn't always load if you make it optional (i.e. use an event)
+    -- syntax highlighting, folding, and more...
+    -- doesn't always load if you make it optional (i.e. use an event)
+    use({
       "nvim-treesitter/nvim-treesitter",
       requires = {
+        -- highlights matching pairs
         {
           "andymass/vim-matchup",
           config = function()
             require("config.matchup")
           end,
         },
+        -- more textobjects
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
       config = function()
         require("config.treesitter")
       end,
+      -- first run this will throw an error you can ignore
       run = ":TSUpdate",
     })
 
-    use({ -- completion engine
+    -- completion engine
+    use({
       "hrsh7th/nvim-cmp",
       requires = {
-        "onsails/lspkind-nvim", -- vscode pictograms,
+        -- vscode pictograms
+        "onsails/lspkind-nvim",
+        -- snippet engine
         {
           "L3MON4D3/LuaSnip",
           requires = {
-            "rafamadriz/friendly-snippets", -- vscode format snippets
+            -- vscode format snippets
+            "rafamadriz/friendly-snippets",
+            -- cmp source
             { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
           },
           config = function()
             require("config.luasnip")
           end,
         },
+        -- lsp source
         { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
-        { "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } }, -- completion for path
-        { "hrsh7th/cmp-buffer", event = "CmdLineEnter" }, -- completion for buffer contents
-        { "hrsh7th/cmp-cmdline", event = "CmdLineEnter" }, -- completion for cmdline
-        { "lukas-reineke/cmp-rg", event = "InsertEnter" }, -- completion for ripgrep
-        { "f3fora/cmp-spell", event = "InsertEnter" }, -- completion for spell
-        { "kdheepak/cmp-latex-symbols", event = "InsertEnter" }, -- easy to enter latex symbols
-        { "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true }, -- completion for digraphs
+        -- completion for paths
+        { "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } },
+        -- completion for buffer contents
+        { "hrsh7th/cmp-buffer", event = "CmdLineEnter" },
+        -- completion for cmdline
+        { "hrsh7th/cmp-cmdline", event = "CmdLineEnter" },
+        -- completion for ripgrep
+        { "lukas-reineke/cmp-rg", event = "InsertEnter" },
+        -- completion for spelling
+        { "f3fora/cmp-spell", event = "InsertEnter" },
+        -- easy to enter symbols using latex codes
+        { "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
+        -- completion for digraphs, very annoying
+        { "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true },
       },
       config = function()
         require("config.cmp")
@@ -69,11 +91,15 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    use({ -- interface for easy LSP configs
+    -- interface for easy LSP installation and config
+    use({
       "williamboman/nvim-lsp-installer",
       requires = {
-        { "tami5/lspsaga.nvim" }, -- nice lsp actions
-        { "neovim/nvim-lspconfig" }, -- easy lspconfig
+        -- nice lsp actions
+        { "tami5/lspsaga.nvim" },
+        -- easy lspconfig
+        { "neovim/nvim-lspconfig" },
+        -- wrapper for ltex so you can use codeactions
         { "vigoux/ltex-ls.nvim" },
       },
       config = function()
@@ -82,16 +108,18 @@ return require("packer").startup({
       after = "nvim-cmp",
     })
 
+    -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",
-      wants = "nvim-treesitter", -- or require if not used so far
+      wants = "nvim-treesitter",
       config = function()
         require("config.tabout")
       end,
       event = "InsertEnter",
     })
 
-    use({ -- automatic pairs
+    -- automatic pair insertion while typing
+    use({
       "windwp/nvim-autopairs",
       config = function()
         require("config.autopairs")
@@ -102,33 +130,45 @@ return require("packer").startup({
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
     use({ "wellle/targets.vim", event = "BufEnter" })
 
-    -- divides words into smaller chunks e.g. camelCase becomes camel+Case when using w motion
+    -- divides words into smaller chunks
+    -- e.g. camelCase becomes (camel) (Case) when using w motion
     use({
       "chaoren/vim-wordmotion",
       event = "BufEnter",
     })
 
+    -- several modules are available
     use({
       "echasnovski/mini.nvim",
       config = function()
+        -- manipulate surrounding items
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
           mappings = {
-            add = "<space>sa", -- Add surrounding in Normal and Visual modes
-            delete = "<space>sd", -- Delete surrounding
-            find = "", -- Find surrounding (to the right)
-            find_left = "", -- Find surrounding (to the left)
-            highlight = "", -- Highlight surrounding
-            replace = "<space>sr", -- Replace surrounding
-            update_n_lines = "", -- Update `n_lines`
+            -- Add surrounding in Normal and Visual modes
+            add = "<space>sa",
+            -- Delete surrounding
+            delete = "<space>sd",
+            -- Find surrounding (to the right)
+            find = "",
+            -- Find surrounding (to the left)
+            find_left = "",
+            -- Highlight surrounding
+            highlight = "",
+            -- Replace surrounding
+            replace = "<space>sr",
+            -- Update `n_lines`
+            update_n_lines = "",
           },
         })
       end,
       event = "BufEnter",
     })
 
-    use({ -- buffer jumping like EasyMotion or Sneak
+    -- buffer jumping like EasyMotion or Sneak
+    use({
       "ggandor/leap.nvim",
+      -- enhances dot repeat
       requires = "tpope/vim-repeat",
       config = function()
         require("leap").set_default_keymaps()
@@ -136,9 +176,11 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    use({ -- Show match number and index for search
+    -- Show match number and index for search
+    use({
       "kevinhwang91/nvim-hlslens",
-      requires = "haya14busa/vim-asterisk", -- asterisk improved
+      -- asterisk improved
+      requires = "haya14busa/vim-asterisk",
       config = function()
         require("config.hlslens")
       end,
@@ -146,7 +188,7 @@ return require("packer").startup({
       event = "CmdLineEnter",
     })
 
-    -- colorscheme based on Hokusai
+    -- colorscheme based on hokusai
     use({
       "rebelot/kanagawa.nvim",
       config = function()
@@ -155,27 +197,32 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    use({ -- status line
+    -- status line
+    use({
       "nvim-lualine/lualine.nvim",
       requires = {
-        "kyazdani42/nvim-web-devicons", -- icons, duh
+        "kyazdani42/nvim-web-devicons",
       },
       config = function()
         require("config.lualine")
       end,
+      -- must be loaded after the colorscheme or it loads default vim colors
       after = "kanagawa.nvim",
     })
 
-    use({ -- tab bar and buffer switching
+    -- tab bar and buffer switching
+    use({
       "romgrk/barbar.nvim",
-      requires = "kyazdani42/nvim-web-devicons", -- icons, duh
+      requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("config.barbar")
       end,
-      after = "kanagawa.nvim", -- needs to be after or the colorscheme doesn't apply
+      -- must be loaded after the colorscheme or it loads default vim colors
+      after = "kanagawa.nvim",
     })
 
-    use({ -- notification plugin
+    -- notification plugin
+    use({
       "rcarriga/nvim-notify",
       config = function()
         local nvim_notify = require("notify")
@@ -193,15 +240,18 @@ return require("packer").startup({
       event = "VimEnter",
     })
 
-    -- exit insert mode with jj or jk or whatever
+    -- exit Insert mode with jj or jk or whatever
     use({
       "max397574/better-escape.nvim",
       config = function()
         -- lua, default settings
         require("better_escape").setup({
-          mapping = { "jk", "jj" }, -- a table with mappings to use
-          timeout = 300, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-          clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+          mapping = { "jk", "jj" },
+          -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+          timeout = 300,
+          -- clear line after escaping if there is only whitespace
+          clear_empty_lines = false,
+          -- function for exiting
           keys = function()
             return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
           end,
@@ -210,16 +260,10 @@ return require("packer").startup({
       event = "InsertEnter",
     })
 
-    -- LSP doesn't do formatting on some languages so use this
-    use({
-      "sbdchd/neoformat",
-      cmd = "Neoformat",
-    })
-
     -- git in the gutter
     use({
       "lewis6991/gitsigns.nvim",
-      requires = "nvim-lua/plenary.nvim", -- extra neovim functions
+      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("gitsigns").setup()
       end,
@@ -230,7 +274,8 @@ return require("packer").startup({
     use({
       "tpope/vim-fugitive",
       setup = function()
-        vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>") -- commit current file
+        -- commit current file
+        vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>")
       end,
       cmd = "Git",
     })
@@ -241,12 +286,14 @@ return require("packer").startup({
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
-        { -- interface for fzf
+        {
           "nvim-telescope/telescope-fzf-native.nvim",
           run = "make",
         },
-        "nvim-telescope/telescope-symbols.nvim", -- emojis and other symbols
+        -- emojis and other symbols
+        "nvim-telescope/telescope-symbols.nvim",
       },
+      -- set this up first so that telescope is only loaded when it's required
       setup = function()
         -- use find_files if not in git project
         local project_files = function(opts)
@@ -312,6 +359,7 @@ return require("packer").startup({
     -- file browser/picker
     use({
       "luukvbaal/nnn.nvim",
+      -- set up maps beforehand so that they can load nnn when required
       setup = function()
         local map = require("utils").map
 
