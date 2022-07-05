@@ -54,58 +54,107 @@ return require("packer").startup({
       "hrsh7th/nvim-cmp",
       requires = {
         -- vscode pictograms
-        "onsails/lspkind-nvim",
+        {
+          "onsails/lspkind-nvim",
+          event = "InsertEnter",
+        },
+        -- vscode format snippets
+        {
+          "rafamadriz/friendly-snippets",
+          event = "InsertEnter",
+        },
         -- snippet engine
         {
           "L3MON4D3/LuaSnip",
-          requires = {
-            -- vscode format snippets
-            "rafamadriz/friendly-snippets",
-            -- cmp source
-            { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
-          },
+          requires = {},
           config = function()
             require("config.luasnip")
           end,
+          after = "friendly-snippets",
         },
-        -- lsp source
-        { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+        -- completion for luasnip
+        {
+          "saadparwaiz1/cmp_luasnip",
+          after = "LuaSnip",
+        },
         -- completion for paths
-        { "hrsh7th/cmp-path", event = { "CmdLineEnter", "InsertEnter" } },
+        {
+          "hrsh7th/cmp-path",
+          event = {
+            "CmdLineEnter",
+            "InsertEnter",
+          },
+        },
         -- completion for buffer contents
-        { "hrsh7th/cmp-buffer", event = "CmdLineEnter" },
+        {
+          "hrsh7th/cmp-buffer",
+          event = "CmdLineEnter",
+        },
         -- completion for cmdline
-        { "hrsh7th/cmp-cmdline", event = "CmdLineEnter" },
+        {
+          "hrsh7th/cmp-cmdline",
+          event = "CmdLineEnter",
+        },
         -- completion for ripgrep
-        { "lukas-reineke/cmp-rg", event = "InsertEnter" },
+        {
+          "lukas-reineke/cmp-rg",
+          event = "InsertEnter",
+        },
         -- completion for spelling
-        { "f3fora/cmp-spell", event = "InsertEnter" },
+        {
+          "f3fora/cmp-spell",
+          event = "InsertEnter",
+        },
         -- easy to enter symbols using latex codes
-        { "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
+        {
+          "kdheepak/cmp-latex-symbols",
+          event = "InsertEnter",
+        },
         -- completion for digraphs, very annoying
-        { "dmitmel/cmp-digraphs", event = "InsertEnter", disable = true },
+        {
+          "dmitmel/cmp-digraphs",
+          event = "InsertEnter",
+          disable = true,
+        },
       },
       config = function()
         require("config.cmp")
       end,
-      event = "BufEnter",
+      after = "lspkind-nvim",
+    })
+
+    -- easy lspconfig
+    use({
+      "neovim/nvim-lspconfig",
+      ft = { "tex", "bib" },
+    })
+
+    -- nice lsp actions
+    use({
+      "tami5/lspsaga.nvim",
+      after = "nvim-lspconfig",
+    })
+
+    -- wrapper for ltex so you can use codeactions
+    use({
+      "vigoux/ltex-ls.nvim",
+      after = "lspsaga.nvim",
     })
 
     -- interface for easy LSP installation and config
     use({
       "williamboman/nvim-lsp-installer",
       requires = {
-        -- nice lsp actions
-        { "tami5/lspsaga.nvim" },
-        -- easy lspconfig
-        { "neovim/nvim-lspconfig" },
-        -- wrapper for ltex so you can use codeactions
-        { "vigoux/ltex-ls.nvim" },
+        -- cmp source
+        {
+          "hrsh7th/cmp-nvim-lsp",
+          event = "InsertEnter",
+        },
       },
       config = function()
         require("config.lsp")
       end,
-      after = "nvim-cmp",
+      after = "ltex-ls.nvim",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
@@ -179,13 +228,17 @@ return require("packer").startup({
     -- Show match number and index for search
     use({
       "kevinhwang91/nvim-hlslens",
-      -- asterisk improved
-      requires = "haya14busa/vim-asterisk",
       config = function()
         require("config.hlslens")
       end,
       keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
       event = "CmdLineEnter",
+    })
+
+    -- asterisk improved
+    use({
+      "haya14busa/vim-asterisk",
+      after = "nvim-hlslens",
     })
 
     -- colorscheme based on hokusai
@@ -280,67 +333,32 @@ return require("packer").startup({
       cmd = "Git",
     })
 
-    -- fuzzy search utilizing fzf
+    -- fuzzy search
     use({
       "nvim-telescope/telescope.nvim",
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
-        {
-          "nvim-telescope/telescope-fzf-native.nvim",
-          run = "make",
-        },
-        -- emojis and other symbols
-        "nvim-telescope/telescope-symbols.nvim",
       },
       -- set this up first so that telescope is only loaded when it's required
       setup = function()
-        -- use find_files if not in git project
-        local project_files = function(opts)
-          local ok = pcall(require("telescope.builtin").git_files, opts)
-          if not ok then
-            require("telescope.builtin").find_files(opts)
-          end
-        end
-
-        local map = require("utils").map
-
-        map("n", "<leader><space>", function()
-          require("telescope.builtin").buffers()
-        end, { desc = "display open buffers with telescope" })
-
-        map("n", "<leader>ff", function()
-          project_files(require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } }))
-        end, { desc = "display project files with telescope" })
-
-        map("n", "<leader>fb", function()
-          require("telescope.builtin").current_buffer_fuzzy_find({ layout_strategy = "bottom_pane" })
-        end, { desc = "current buffer fuzzy find with telescope" })
-
-        map("n", "<leader>fh", function()
-          require("telescope.builtin").help_tags({ layout_strategy = "bottom_pane" })
-        end, { desc = "display help topics with telescope" })
-
-        map("n", "<leader>fd", function()
-          require("telescope.builtin").grep_string({ layout_strategy = "bottom_pane" })
-        end, { desc = "grep string with telescope" })
-
-        map("n", "<leader>fg", function()
-          require("telescope.builtin").live_grep({ layout_strategy = "bottom_pane" })
-        end, { desc = "live grep with telescope" })
-
-        map("n", "<leader>?", function()
-          require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
-        end, { desc = "display recent files with telescope" })
-
-        map("n", "<leader>ft", function()
-          require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
-        end, { desc = "display tags with telescope" })
+        require("config.telescope_maps")
       end,
       config = function()
         require("config.telescope")
       end,
       module = "telescope",
+      cmd = "Telescope",
+    })
+
+    -- FZF integration for telescope
+    use({
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
+      config = function()
+        require("telescope").load_extension("fzf")
+      end,
+      after = "telescope.nvim",
     })
 
     -- better quickfix window
