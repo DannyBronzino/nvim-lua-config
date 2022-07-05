@@ -56,25 +56,20 @@ return require("packer").startup({
         -- vscode pictograms
         {
           "onsails/lspkind-nvim",
-          event = "InsertEnter",
-        },
-        -- vscode format snippets
-        {
-          "rafamadriz/friendly-snippets",
-          event = "InsertEnter",
         },
         -- snippet engine
         {
           "L3MON4D3/LuaSnip",
+          -- vscode format snippets
+          requires = "rafamadriz/friendly-snippets",
           config = function()
             require("config.luasnip")
           end,
-          after = "friendly-snippets",
         },
         -- completion for luasnip
         {
           "saadparwaiz1/cmp_luasnip",
-          after = "LuaSnip",
+          event = "InsertEnter",
         },
         -- completion for paths
         {
@@ -119,7 +114,7 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      after = "lspkind-nvim",
+      event = "BufEnter",
     })
 
     -- easy lspconfig
