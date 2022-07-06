@@ -155,7 +155,8 @@ return require("packer").startup({
 
     -- nice lsp actions
     use({
-      "tami5/lspsaga.nvim",
+      "glepnir/lspsaga.nvim",
+      branch = "main",
       module = "lspsaga",
     })
 

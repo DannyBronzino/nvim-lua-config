@@ -1,46 +1,3 @@
-require("lspsaga").setup({
-  debug = false,
-  use_saga_diagnostic_sign = true,
-  -- diagnostic sign
-  error_sign = "",
-  warn_sign = "",
-  hint_sign = "",
-  infor_sign = "",
-  diagnostic_header_icon = "   ",
-  -- code action title icon
-  code_action_icon = " ",
-  code_action_prompt = {
-    enable = true,
-    sign = true,
-    sign_priority = 40,
-    virtual_text = true,
-  },
-  finder_definition_icon = "  ",
-  finder_reference_icon = "  ",
-  max_preview_lines = 10,
-  finder_action_keys = {
-    open = "o",
-    vsplit = "s",
-    split = "i",
-    quit = "q",
-    scroll_down = "<C-n>",
-    scroll_up = "<C-p>",
-  },
-  code_action_keys = {
-    quit = "q",
-    exec = "<CR>",
-  },
-  rename_action_keys = {
-    quit = "<C-c>",
-    exec = "<CR>",
-  },
-  definition_preview_icon = "  ",
-  border_style = "single",
-  rename_prompt_prefix = "➤",
-  server_filetype_map = {},
-  diagnostic_prefix_format = "%d. ",
-})
-
 require("nvim-lsp-installer").setup({
   automatic_installation = true, -- based on which servers are set up via lspconfig
 })
@@ -48,6 +5,32 @@ require("nvim-lsp-installer").setup({
 local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
+  require("lspsaga").init_lsp_saga({
+    -- "single" | "double" | "rounded" | "bold" | "plus"
+    border_style = "single",
+    -- Error, Warn, Info, Hint
+    diagnostic_header = { "🙀", "😿", "😾", "😺" },
+    -- use emoji lightbulb in default
+    code_action_icon = "",
+    symbol_in_winbar = true,
+    winbar_separator = " > ",
+    winbar_show_file = true,
+  })
+
+  -- Change diagnostic signs.
+  vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
+  vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
+  vim.fn.sign_define("DiagnosticSignInformation", { text = "", texthl = "DiagnosticSignInfo" })
+  vim.fn.sign_define("DiagnosticSignHint", { text = "ﴞ", texthl = "DiagnosticSignHint" })
+
+  -- global config for diagnostic
+  vim.diagnostic.config({
+    underline = true,
+    virtual_text = true,
+    signs = true,
+    severity_sort = true,
+  })
+
   -- mapping function
   local map = function(mode, left_hand_side, right_hand_side, opts)
     opts = opts or { silent = true }
@@ -118,9 +101,6 @@ local on_attach = function(client, bufnr)
     ]])
   end
 
-  -- turn off virtual annotation
-  vim.diagnostic.config({ virtual_text = false })
-
   -- send notification on server start
   local msg = string.format("Language server %s started!", client.name)
   vim.notify(msg, "info")
@@ -157,7 +137,7 @@ require("ltex-ls").setup({
   use_spellfile = false,
   settings = {
     ltex = {
-      enabled = { "latex", "tex", "bib", "markdown" },
+      enabled = { "latex", "tex", "bib" },
       language = "en-US",
       diagnosticSeverity = "information",
       sentenceCacheSize = 2000,
