@@ -12,9 +12,12 @@ local on_attach = function(client, bufnr)
     diagnostic_header = { "🙀", "😿", "😾", "😺" },
     -- use emoji lightbulb in default
     code_action_icon = "",
-    symbol_in_winbar = true,
-    winbar_separator = " > ",
-    winbar_show_file = true,
+    symbol_in_winbar = {
+      in_custom = false,
+      enable = true,
+      separator = " ",
+      show_file = true,
+    },
   })
 
   -- Change diagnostic signs.

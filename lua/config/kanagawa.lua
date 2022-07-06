@@ -6,20 +6,25 @@ local overrides = {
   Comment = { fg = colors.springBlue },
   Visual = { bg = colors.waveBlue2 },
   IncSearch = { bg = colors.oniViolet },
-  MatchParen = { fg = colors.sakuraPink, bold = true }, -- for vim-matchup
-  Error = { fg = colors.peachRed, bold = true },
-  ErrorMsg = { fg = colors.peachRed, bold = true },
-  SpellBad = { fg = colors.peachRed, bold = true },
-  SpellCap = { fg = colors.peachRed, bold = true },
-  SpellRare = { fg = colors.peachRed, bold = true },
-  SpellLocal = { fg = colors.peachRed, bold = true },
+  MatchParen = { fg = colors.sakuraPink }, -- for vim-matchup
+  Error = { fg = colors.peachRed },
+  ErrorMsg = { fg = colors.peachRed, undercurl = true },
+  SpellBad = { fg = colors.peachRed, undercurl = true },
+  SpellCap = { fg = colors.peachRed, undercurl = true },
+  SpellRare = { fg = colors.peachRed, undercurl = true },
+  SpellLocal = { fg = colors.peachRed, undercurl = true },
   String = { fg = colors.lightBlue },
   TelescopePreviewLine = { link = "Cursorline" },
   BufferTabPageFill = { bg = "none" },
+  DiagnosticUnderlineError = { fg = colors.peachRed, undercurl = true },
+  DiagnosticUnderlineWarn = { fg = colors.roninYellow, undercurl = true },
+  DiagnosticUnderlineInfo = { fg = colors.roninYellow, undercurl = true },
+  DiagnosticUnderlineHint = { fg = colors.roninYellow, undercurl = true },
 }
 
 require("kanagawa").setup({
   overrides = overrides,
+  undercurl = true,
   transparent = true,
   diminactive = true,
   globalstatus = true,
