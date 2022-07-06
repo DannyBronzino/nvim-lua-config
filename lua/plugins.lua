@@ -132,18 +132,6 @@ return require("packer").startup({
       after = "nvim-cmp",
     })
 
-    -- easy lspconfig
-    use({
-      "neovim/nvim-lspconfig",
-      module = "lspconfig",
-    })
-
-    -- nice lsp actions
-    use({
-      "tami5/lspsaga.nvim",
-      module = "lspsaga",
-    })
-
     -- nice quickfix-like menu for diagnostics
     use({
       "folke/trouble.nvim",
@@ -157,6 +145,18 @@ return require("packer").startup({
         require("trouble").setup()
       end,
       cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
+    })
+
+    -- easy lspconfig
+    use({
+      "neovim/nvim-lspconfig",
+      module = "lspconfig",
+    })
+
+    -- nice lsp actions
+    use({
+      "tami5/lspsaga.nvim",
+      module = "lspsaga",
     })
 
     -- wrapper for ltex so you can use codeactions
