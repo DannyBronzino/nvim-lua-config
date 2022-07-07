@@ -49,87 +49,32 @@ return require("packer").startup({
       run = ":TSUpdate",
     })
 
-    -- vscode pictograms
+    -- automatic pair insertion while typing
     use({
-      "onsails/lspkind-nvim",
-      module = "lspkind",
-    })
-
-    -- vscode format snippets
-    use({
-      "rafamadriz/friendly-snippets",
-      module = "luasnip.loaders.from_vscode",
-    })
-
-    -- snippet engine
-    use({
-      "L3MON4D3/LuaSnip",
+      "windwp/nvim-autopairs",
       config = function()
-        require("config.luasnip")
+        require("config.autopairs")
       end,
-      module = "luasnip",
+      event = "InsertEnter",
     })
 
-    -- completion engine
     use({
-      "hrsh7th/nvim-cmp",
-      requires = {},
-      config = function()
-        require("config.cmp")
-      end,
-      event = { "InsertEnter", "CmdLineEnter" },
-    })
-
-    -- completion for paths
-    use({
-      "hrsh7th/cmp-path",
-      event = {
-        "CmdLineEnter",
-        "InsertEnter",
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+      requires = {
+        {
+          "ms-jpq/coq.artifacts",
+          branch = "artifacts",
+        },
+        {
+          "ms-jpq/coq.thirdparty",
+          branch = "3p",
+        },
       },
-      after = "nvim-cmp",
-    })
-
-    -- completion for luasnip
-    use({
-      "saadparwaiz1/cmp_luasnip",
+      setup = function()
+        vim.g.coq_settings = { auto_start = "shut-up" }
+      end,
       event = "InsertEnter",
-    })
-
-    -- completion for buffer contents
-    use({
-      "hrsh7th/cmp-buffer",
-      event = "CmdLineEnter",
-      after = "nvim-cmp",
-    })
-
-    -- completion for cmdline
-    use({
-      "hrsh7th/cmp-cmdline",
-      event = "CmdLineEnter",
-      after = "nvim-cmp",
-    })
-
-    -- completion for ripgrep
-    use({
-      "lukas-reineke/cmp-rg",
-      event = "InsertEnter",
-      after = "nvim-cmp",
-    })
-
-    -- completion for digraphs, very annoying
-    use({
-      "dmitmel/cmp-digraphs",
-      event = "InsertEnter",
-      after = "nvim-cmp",
-      disable = true,
-    })
-
-    -- easy to enter symbols using latex codes
-    use({
-      "kdheepak/cmp-latex-symbols",
-      event = "InsertEnter",
-      after = "nvim-cmp",
     })
 
     -- wrapper for ltex so you can use codeactions
@@ -161,10 +106,6 @@ return require("packer").startup({
           end,
         },
         "nvim-treesitter",
-        {
-          "hrsh7th/cmp-nvim-lsp",
-          event = "InsertEnter",
-        },
       },
       config = function()
         require("config.navigator")
@@ -192,15 +133,7 @@ return require("packer").startup({
         require("config.tabout")
       end,
       event = "InsertEnter",
-    })
-
-    -- automatic pair insertion while typing
-    use({
-      "windwp/nvim-autopairs",
-      config = function()
-        require("config.autopairs")
-      end,
-      event = "InsertEnter",
+      after = "coq_nvim",
     })
 
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
