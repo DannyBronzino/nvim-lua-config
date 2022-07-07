@@ -131,41 +131,6 @@ return require("packer").startup({
       event = "InsertEnter",
       after = "nvim-cmp",
     })
-    use({
-      "hrsh7th/cmp-nvim-lsp",
-      event = "InsertEnter",
-      after = "navigator.nvim",
-    })
-
-    -- nice quickfix-like menu for diagnostics
-    -- use({
-    -- "folke/trouble.nvim",
-    -- requires = "kyazdani42/nvim-web-devicons",
-    -- setup = function()
-    -- local map = require("utils").map
-
-    -- map("n", "<space>t", "<cmd>Trouble<cr>")
-    -- end,
-    -- config = function()
-    -- require("trouble").setup()
-    -- end,
-    -- cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
-    -- })
-
-    -- easy lspconfig
-    -- use({
-    -- "neovim/nvim-lspconfig",
-    -- module = "lspconfig",
-    -- disable = true,
-    -- })
-
-    -- nice lsp actions
-    -- use({
-    -- "glepnir/lspsaga.nvim",
-    -- branch = "main",
-    -- module = "lspsaga",
-    -- disable = true,
-    -- })
 
     -- wrapper for ltex so you can use codeactions
     use({
@@ -182,14 +147,43 @@ return require("packer").startup({
     use({
       "ray-x/navigator.lua",
       requires = {
-        { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
-        { "neovim/nvim-lspconfig" },
+        {
+          "ray-x/guihua.lua",
+          run = "cd lua/fzy && make",
+        },
+        "neovim/nvim-lspconfig",
+        {
+          "SmiteshP/nvim-navic",
+          config = function()
+            require("nvim-navic").setup({
+              highlight = true,
+            })
+          end,
+        },
+        "nvim-treesitter",
+        {
+          "hrsh7th/cmp-nvim-lsp",
+          event = "InsertEnter",
+        },
       },
       config = function()
-        require("config.lsp_navigator")
+        require("config.navigator")
       end,
     })
 
+    use({
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      setup = function()
+        local map = require("utils").map
+
+        map("n", "<space>t", "<cmd>Trouble<cr>")
+      end,
+      config = function()
+        require("trouble").setup({})
+      end,
+      cmd = { "Trouble", "TroubleToggle", "TroubleClose", "TroubleRefresh" },
+    })
     -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",

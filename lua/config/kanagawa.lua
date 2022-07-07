@@ -20,6 +20,8 @@ local overrides = {
   DiagnosticUnderlineWarn = { fg = colors.roninYellow, undercurl = true },
   DiagnosticUnderlineInfo = { fg = colors.roninYellow, undercurl = true },
   DiagnosticUnderlineHint = { fg = colors.roninYellow, undercurl = true },
+  NavicIconsModule = { fg = colors.oniViolet },
+  NavicText = { fg = colors.crystalBlue },
 }
 
 require("kanagawa").setup({
