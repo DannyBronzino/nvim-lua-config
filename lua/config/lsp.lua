@@ -1,5 +1,6 @@
 require("nvim-lsp-installer").setup({
   automatic_installation = true, -- based on which servers are set up via lspconfig
+  ensure_installed = { "texlab", "ltex" },
 })
 
 local lspconfig = require("lspconfig")
