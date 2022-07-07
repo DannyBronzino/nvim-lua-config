@@ -59,12 +59,23 @@ return require("packer").startup({
     })
 
     use({
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("config.luasnip")
+      end,
+      event = "InsertEnter",
+    })
+
+    use({
       "ms-jpq/coq_nvim",
       branch = "coq",
       setup = function()
         local map = require("utils").map
 
-        vim.g.coq_settings = { auto_start = "shut-up", keymap = { recommended = false } }
+        vim.g.coq_settings = {
+          auto_start = "shut-up",
+          keymap = { recommended = false },
+        }
 
         map("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true })
         map("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true })
