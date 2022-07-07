@@ -1,4 +1,6 @@
-require("nvim-lsp-installer").setup({})
+require("nvim-lsp-installer").setup({
+  ensure_installed = { "texlab", "ltex" },
+})
 
 require("navigator").setup({
   debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
@@ -8,6 +10,8 @@ require("navigator").setup({
   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- border style, can be one of 'none', 'single', 'double',
   -- 'shadow', or a list of chars which defines the border
   on_attach = function(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
+
     -- send notification on server start
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, "info")
@@ -24,8 +28,6 @@ require("navigator").setup({
     { key = "g0", func = require("navigator.symbols").document_symbols, doc = "document_symbols" },
     { key = "gW", func = require("navigator.workspace").workspace_symbol_live, doc = "workspace_symbol_live" },
     { key = "gd", func = require("navigator.definition").definition_preview, doc = "definition_preview" },
-    { key = "<Leader>gt", func = require("navigator.treesitter").buf_ts, doc = "buf_ts" },
-    { key = "<Leader>gT", func = require("navigator.treesitter").bufs_ts, doc = "bufs_ts" },
     { key = "K", func = vim.lsp.buf.hover, doc = "hover" },
     { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, doc = "code_action" },
     {
@@ -37,49 +39,27 @@ require("navigator").setup({
     -- { key = '<Leader>re', func = 'rename()' },
     { key = "<F2>", func = require("navigator.rename").rename, doc = "rename" },
     { key = "go", func = require("navigator.diagnostics").show_diagnostics, doc = "show_diagnostics" },
-    { key = "gG", func = require("navigator.diagnostics").show_buf_diagnostics, doc = "show_buf_diagnostics" },
-    { key = "<Leader>dt", func = require("navigator.diagnostics").toggle_diagnostics, doc = "toggle_diagnostics" },
-    { key = "]d", func = vim.diagnostic.goto_next, doc = "next diagnostics" },
-    { key = "[d", func = vim.diagnostic.goto_prev, doc = "prev diagnostics" },
-    { key = "]O", func = vim.diagnostic.set_loclist, doc = "diagnostics set loclist" },
-    { key = "]r", func = require("navigator.treesitter").goto_next_usage, doc = "goto_next_usage" },
-    { key = "[r", func = require("navigator.treesitter").goto_previous_usage, doc = "goto_previous_usage" },
-    { key = "<C-LeftMouse>", func = vim.lsp.buf.definition, doc = "definition" },
-    { key = "g<LeftMouse>", func = vim.lsp.buf.implementation, doc = "implementation" },
-    { key = "<Leader>k", func = require("navigator.dochighlight").hi_symbol, doc = "hi_symbol" },
-    { key = "<Space>wa", func = require("navigator.workspace").add_workspace_folder, doc = "add_workspace_folder" },
-    {
-      key = "<Space>wr",
-      func = require("navigator.workspace").remove_workspace_folder,
-      doc = "remove_workspace_folder",
-    },
-    { key = "<Space>ff", func = vim.lsp.buf.format, mode = "n", doc = "format" },
-    { key = "<Space>ff", func = vim.lsp.buf.range_formatting, mode = "v", doc = "range format" },
-    { key = "<Space>rf", func = require("navigator.formatting").range_format, mode = "n", doc = "range_fmt_v" },
-    {
-      key = "<Space>wl",
-      func = require("navigator.workspace").list_workspace_folders,
-      doc = "list_workspace_folders",
-    },
-    { key = "<Space>la", mode = "n", func = require("navigator.codelens").run_action, doc = "run code lens action" },
-  }, -- a list of key maps
-  -- this kepmap gK will override "gD" mapping function declaration()  in default kepmap
-  -- please check mapping.lua for all keymaps
+    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, doc = "show_buf_diagnostics" },
+    { key = "gj", func = vim.diagnostic.goto_next, doc = "next diagnostics" },
+    { key = "gk", func = vim.diagnostic.goto_prev, doc = "prev diagnostics" },
+    { key = "]O", func = vim.diagnostic.setloclist, doc = "diagnostics set loclist" },
+  },
   treesitter_analysis = true, -- treesitter variable context
   treesitter_analysis_max_num = 100, -- how many items to run treesitter analysis
   -- this value prevent slow in large projects, e.g. found 100000 reference in a project
   transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
-  lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
+  lsp_signature_help = false, -- if you would like to hook ray-x/lsp_signature plugin in navigator
   -- setup here. if it is nil, navigator will not init signature help
   signature_help_cfg = nil, -- if you would like to init ray-x/lsp_signature plugin in navigator, and pass in your own config to signature help
   icons = {
     -- Code action
-    code_action_icon = "🏏", -- note: need terminal support, for those not support unicode, might crash
+    code_action_icon = "", -- note: need terminal support, for those not support unicode, might crash
     -- Diagnostics
-    diagnostic_head = "🐛",
-    diagnostic_head_severity_1 = "🈲",
-    -- refer to lua/navigator.lua for more icons setups
+    diagnostic_err = "",
+    diagnostic_warn = "",
+    diagnostic_hint = "",
+    diagnostic_info = "",
   },
   lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
   lsp = {
@@ -158,3 +138,7 @@ require("ltex-ls").setup({
     },
   },
 })
+
+local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
+
+vim.o.winbar = navic_location
