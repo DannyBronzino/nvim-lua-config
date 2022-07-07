@@ -131,34 +131,41 @@ return require("packer").startup({
       event = "InsertEnter",
       after = "nvim-cmp",
     })
+    use({
+      "hrsh7th/cmp-nvim-lsp",
+      event = "InsertEnter",
+      after = "navigator.nvim",
+    })
 
     -- nice quickfix-like menu for diagnostics
-    use({
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      setup = function()
-        local map = require("utils").map
+    -- use({
+    -- "folke/trouble.nvim",
+    -- requires = "kyazdani42/nvim-web-devicons",
+    -- setup = function()
+    -- local map = require("utils").map
 
-        map("n", "<space>t", "<cmd>Trouble<cr>")
-      end,
-      config = function()
-        require("trouble").setup()
-      end,
-      cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
-    })
+    -- map("n", "<space>t", "<cmd>Trouble<cr>")
+    -- end,
+    -- config = function()
+    -- require("trouble").setup()
+    -- end,
+    -- cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
+    -- })
 
     -- easy lspconfig
-    use({
-      "neovim/nvim-lspconfig",
-      module = "lspconfig",
-    })
+    -- use({
+    -- "neovim/nvim-lspconfig",
+    -- module = "lspconfig",
+    -- disable = true,
+    -- })
 
     -- nice lsp actions
-    use({
-      "glepnir/lspsaga.nvim",
-      branch = "main",
-      module = "lspsaga",
-    })
+    -- use({
+    -- "glepnir/lspsaga.nvim",
+    -- branch = "main",
+    -- module = "lspsaga",
+    -- disable = true,
+    -- })
 
     -- wrapper for ltex so you can use codeactions
     use({
@@ -169,17 +176,18 @@ return require("packer").startup({
     -- interface for easy LSP installation and config
     use({
       "williamboman/nvim-lsp-installer",
+      module = "nvim-lsp-installer",
+    })
+
+    use({
+      "ray-x/navigator.lua",
       requires = {
-        -- cmp source
-        {
-          "hrsh7th/cmp-nvim-lsp",
-          event = "InsertEnter",
-        },
+        { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+        { "neovim/nvim-lspconfig" },
       },
       config = function()
-        require("config.lsp")
+        require("config.lsp_navigator")
       end,
-      event = "BufEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
