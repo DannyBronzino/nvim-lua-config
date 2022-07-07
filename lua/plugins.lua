@@ -61,20 +61,28 @@ return require("packer").startup({
     use({
       "ms-jpq/coq_nvim",
       branch = "coq",
-      requires = {
-        {
-          "ms-jpq/coq.artifacts",
-          branch = "artifacts",
-        },
-        {
-          "ms-jpq/coq.thirdparty",
-          branch = "3p",
-        },
-      },
       setup = function()
-        vim.g.coq_settings = { auto_start = "shut-up" }
+        local map = require("utils").map
+
+        vim.g.coq_settings = { auto_start = "shut-up", keymap = { recommended = false } }
+
+        map("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true })
+        map("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true })
+        map("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true })
+        map("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true })
       end,
-      event = "InsertEnter",
+    })
+
+    use({
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts",
+      after = "coq_nvim",
+    })
+
+    use({
+      "ms-jpq/coq.thirdparty",
+      branch = "3p",
+      after = "coq_nvim",
     })
 
     -- wrapper for ltex so you can use codeactions

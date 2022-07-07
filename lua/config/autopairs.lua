@@ -1,18 +1,11 @@
-require("nvim-autopairs").setup({
-  disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" },
-})
-local remap = vim.api.nvim_set_keymap
+local map = require("utils").map
 local npairs = require("nvim-autopairs")
 
-npairs.setup({ map_bs = false, map_cr = false })
-
-vim.g.coq_settings = { keymap = { recommended = false } }
-
--- these mappings are coq recommended mappings unrelated to nvim-autopairs
-remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
-remap("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-remap("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
-remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
+npairs.setup({
+  disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" },
+  map_bs = false,
+  map_cr = false,
+})
 
 -- skip it, if you use another global object
 _G.MUtils = {}
@@ -28,7 +21,7 @@ MUtils.CR = function()
     return npairs.autopairs_cr()
   end
 end
-remap("i", "<cr>", "v:lua.MUtils.CR()", { expr = true, noremap = true })
+map("i", "<cr>", "v:lua.MUtils.CR()", { expr = true })
 
 MUtils.BS = function()
   if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ "mode" }).mode == "eval" then
@@ -37,4 +30,4 @@ MUtils.BS = function()
     return npairs.autopairs_bs()
   end
 end
-remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
+map("i", "<bs>", "v:lua.MUtils.BS()", { expr = true })
