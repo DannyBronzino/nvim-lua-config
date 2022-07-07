@@ -85,6 +85,21 @@ return require("packer").startup({
       after = "coq_nvim",
     })
 
+    use({
+      "gelguy/wilder.nvim",
+      requires = {
+        {
+          "romgrk/fzy-lua-native",
+          run = "make",
+        },
+        { "kyazdani42/nvim-web-devicons" },
+      },
+      config = function()
+        require("config.wilder")
+      end,
+      after = "kanagawa.nvim",
+    })
+
     -- wrapper for ltex so you can use codeactions
     use({
       "vigoux/ltex-ls.nvim",
@@ -218,7 +233,7 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
-      event = "BufEnter",
+      event = "VimEnter",
     })
 
     -- status line
