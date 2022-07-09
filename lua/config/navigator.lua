@@ -24,25 +24,25 @@ require("navigator").setup({
 
   default_mapping = false, -- set to false if you will remap every key or if you using old version of nvim-
   keymaps = {
-    { key = "gr", func = require("navigator.reference").async_ref, doc = "async_ref" },
-    { key = "g0", func = require("navigator.symbols").document_symbols, doc = "document_symbols" },
-    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, doc = "workspace_symbol_live" },
-    { key = "gd", func = require("navigator.definition").definition_preview, doc = "definition_preview" },
-    { key = "K", func = vim.lsp.buf.hover, doc = "hover" },
-    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, doc = "code_action" },
+    { key = "gr", func = require("navigator.reference").async_ref, desc = "async_ref" },
+    { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document_symbols" },
+    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace_symbol_live" },
+    { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition_preview" },
+    { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
+    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code_action" },
     {
       key = "ga",
       mode = "v",
       func = require("navigator.codeAction").range_code_action,
-      doc = "range_code_action",
+      desc = "range_code_action",
     },
     -- { key = '<Leader>re', func = 'rename()' },
-    { key = "<F2>", func = require("navigator.rename").rename, doc = "rename" },
-    { key = "go", func = require("navigator.diagnostics").show_diagnostics, doc = "show_diagnostics" },
-    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, doc = "show_buf_diagnostics" },
-    { key = "gj", func = vim.diagnostic.goto_next, doc = "next diagnostics" },
-    { key = "gk", func = vim.diagnostic.goto_prev, doc = "prev diagnostics" },
-    { key = "]O", func = vim.diagnostic.setloclist, doc = "diagnostics set loclist" },
+    { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
+    { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show_diagnostics" },
+    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show_buf_diagnostics" },
+    { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostics" },
+    { key = "gk", func = vim.diagnostic.goto_prev, desc = "prev diagnostics" },
+    { key = "]O", func = vim.diagnostic.setloclist, desc = "diagnostics set loclist" },
   },
   treesitter_analysis = true, -- treesitter variable context
   treesitter_analysis_max_num = 100, -- how many items to run treesitter analysis
