@@ -52,14 +52,27 @@ au("TextYankPost", {
   desc = "highlights on yank",
 })
 
-au({ "BufReadPost" }, {
-  callback = function()
-    local row, column = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-    local buf_line_count = vim.api.nvim_buf_line_count(0)
+vim.cmd([[
+" Only resume last cursor position when there is no go-to-line command (something like '+23').
+function s:resume_cursor_position() abort
+  if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    let l:args = v:argv  " command line arguments
+    for l:cur_arg in l:args
+      " Check if a go-to-line command is given.
+      let idx = match(l:cur_arg, '\v^\+(\d){1,}$')
+      if idx != -1
+        return
+      endif
+    endfor
 
-    if row >= 1 and row <= buf_line_count then
-      vim.api.nvim_win_set_cursor(0, { row, column })
-    end
-  end,
-  desc = "resets cursor to last position",
-})
+    execute "normal! g`\"zvzz"
+  endif
+endfunction
+
+" Return to last cursor position when opening a file
+augroup resume_cursor_position
+  autocmd!
+  autocmd BufReadPost * call s:resume_cursor_position()
+augroup END
+
+]])
