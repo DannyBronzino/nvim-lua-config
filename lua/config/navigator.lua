@@ -11,7 +11,9 @@ require("navigator").setup({
   -- 'shadow', or a list of chars which defines the border
   on_attach = function(client, bufnr)
     require("nvim-navic").attach(client, bufnr)
+    local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
+    vim.o.winbar = navic_location
     -- send notification on server start
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, "info")
@@ -133,7 +135,3 @@ require("ltex-ls").setup({
     },
   },
 })
-
-local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
-
-vim.o.winbar = navic_location
