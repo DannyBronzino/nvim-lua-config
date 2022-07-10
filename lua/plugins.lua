@@ -77,10 +77,17 @@ return require("packer").startup({
           keymap = { recommended = false },
         }
 
-        map("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true })
-        map("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true })
-        map("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true })
-        map("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true })
+        map("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], { expr = true })
+        map("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], { expr = true })
+        -- map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>"  : "\<BS>"]], { expr = true })
+        map(
+          "i",
+          "<CR>",
+          [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+          { expr = true }
+        )
+        map("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+        map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true })
       end,
     })
 
@@ -187,6 +194,8 @@ return require("packer").startup({
     use({
       "echasnovski/mini.nvim",
       config = function()
+        -- pairs insertion
+        -- require("mini.pairs").setup({})
         -- manipulate surrounding items
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
