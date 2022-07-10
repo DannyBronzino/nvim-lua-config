@@ -74,5 +74,4 @@ augroup resume_cursor_position
   autocmd!
   autocmd BufReadPost * call s:resume_cursor_position()
 augroup END
-
 ]])
