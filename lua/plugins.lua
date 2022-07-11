@@ -408,6 +408,14 @@ return require("packer").startup({
         require("config.which-key")
       end,
     })
+    -- Using Packer
+    use({
+      "vladdoster/remember.nvim",
+      config = function()
+        require("remember")
+        vim.api.nvim_feedkeys("zt2k2j", "n", true)
+      end,
+    })
     if is_bootstrap then
       require("packer").sync()
     end
