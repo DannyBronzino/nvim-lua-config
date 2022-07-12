@@ -81,4 +81,12 @@ ls.add_snippets("tex", {
   s({ trig = "Qing", name = "Qīng", dscr = "Qīng", wordTrig = false }, t("Qīng")),
 
   s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
+
+  -- for when you fat finger the shift key
+  s(
+    { trig = "(%u)(%u+%U)", regTrig = true },
+    f(function(_, snip)
+      return snip.captures[1] .. string.lower(snip.captures[2])
+    end, {})
+  ),
 }, { type = "autosnippets" })
