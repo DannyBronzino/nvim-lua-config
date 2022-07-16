@@ -220,6 +220,22 @@ return require("packer").startup({
     use({
       "echasnovski/mini.nvim",
       config = function()
+        local map = require("utils").map
+
+        -- extends 'f' and 't'
+        require("mini.jump").setup({})
+
+        -- jump to beginning or ending of word via 2-character input
+        require("mini.jump2d").setup({})
+
+        local colors = require("kanagawa.colors").setup()
+
+        vim.api.nvim_set_hl(0, "MiniJump2dSpot", { fg = colors.roninYellow, bold = true })
+
+        map("n", "S", function()
+          require("mini.jump2d").start({})
+        end, { desc = "activate mini.jump2d" })
+
         -- manipulate surrounding items
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
@@ -264,7 +280,6 @@ return require("packer").startup({
         local map = require("utils").map
 
         map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
-        map("n", "S", "<cmd>PounceRepeat<cr>")
       end,
       event = "BufEnter",
     })
