@@ -11,7 +11,9 @@ require("navigator").setup({
   -- 'shadow', or a list of chars which defines the border
   on_attach = function(client, bufnr)
     require("nvim-navic").attach(client, bufnr)
+    local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
+    vim.o.winbar = navic_location
     -- send notification on server start
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, "info")
@@ -24,25 +26,26 @@ require("navigator").setup({
 
   default_mapping = false, -- set to false if you will remap every key or if you using old version of nvim-
   keymaps = {
-    { key = "gr", func = require("navigator.reference").async_ref, doc = "async_ref" },
-    { key = "g0", func = require("navigator.symbols").document_symbols, doc = "document_symbols" },
-    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, doc = "workspace_symbol_live" },
-    { key = "gd", func = require("navigator.definition").definition_preview, doc = "definition_preview" },
-    { key = "K", func = vim.lsp.buf.hover, doc = "hover" },
-    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, doc = "code_action" },
+    { key = "gr", func = require("navigator.reference").async_ref, desc = "async_ref" },
+    { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document_symbols" },
+    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace_symbol_live" },
+    { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition_preview" },
+    { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
+    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code_action" },
     {
       key = "ga",
       mode = "v",
       func = require("navigator.codeAction").range_code_action,
-      doc = "range_code_action",
+      desc = "range_code_action",
     },
     -- { key = '<Leader>re', func = 'rename()' },
-    { key = "<F2>", func = require("navigator.rename").rename, doc = "rename" },
-    { key = "go", func = require("navigator.diagnostics").show_diagnostics, doc = "show_diagnostics" },
-    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, doc = "show_buf_diagnostics" },
-    { key = "gj", func = vim.diagnostic.goto_next, doc = "next diagnostics" },
-    { key = "gk", func = vim.diagnostic.goto_prev, doc = "prev diagnostics" },
-    { key = "]O", func = vim.diagnostic.setloclist, doc = "diagnostics set loclist" },
+    { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
+    { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show_diagnostics" },
+    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show_buf_diagnostics" },
+    { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostics" },
+    { key = "gk", func = vim.diagnostic.goto_prev, desc = "prev diagnostics" },
+    { key = "]O", func = vim.diagnostic.setloclist, desc = "diagnostics set loclist" },
+    { key = "<Space>wa", func = require("navigator.workspace").add_workspace_folder, desc = "add_workspace_folder" },
   },
   treesitter_analysis = true, -- treesitter variable context
   treesitter_analysis_max_num = 100, -- how many items to run treesitter analysis
@@ -65,8 +68,8 @@ require("navigator").setup({
   lsp = {
     enable = true, -- skip lsp setup if disabled make sure add require('navigator.lspclient.mapping').setup() in you
     -- own on_attach
-    code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
-    code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
+    code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
+    code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
     format_on_save = true, -- set to false to disable lsp code format on save (if you are using prettier/efm/formater etc)
     disable_format_cap = { "sqls", "sumneko_lua", "gopls" }, -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
     disable_lsp = {}, -- a list of lsp server disabled for your project, e.g. denols and tsserver you may
@@ -74,15 +77,9 @@ require("navigator").setup({
     -- to disable all default config and use your own lsp setup set
     -- disable_lsp = 'all'
     -- Default {}
-    diagnostic = {
-      underline = true,
-      virtual_text = true, -- show virtual for diagnostic message
-      update_in_insert = false, -- update diagnostic message in insert mode
-    },
-
     diagnostic_scrollbar_sign = { "▃", "▆", "█" }, -- experimental:  diagnostic status in scroll bar area; set to false to disable the diagnostic sign,
     -- for other style, set to {'╍', 'ﮆ'} or {'-', '='}
-    diagnostic_virtual_text = true, -- show virtual for diagnostic message
+    diagnostic_virtual_text = false, -- show virtual for diagnostic message
     diagnostic_update_in_insert = false, -- update diagnostic message in insert mode
     disply_diagnostic_qf = true, -- always show quickfix if there are diagnostic errors, set to false if you  want to ignore it
     servers = {}, -- by default empty, and it should load all LSP clients avalible based on filetype
@@ -138,7 +135,3 @@ require("ltex-ls").setup({
     },
   },
 })
-
-local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
-
-vim.o.winbar = navic_location
