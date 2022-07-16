@@ -245,12 +245,26 @@ return require("packer").startup({
     })
 
     -- buffer jumping like EasyMotion or Sneak
+    -- use({
+    -- "ggandor/leap.nvim",
+    -- -- enhances dot repeat
+    -- requires = "tpope/vim-repeat",
+    -- config = function()
+    -- require("leap").set_default_keymaps()
+    -- require("leap").setup({
+    -- highlight_unlabeled = true,
+    -- })
+    -- end,
+    -- event = "BufEnter",
+    -- })
+
     use({
-      "ggandor/leap.nvim",
-      -- enhances dot repeat
-      requires = "tpope/vim-repeat",
+      "rlane/pounce.nvim",
       config = function()
-        require("leap").set_default_keymaps()
+        local map = require("utils").map
+
+        map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
+        map("n", "S", "<cmd>PounceRepeat<cr>")
       end,
       event = "BufEnter",
     })
@@ -277,7 +291,7 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
-      event = "BufEnter",
+      event = "VimEnter",
     })
 
     -- status line
@@ -430,6 +444,14 @@ return require("packer").startup({
       "folke/which-key.nvim",
       config = function()
         require("config.which-key")
+      end,
+    })
+    -- Using Packer
+    use({
+      "vladdoster/remember.nvim",
+      config = function()
+        require("remember")
+        vim.api.nvim_feedkeys("zt2k2j", "n", true)
       end,
     })
     if is_bootstrap then
