@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 local package_home = vim.fn.stdpath("data") .. "/site/pack/packer/"
 
 local packer_install_path = package_home .. "/opt/packer.nvim"
@@ -221,12 +223,26 @@ return require("packer").startup({
     })
 
     -- buffer jumping like EasyMotion or Sneak
+    -- use({
+    -- "ggandor/leap.nvim",
+    -- -- enhances dot repeat
+    -- requires = "tpope/vim-repeat",
+    -- config = function()
+    -- require("leap").set_default_keymaps()
+    -- require("leap").setup({
+    -- highlight_unlabeled = true,
+    -- })
+    -- end,
+    -- event = "BufEnter",
+    -- })
+
     use({
-      "ggandor/leap.nvim",
-      -- enhances dot repeat
-      requires = "tpope/vim-repeat",
+      "rlane/pounce.nvim",
       config = function()
-        require("leap").set_default_keymaps()
+        local map = require("utils").map
+
+        map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
+        map("n", "S", "<cmd>PounceRepeat<cr>")
       end,
       event = "BufEnter",
     })
