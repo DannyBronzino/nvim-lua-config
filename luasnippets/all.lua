@@ -15,36 +15,18 @@ local fmt = require("luasnip.extras.fmt").fmt
 local m = require("luasnip.extras").m
 local lambda = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
+local utils = require("utils")
 
-ls.add_snippets("bib", {
-  s({
-    trig = "misc",
-    name = "Miscellaneous Reference",
-  }, {
-    t("@misc{"),
-    i(1, "citekey"),
-    t({ "", "" }),
-    t("\tauthor={"),
-    i(2, "author"),
-    t({ "},", "" }),
-    t("\ttitle={"),
-    i(3, "title"),
-    t({ "},", "" }),
-    t("\thowpublished={"),
-    i(4, "how published"),
-    t({ "},", "" }),
-    t("\tdate={"),
-    i(4, "date"),
-    t({ "},", "" }),
-    t("\tnote={"),
-    i(5, "note"),
-    t({ "},", "" }),
-    t("\tannote={"),
-    i(6, "annote"),
-    t({ "},", "" }),
-    t("\turl={"),
-    i(7, "url"),
-    t({ "},", "" }),
-    i(0),
-  }),
-})
+ls.add_snippets("all", {
+  s({ trig = "Qing", name = "Qīng", dscr = "Qīng", wordTrig = false }, t("Qīng")),
+
+  s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
+
+  -- for when you fat finger the shift key
+  s(
+    { trig = "(%u)(%u+%U)", regTrig = true },
+    f(function(_, snip)
+      return snip.captures[1] .. string.lower(snip.captures[2])
+    end, {})
+  ),
+}, { type = "autosnippets" })
