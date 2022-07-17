@@ -61,14 +61,6 @@ return require("packer").startup({
     })
 
     use({
-      "L3MON4D3/LuaSnip",
-      config = function()
-        require("config.luasnip")
-      end,
-      event = "InsertEnter",
-    })
-
-    use({
       "hrsh7th/nvim-cmp",
       config = function()
         require("config.cmp")
@@ -97,7 +89,13 @@ return require("packer").startup({
 
         vim.g.coq_settings = {
           auto_start = "shut-up",
-          keymap = { recommended = false },
+          keymap = {
+            recommended = false,
+            jump_to_mark = "", -- disable jump to mark
+          },
+          clients = {
+            snippets = { enabled = false }, -- disable coq snippets
+          },
         }
 
         map("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], { expr = true })
@@ -123,6 +121,30 @@ return require("packer").startup({
     use({
       "ms-jpq/coq.thirdparty",
       branch = "3p",
+      config = function()
+        require("coq_3p")({
+          { src = "bc", short_name = "MATH", precision = 6 },
+        })
+      end,
+      after = "coq_nvim",
+    })
+
+    use({
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("config.luasnip")
+      end,
+      event = "InsertEnter",
+    })
+
+    -- vscode format snippets
+    use({
+      "rafamadriz/friendly-snippets",
+      module = "luasnip.loaders.from_vscode",
+    })
+
+    use({
+      "mendes-davi/coq_luasnip",
       after = "coq_nvim",
     })
 
