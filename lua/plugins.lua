@@ -99,16 +99,16 @@ return require("packer").startup({
         }
 
         map("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], { expr = true })
-        map("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], { expr = true })
-        -- map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>"  : "\<BS>"]], { expr = true })
+        -- map("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], { expr = true })
+        map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>"  : "\<BS>"]], { expr = true })
         map(
           "i",
-          "<CR>",
-          [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+          "<c-o>",
+          [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><c-o>" : "\<C-y>") : "\<c-o>"]],
           { expr = true }
         )
-        map("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
-        map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true })
+        -- map("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+        -- map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true })
       end,
     })
 
@@ -121,6 +121,19 @@ return require("packer").startup({
     use({
       "ms-jpq/coq.thirdparty",
       branch = "3p",
+      requires = {
+        "lervag/vimtex",
+      },
+      config = function()
+        require("coq_3p")({
+          { src = "vimtex", short_name = "vTEX" },
+        })
+      end,
+      after = "coq_nvim",
+    })
+
+    use({
+      "mendes-davi/coq_luasnip",
       after = "coq_nvim",
     })
 
@@ -136,11 +149,6 @@ return require("packer").startup({
     use({
       "rafamadriz/friendly-snippets",
       module = "luasnip.loaders.from_vscode",
-    })
-
-    use({
-      "mendes-davi/coq_luasnip",
-      after = "coq_nvim",
     })
 
     -- use({
