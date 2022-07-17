@@ -121,11 +121,6 @@ return require("packer").startup({
     use({
       "ms-jpq/coq.thirdparty",
       branch = "3p",
-      config = function()
-        require("coq_3p")({
-          { src = "bc", short_name = "MATH", precision = 6 },
-        })
-      end,
       after = "coq_nvim",
     })
 
