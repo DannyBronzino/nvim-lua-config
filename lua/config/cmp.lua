@@ -1,86 +1,46 @@
 local cmp = require("cmp")
-local lspkind = require("lspkind")
-local luasnip = require("luasnip")
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
-    ["<c-n>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<c-p>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    ["<esc>"] = cmp.mapping.close(),
-    ["<c-space>"] = cmp.mapping.confirm({ select = true }),
-    ["<c-e>"] = cmp.mapping.abort(),
-    ["<c-d>"] = cmp.mapping.scroll_docs(-3),
-    ["<c-f>"] = cmp.mapping.scroll_docs(3),
-  }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { -- ripgrep completion
-      name = "rg",
-      max_item_count = 3,
-      option = {
-        additional_arguments = "--smart-case",
-        context_before = 3,
-        context_after = 3,
-      },
-    },
-    { name = "path" }, -- for path completion
-    { name = "latex_symbols", max_item_count = 3 },
-    { name = "luasnip" }, -- for luasnip
-    -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
-  }),
-  completion = {
-    keyword_length = 1,
-  },
-  experimental = {
-    ghost_text = true, -- adds ghost text that completes the word in buffer
-  },
   formatting = {
-    format = lspkind.cmp_format({
-      -- with_text = true,
-      mode = "symbol",
-      menu = {
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snip]",
-        rg = "[RG]",
-        path = "[Path]",
-        latex_symbols = "[Symbols]",
-        -- digraphs = "[Digraphs]",
-      },
-    }),
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = kind_icons[vim_item.kind]
+      -- Source
+      vim_item.menu = ({})[entry.source.name]
+      return vim_item
+    end,
   },
 })
 

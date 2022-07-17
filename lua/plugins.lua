@@ -69,6 +69,27 @@ return require("packer").startup({
     })
 
     use({
+      "hrsh7th/nvim-cmp",
+      config = function()
+        require("config.cmp")
+      end,
+      event = "CmdLineEnter",
+    })
+
+    use({
+      "hrsh7th/cmp-buffer",
+      after = "nvim-cmp",
+    })
+    use({
+      "hrsh7th/cmp-path",
+      after = "nvim-cmp",
+    })
+    use({
+      "hrsh7th/cmp-cmdline",
+      after = "nvim-cmp",
+    })
+
+    use({
       "ms-jpq/coq_nvim",
       branch = "coq",
       setup = function()
@@ -105,20 +126,20 @@ return require("packer").startup({
       after = "coq_nvim",
     })
 
-    use({
-      "gelguy/wilder.nvim",
-      requires = {
-        {
-          "romgrk/fzy-lua-native",
-          run = "make",
-        },
-        { "kyazdani42/nvim-web-devicons" },
-      },
-      config = function()
-        require("config.wilder")
-      end,
-      after = "kanagawa.nvim",
-    })
+    -- use({
+    -- "gelguy/wilder.nvim",
+    -- requires = {
+    -- {
+    -- "romgrk/fzy-lua-native",
+    -- run = "make",
+    -- },
+    -- { "kyazdani42/nvim-web-devicons" },
+    -- },
+    -- config = function()
+    -- require("config.wilder")
+    -- end,
+    -- after = "kanagawa.nvim",
+    -- })
 
     -- wrapper for ltex so you can use codeactions
     use({
@@ -256,7 +277,6 @@ return require("packer").startup({
         local map = require("utils").map
 
         map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
-        map("n", "S", "<cmd>PounceRepeat<cr>")
       end,
       event = "BufEnter",
     })
