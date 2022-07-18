@@ -48,6 +48,7 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
+    { name = "luasnip" }, -- for luasnip
     { -- ripgrep completion
       name = "rg",
       max_item_count = 3,
@@ -59,7 +60,6 @@ cmp.setup({
     },
     { name = "path" }, -- for path completion
     { name = "latex_symbols", max_item_count = 3 },
-    { name = "luasnip" }, -- for luasnip
     -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
   }),
   completion = {
