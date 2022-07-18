@@ -70,6 +70,12 @@ return require("packer").startup({
       module = "luasnip",
     })
 
+    -- vimtex, for latex editing
+    use({
+      "lervag/vimtex",
+      ft = { "tex" },
+    })
+
     -- completion engine
     use({
       "hrsh7th/nvim-cmp",
@@ -78,6 +84,11 @@ return require("packer").startup({
         require("config.cmp")
       end,
       event = "BufEnter",
+    })
+
+    use({
+      "hrsh7th/cmp-omni",
+      event = "InsertEnter",
     })
 
     -- completion for paths
