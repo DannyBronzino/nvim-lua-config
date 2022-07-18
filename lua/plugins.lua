@@ -77,7 +77,7 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = { "InsertEnter", "CmdLineEnter" },
+      event = "BufEnter",
     })
 
     -- completion for paths
@@ -87,7 +87,6 @@ return require("packer").startup({
         "CmdLineEnter",
         "InsertEnter",
       },
-      after = "nvim-cmp",
     })
 
     -- completion for luasnip
@@ -100,28 +99,24 @@ return require("packer").startup({
     use({
       "hrsh7th/cmp-buffer",
       event = "CmdLineEnter",
-      after = "nvim-cmp",
     })
 
     -- completion for cmdline
     use({
       "hrsh7th/cmp-cmdline",
       event = "CmdLineEnter",
-      after = "nvim-cmp",
     })
 
     -- completion for ripgrep
     use({
       "lukas-reineke/cmp-rg",
       event = "InsertEnter",
-      after = "nvim-cmp",
     })
 
     -- completion for digraphs, very annoying
     use({
       "dmitmel/cmp-digraphs",
       event = "InsertEnter",
-      after = "nvim-cmp",
       disable = true,
     })
 
@@ -129,7 +124,6 @@ return require("packer").startup({
     use({
       "kdheepak/cmp-latex-symbols",
       event = "InsertEnter",
-      after = "nvim-cmp",
     })
 
     -- wrapper for ltex so you can use codeactions
