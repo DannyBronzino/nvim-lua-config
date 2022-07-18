@@ -163,6 +163,7 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
+      event = "BufEnter",
     })
 
     use({
