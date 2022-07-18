@@ -1,5 +1,8 @@
-require("nvim-autopairs").setup({
-  disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" },
+local npairs = require("nvim-autopairs")
+
+npairs.setup({
+  check_ts = true,
+  disable_filetype = { "TelescopePrompt" },
 })
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
