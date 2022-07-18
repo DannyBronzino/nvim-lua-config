@@ -27,29 +27,26 @@ require("navigator").setup({
 
   default_mapping = false, -- set to false if you will remap every key or if you using old version of nvim-
   keymaps = {
-    { key = "gr", func = require("navigator.reference").async_ref, desc = "async_ref" },
-    { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document_symbols" },
-    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace_symbol_live" },
-    { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition_preview" },
+    { key = "gr", func = require("navigator.reference").async_ref, desc = "async reference" },
+    { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document symbols" },
+    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
+    { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition preview" },
     { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
-    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code_action" },
+    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code action" },
     {
       key = "ga",
       mode = "v",
       func = require("navigator.codeAction").range_code_action,
-      desc = "range_code_action",
+      desc = "range code action",
     },
-    -- { key = '<Leader>re', func = 'rename()' },
     { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
-    { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show_diagnostics" },
-    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show_buf_diagnostics" },
-    { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostics" },
-    { key = "gk", func = vim.diagnostic.goto_prev, desc = "prev diagnostics" },
-    { key = "]O", func = vim.diagnostic.setloclist, desc = "diagnostics set loclist" },
-    { key = "<Space>wa", func = require("navigator.workspace").add_workspace_folder, desc = "add_workspace_folder" },
+    { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show line diagnostics" },
+    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show buffer diagnostics" },
+    { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostic" },
+    { key = "gk", func = vim.diagnostic.goto_prev, desc = "previous diagnostic" },
   },
   treesitter_analysis = true, -- treesitter variable context
-  treesitter_analysis_max_num = 100, -- how many items to run treesitter analysis
+  treesitter_analysis_max_num = 1000, -- how many items to run treesitter analysis
   -- this value prevent slow in large projects, e.g. found 100000 reference in a project
   transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
@@ -72,8 +69,8 @@ require("navigator").setup({
     code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
     code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
     format_on_save = true, -- set to false to disable lsp code format on save (if you are using prettier/efm/formater etc)
-    disable_format_cap = { "sqls", "sumneko_lua", "gopls" }, -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
-    disable_lsp = {}, -- a list of lsp server disabled for your project, e.g. denols and tsserver you may
+    disable_format_cap = {}, -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
+    disable_lsp = { "ltex" }, -- a list of lsp server disabled for your project, e.g. denols and tsserver you may
     -- only want to enable one lsp server
     -- to disable all default config and use your own lsp setup set
     -- disable_lsp = 'all'
@@ -82,7 +79,7 @@ require("navigator").setup({
     -- for other style, set to {'╍', 'ﮆ'} or {'-', '='}
     diagnostic_virtual_text = false, -- show virtual for diagnostic message
     diagnostic_update_in_insert = false, -- update diagnostic message in insert mode
-    disply_diagnostic_qf = true, -- always show quickfix if there are diagnostic errors, set to false if you  want to ignore it
+    disply_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you  want to ignore it
     servers = {}, -- by default empty, and it should load all LSP clients avalible based on filetype
     -- but if you whant navigator load  e.g. `cmake` and `ltex` for you , you
     -- can put them in the `servers` list and navigator will auto load them.
