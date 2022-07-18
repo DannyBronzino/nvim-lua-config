@@ -11,7 +11,7 @@ map({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "allow
 
 map({ "n", "x" }, "H", "g^", { desc = "move to beginning of wrapped line" })
 
-map({ "n", "x" }, "L", "g$", { desc = "move to beginning of wrapped line" })
+map({ "n", "x" }, "L", "g$", { desc = "move to end of wrapped line" })
 
 map("n", "Y", "y$", { desc = "yank until end of line" })
 
