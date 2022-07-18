@@ -14,6 +14,10 @@ require("navigator").setup({
     local navic_location = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
     vim.o.winbar = navic_location
+
+    -- add cmp capabilities
+    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     -- send notification on server start
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, "info")
