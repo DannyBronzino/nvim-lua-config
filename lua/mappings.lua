@@ -91,17 +91,13 @@ map("n", "<m-k>", function()
 end, { desc = "move line up" })
 
 map("n", "zt", function()
-  if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
-    return ""
-  else
+  if vim.api.nvim_win_get_cursor(0)[1] > 3 then
     vim.api.nvim_feedkeys("zt2k2j", "n", true)
   end
 end, { desc = "works like zt, but places line 2 lines from the top of the screen" })
 
 map("i", "kj", function()
-  if vim.api.nvim_win_get_cursor(0)[1] <= 3 then
-    return ""
-  else
+  if vim.api.nvim_win_get_cursor(0)[1] > 3 then
     local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
     vim.api.nvim_feedkeys(esc .. "zt2k2ja", "n", false)
   end
