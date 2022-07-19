@@ -474,7 +474,20 @@ return require("packer").startup({
         require("config.which-key")
       end,
     })
-    -- Using Packer
+
+    -- visual undo
+    use({
+      "simnalamburt/vim-mundo",
+      setup = function()
+        vim.g.mundo_width = 80
+        local map = require("utils").map
+
+        map("n", "<F9>", "<cmd>MundoToggle<cr>")
+      end,
+      cmd = { "MundoToggle", "MundoShow" },
+    })
+
+    -- restores last edit position
     use({
       "vladdoster/remember.nvim",
       config = function()
