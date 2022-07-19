@@ -487,14 +487,6 @@ return require("packer").startup({
       cmd = { "MundoToggle", "MundoShow" },
     })
 
-    -- restores last edit position
-    use({
-      "vladdoster/remember.nvim",
-      config = function()
-        require("remember")
-        vim.api.nvim_feedkeys("zt2k2j", "n", true)
-      end,
-    })
     if is_bootstrap then
       require("packer").sync()
     end
