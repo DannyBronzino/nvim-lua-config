@@ -73,7 +73,19 @@ return require("packer").startup({
     -- vimtex, for latex editing
     use({
       "lervag/vimtex",
-      ft = { "tex" },
+      config = function()
+        local map = require("utils").map
+
+        -- open LaTeX documentation in browser
+        map("n", "<c-k>", [[<plug>(vimtex-doc-package)]])
+        vim.g.vimtex_toc_config = {
+          layer_status = { include = 0 },
+          split_pos = "vert rightbelow",
+          split_width = 30,
+          show_help = 0,
+        }
+      end,
+      ft = { "tex", "bibtex" },
     })
 
     -- completion engine
