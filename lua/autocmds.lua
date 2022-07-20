@@ -55,20 +55,28 @@ au("TextYankPost", {
 -- resume last insert position
 au("BufReadPost", {
   callback = function()
-    local set_cursor = vim.api.nvim_win_set_cursor
+    -- this only works in the current buffer
+    local set_cursor = function(position)
+      return vim.api.nvim_win_set_cursor(0, position)
+    end
 
+    -- get the mark
     local mark = vim.api.nvim_buf_get_mark(0, "^")
+    -- get the total lines
     local total_lines = vim.api.nvim_buf_line_count(0)
 
     -- test to see if mark is outside of range
-    if pcall(set_cursor, 0, mark) then
-      set_cursor(0, mark)
+    if pcall(set_cursor, mark) then
+      set_cursor(mark)
     elseif mark[1] > total_lines then
       -- if mark is beyond last line, move cursor to last existing line
-      set_cursor(0, { total_lines, 0 })
-    else
+      set_cursor({ total_lines, 0 })
+    elseif pcall(set_cursor, { mark[1], -1 }) then
       -- if mark is within document, but beyond end of line, move cursor  to end of line
-      set_cursor(0, { mark[0], -1 })
+      set_cursor({ mark[1], -1 })
+    else
+      -- put the cursor at the beginning for all other cases, such as missing mark
+      set_cursor({ 1, 0 })
     end
 
     -- position line two rows from the top of the screen
