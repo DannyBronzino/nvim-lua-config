@@ -44,6 +44,8 @@ require("navigator").setup({
     { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show buffer diagnostics" },
     { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostic" },
     { key = "gk", func = vim.diagnostic.goto_prev, desc = "previous diagnostic" },
+    { key = "<Space>f", func = vim.lsp.buf.format, mode = "n", desc = "format" },
+    { key = "<Space>f", func = vim.lsp.buf.range_formatting, mode = "v", desc = "range format" },
   },
   treesitter_analysis = true, -- treesitter variable context
   treesitter_analysis_max_num = 1000, -- how many items to run treesitter analysis
@@ -68,7 +70,7 @@ require("navigator").setup({
     -- own on_attach
     code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
     code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
-    format_on_save = true, -- set to false to disable lsp code format on save (if you are using prettier/efm/formater etc)
+    format_on_save = false, -- set to false to disable lsp code format on save (if you are using prettier/efm/formater etc)
     disable_format_cap = {}, -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
     disable_lsp = { "ltex" }, -- a list of lsp server disabled for your project, e.g. denols and tsserver you may
     -- only want to enable one lsp server
