@@ -483,6 +483,35 @@ return require("packer").startup({
       cmd = { "MundoToggle", "MundoShow" },
     })
 
+    -- Lua
+    use({
+      "gbprod/yanky.nvim",
+      config = function()
+        require("yanky").setup({})
+        local map = require("utils").map
+
+        map("n", "p", "<Plug>(YankyPutAfter)")
+        map("n", "P", "<Plug>(YankyPutBefore)")
+        map("x", "p", "<Plug>(YankyPutAfter)")
+        map("x", "P", "<Plug>(YankyPutBefore)")
+        map("n", "gp", "<Plug>(YankyGPutAfter)")
+        map("n", "gP", "<Plug>(YankyGPutBefore)")
+        map("x", "gp", "<Plug>(YankyGPutAfter)")
+        map("x", "gP", "<Plug>(YankyGPutBefore)")
+        map("n", "<c-n>", "<Plug>(YankyCycleForward)")
+        map("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+        map("n", "y", "<Plug>(YankyYank)")
+        map("x", "y", "<Plug>(YankyYank)")
+
+        map("n", "<leader>p", function()
+          require("telescope").extensions.yank_history.yank_history(
+            require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
+          )
+        end)
+      end,
+      event = "BufEnter",
+    })
+
     if is_bootstrap then
       require("packer").sync()
     end
