@@ -1,7 +1,8 @@
+local api = vim.api
 local au = vim.api.nvim_create_autocmd
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
-local number_toggle = vim.api.nvim_create_augroup("number_toggle", { clear = true })
+local number_toggle = api.nvim_create_augroup("number_toggle", { clear = true })
 
 au({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
   callback = function()
@@ -23,7 +24,7 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   desc = "set numbers to absolute when entering Insert mode",
 })
 
--- local cursorline_toggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+-- local cursorline_toggle = api.nvim_create_augroup("numbertoggle", { clear = true })
 
 -- au("InsertEnter", {
 --   callback = function()
@@ -42,7 +43,7 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- })
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+local highlight_group = api.nvim_create_augroup("YankHighlight", { clear = true })
 au("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
@@ -55,15 +56,16 @@ au("TextYankPost", {
 -- resume last insert position
 au("BufReadPost", {
   callback = function()
+    local api = vim.api
     -- this only works in the current buffer
     local set_cursor = function(position)
-      return vim.api.nvim_win_set_cursor(0, position)
+      return api.nvim_win_set_cursor(0, position)
     end
 
     -- get the mark
-    local last_insert_mark = vim.api.nvim_buf_get_mark(0, "^")
+    local last_insert_mark = api.nvim_buf_get_mark(0, "^")
     -- get the total lines
-    local total_buf_lines = vim.api.nvim_buf_line_count(0)
+    local total_buf_lines = api.nvim_buf_line_count(0)
 
     -- test to see if mark is outside of range
     -- if not, move to mark
@@ -85,8 +87,8 @@ au("BufReadPost", {
 
     -- position line two rows from the top of the screen
     -- see similar mapping in mappings.lua
-    if vim.api.nvim_win_get_cursor(0)[1] > 3 then
-      vim.api.nvim_feedkeys("zt2k2j", "n", true)
+    if api.nvim_win_get_cursor(0)[1] > 3 then
+      api.nvim_feedkeys("zt2k2j", "n", true)
     end
   end,
   desc = "places cursor at last insert position",
