@@ -61,21 +61,25 @@ au("BufReadPost", {
     end
 
     -- get the mark
-    local mark = vim.api.nvim_buf_get_mark(0, "^")
+    local last_insert_mark = vim.api.nvim_buf_get_mark(0, "^")
     -- get the total lines
-    local total_lines = vim.api.nvim_buf_line_count(0)
+    local total_buf_lines = vim.api.nvim_buf_line_count(0)
 
     -- test to see if mark is outside of range
-    if pcall(set_cursor, mark) then
-      set_cursor(mark)
-    elseif mark[1] > total_lines then
+    -- if not, move to mark
+    if pcall(set_cursor, last_insert_mark) then
+      set_cursor(last_insert_mark)
+
       -- if mark is beyond last line, move cursor to last existing line
-      set_cursor({ total_lines, 0 })
-    elseif pcall(set_cursor, { mark[1], -1 }) then
-      -- if mark is within document, but beyond end of line, move cursor  to end of line
-      set_cursor({ mark[1], -1 })
+    elseif last_insert_mark[1] > total_buf_lines then
+      set_cursor({ total_buf_lines, 0 })
+
+      -- if mark is past end of an existing line, then move cursor  to end of line
+    elseif pcall(set_cursor, { last_insert_mark[1], -1 }) then
+      set_cursor({ last_insert_mark[1], -1 })
+
+      -- if mark simply doesn't exist, e.g. first time opening file, place cursor on first character in buffer
     else
-      -- put the cursor at the beginning for all other cases, such as missing mark
       set_cursor({ 1, 0 })
     end
 
@@ -85,5 +89,5 @@ au("BufReadPost", {
       vim.api.nvim_feedkeys("zt2k2j", "n", true)
     end
   end,
-  desc = "resumes last insert position",
+  desc = "places cursor at last insert position",
 })
