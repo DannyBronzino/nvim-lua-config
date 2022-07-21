@@ -22,6 +22,7 @@ local overrides = {
   DiagnosticUnderlineHint = { fg = colors.roninYellow, undercurl = true },
   NavicIconsModule = { fg = colors.oniViolet },
   NavicText = { fg = colors.crystalBlue },
+  MiniJump2dSpot = { fg = colors.roninYellow, bold = true },
 }
 
 require("kanagawa").setup({

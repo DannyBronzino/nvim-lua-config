@@ -245,10 +245,6 @@ return require("packer").startup({
         -- activates with <cr>
         require("mini.jump2d").setup({})
 
-        local colors = require("kanagawa.colors").setup()
-
-        vim.api.nvim_set_hl(0, "MiniJump2dSpot", { fg = colors.roninYellow, bold = true })
-
         -- manipulate surrounding items
         require("mini.surround").setup({
           -- Module mappings. Use `''` (empty string) to disable one.
