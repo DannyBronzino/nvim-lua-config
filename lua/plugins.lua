@@ -169,14 +169,6 @@ return require("packer").startup({
           run = "cd lua/fzy && make",
         },
         "neovim/nvim-lspconfig",
-        {
-          "SmiteshP/nvim-navic",
-          config = function()
-            require("nvim-navic").setup({
-              highlight = true,
-            })
-          end,
-        },
         "nvim-treesitter",
         {
           "hrsh7th/cmp-nvim-lsp",
@@ -187,6 +179,14 @@ return require("packer").startup({
         require("config.navigator")
       end,
       event = "BufEnter",
+    })
+
+    use({
+      "SmiteshP/nvim-navic",
+      config = function()
+        require("nvim-navic").setup({})
+      end,
+      module = "nvim-navic",
     })
 
     use({
