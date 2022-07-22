@@ -1,3 +1,5 @@
+local navic = require("nvim-navic")
+
 -- displays spell indicator
 local function spell()
   if vim.o.spell then
@@ -52,6 +54,16 @@ require("lualine").setup({
     lualine_z = {},
   },
   tabline = {},
+  winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {
+      { navic.get_location, cond = navic.is_available },
+    },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
   extensions = {
     "quickfix",
     "fugitive",
