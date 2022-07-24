@@ -488,6 +488,8 @@ return require("packer").startup({
       "gbprod/yanky.nvim",
       config = function()
         require("yanky").setup({})
+        require("telescope").load_extension("yank_history")
+
         local map = require("utils").map
 
         map("n", "p", "<Plug>(YankyPutAfter)")
