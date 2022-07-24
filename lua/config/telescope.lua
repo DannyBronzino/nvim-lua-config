@@ -6,12 +6,11 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
-require("telescope").load_extension("yank_history")
 local actions = require("telescope.actions")
 
 require("telescope").setup({
   defaults = {
-    initial_mode = "normal",
+    -- initial_mode = "normal",
     layout_strategy = "vertical",
     layout_config = {
       vertical = {

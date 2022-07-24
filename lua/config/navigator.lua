@@ -38,7 +38,7 @@ require("navigator").setup({
   keymaps = {
     { key = "gr", func = require("navigator.reference").async_ref, desc = "async reference" },
     { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document symbols" },
-    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
+    { key = "gw", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
     { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition preview" },
     { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
     { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code action" },
@@ -50,7 +50,11 @@ require("navigator").setup({
     },
     { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
     { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show line diagnostics" },
-    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show buffer diagnostics" },
+    {
+      key = "<space>d",
+      func = require("navigator.diagnostics").show_buf_diagnostics,
+      desc = "show buffer diagnostics",
+    },
     { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostic" },
     { key = "gk", func = vim.diagnostic.goto_prev, desc = "previous diagnostic" },
     { key = "<Space>f", func = vim.lsp.buf.format, mode = "n", desc = "format" },

@@ -35,7 +35,3 @@ end, { desc = "live grep with telescope" })
 map("n", "<leader>?", function()
   require("telescope.builtin").oldfiles({ layout_strategy = "bottom_pane" })
 end, { desc = "display recent files with telescope" })
-
-map("n", "<leader>ft", function()
-  require("telescope.builtin").tags({ layout_strategy = "bottom_pane" })
-end, { desc = "display tags with telescope" })
