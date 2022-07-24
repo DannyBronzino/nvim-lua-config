@@ -56,6 +56,10 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- resume last insert position
 au("BufReadPost", {
   callback = function()
+    local ft = vim.opt.filetype:get()
+    if ft == { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" } then
+      return nil
+    end
     local api = vim.api
     -- this only works in the current buffer
     local set_cursor = function(position)
