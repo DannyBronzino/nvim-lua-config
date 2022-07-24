@@ -38,29 +38,33 @@ require("navigator").setup({
     },
     { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
     { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show line diagnostics" },
-    { key = "gO", func = require("navigator.diagnostics").show_buf_diagnostics, desc = "show buffer diagnostics" },
+    {
+      key = "<space>d",
+      func = require("navigator.diagnostics").show_buf_diagnostics,
+      desc = "show buffer diagnostics",
+    },
     { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostic" },
     { key = "gk", func = vim.diagnostic.goto_prev, desc = "previous diagnostic" },
     { key = "<Space>f", func = vim.lsp.buf.format, mode = "n", desc = "format" },
     { key = "<Space>f", func = vim.lsp.buf.range_formatting, mode = "v", desc = "range format" },
   },
   treesitter_analysis = true, -- treesitter variable context
-  treesitter_analysis_max_num = 1000, -- how many items to run treesitter analysis
+  treesitter_analysis_max_num = 100, -- how many items to run treesitter analysis
   -- this value prevent slow in large projects, e.g. found 100000 reference in a project
   transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
   lsp_signature_help = false, -- if you would like to hook ray-x/lsp_signature plugin in navigator
   -- setup here. if it is nil, navigator will not init signature help
   signature_help_cfg = nil, -- if you would like to init ray-x/lsp_signature plugin in navigator, and pass in your own config to signature help
-  icons = {
-    -- Code action
-    code_action_icon = "", -- note: need terminal support, for those not support unicode, might crash
-    -- Diagnostics
-    diagnostic_err = "",
-    diagnostic_warn = "",
-    diagnostic_hint = "",
-    diagnostic_info = "",
-  },
+  -- icons = {
+  -- -- Code action
+  -- code_action_icon = "", -- note: need terminal support, for those not support unicode, might crash
+  -- -- Diagnostics
+  -- diagnostic_err = "",
+  -- diagnostic_warn = "",
+  -- diagnostic_hint = "",
+  -- diagnostic_info = "",
+  -- },
   lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
   lsp = {
     enable = true, -- skip lsp setup if disabled make sure add require('navigator.lspclient.mapping').setup() in you
