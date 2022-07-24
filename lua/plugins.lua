@@ -21,7 +21,7 @@ return require("packer").startup({
       end,
     })
 
-    -- packer itself, can be optional
+    -- packer itself, can be optional since it's manually loaded
     use({
       "wbthomason/packer.nvim",
       opt = true,
@@ -169,7 +169,6 @@ return require("packer").startup({
           run = "cd lua/fzy && make",
         },
         "neovim/nvim-lspconfig",
-        "nvim-treesitter",
         {
           "hrsh7th/cmp-nvim-lsp",
           event = "InsertEnter",
@@ -178,9 +177,11 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
+      after = "nvim-treesitter",
       event = "BufEnter",
     })
 
+    -- prints location in winbar
     use({
       "SmiteshP/nvim-navic",
       config = function()
@@ -202,6 +203,7 @@ return require("packer").startup({
       end,
       cmd = { "Trouble", "TroubleToggle", "TroubleClose", "TroubleRefresh" },
     })
+
     -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",
@@ -435,12 +437,6 @@ return require("packer").startup({
       ft = "qf",
     })
 
-    -- creates missing directories when saving a new file
-    use({
-      "jghauser/mkdir.nvim",
-      event = "CmdLineEnter",
-    })
-
     -- file browser/picker
     use({
       "luukvbaal/nnn.nvim",
@@ -482,7 +478,7 @@ return require("packer").startup({
       cmd = { "MundoToggle", "MundoShow" },
     })
 
-    -- Lua
+    -- yank manager
     use({
       "gbprod/yanky.nvim",
       config = function()
