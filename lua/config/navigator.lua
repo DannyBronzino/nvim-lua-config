@@ -26,7 +26,7 @@ require("navigator").setup({
   keymaps = {
     { key = "gr", func = require("navigator.reference").async_ref, desc = "async reference" },
     { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document symbols" },
-    { key = "gW", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
+    { key = "gw", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
     { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition preview" },
     { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
     { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code action" },
