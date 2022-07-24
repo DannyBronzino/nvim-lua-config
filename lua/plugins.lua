@@ -315,7 +315,6 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
-      event = "VimEnter",
     })
 
     -- status line
