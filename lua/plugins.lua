@@ -155,18 +155,18 @@ return require("packer").startup({
       module = "ltex-ls",
     })
 
-    -- interface for easy LSP installation and config
-    use({
-      "williamboman/nvim-lsp-installer",
-      module = "nvim-lsp-installer",
-    })
-
     use({
       "ray-x/navigator.lua",
       requires = {
         {
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
+        },
+        {
+          "williamboman/nvim-lsp-installer",
+          config = function()
+            require("nvim-lsp-installer").setup({ ensure_installed = { "texlab", "ltex" } })
+          end,
         },
         "neovim/nvim-lspconfig",
         {
@@ -177,8 +177,6 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
-      after = "nvim-treesitter",
-      event = "BufEnter",
     })
 
     -- prints location in winbar
@@ -188,20 +186,6 @@ return require("packer").startup({
         require("nvim-navic").setup({})
       end,
       module = "nvim-navic",
-    })
-
-    use({
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      setup = function()
-        local map = require("utils").map
-
-        map("n", "<space>t", "<cmd>Trouble<cr>")
-      end,
-      config = function()
-        require("trouble").setup({})
-      end,
-      cmd = { "Trouble", "TroubleToggle", "TroubleClose", "TroubleRefresh" },
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
