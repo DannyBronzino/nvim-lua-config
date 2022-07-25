@@ -156,19 +156,26 @@ return require("packer").startup({
     })
 
     use({
+      "williamboman/nvim-lsp-installer",
+      requires = {
+        {
+          "neovim/nvim-lspconfig",
+          event = "VimEnter",
+        },
+      },
+      config = function()
+        require("nvim-lsp-installer").setup({ ensure_installed = { "texlab", "ltex" } })
+      end,
+      event = "VimEnter",
+    })
+
+    use({
       "ray-x/navigator.lua",
       requires = {
         {
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
         },
-        {
-          "williamboman/nvim-lsp-installer",
-          config = function()
-            require("nvim-lsp-installer").setup({ ensure_installed = { "texlab", "ltex" } })
-          end,
-        },
-        "neovim/nvim-lspconfig",
         {
           "hrsh7th/cmp-nvim-lsp",
           event = "InsertEnter",
@@ -177,15 +184,13 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
+      after = "nvim-lsp-installer",
     })
 
-    -- prints location in winbar
     use({
-      "SmiteshP/nvim-navic",
-      config = function()
-        require("nvim-navic").setup({})
-      end,
-      module = "nvim-navic",
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
+      requires = { "kyazdani42/nvim-web-devicons" },
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
@@ -301,6 +306,7 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
+      event = "VimEnter",
     })
 
     -- status line
@@ -308,6 +314,14 @@ return require("packer").startup({
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons",
+        -- prints location in winbar
+        {
+          "SmiteshP/nvim-navic",
+          config = function()
+            require("nvim-navic").setup({})
+          end,
+          module = "nvim-navic",
+        },
       },
       config = function()
         require("config.lualine")
