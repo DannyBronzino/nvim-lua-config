@@ -83,5 +83,6 @@ vim.api.nvim_create_autocmd("Colorscheme", {
     -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
     vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
   end,
+  pattern = "*",
   desc = "changes lualine colorscheme when nvim colorscheme changes",
 })

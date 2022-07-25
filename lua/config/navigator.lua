@@ -1,7 +1,3 @@
-require("nvim-lsp-installer").setup({
-  ensure_installed = { "texlab", "ltex" },
-})
-
 require("navigator").setup({
   debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
   width = 0.75, -- max width ratio (number of cols for the floating window) / (window width)

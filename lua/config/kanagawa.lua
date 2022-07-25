@@ -31,7 +31,6 @@ require("kanagawa").setup({
   overrides = overrides,
   undercurl = false,
   transparent = true,
-  diminactive = true,
   globalstatus = true,
 })
 
