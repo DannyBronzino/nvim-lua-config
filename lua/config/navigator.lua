@@ -10,16 +10,6 @@ require("navigator").setup({
 
     local map = require("utils").map
 
-    if client.server_capabilities.workspaceSymbolProvider then
-      map("n", "<leader>ft", function()
-        require("telescope.builtin").lsp_dynamic_workspace_symbols(require("telescope.themes").get_dropdown({
-          layout_config = {
-            width = 0.5,
-          },
-        }))
-      end, { desc = "displays workspace symbols using telescope" })
-    end
-
     -- send notification on server start
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, "info")

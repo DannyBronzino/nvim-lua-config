@@ -387,33 +387,6 @@ return require("packer").startup({
     })
 
     -- fuzzy search
-    use({
-      "nvim-telescope/telescope.nvim",
-      requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
-      },
-      -- set this up first so that telescope is only loaded when it's required
-      setup = function()
-        require("config.telescope_maps")
-      end,
-      config = function()
-        require("config.telescope")
-      end,
-      module = "telescope",
-      cmd = "Telescope",
-    })
-
-    -- FZF integration for telescope
-    use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-      after = "telescope.nvim",
-    })
-
     -- better quickfix window
     use({
       "kevinhwang91/nvim-bqf",
@@ -467,7 +440,6 @@ return require("packer").startup({
       "gbprod/yanky.nvim",
       config = function()
         require("yanky").setup({})
-        require("telescope").load_extension("yank_history")
 
         local map = require("utils").map
 
@@ -483,12 +455,6 @@ return require("packer").startup({
         map("n", "<c-p>", "<Plug>(YankyCycleBackward)")
         map("n", "y", "<Plug>(YankyYank)")
         map("x", "y", "<Plug>(YankyYank)")
-
-        map("n", "<leader>p", function()
-          require("telescope").extensions.yank_history.yank_history(
-            require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
-          )
-        end)
       end,
       event = "BufEnter",
     })
