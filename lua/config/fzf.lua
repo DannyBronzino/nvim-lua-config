@@ -7,17 +7,17 @@ require("fzf-lua").setup({
   -- `<any_function>.({ gl ... })`
   global_resume_query = true, -- include typed query in `resume`?
   winopts = {
-    -- split         = "belowright new",-- open in a split instead?
+    -- split = "belowright new", -- open in a split instead?
     -- "belowright new"  : split below
     -- "aboveleft new"   : split above
     -- "belowright vnew" : split right
     -- "aboveleft vnew   : split left
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
-    height = 0.85, -- window height
-    width = 0.80, -- window width
-    row = 0.35, -- window row position (0=top, 1=bottom)
-    col = 0.50, -- window col position (0=left, 1=right)
+    height = 0.75, -- window height
+    width = 0.75, -- window width
+    row = 0.25, -- window row position (0=top, 1=bottom)
+    col = 0.5, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win(), also used
     -- to manually draw the border characters around the preview
     -- window, can be set to 'false' to remove all borders or to
@@ -50,11 +50,11 @@ require("fzf-lua").setup({
       -- default uses the 'builtin' previewer
       border = "border", -- border|noborder, applies only to
       -- native fzf previewers (bat/cat/git/etc)
-      wrap = "nowrap", -- wrap|nowrap
+      wrap = "wrap", -- wrap|nowrap
       hidden = "nohidden", -- hidden|nohidden
       vertical = "down:45%", -- up|down:size
-      horizontal = "right:60%", -- right|left:size
-      layout = "flex", -- horizontal|vertical|flex
+      horizontal = "right:66%", -- right|left:size
+      layout = "horizontal", -- horizontal|vertical|flex
       flip_columns = 120, -- #cols to switch to horizontal on flex
       -- Only used with the builtin previewer:
       title = true, -- preview border title (file/buf)?
@@ -84,6 +84,10 @@ require("fzf-lua").setup({
       -- can be used to add custom fzf-lua mappings, e.g:
       --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
       --     { silent = true, noremap = true })
+      local buffer_map = require("utils").buffer_map
+
+      buffer_map("t", "<c-o>", "<cr>") -- use <c-o> for default action
+      buffer_map("t", "<c-e>", "<esc>") -- use <c-e> to escape
     end,
   },
   keymap = {
@@ -100,8 +104,8 @@ require("fzf-lua").setup({
       -- Rotate preview clockwise/counter-clockwise
       ["<F5>"] = "toggle-preview-ccw",
       ["<F6>"] = "toggle-preview-cw",
-      ["<S-down>"] = "preview-page-down",
-      ["<S-up>"] = "preview-page-up",
+      ["<c-f>"] = "preview-page-down",
+      ["<c-b>"] = "preview-page-up",
       ["<S-left>"] = "preview-page-reset",
     },
     fzf = {
