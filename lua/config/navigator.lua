@@ -1,73 +1,82 @@
 local on_attach = function(client, bufnr)
   local providers = client.server_capabilities
-  local buffer_map = require("utils").map
+  local map = function(mode, left_hand_side, right_hand_side, opts)
+    opts = opts or { silent = true, buffer = bufnr }
+    if opts.silent == nil then
+      opts.silent = true
+    end
+    if opts.buffer == nil then
+      opts.buffer = bufnr
+    end
+    return vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
+  end
 
   if providers.referencesProvider then
-    buffer_map("n", "gr", function()
+    map("n", "gr", function()
       require("navigator.reference").async_ref()
     end, { desc = "async reference" })
   end
 
   if providers.documentSymbolProvider then
-    buffer_map("n", "g0", function()
+    map("n", "g0", function()
       require("navigator.symbols").document_symbols()
     end, { desc = "document symbols" })
   end
 
   if providers.workspaceSymbolProvider then
-    buffer_map("n", "gw", function()
+    map("n", "gw", function()
       require("navigator.workspace").workspace_symbol_live()
     end, { desc = "workspace symbol live" })
   end
 
   if providers.definitionProvider then
-    buffer_map("n", "gd", function()
+    map("n", "gd", function()
       require("navigator.definition").definition_preview()
     end, { desc = "definition preview" })
   end
 
   if providers.hoverProvider then
-    buffer_map("n", "K", function()
+    map("n", "K", function()
       vim.lsp.buf.hover()
     end, { desc = "hover" })
   end
 
   if providers.codeActionProvider then
-    buffer_map("n", "ga", function()
+    map("n", "ga", function()
       require("navigator.codeAction").code_action()
     end, { desc = "code action" })
   end
 
   if providers.codeActionProvider then
-    buffer_map("v", "ga", function()
+    map("v", "ga", function()
       require("navigator.codeAction").range_code_action()
     end, { desc = "range code action" })
   end
 
   if providers.renameProvider then
-    buffer_map("n", "<F2>", function()
+    map("n", "<F2>", function()
       require("navigator.rename").rename()
     end, { desc = "rename" })
   end
 
-  buffer_map("n", "go", function()
+  map("n", "go", function()
     require("navigator.diagnostics").show_diagnostics()
   end, { desc = "show line diagnostics" })
 
-  buffer_map("n", "<space>d", function()
+  map("n", "<space>d", function()
     require("navigator.diagnostics").show_buf_diagnostics()
   end, { desc = "show buffer diagnostics" })
 
-  buffer_map("n", "gj", function()
+  map("n", "gj", function()
     vim.diagnostic.goto_next()
   end, { desc = "next diagnostic" })
 
-  buffer_map("n", "gk", function()
+  map("n", "gk", function()
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
   if providers.documentFormattingProvider then
-    buffer_map("n", "<Space>f", function()
+    map("n", "<Space>f", function()
       vim.lsp.buf.format()
     end, { desc = "format" })
   end

@@ -84,10 +84,10 @@ require("fzf-lua").setup({
       -- can be used to add custom fzf-lua mappings, e.g:
       --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
       --     { silent = true, noremap = true })
-      local buffer_map = require("utils").buffer_map
+      local map = require("utils").map
 
-      buffer_map("t", "<c-o>", "<cr>") -- use <c-o> for default action
-      buffer_map("t", "<c-e>", "<esc>") -- use <c-e> to escape
+      map("t", "<c-o>", "<cr>", { buffer = 0 }) -- use <c-o> for default action
+      map("t", "<c-e>", "<esc>", { buffer = 0 }) -- use <c-e> to escape
     end,
   },
   keymap = {
