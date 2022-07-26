@@ -5,31 +5,7 @@ require("navigator").setup({
   preview_height = 0.35, -- max height of preview windows
   border = "rounded",
   default_mapping = false,
-  keymaps = {
-    { key = "gr", func = require("navigator.reference").async_ref, desc = "async reference" },
-    { key = "g0", func = require("navigator.symbols").document_symbols, desc = "document symbols" },
-    { key = "gw", func = require("navigator.workspace").workspace_symbol_live, desc = "workspace symbol live" },
-    { key = "gd", func = require("navigator.definition").definition_preview, desc = "definition preview" },
-    { key = "K", func = vim.lsp.buf.hover, desc = "hover" },
-    { key = "ga", mode = "n", func = require("navigator.codeAction").code_action, desc = "code action" },
-    {
-      key = "ga",
-      mode = "v",
-      func = require("navigator.codeAction").range_code_action,
-      desc = "range code action",
-    },
-    { key = "<F2>", func = require("navigator.rename").rename, desc = "rename" },
-    { key = "go", func = require("navigator.diagnostics").show_diagnostics, desc = "show line diagnostics" },
-    {
-      key = "<space>d",
-      func = require("navigator.diagnostics").show_buf_diagnostics,
-      desc = "show buffer diagnostics",
-    },
-    { key = "gj", func = vim.diagnostic.goto_next, desc = "next diagnostic" },
-    { key = "gk", func = vim.diagnostic.goto_prev, desc = "previous diagnostic" },
-    { key = "<Space>f", func = vim.lsp.buf.format, mode = "n", desc = "format" },
-    { key = "<Space>f", func = vim.lsp.buf.range_formatting, mode = "v", desc = "range format" },
-  },
+  keymaps = {},
   treesitter_analysis = true,
   treesitter_analysis_max_num = 100,
   transparency = 50,
@@ -71,8 +47,80 @@ require("navigator").setup({
 })
 
 local on_attach = function(client, bufnr)
-  require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr })
-  if client.server_capabilities.documentSymbolProvider then
+  local map = require("utils").map
+  local providers = client.server_capabilities
+
+  if providers.referencesProvider then
+    map("n", "gr", function()
+      require("navigator.reference").async_ref()
+    end, { desc = "async reference" })
+  end
+
+  if providers.documentSymbolProvider then
+    map("n", "g0", function()
+      require("navigator.symbols").document_symbols()
+    end, { desc = "document symbols" })
+  end
+
+  if providers.workspaceSymbolProvider then
+    map("n", "gw", function()
+      require("navigator.workspace").workspace_symbol_live()
+    end, { desc = "workspace symbol live" })
+  end
+
+  if providers.definitionProvider then
+    map("n", "gd", function()
+      require("navigator.definition").definition_preview()
+    end, { desc = "definition preview" })
+  end
+
+  if providers.hoverProvider then
+    map("n", "K", function()
+      vim.lsp.buf.hover()
+    end, { desc = "hover" })
+  end
+
+  if providers.codeActionProvider then
+    map("n", "ga", function()
+      require("navigator.codeAction").code_action()
+    end, { desc = "code action" })
+  end
+
+  if providers.codeActionProvider then
+    map("v", "ga", function()
+      require("navigator.codeAction").range_code_action()
+    end, { desc = "range code action" })
+  end
+
+  if providers.renameProvider then
+    map("n", "<F2>", function()
+      require("navigator.rename").rename()
+    end, { desc = "rename" })
+  end
+
+  map("n", "go", function()
+    require("navigator.diagnostics").show_diagnostics()
+  end, { desc = "show line diagnostics" })
+
+  map("n", "<space>d", function()
+    require("navigator.diagnostics").show_buf_diagnostics()
+  end, { desc = "show buffer diagnostics" })
+
+  map("n", "gj", function()
+    vim.diagnostic.goto_next()
+  end, { desc = "next diagnostic" })
+
+  map("n", "gk", function()
+    vim.diagnostic.goto_prev()
+  end, { desc = "previous diagnostic" })
+
+  if providers.documentFormattingProvider then
+    map("n", "<Space>f", function()
+      vim.lsp.buf.format()
+    end, { desc = "format" })
+  end
+
+  if providers.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
 
