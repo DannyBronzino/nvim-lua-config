@@ -156,17 +156,14 @@ return require("packer").startup({
     })
 
     use({
-      "williamboman/nvim-lsp-installer",
+      "williamboman/mason-lspconfig.nvim",
       requires = {
-        {
-          "neovim/nvim-lspconfig",
-          event = "VimEnter",
-        },
+        "williamboman/mason.nvim",
       },
       config = function()
-        require("nvim-lsp-installer").setup({ ensure_installed = { "texlab", "ltex" } })
+        require("mason").setup()
+        require("mason-lspconfig").setup({ ensure_installed = { "texlab", "ltex" } })
       end,
-      event = "VimEnter",
     })
 
     use({
@@ -176,21 +173,24 @@ return require("packer").startup({
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
         },
+        "neovim/nvim-lspconfig",
         {
           "hrsh7th/cmp-nvim-lsp",
           event = "InsertEnter",
         },
+        wants = "nvim-treesitter",
       },
       config = function()
         require("config.navigator")
       end,
-      after = "nvim-lsp-installer",
+      event = "BufEnter",
     })
 
     use({
       "ibhagwan/fzf-lua",
       -- optional for icon support
       requires = { "kyazdani42/nvim-web-devicons" },
+      event = "BufEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
