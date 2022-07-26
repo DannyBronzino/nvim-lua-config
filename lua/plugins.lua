@@ -190,6 +190,9 @@ return require("packer").startup({
       "ibhagwan/fzf-lua",
       -- optional for icon support
       requires = { "kyazdani42/nvim-web-devicons" },
+      config = function()
+        require("config.fzf")
+      end,
       event = "BufEnter",
     })
 
@@ -315,13 +318,13 @@ return require("packer").startup({
       requires = {
         "kyazdani42/nvim-web-devicons",
         -- prints location in winbar
-        {
-          "SmiteshP/nvim-navic",
-          config = function()
-            require("nvim-navic").setup({})
-          end,
-          module = "nvim-navic",
-        },
+        -- {
+        -- "SmiteshP/nvim-navic",
+        -- config = function()
+        -- require("nvim-navic").setup({})
+        -- end,
+        -- module = "nvim-navic",
+        -- },
       },
       config = function()
         require("config.lualine")

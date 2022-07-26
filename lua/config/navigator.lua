@@ -72,9 +72,9 @@ local on_attach = function(client, bufnr)
     end, { desc = "format" })
   end
 
-  if providers.documentSymbolProvider then
-    require("nvim-navic").attach(client, bufnr)
-  end
+  -- if providers.documentSymbolProvider then
+  -- require("nvim-navic").attach(client, bufnr)
+  -- end
 
   -- send notification on server start
   local msg = string.format("Language server %s started!", client.name)
