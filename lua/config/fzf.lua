@@ -14,15 +14,16 @@ require("fzf-lua").setup({
     -- "aboveleft vnew   : split left
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
-    height = 0.75, -- window height
-    width = 0.75, -- window width
-    row = 0.25, -- window row position (0=top, 1=bottom)
-    col = 0.5, -- window col position (0=left, 1=right)
+    height = 0.9, -- window height
+    width = 1.0, -- window width
+    row = 0, -- window row position (0=top, 1=bottom)
+    col = 0, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win(), also used
     -- to manually draw the border characters around the preview
     -- window, can be set to 'false' to remove all borders or to
     -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    border = "single",
     fullscreen = false, -- start fullscreen?
     -- highlights should optimally be set by the colorscheme using
     -- FzfLuaXXX highlights. If your colorscheme doesn't set these
@@ -52,7 +53,7 @@ require("fzf-lua").setup({
       -- native fzf previewers (bat/cat/git/etc)
       wrap = "wrap", -- wrap|nowrap
       hidden = "nohidden", -- hidden|nohidden
-      vertical = "down:45%", -- up|down:size
+      vertical = "down:66%", -- up|down:size
       horizontal = "right:66%", -- right|left:size
       layout = "horizontal", -- horizontal|vertical|flex
       flip_columns = 120, -- #cols to switch to horizontal on flex

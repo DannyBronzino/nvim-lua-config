@@ -11,7 +11,7 @@ require("nnn").setup({
   picker = {
     cmd = "nnn", -- command override (-p flag is implied)
     style = {
-      width = 50, -- percentage relative to terminal size when < 1, absolute otherwise
+      width = 0.5, -- percentage relative to terminal size when < 1, absolute otherwise
       height = 0.9, -- ^
       xoffset = 2, -- ^
       yoffset = 2, -- ^
