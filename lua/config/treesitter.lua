@@ -27,19 +27,17 @@ require("nvim-treesitter.configs").setup({
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
+        ["]]"] = "@class.outer", -- move to chapter/section in latex
+        ["]s"] = "@statement.outer", -- move to commands
       },
       goto_next_end = {
-        ["]M"] = "@function.outer",
         ["]["] = "@class.outer",
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer",
         ["[["] = "@class.outer",
+        ["[s"] = "@statement.outer",
       },
       goto_previous_end = {
-        ["[M"] = "@function.outer",
         ["[]"] = "@class.outer",
       },
     },
@@ -47,7 +45,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- override bibtex query
-require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer")
+require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @class.outer (field) @statement.outer")
 
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
