@@ -42,8 +42,8 @@ cmp.setup({
 
     ["<c-o>"] = cmp.mapping.confirm({ select = true }),
     ["<c-e>"] = cmp.mapping.abort(),
-    ["<c-d>"] = cmp.mapping.scroll_docs(-3),
-    ["<c-f>"] = cmp.mapping.scroll_docs(3),
+    ["<c-f>"] = cmp.mapping.scroll_docs(-3),
+    ["<c-d>"] = cmp.mapping.scroll_docs(3),
   }),
   sources = cmp.config.sources({
     { name = "omni" },
