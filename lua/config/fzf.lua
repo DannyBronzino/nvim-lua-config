@@ -15,9 +15,9 @@ require("fzf-lua").setup({
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
     height = 0.9, -- window height
-    width = 1.0, -- window width
-    row = 0, -- window row position (0=top, 1=bottom)
-    col = 0, -- window col position (0=left, 1=right)
+    width = 0.66, -- window width
+    row = 0.2, -- window row position (0=top, 1=bottom)
+    col = 0.5, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win(), also used
     -- to manually draw the border characters around the preview
     -- window, can be set to 'false' to remove all borders or to
@@ -52,10 +52,10 @@ require("fzf-lua").setup({
       border = "border", -- border|noborder, applies only to
       -- native fzf previewers (bat/cat/git/etc)
       wrap = "wrap", -- wrap|nowrap
-      hidden = "nohidden", -- hidden|nohidden
-      vertical = "down:66%", -- up|down:size
-      horizontal = "right:66%", -- right|left:size
-      layout = "horizontal", -- horizontal|vertical|flex
+      hidden = "hidden", -- hidden|nohidden
+      vertical = "down:75%", -- up|down:size
+      horizontal = "right:75%", -- right|left:size
+      layout = "vertical", -- horizontal|vertical|flex
       flip_columns = 120, -- #cols to switch to horizontal on flex
       -- Only used with the builtin previewer:
       title = true, -- preview border title (file/buf)?
@@ -66,7 +66,7 @@ require("fzf-lua").setup({
       -- applies only when scrollbar = 'float'
       scrollchars = { "█", "" }, -- scrollbar chars ({ <full>, <empty> }
       -- applies only when scrollbar = 'border'
-      delay = 100, -- delay(ms) displaying the preview
+      delay = 10, -- delay(ms) displaying the preview
       -- prevents lag on fast scrolling
       winopts = { -- builtin previewer window options
         number = true,
@@ -106,7 +106,7 @@ require("fzf-lua").setup({
       ["<F5>"] = "toggle-preview-ccw",
       ["<F6>"] = "toggle-preview-cw",
       ["<c-f>"] = "preview-page-down",
-      ["<c-b>"] = "preview-page-up",
+      ["<c-d>"] = "preview-page-up",
       ["<S-left>"] = "preview-page-reset",
     },
     fzf = {
@@ -114,7 +114,7 @@ require("fzf-lua").setup({
       ["ctrl-z"] = "abort",
       ["ctrl-u"] = "unix-line-discard",
       ["ctrl-f"] = "half-page-down",
-      ["ctrl-b"] = "half-page-up",
+      ["ctrl-d"] = "half-page-up",
       ["ctrl-a"] = "beginning-of-line",
       ["ctrl-e"] = "end-of-line",
       ["alt-a"] = "toggle-all",
