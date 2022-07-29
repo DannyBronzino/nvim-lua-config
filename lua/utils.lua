@@ -39,4 +39,20 @@ function M.rtrim(s)
   return s:match("^(.*%S)%s*$")
 end
 
+---checks if a value is in a table
+---@param tbl table
+---@param val any
+---@return boolean
+function M.is_in_table(tbl, val)
+  if tbl == nil then
+    return false
+  end
+  for _, value in pairs(tbl) do
+    if val == value then
+      return true
+    end
+  end
+  return false
+end
+
 return M
