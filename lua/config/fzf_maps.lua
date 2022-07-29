@@ -9,11 +9,11 @@ map("n", "<leader>b", function()
 end, { desc = "show buffers with fzf" })
 
 map("n", "<leader>fp", function()
-  require("fzf-lua").lsp_workspace_symbols()
+  require("fzf-lua").lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
 end, { desc = "show workspace symbols with fzf" })
 
 map("n", "<leader>fd", function()
-  require("fzf-lua").lsp_document_symbols()
+  require("fzf-lua").lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
 end, { desc = "show document symbols with fzf" })
 
 map("n", "<leader>gw", function()
