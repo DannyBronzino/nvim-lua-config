@@ -197,8 +197,8 @@ return require("packer").startup({
         require("config.fzf")
       end,
       -- event = "BufEnter",
-      cmd = "FzfLua",
       module = "fzf-lua",
+      event = "CmdLineEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
