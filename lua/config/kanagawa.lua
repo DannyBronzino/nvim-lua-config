@@ -22,9 +22,11 @@ local overrides = {
   DiagnosticUnderlineHint = { fg = colors.roninYellow },
   -- NavicIconsModule = { fg = colors.oniViolet },
   -- NavicText = { fg = colors.crystalBlue },
-  MiniJump2dSpot = { fg = colors.roninYellow, bold = true },
+  MiniJump2dSpot = { fg = colors.surimiOrange, undercurl = true },
   YankyYanked = { link = "IncSearch" },
   YankyPut = { link = "IncSearch" },
+  LeapLabelPrimary = { fg = colors.sumiInk1, bg = colors.surimiOrange },
+  LeapMatch = { fg = colors.surimiOrange },
 }
 
 require("kanagawa").setup({

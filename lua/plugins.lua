@@ -268,29 +268,29 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    -- buffer jumping like EasyMotion or Sneak
-    -- use({
-    -- "ggandor/leap.nvim",
-    -- -- enhances dot repeat
-    -- requires = "tpope/vim-repeat",
-    -- config = function()
-    -- require("leap").set_default_keymaps()
-    -- require("leap").setup({
-    -- highlight_unlabeled = true,
-    -- })
-    -- end,
-    -- event = "BufEnter",
-    -- })
-
+    --  buffer jumping like EasyMotion or Sneak
     use({
-      "rlane/pounce.nvim",
+      "ggandor/leap.nvim",
+      -- enhances dot repeat
+      requires = "tpope/vim-repeat",
       config = function()
-        local map = require("utils").map
-
-        map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
+        require("leap").set_default_keymaps()
+        require("leap").setup({
+          highlight_unlabeled = true,
+        })
       end,
       event = "BufEnter",
     })
+
+    -- use({
+    -- "rlane/pounce.nvim",
+    -- config = function()
+    -- local map = require("utils").map
+
+    -- map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
+    -- end,
+    -- event = "BufEnter",
+    -- })
 
     -- Show match number and index for search
     use({
