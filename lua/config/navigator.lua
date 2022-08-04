@@ -97,6 +97,7 @@ require("navigator").setup({
   preview_height = 0.35, -- max height of preview windows
   border = "rounded",
   on_attach = on_attach,
+  ts_fold = false,
   default_mapping = false,
   keymaps = {},
   treesitter_analysis = true,
