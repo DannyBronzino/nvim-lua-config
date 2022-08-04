@@ -322,7 +322,14 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
-      event = "VimEnter",
+    })
+
+    use({
+      "rmehri01/onenord.nvim",
+      config = function()
+        require("config.onenord")
+        vim.cmd([[colorscheme onenord]])
+      end,
     })
 
     -- status line
@@ -330,20 +337,12 @@ return require("packer").startup({
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons",
-        -- prints location in winbar
-        -- {
-        -- "SmiteshP/nvim-navic",
-        -- config = function()
-        -- require("nvim-navic").setup({})
-        -- end,
-        -- module = "nvim-navic",
-        -- },
       },
       config = function()
         require("config.lualine")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = "kanagawa.nvim",
+      after = "onenord.nvim",
     })
 
     -- tab bar and buffer switching
@@ -354,7 +353,7 @@ return require("packer").startup({
         require("config.barbar")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = "kanagawa.nvim",
+      after = "lualine.nvim",
     })
 
     -- notification plugin
