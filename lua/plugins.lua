@@ -342,7 +342,7 @@ return require("packer").startup({
         require("config.lualine")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = "onenord.nvim",
+      after = { "kanagawa.nvim", "onenord.nvim" },
     })
 
     -- tab bar and buffer switching
