@@ -1,8 +1,17 @@
 local map = require("utils").map
 
-map("n", "<c-t>", function()
-  require("fzf-lua").files()
-end, { desc = "search files with fzf" })
+map("n", "<leader>ff", function()
+  require("fzf-lua").files({
+    actions = {
+      -- puts currently selected line in default register
+      ["ctrl-y"] = function(selected, _)
+        -- strips out any icons
+        local contents = string.match(selected[1], "[%a%d%p]+")
+        vim.fn.setreg([["]], contents, "c")
+      end,
+    },
+  })
+end, { desc = "find files with fzf" })
 
 map("n", "<leader>b", function()
   require("fzf-lua").buffers()
