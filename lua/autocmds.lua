@@ -43,15 +43,16 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- })
 
 -- Highlight on yank
--- local highlight_group = api.nvim_create_augroup("YankHighlight", { clear = true })
--- au("TextYankPost", {
--- callback = function()
--- vim.highlight.on_yank()
--- end,
--- group = highlight_group,
--- pattern = "*",
--- desc = "highlights on yank",
--- })
+local highlight_group = api.nvim_create_augroup("YankHighlight", { clear = true })
+
+au("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = "*",
+  desc = "highlights on yank",
+})
 
 local resume_edit = function()
   local api = vim.api

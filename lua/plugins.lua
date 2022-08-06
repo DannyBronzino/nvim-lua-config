@@ -149,6 +149,12 @@ return require("packer").startup({
       event = "InsertEnter",
     })
 
+    -- source for lsp completions
+    use({
+      "hrsh7th/cmp-nvim-lsp",
+      event = "InsertEnter",
+    })
+
     -- wrapper for ltex so you can use codeactions
     use({
       "vigoux/ltex-ls.nvim",
@@ -156,14 +162,23 @@ return require("packer").startup({
     })
 
     use({
-      "williamboman/mason-lspconfig.nvim",
-      requires = {
-        "williamboman/mason.nvim",
-      },
+      "neovim/nvim-lspconfig",
+    })
+
+    use({
+      "williamboman/mason.nvim",
       config = function()
         require("mason").setup()
+      end,
+      after = "nvim-lspconfig",
+    })
+
+    use({
+      "williamboman/mason-lspconfig.nvim",
+      config = function()
         require("mason-lspconfig").setup({ ensure_installed = { "texlab", "ltex" } })
       end,
+      after = "mason.nvim",
     })
 
     use({
@@ -173,35 +188,29 @@ return require("packer").startup({
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
         },
-        "neovim/nvim-lspconfig",
-        {
-          "hrsh7th/cmp-nvim-lsp",
-          event = "InsertEnter",
-        },
-        wants = "nvim-treesitter",
+        requires = "nvim-treesitter",
       },
       config = function()
         require("config.navigator")
       end,
-      event = "BufEnter",
+      after = "mason.nvim",
     })
 
     use({
       "ibhagwan/fzf-lua",
       -- optional for icon support
-      requires = { "kyazdani42/nvim-web-devicons" },
+      requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("config.fzf")
         -- replaces selection menus with fzf
         require("fzf-lua").register_ui_select()
       end,
-      event = "VimEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",
-      wants = "nvim-treesitter",
+      requires = "nvim-treesitter",
       config = function()
         require("config.tabout")
       end,
@@ -319,6 +328,7 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
+      disable = true,
     })
 
     use({
@@ -369,7 +379,6 @@ return require("packer").startup({
 
         vim.notify = nvim_notify
       end,
-      event = "VimEnter",
     })
 
     -- exit Insert mode with jj or jk or whatever
@@ -459,6 +468,7 @@ return require("packer").startup({
         map("n", "<F9>", "<cmd>MundoToggle<cr>")
       end,
       cmd = { "MundoToggle", "MundoShow" },
+      disable = true,
     })
 
     -- yank manager
@@ -483,6 +493,7 @@ return require("packer").startup({
         map("x", "y", "<Plug>(YankyYank)")
       end,
       event = "BufEnter",
+      disable = true,
     })
 
     if is_bootstrap then
