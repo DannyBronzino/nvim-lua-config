@@ -205,12 +205,11 @@ return require("packer").startup({
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
         },
-        requires = "nvim-treesitter",
       },
       config = function()
         require("config.navigator")
       end,
-      after = "mason-lspconfig.nvim",
+      after = { "nvim-treesitter", "mason-lspconfig.nvim" },
     })
 
     -- icons used by everything
@@ -232,10 +231,10 @@ return require("packer").startup({
     -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",
-      requires = "nvim-treesitter",
       config = function()
         require("config.tabout")
       end,
+      after = "nvim-treesitter",
       event = "InsertEnter",
     })
 
