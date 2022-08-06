@@ -190,15 +190,12 @@ return require("packer").startup({
       "ibhagwan/fzf-lua",
       -- optional for icon support
       requires = { "kyazdani42/nvim-web-devicons" },
-      setup = function()
-        require("config.fzf_maps")
-      end,
       config = function()
         require("config.fzf")
+        -- replaces selection menus with fzf
+        require("fzf-lua").register_ui_select()
       end,
-      -- event = "BufEnter",
-      module = "fzf-lua",
-      event = "CmdLineEnter",
+      event = "VimEnter",
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
