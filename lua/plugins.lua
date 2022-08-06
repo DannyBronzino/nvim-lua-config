@@ -78,6 +78,8 @@ return require("packer").startup({
 
         -- open LaTeX documentation in browser
         map("n", "<c-k>", [[<plug>(vimtex-doc-package)]])
+
+        -- set up TOC
         vim.g.vimtex_toc_config = {
           layer_status = { include = 0 },
           split_pos = "vert rightbelow",
@@ -95,12 +97,16 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = "BufEnter",
+      event = {
+        "CmdLineEnter",
+        "InsertEnter",
+      },
     })
 
     use({
       "hrsh7th/cmp-omni",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for paths
@@ -110,36 +116,42 @@ return require("packer").startup({
         "CmdLineEnter",
         "InsertEnter",
       },
+      after = "nvim-cmp",
     })
 
     -- completion for luasnip
     use({
       "saadparwaiz1/cmp_luasnip",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for buffer contents
     use({
       "hrsh7th/cmp-buffer",
       event = "CmdLineEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for cmdline
     use({
       "hrsh7th/cmp-cmdline",
       event = "CmdLineEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for ripgrep
     use({
       "lukas-reineke/cmp-rg",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for digraphs, very annoying
     use({
       "dmitmel/cmp-digraphs",
       event = "InsertEnter",
+      after = "nvim-cmp",
       disable = true,
     })
 
@@ -147,12 +159,17 @@ return require("packer").startup({
     use({
       "kdheepak/cmp-latex-symbols",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- source for lsp completions
     use({
       "hrsh7th/cmp-nvim-lsp",
       event = "InsertEnter",
+      after = {
+        "nvim-cmp",
+        "navigator.lua",
+      },
     })
 
     -- wrapper for ltex so you can use codeactions
@@ -193,13 +210,16 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
-      after = "mason.nvim",
+      after = "mason-lspconfig.nvim",
     })
 
     use({
       "ibhagwan/fzf-lua",
       -- optional for icon support
-      requires = "kyazdani42/nvim-web-devicons",
+      requires = {
+        "kyazdani42/nvim-web-devicons",
+        opt = true,
+      },
       config = function()
         require("config.fzf")
         -- replaces selection menus with fzf
@@ -229,14 +249,12 @@ return require("packer").startup({
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
     use({
       "wellle/targets.vim",
-      event = "BufEnter",
     })
 
     -- divides words into smaller chunks
     -- e.g. camelCase becomes (camel) (Case) when using w motion
     use({
       "chaoren/vim-wordmotion",
-      event = "BufEnter",
     })
 
     -- several modules are available
@@ -244,11 +262,11 @@ return require("packer").startup({
       "echasnovski/mini.nvim",
       config = function()
         -- extends 'f' and 't'
-        require("mini.jump").setup({})
+        -- require("mini.jump").setup({})
 
         -- jump to beginning or ending of word via 2-character input
         -- activates with <cr>
-        require("mini.jump2d").setup({})
+        -- require("mini.jump2d").setup({})
 
         -- manipulate surrounding items
         require("mini.surround").setup({
@@ -296,16 +314,6 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    -- use({
-    -- "rlane/pounce.nvim",
-    -- config = function()
-    -- local map = require("utils").map
-
-    -- map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
-    -- end,
-    -- event = "BufEnter",
-    -- })
-
     -- Show match number and index for search
     use({
       "kevinhwang91/nvim-hlslens",
@@ -344,6 +352,7 @@ return require("packer").startup({
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons",
+        opt = true,
       },
       config = function()
         require("config.lualine")
@@ -355,7 +364,10 @@ return require("packer").startup({
     -- tab bar and buffer switching
     use({
       "romgrk/barbar.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
+      requires = {
+        "kyazdani42/nvim-web-devicons",
+        opt = true,
+      },
       config = function()
         require("config.barbar")
       end,
@@ -456,19 +468,6 @@ return require("packer").startup({
       config = function()
         require("config.which-key")
       end,
-    })
-
-    -- visual undo
-    use({
-      "simnalamburt/vim-mundo",
-      setup = function()
-        vim.g.mundo_width = 80
-        local map = require("utils").map
-
-        map("n", "<F9>", "<cmd>MundoToggle<cr>")
-      end,
-      cmd = { "MundoToggle", "MundoShow" },
-      disable = true,
     })
 
     -- yank manager
