@@ -6,8 +6,14 @@ map("n", "<leader>ff", function()
       -- puts currently selected line in default register
       ["ctrl-y"] = function(selected, _)
         -- strips out any icons
-        local contents = string.match(selected[1], "[%a%d%p]+")
-        vim.fn.setreg([["]], contents, "c")
+        local selection = string.match(selected[1], "[%a%d%p]+")
+        vim.fn.setreg([["]], selection, "c")
+      end,
+      -- pastes currently selected line directly into buffer
+      ["ctrl-p"] = function(selected, _)
+        -- strips out any icons
+        local selection = string.match(selected[1], "[%a%d%p]+")
+        vim.api.nvim_paste(selection, true, -1)
       end,
     },
   })
