@@ -213,13 +213,15 @@ return require("packer").startup({
       after = "mason-lspconfig.nvim",
     })
 
+    -- icons used by everything
+    use({
+      "kyazdani42/nvim-web-devicons",
+      module = "nvim-web-devicons",
+    })
+
     use({
       "ibhagwan/fzf-lua",
       -- optional for icon support
-      requires = {
-        "kyazdani42/nvim-web-devicons",
-        opt = true,
-      },
       config = function()
         require("config.fzf")
         -- replaces selection menus with fzf
@@ -350,10 +352,6 @@ return require("packer").startup({
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
-      requires = {
-        "kyazdani42/nvim-web-devicons",
-        opt = true,
-      },
       config = function()
         require("config.lualine")
       end,
@@ -364,10 +362,6 @@ return require("packer").startup({
     -- tab bar and buffer switching
     use({
       "romgrk/barbar.nvim",
-      requires = {
-        "kyazdani42/nvim-web-devicons",
-        opt = true,
-      },
       config = function()
         require("config.barbar")
       end,
