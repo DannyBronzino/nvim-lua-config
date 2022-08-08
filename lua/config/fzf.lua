@@ -590,25 +590,34 @@ require("fzf-lua").setup({
   -- nbsp = '\xc2\xa0',
 })
 
+local files_git_or_cwd = function()
+  local actions = {
+    -- puts currently selected line in default register
+    ["alt-y"] = function(selected, _)
+      -- strips out any icons or leading whitespace
+      local selection = string.match(selected[1], "[%a%d%p][%a%d%p%s]+[%a%d%p]")
+      vim.fn.setreg([["]], selection, "c")
+    end,
+    -- pastes currently selected line directly into buffer
+    ["alt-p"] = function(selected, _)
+      -- strips out any icons or leading whitespace
+      local selection = string.match(selected[1], "[%a%d%p][%a%d%p%s]+[%a%d%p]")
+      vim.api.nvim_paste(selection, true, -1)
+    end,
+  }
+  -- version 2: uses `git ls-files` for git dirs
+  -- change to `false` if you'd like to see a message when not in a git repo
+  if require("fzf-lua.path").is_git_repo(vim.loop.cwd(), true) then
+    require("fzf-lua").git_files({ actions = actions })
+  else
+    require("fzf-lua").files({ actions = actions })
+  end
+end
+
 local map = require("utils").map
 
 map("n", "<leader>ff", function()
-  require("fzf-lua").files({
-    actions = {
-      -- puts currently selected line in default register
-      ["alt-y"] = function(selected, _)
-        -- strips out any icons
-        local selection = string.match(selected[1], "[%a%d%p]+")
-        vim.fn.setreg([["]], selection, "c")
-      end,
-      -- pastes currently selected line directly into buffer
-      ["alt-p"] = function(selected, _)
-        -- strips out any icons
-        local selection = string.match(selected[1], "[%a%d%p]+")
-        vim.api.nvim_paste(selection, true, -1)
-      end,
-    },
-  })
+  files_git_or_cwd()
 end, { desc = "find files with fzf" })
 
 map("n", "<leader>b", function()
