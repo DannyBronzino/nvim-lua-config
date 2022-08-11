@@ -224,7 +224,8 @@ return require("packer").startup({
       config = function()
         require("config.fzf")
         -- replaces selection menus with fzf
-        require("fzf-lua").register_ui_select()
+        -- second argument is 'silent' = true
+        require("fzf-lua").register_ui_select({}, true)
       end,
     })
 
