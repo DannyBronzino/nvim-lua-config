@@ -292,6 +292,17 @@ return require("packer").startup({
         })
       end,
       event = "BufEnter",
+      disable = true,
+    })
+
+    -- surround stuff
+    use({
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup()
+      end,
+      module = "nvim-surround",
+      event = "BufEnter",
     })
 
     --  buffer jumping like EasyMotion or Sneak
@@ -313,7 +324,7 @@ return require("packer").startup({
           require("leap").leap({ target_windows = focusable_windows_on_tabpage })
         end, { desc = "changes leap's 's' to work bidirectionally on all visible buffers" })
       end,
-      event = "BufEnter",
+      after = "nvim-surround",
     })
 
     -- Show match number and index for search
