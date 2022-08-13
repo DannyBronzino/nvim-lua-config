@@ -301,6 +301,7 @@ return require("packer").startup({
       config = function()
         require("nvim-surround").setup()
       end,
+      -- ftplugin files load before BufEnter
       module = "nvim-surround",
       event = "BufEnter",
     })
