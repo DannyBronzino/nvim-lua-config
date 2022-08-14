@@ -1,82 +1,78 @@
 local on_attach = function(client, bufnr)
   local providers = client.server_capabilities
-  local map = function(mode, left_hand_side, right_hand_side, opts)
-    opts = opts or { silent = true, buffer = bufnr }
-    if opts.silent == nil then
-      opts.silent = true
-    end
-    if opts.buffer == nil then
-      opts.buffer = bufnr
-    end
-    return vim.keymap.set(mode, left_hand_side, right_hand_side, opts)
+
+  local buf_map = function(mode, left_hand_side, right_hand_side, opts)
+    opts.buffer = bufnr
+
+    return require("utils").map(mode, left_hand_side, right_hand_side, opts)
   end
 
   if providers.referencesProvider then
-    map("n", "gr", function()
+    buf_map("n", "gr", function()
       require("navigator.reference").async_ref()
     end, { desc = "async reference" })
   end
 
   if providers.documentSymbolProvider then
-    map("n", "g0", function()
+    buf_map("n", "g0", function()
       require("navigator.symbols").document_symbols()
     end, { desc = "document symbols" })
   end
 
   if providers.workspaceSymbolProvider then
-    map("n", "gw", function()
+    buf_map("n", "gw", function()
       require("navigator.workspace").workspace_symbol_live()
     end, { desc = "workspace symbol live" })
   end
 
   if providers.definitionProvider then
-    map("n", "gd", function()
+    buf_map("n", "gd", function()
       require("navigator.definition").definition_preview()
     end, { desc = "definition preview" })
   end
 
   if providers.hoverProvider then
-    map("n", "K", function()
+    buf_map("n", "K", function()
       vim.lsp.buf.hover()
     end, { desc = "hover" })
   end
 
   if providers.codeActionProvider then
-    map("n", "ga", function()
+    buf_map("n", "ga", function()
       require("navigator.codeAction").code_action()
     end, { desc = "code action" })
   end
 
   if providers.codeActionProvider then
-    map("v", "ga", function()
+    buf_map("v", "ga", function()
       require("navigator.codeAction").range_code_action()
     end, { desc = "range code action" })
   end
 
   if providers.renameProvider then
-    map("n", "<F2>", function()
+    buf_map("n", "<F2>", function()
       require("navigator.rename").rename()
     end, { desc = "rename" })
   end
 
-  map("n", "go", function()
+  buf_map("n", "go", function()
     require("navigator.diagnostics").show_diagnostics()
   end, { desc = "show line diagnostics" })
 
-  map("n", "<space>d", function()
+  buf_map("n", "<space>d", function()
     require("navigator.diagnostics").show_buf_diagnostics()
   end, { desc = "show buffer diagnostics" })
 
-  map("n", "gj", function()
+  buf_map("n", "gj", function()
     vim.diagnostic.goto_next()
   end, { desc = "next diagnostic" })
 
-  map("n", "gk", function()
+  buf_map("n", "gk", function()
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
   if providers.documentFormattingProvider then
-    map("n", "<Space>f", function()
+    buf_map("n", "<Space>f", function()
       vim.lsp.buf.format()
     end, { desc = "format" })
   end
@@ -122,7 +118,7 @@ require("navigator").setup({
     code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = false },
     format_on_save = false,
     disable_format_cap = {}, -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
-    disable_lsp = { "ltex" },
+    disable_lsp = { "ltex" }, -- custom setup below
     diagnostic = {
       underline = true,
       virtual_text = false,
