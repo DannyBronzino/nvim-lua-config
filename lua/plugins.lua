@@ -193,9 +193,28 @@ return require("packer").startup({
     use({
       "williamboman/mason-lspconfig.nvim",
       config = function()
-        require("mason-lspconfig").setup({ ensure_installed = { "texlab", "ltex" } })
+        require("mason-lspconfig").setup()
       end,
       after = "mason.nvim",
+    })
+
+    use({
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      config = function()
+        require("mason-tool-installer").setup({
+
+          -- a list of all tools you want to ensure are installed upon
+          -- start; they should be the names Mason uses for each tool
+          ensure_installed = {
+            "texlab",
+            "ltex-ls",
+          },
+          auto_update = true,
+          run_on_start = true,
+          start_delay = 0,
+        })
+      end,
+      after = "mason-lspconfig.nvim",
     })
 
     use({
