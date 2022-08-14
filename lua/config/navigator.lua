@@ -156,7 +156,7 @@ require("ltex-ls").setup({
   use_spellfile = false,
   settings = {
     ltex = {
-      enabled = { "latex", "tex", "bib", "markdown" },
+      enabled = { "latex", "tex", "bib" },
       language = "en-US",
       diagnosticSeverity = "information",
       sentenceCacheSize = 2000,
