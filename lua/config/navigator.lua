@@ -150,6 +150,7 @@ require("navigator").setup({
 require("ltex-ls").setup({
   on_attach = on_attach,
   use_spellfile = false,
+  filetypes = { "latex", "tex", "bib", "gitcommit", "text" },
   settings = {
     ltex = {
       enabled = { "latex", "tex", "bib" },
