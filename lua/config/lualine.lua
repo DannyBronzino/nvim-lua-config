@@ -6,7 +6,7 @@ end
 require("lualine").setup({
   options = {
     icons_enabled = true,
-    theme = "onenord",
+    theme = "auto",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     disabled_filetypes = {},
@@ -56,20 +56,4 @@ require("lualine").setup({
     "quickfix",
     "fugitive",
   },
-})
-
-vim.api.nvim_create_autocmd("Colorscheme", {
-  callback = function()
-    -- change lualine colorscheme
-    require("lualine").setup({
-      options = {
-        theme = "auto",
-      },
-    })
-    -- the lua doesn't seem to work in the autocmd
-    -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
-    vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
-  end,
-  pattern = "*",
-  desc = "changes lualine colorscheme when nvim colorscheme changes",
 })

@@ -107,3 +107,14 @@ au("Filetype", {
   end,
   desc = "places cursor at last insert position",
 })
+
+vim.api.nvim_create_autocmd("Colorscheme", {
+  callback = function()
+    -- change lualine colorscheme
+    require("config.lualine")
+    -- the lua doesn't seem to work in the autocmd
+    vim.api.nvim_set_hl(0, "BufferTabPageFill", {})
+  end,
+  pattern = "*",
+  desc = "changes lualine colorscheme when nvim colorscheme changes",
+})
