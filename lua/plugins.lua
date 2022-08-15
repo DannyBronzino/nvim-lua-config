@@ -376,7 +376,6 @@ return require("packer").startup({
       "rmehri01/onenord.nvim",
       config = function()
         require("config.onenord")
-        vim.cmd([[colorscheme onenord]])
       end,
     })
 
