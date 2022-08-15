@@ -383,11 +383,8 @@ return require("packer").startup({
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
-      config = function()
-        require("config.lualine")
-      end,
-      -- must be loaded after the colorscheme or it loads default vim colors
-      after = { "kanagawa.nvim", "onenord.nvim" },
+      -- loaded by autocommand in autocmds.lua
+      module = "lualine",
     })
 
     -- tab bar and buffer switching
@@ -397,7 +394,7 @@ return require("packer").startup({
         require("config.barbar")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = "lualine.nvim",
+      after = { "kanagawa.nvim", "onenord.nvim" },
     })
 
     -- notification plugin
