@@ -110,8 +110,23 @@ au("Filetype", {
 
 vim.api.nvim_create_autocmd("Colorscheme", {
   callback = function()
-    -- change lualine colorscheme
+    local get_colorscheme = function()
+      local colorscheme = vim.api.nvim_exec("colorscheme", true)
+      if colorscheme == "onenord" then
+        return colorscheme
+      else
+        return "auto"
+      end
+    end
+
     require("config.lualine")
+
+    -- change lualine colorscheme
+    require("lualine").setup({
+      options = {
+        theme = get_colorscheme(),
+      },
+    })
   end,
   pattern = "*",
   desc = "changes lualine colorscheme when nvim colorscheme changes",
