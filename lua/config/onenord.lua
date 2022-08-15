@@ -26,7 +26,7 @@ require("onenord").setup({
     -- Normal = { fg = colors.fg_light },
     WhichKeyValue = { fg = colors.fg },
     WhichKeyDesc = { fg = colors.yellow },
-    BufferTabPageFill = { bg = "none" },
+    BufferTabPageFill = {},
     Visual = { fg = colors.bg, bg = colors.light_purple },
     Comment = { fg = colors.orange },
     MiniJump2dSpot = { fg = colors.light_green },
