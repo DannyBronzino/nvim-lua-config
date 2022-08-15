@@ -3,12 +3,23 @@ local function get_words()
   return tostring(vim.fn.wordcount().words .. " words")
 end
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
 require("lualine").setup({
   options = {
     icons_enabled = true,
-    theme = "auto",
+    -- theme = "auto",
     section_separators = { left = "", right = "" },
-    component_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = true,
@@ -16,8 +27,8 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      "branch",
-      "diff",
+      { "b:gitsigns_head", icon = "" },
+      { "diff", source = diff_source },
     },
     lualine_c = { "filename" },
     lualine_x = {
@@ -57,5 +68,3 @@ require("lualine").setup({
     "fugitive",
   },
 })
-
-vim.api.nvim_set_hl(0, "BufferTabPageFill", {})
