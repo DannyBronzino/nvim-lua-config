@@ -11,7 +11,7 @@ require("onenord").setup({
     keywords = "NONE",
     functions = "NONE",
     variables = "NONE",
-    diagnostics = "inverse",
+    diagnostics = "underline",
   },
   disable = {
     background = true, -- Disable setting the background color
