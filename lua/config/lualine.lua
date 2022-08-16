@@ -16,7 +16,7 @@ end
 
 require("lualine").setup({
   options = {
-    icons_enabled = true,
+    icons_enabled = false,
     -- theme = "auto",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
@@ -41,8 +41,9 @@ require("lualine").setup({
         sources = { "nvim_diagnostic" },
       },
       "location",
+      "progress",
     },
-    lualine_z = { "progress" },
+    lualine_z = {},
   },
   inactive_sections = {
     lualine_a = {},
@@ -53,16 +54,7 @@ require("lualine").setup({
     lualine_z = {},
   },
   tabline = {},
-  -- winbar = {
-  -- lualine_a = {},
-  -- lualine_b = {},
-  -- lualine_c = {
-  -- { navic.get_location, cond = navic.is_available },
-  -- },
-  -- lualine_x = {},
-  -- lualine_y = {},
-  -- lualine_z = {},
-  -- },
+  winbar = {},
   extensions = {
     "quickfix",
     "fugitive",
