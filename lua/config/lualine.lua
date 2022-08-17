@@ -17,7 +17,7 @@ end
 require("lualine").setup({
   options = {
     icons_enabled = false,
-    -- theme = "auto",
+    theme = "catppuccin",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     disabled_filetypes = {},

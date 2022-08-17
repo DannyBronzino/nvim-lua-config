@@ -344,7 +344,7 @@ return require("packer").startup({
           require("leap").leap({ target_windows = focusable_windows_on_tabpage })
         end, { desc = "changes leap's 's' to work bidirectionally on all visible buffers" })
       end,
-      after = "nvim-surround",
+      event = "BufEnter",
     })
 
     -- Show match number and index for search
@@ -377,13 +377,24 @@ return require("packer").startup({
       config = function()
         require("config.onenord")
       end,
+      disable = true,
+    })
+
+    use({
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = function()
+        require("config.catppuccin")
+      end,
     })
 
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
-      -- loaded by autocommand in autocmds.lua
-      module = "lualine",
+      config = function()
+        require("config.lualine")
+      end,
+      after = "catppuccin",
     })
 
     -- tab bar and buffer switching
@@ -393,7 +404,7 @@ return require("packer").startup({
         require("config.barbar")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = { "kanagawa.nvim", "onenord.nvim" },
+      after = "lualine.nvim",
     })
 
     -- notification plugin
