@@ -150,10 +150,10 @@ require("navigator").setup({
 require("ltex-ls").setup({
   on_attach = on_attach,
   use_spellfile = false,
-  filetypes = { "latex", "tex", "bib", "gitcommit", "text" },
+  filetypes = { "latex", "tex", "bib", "gitcommit", "text", "markdown" },
   settings = {
     ltex = {
-      enabled = { "latex", "tex", "bib" },
+      enabled = { "latex", "tex", "bib", "markdown" },
       language = "en-US",
       diagnosticSeverity = "information",
       sentenceCacheSize = 2000,
