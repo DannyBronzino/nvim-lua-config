@@ -179,15 +179,10 @@ return require("packer").startup({
     })
 
     use({
-      "neovim/nvim-lspconfig",
-    })
-
-    use({
       "williamboman/mason.nvim",
       config = function()
         require("mason").setup()
       end,
-      after = "nvim-lspconfig",
     })
 
     use({
@@ -196,6 +191,11 @@ return require("packer").startup({
         require("mason-lspconfig").setup()
       end,
       after = "mason.nvim",
+    })
+
+    use({
+      "neovim/nvim-lspconfig",
+      after = "mason-lspconfig.nvim",
     })
 
     use({
@@ -228,7 +228,7 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
-      after = { "nvim-treesitter", "mason-lspconfig.nvim" },
+      after = { "nvim-treesitter", "nvim-lspconfig" },
     })
 
     -- icons used by everything
