@@ -127,7 +127,7 @@ require("navigator").setup({
     diagnostic_scrollbar_sign = { "▃", "▆", "█" },
     diagnostic_virtual_text = false,
     diagnostic_update_in_insert = false,
-    disply_diagnostic_qf = true,
+    disply_diagnostic_qf = false,
     ctags = {
       cmd = "ctags",
       tagfile = "tags",
