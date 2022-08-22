@@ -218,7 +218,8 @@ require("fzf-lua").setup({
       -- will do nothing if `viu` isn't executable
       extensions = {
         -- neovim terminal only supports `viu` block output
-        ["png"] = { "viu", "-b" },
+        -- viu looks bad
+        ["png"] = { "ueberzug" },
         ["jpg"] = { "ueberzug" },
       },
       -- if using `ueberzug` in the above extensions map
@@ -226,7 +227,7 @@ require("fzf-lua").setup({
       --   false (none), "crop", "distort", "fit_contain",
       --   "contain", "forced_cover", "cover"
       -- https://github.com/seebye/ueberzug
-      ueberzug_scaler = "cover",
+      ueberzug_scaler = "contain",
     },
   },
   -- provider setup
