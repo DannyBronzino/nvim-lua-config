@@ -278,42 +278,6 @@ return require("packer").startup({
       "chaoren/vim-wordmotion",
     })
 
-    -- several modules are available
-    use({
-      "echasnovski/mini.nvim",
-      config = function()
-        -- extends 'f' and 't'
-        -- require("mini.jump").setup({})
-
-        -- jump to beginning or ending of word via 2-character input
-        -- activates with <cr>
-        -- require("mini.jump2d").setup({})
-
-        -- manipulate surrounding items
-        require("mini.surround").setup({
-          -- Module mappings. Use `''` (empty string) to disable one.
-          mappings = {
-            -- Add surrounding in Normal and Visual modes
-            add = "<space>sa",
-            -- Delete surrounding
-            delete = "<space>sd",
-            -- Find surrounding (to the right)
-            find = "",
-            -- Find surrounding (to the left)
-            find_left = "",
-            -- Highlight surrounding
-            highlight = "",
-            -- Replace surrounding
-            replace = "<space>sr",
-            -- Update `n_lines`
-            update_n_lines = "",
-          },
-        })
-      end,
-      event = "BufEnter",
-      disable = true,
-    })
-
     -- surround stuff
     use({
       "kylechui/nvim-surround",
@@ -465,27 +429,11 @@ return require("packer").startup({
       cmd = "Git",
     })
 
-    -- fuzzy search
     -- better quickfix window
     use({
       "kevinhwang91/nvim-bqf",
       config = [[require("config.bqf")]],
       ft = "qf",
-    })
-
-    -- file browser/picker
-    use({
-      "luukvbaal/nnn.nvim",
-      -- set up maps beforehand so that they can load nnn when required
-      setup = function()
-        local map = require("utils").map
-
-        map("n", "<space>n", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
-      end,
-      config = function()
-        require("config.nnn")
-      end,
-      cmd = { "NnnPicker", "NnnExplorer" },
     })
 
     -- rename files in neovim
@@ -500,31 +448,6 @@ return require("packer").startup({
       config = function()
         require("config.which-key")
       end,
-    })
-
-    -- yank manager
-    use({
-      "gbprod/yanky.nvim",
-      config = function()
-        require("yanky").setup({})
-
-        local map = require("utils").map
-
-        map("n", "p", "<Plug>(YankyPutAfter)")
-        map("n", "P", "<Plug>(YankyPutBefore)")
-        map("x", "p", "<Plug>(YankyPutAfter)")
-        map("x", "P", "<Plug>(YankyPutBefore)")
-        map("n", "gp", "<Plug>(YankyGPutAfter)")
-        map("n", "gP", "<Plug>(YankyGPutBefore)")
-        map("x", "gp", "<Plug>(YankyGPutAfter)")
-        map("x", "gP", "<Plug>(YankyGPutBefore)")
-        map("n", "<c-n>", "<Plug>(YankyCycleForward)")
-        map("n", "<c-p>", "<Plug>(YankyCycleBackward)")
-        map("n", "y", "<Plug>(YankyYank)")
-        map("x", "y", "<Plug>(YankyYank)")
-      end,
-      event = "BufEnter",
-      disable = true,
     })
 
     if is_bootstrap then
