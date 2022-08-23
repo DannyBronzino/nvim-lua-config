@@ -333,7 +333,6 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
-      disable = true,
     })
 
     use({
@@ -341,7 +340,6 @@ return require("packer").startup({
       config = function()
         require("config.onenord")
       end,
-      disable = true,
     })
 
     use({
