@@ -56,52 +56,37 @@ autocmd("TextYankPost", {
 local resume_edit = function() end
 
 -- resume last insert position
-autocmd("FileType", {
+autocmd("BufEnter", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
-  callback = function(ctx)
-    local blacklist = {
-      "guihua",
-      "guihua_rust",
-      "clap_input",
-      "gitcommit",
-      "gitrebase",
-      "fzf",
-      "notify",
-      "packer",
-      "help",
-      "cmp_menu",
-    }
-    local is_in_table = require("utils").is_in_table
+  callback = function()
+    -- this only works in the current buffer
+    local set_cursor = function(position)
+      return api.nvim_win_set_cursor(0, position)
+    end
 
-    if is_in_table(blacklist, ctx.match) == false then
-      local api = vim.api
-      -- this only works in the current buffer
-      local set_cursor = function(position)
-        return api.nvim_win_set_cursor(0, position)
-      end
+    -- get the total lines
+    local total_buf_lines = api.nvim_buf_line_count(0)
 
-      -- get the mark
-      local last_insert_mark = api.nvim_buf_get_mark(0, "^")
-      -- get the total lines
-      local total_buf_lines = api.nvim_buf_line_count(0)
+    -- get the mark
+    local last_insert_mark = api.nvim_buf_get_mark(0, "^")
+    if last_insert_mark == { 0, 0 } then
+      return
+    end
 
-      -- test to see if mark is outside of range
-      -- if not, move to mark
-      if pcall(set_cursor, last_insert_mark) then
-        set_cursor(last_insert_mark)
+    -- test to see if mark is outside of range
+    -- if not, move to mark
+    if pcall(set_cursor, last_insert_mark) then
+      return set_cursor(last_insert_mark)
+    end
 
-      -- if mark is beyond last line, move cursor to last existing line
-      elseif last_insert_mark[1] > total_buf_lines then
-        set_cursor({ total_buf_lines, 0 })
+    -- if mark is beyond last line, move cursor to last existing line
+    if last_insert_mark[1] > total_buf_lines then
+      return set_cursor({ total_buf_lines, 0 })
+    end
 
-      -- if mark is past end of an existing line, then move cursor  to end of line
-      elseif pcall(set_cursor, { last_insert_mark[1], -1 }) then
-        set_cursor({ last_insert_mark[1], -1 })
-
-      -- if mark simply doesn't exist, e.g. first time opening file, place cursor on first character in buffer
-      else
-        set_cursor({ 1, 0 })
-      end
+    -- if mark is past end of an existing line, then move cursor  to end of line
+    if pcall(set_cursor, { last_insert_mark[1], -1 }) then
+      return set_cursor({ last_insert_mark[1], -1 })
     end
   end,
   desc = "places cursor at last insert position",
@@ -109,10 +94,34 @@ autocmd("FileType", {
 
 autocmd({ "BufWritePre" }, {
   pattern = "*",
-  group = vim.api.nvim_create_augroup("auto_create_dir", { clear = true }),
+  group = api.nvim_create_augroup("auto_create_dir", { clear = true }),
   callback = function(ctx)
     local dir = vim.fn.fnamemodify(ctx.file, ":p:h")
     vim.fn.mkdir(dir, "p")
   end,
   desc = "creates missing directories in save path",
+})
+
+autocmd({ "BufEnter" }, {
+  pattern = { "*.tex", "*.bib" },
+  group = api.nvim_create_augroup("tex_file", { clear = true }),
+  callback = function()
+    require("nvim-surround").buffer_setup({
+      surrounds = {
+        ["c"] = {
+          add = function()
+            local cmd = require("nvim-surround.config").get_input("Command: ")
+            return { { "\\" .. cmd .. "{" }, { "}" } }
+          end,
+        },
+        ["e"] = {
+          add = function()
+            local env = require("nvim-surround.config").get_input("Environment: ")
+            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
+          end,
+        },
+      },
+    })
+  end,
+  desc = "loads latex only surrounds",
 })
