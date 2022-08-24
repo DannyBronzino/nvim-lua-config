@@ -33,12 +33,7 @@ return require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       requires = {
         -- highlights matching pairs
-        {
-          "andymass/vim-matchup",
-          config = function()
-            require("config.matchup")
-          end,
-        },
+        "andymass/vim-matchup",
         -- more textobjects
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
@@ -202,7 +197,6 @@ return require("packer").startup({
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       config = function()
         require("mason-tool-installer").setup({
-
           -- a list of all tools you want to ensure are installed upon
           -- start; they should be the names Mason uses for each tool
           ensure_installed = {
@@ -228,7 +222,7 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
-      after = { "nvim-treesitter", "nvim-lspconfig" },
+      after = { "nvim-treesitter", "mason-tool-installer.nvim" },
     })
 
     -- icons used by everything
@@ -284,9 +278,6 @@ return require("packer").startup({
       config = function()
         require("nvim-surround").setup()
       end,
-      -- ftplugin files load before BufEnter
-      module = "nvim-surround",
-      event = "BufEnter",
     })
 
     --  buffer jumping like EasyMotion or Sneak
