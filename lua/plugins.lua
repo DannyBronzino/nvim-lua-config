@@ -168,10 +168,10 @@ return require("packer").startup({
     })
 
     -- wrapper for ltex so you can use codeactions
-    use({
-      "vigoux/ltex-ls.nvim",
-      module = "ltex-ls",
-    })
+    -- use({
+    -- "vigoux/ltex-ls.nvim",
+    -- module = "ltex-ls",
+    -- })
 
     use({
       "williamboman/mason.nvim",
@@ -209,6 +209,11 @@ return require("packer").startup({
         })
       end,
       after = "mason-lspconfig.nvim",
+    })
+
+    use({
+      "barreiroleo/ltex-extra.nvim",
+      module = "ltex_extra",
     })
 
     use({

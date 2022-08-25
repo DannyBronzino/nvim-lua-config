@@ -1,6 +1,16 @@
 local on_attach = function(client, bufnr)
   local providers = client.server_capabilities
 
+  if client.name == "ltex" then
+    -- your other on_attach functions.
+    require("ltex_extra").setup({
+      load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
+      init_check = true, -- boolean : whether to load dictionaries on startup
+      path = nil, -- string : path to store dictionaries. Relative path uses current working directory
+      log_level = "none", -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
+    })
+  end
+
   local buf_map = function(mode, left_hand_side, right_hand_side, opts)
     opts.buffer = bufnr
 
@@ -146,45 +156,7 @@ require("navigator").setup({
   },
 })
 
--- manual setup for ltex
-require("ltex-ls").setup({
+require("lspconfig").ltex.setup({
   on_attach = on_attach,
-  use_spellfile = false,
-  filetypes = { "latex", "tex", "bib", "gitcommit", "text" },
-  settings = {
-    ltex = {
-      enabled = { "latex", "tex", "bib" },
-      language = "en-US",
-      diagnosticSeverity = "information",
-      sentenceCacheSize = 2000,
-      additionalRules = {
-        enablePickyRules = true,
-        motherTongue = "en",
-      },
-      disabledRules = {},
-      dictionary = (function()
-        -- For dictionary, search for files in the runtime to have
-        -- and include them as externals the format for them is
-        -- dict/{LANG}.txt
-        --
-        -- Also add dict/default.txt to all of them
-        local files = {}
-        for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
-          local lang = vim.fn.fnamemodify(file, ":t:r")
-          local fullpath = vim.fs.normalize(file, ":p")
-          files[lang] = { ":" .. fullpath }
-        end
-
-        if files.default then
-          for lang, _ in pairs(files) do
-            if lang ~= "default" then
-              vim.list_extend(files[lang], files.default)
-            end
-          end
-          files.default = nil
-        end
-        return files
-      end)(),
-    },
-  },
+  filetypes = { "tex", "bib" },
 })

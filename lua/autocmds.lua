@@ -56,7 +56,7 @@ autocmd("TextYankPost", {
 local resume_edit = function() end
 
 -- resume last insert position
-autocmd("BufEnter", {
+autocmd("BufReadPost", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function()
     -- this only works in the current buffer
