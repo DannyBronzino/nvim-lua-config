@@ -167,12 +167,6 @@ return require("packer").startup({
       },
     })
 
-    -- wrapper for ltex so you can use codeactions
-    -- use({
-    -- "vigoux/ltex-ls.nvim",
-    -- module = "ltex-ls",
-    -- })
-
     use({
       "williamboman/mason.nvim",
       config = function()
@@ -212,8 +206,8 @@ return require("packer").startup({
     })
 
     use({
-      "barreiroleo/ltex-extra.nvim",
-      module = "ltex_extra",
+      "barreiroleo/ltex_extra.nvim",
+      after = { "mason-tool-installer.nvim" },
     })
 
     use({
@@ -227,7 +221,7 @@ return require("packer").startup({
       config = function()
         require("config.navigator")
       end,
-      after = { "nvim-treesitter", "mason-tool-installer.nvim" },
+      after = { "nvim-treesitter", "ltex_extra.nvim" },
     })
 
     -- icons used by everything
