@@ -2,7 +2,6 @@ local on_attach = function(client, bufnr)
   local providers = client.server_capabilities
 
   if client.name == "ltex" then
-    -- your other on_attach functions.
     require("ltex_extra").setup({
       load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
       init_check = true, -- boolean : whether to load dictionaries on startup
@@ -159,4 +158,15 @@ require("navigator").setup({
 require("lspconfig").ltex.setup({
   on_attach = on_attach,
   filetypes = { "tex", "bib" },
+  settings = {
+    ltex = {
+      enabled = { "tex", "bib" },
+      language = "en-US",
+      diagnosticSeverity = "information",
+      additionalRules = {
+        enablePickyRules = true,
+        motherTongue = "en-US",
+      },
+    },
+  },
 })
