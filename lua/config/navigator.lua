@@ -160,9 +160,6 @@ require("lspconfig").ltex.setup({
   filetypes = { "tex", "bib" },
   settings = {
     ltex = {
-      enabled = { "tex", "bib" },
-      language = "en-US",
-      diagnosticSeverity = "information",
       additionalRules = {
         enablePickyRules = true,
         motherTongue = "en-US",
