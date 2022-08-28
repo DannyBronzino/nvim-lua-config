@@ -10,7 +10,7 @@ require("autocmds")
 ---pretty print table or function result
 ---@param item function|table
 function Inspect(item)
-  print(vim.inspect(item))
+  vim.pretty_print(item)
 end
 
 -- join all non-blank lines

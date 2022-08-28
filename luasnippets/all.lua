@@ -24,7 +24,7 @@ ls.add_snippets("all", {
 
   -- for when you fat finger the shift key
   s(
-    { trig = "(%u)(%u+%U)", regTrig = true },
+    { trig = "(%u)(%u+%l)", regTrig = true },
     f(function(_, snip)
       return snip.captures[1] .. string.lower(snip.captures[2])
     end, {})

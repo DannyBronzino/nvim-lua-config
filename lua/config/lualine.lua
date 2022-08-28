@@ -1,25 +1,25 @@
-local navic = require("nvim-navic")
-
--- displays spell indicator
-local function spell()
-  if vim.o.spell then
-    return string.format("SPELL")
-  end
-
-  return ""
-end
-
 -- show word count
 local function get_words()
   return tostring(vim.fn.wordcount().words .. " words")
 end
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
 require("lualine").setup({
   options = {
-    icons_enabled = true,
-    theme = "auto",
+    icons_enabled = false,
+    theme = "catppuccin",
     section_separators = { left = "", right = "" },
-    component_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = true,
@@ -27,12 +27,11 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      "branch",
-      "diff",
+      { "b:gitsigns_head", icon = "" },
+      { "diff", source = diff_source },
     },
     lualine_c = { "filename" },
     lualine_x = {
-      { spell, color = "WarningMsg" },
       { get_words },
       "filetype",
     },
@@ -42,8 +41,9 @@ require("lualine").setup({
         sources = { "nvim_diagnostic" },
       },
       "location",
+      "progress",
     },
-    lualine_z = { "progress" },
+    lualine_z = {},
   },
   inactive_sections = {
     lualine_a = {},
@@ -54,34 +54,9 @@ require("lualine").setup({
     lualine_z = {},
   },
   tabline = {},
-  winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {
-      { navic.get_location, cond = navic.is_available },
-    },
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
-  },
+  winbar = {},
   extensions = {
     "quickfix",
     "fugitive",
-    "nvim-tree",
   },
-})
-
-vim.api.nvim_create_autocmd("Colorscheme", {
-  callback = function()
-    -- change lualine colorscheme
-    require("lualine").setup({
-      options = {
-        theme = "auto",
-      },
-    })
-    -- the lua doesn't seem to work in the autocmd
-    -- vim.api.nvim_set_hl(0, "BufferTabPageFill", { bg = "none" })
-    vim.cmd([[hi BufferTabPageFill ctermbg=none guibg=none]])
-  end,
-  desc = "changes lualine colorscheme when nvim colorscheme changes",
 })

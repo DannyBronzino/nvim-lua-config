@@ -4,7 +4,7 @@ local M = {}
 ---@param mode string|table nvim mode for mapping
 ---@param left_hand_side string
 ---@param right_hand_side string|function
----@param opts table|nil if silent = false not present then it will be set to true
+---@param opts table|nil if {silent = false} not present then it will be set to true
 ---@return function vim.keymap.set
 function M.map(mode, left_hand_side, right_hand_side, opts)
   opts = opts or { silent = true }
@@ -37,6 +37,22 @@ end
 ---@return string
 function M.rtrim(s)
   return s:match("^(.*%S)%s*$")
+end
+
+---checks if a value is in a table
+---@param tbl table
+---@param val any
+---@return boolean
+function M.is_in_table(tbl, val)
+  if tbl == nil then
+    return false
+  end
+  for _, value in pairs(tbl) do
+    if val == value then
+      return true
+    end
+  end
+  return false
 end
 
 return M

@@ -33,12 +33,7 @@ return require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       requires = {
         -- highlights matching pairs
-        {
-          "andymass/vim-matchup",
-          config = function()
-            require("config.matchup")
-          end,
-        },
+        "andymass/vim-matchup",
         -- more textobjects
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
@@ -78,6 +73,8 @@ return require("packer").startup({
 
         -- open LaTeX documentation in browser
         map("n", "<c-k>", [[<plug>(vimtex-doc-package)]])
+
+        -- set up TOC
         vim.g.vimtex_toc_config = {
           layer_status = { include = 0 },
           split_pos = "vert rightbelow",
@@ -95,12 +92,16 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = "BufEnter",
+      event = {
+        "CmdLineEnter",
+        "InsertEnter",
+      },
     })
 
     use({
       "hrsh7th/cmp-omni",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for paths
@@ -110,36 +111,42 @@ return require("packer").startup({
         "CmdLineEnter",
         "InsertEnter",
       },
+      after = "nvim-cmp",
     })
 
     -- completion for luasnip
     use({
       "saadparwaiz1/cmp_luasnip",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for buffer contents
     use({
       "hrsh7th/cmp-buffer",
       event = "CmdLineEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for cmdline
     use({
       "hrsh7th/cmp-cmdline",
       event = "CmdLineEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for ripgrep
     use({
       "lukas-reineke/cmp-rg",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
     -- completion for digraphs, very annoying
     use({
       "dmitmel/cmp-digraphs",
       event = "InsertEnter",
+      after = "nvim-cmp",
       disable = true,
     })
 
@@ -147,18 +154,60 @@ return require("packer").startup({
     use({
       "kdheepak/cmp-latex-symbols",
       event = "InsertEnter",
+      after = "nvim-cmp",
     })
 
-    -- wrapper for ltex so you can use codeactions
+    -- source for lsp completions
     use({
-      "vigoux/ltex-ls.nvim",
-      module = "ltex-ls",
+      "hrsh7th/cmp-nvim-lsp",
+      event = "InsertEnter",
+      after = {
+        "nvim-cmp",
+        "navigator.lua",
+      },
     })
 
-    -- interface for easy LSP installation and config
     use({
-      "williamboman/nvim-lsp-installer",
-      module = "nvim-lsp-installer",
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup()
+      end,
+    })
+
+    use({
+      "williamboman/mason-lspconfig.nvim",
+      config = function()
+        require("mason-lspconfig").setup()
+      end,
+      after = "mason.nvim",
+    })
+
+    use({
+      "neovim/nvim-lspconfig",
+      after = "mason-lspconfig.nvim",
+    })
+
+    use({
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      config = function()
+        require("mason-tool-installer").setup({
+          -- a list of all tools you want to ensure are installed upon
+          -- start; they should be the names Mason uses for each tool
+          ensure_installed = {
+            "texlab",
+            "ltex-ls",
+          },
+          auto_update = true,
+          run_on_start = true,
+          start_delay = 0,
+        })
+      end,
+      after = "mason-lspconfig.nvim",
+    })
+
+    use({
+      "barreiroleo/ltex_extra.nvim",
+      after = { "mason-tool-installer.nvim" },
     })
 
     use({
@@ -168,49 +217,37 @@ return require("packer").startup({
           "ray-x/guihua.lua",
           run = "cd lua/fzy && make",
         },
-        "neovim/nvim-lspconfig",
-        {
-          "hrsh7th/cmp-nvim-lsp",
-          event = "InsertEnter",
-        },
       },
       config = function()
         require("config.navigator")
       end,
-      after = "nvim-treesitter",
-      event = "BufEnter",
+      after = { "nvim-treesitter", "ltex_extra.nvim" },
     })
 
-    -- prints location in winbar
+    -- icons used by everything
     use({
-      "SmiteshP/nvim-navic",
-      config = function()
-        require("nvim-navic").setup({})
-      end,
-      module = "nvim-navic",
+      "kyazdani42/nvim-web-devicons",
+      module = "nvim-web-devicons",
     })
 
     use({
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      setup = function()
-        local map = require("utils").map
-
-        map("n", "<space>t", "<cmd>Trouble<cr>")
-      end,
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
       config = function()
-        require("trouble").setup({})
+        require("config.fzf")
+        -- replaces selection menus with fzf
+        -- second argument is 'silent' = true
+        require("fzf-lua").register_ui_select({}, true)
       end,
-      cmd = { "Trouble", "TroubleToggle", "TroubleClose", "TroubleRefresh" },
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
     use({
       "abecodes/tabout.nvim",
-      wants = "nvim-treesitter",
       config = function()
         require("config.tabout")
       end,
+      after = "nvim-treesitter",
       event = "InsertEnter",
     })
 
@@ -226,71 +263,40 @@ return require("packer").startup({
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
     use({
       "wellle/targets.vim",
-      event = "BufEnter",
     })
 
     -- divides words into smaller chunks
     -- e.g. camelCase becomes (camel) (Case) when using w motion
     use({
       "chaoren/vim-wordmotion",
-      event = "BufEnter",
     })
 
-    -- several modules are available
+    -- surround stuff
     use({
-      "echasnovski/mini.nvim",
+      "kylechui/nvim-surround",
       config = function()
-        -- extends 'f' and 't'
-        require("mini.jump").setup({})
-
-        -- jump to beginning or ending of word via 2-character input
-        -- activates with <cr>
-        require("mini.jump2d").setup({})
-
-        -- manipulate surrounding items
-        require("mini.surround").setup({
-          -- Module mappings. Use `''` (empty string) to disable one.
-          mappings = {
-            -- Add surrounding in Normal and Visual modes
-            add = "<space>sa",
-            -- Delete surrounding
-            delete = "<space>sd",
-            -- Find surrounding (to the right)
-            find = "",
-            -- Find surrounding (to the left)
-            find_left = "",
-            -- Highlight surrounding
-            highlight = "",
-            -- Replace surrounding
-            replace = "<space>sr",
-            -- Update `n_lines`
-            update_n_lines = "",
-          },
-        })
+        require("nvim-surround").setup()
       end,
-      event = "BufEnter",
     })
 
-    -- buffer jumping like EasyMotion or Sneak
-    -- use({
-    -- "ggandor/leap.nvim",
-    -- -- enhances dot repeat
-    -- requires = "tpope/vim-repeat",
-    -- config = function()
-    -- require("leap").set_default_keymaps()
-    -- require("leap").setup({
-    -- highlight_unlabeled = true,
-    -- })
-    -- end,
-    -- event = "BufEnter",
-    -- })
-
+    --  buffer jumping like EasyMotion or Sneak
     use({
-      "rlane/pounce.nvim",
+      "ggandor/leap.nvim",
+      -- enhances dot repeat
+      requires = "tpope/vim-repeat",
       config = function()
+        require("leap").set_default_keymaps()
+        require("leap").setup({
+          highlight_unlabeled = true,
+        })
         local map = require("utils").map
 
-        map({ "n", "v", "o" }, "s", "<cmd>Pounce<cr>")
+        map("n", "s", function()
+          local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
+            return vim.api.nvim_win_get_config(win).focusable
+          end, vim.api.nvim_tabpage_list_wins(0))
+          require("leap").leap({ target_windows = focusable_windows_on_tabpage })
+        end, { desc = "changes leap's 's' to work bidirectionally on all visible buffers" })
       end,
       event = "BufEnter",
     })
@@ -319,28 +325,38 @@ return require("packer").startup({
       end,
     })
 
+    use({
+      "rmehri01/onenord.nvim",
+      config = function()
+        require("config.onenord")
+      end,
+    })
+
+    use({
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = function()
+        require("config.catppuccin")
+      end,
+    })
+
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
-      requires = {
-        "kyazdani42/nvim-web-devicons",
-      },
       config = function()
         require("config.lualine")
       end,
-      -- must be loaded after the colorscheme or it loads default vim colors
-      after = "kanagawa.nvim",
+      after = "catppuccin",
     })
 
     -- tab bar and buffer switching
     use({
       "romgrk/barbar.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("config.barbar")
       end,
       -- must be loaded after the colorscheme or it loads default vim colors
-      after = "kanagawa.nvim",
+      after = "lualine.nvim",
     })
 
     -- notification plugin
@@ -359,7 +375,6 @@ return require("packer").startup({
 
         vim.notify = nvim_notify
       end,
-      event = "VimEnter",
     })
 
     -- exit Insert mode with jj or jk or whatever
@@ -402,54 +417,11 @@ return require("packer").startup({
       cmd = "Git",
     })
 
-    -- fuzzy search
-    use({
-      "nvim-telescope/telescope.nvim",
-      requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
-      },
-      -- set this up first so that telescope is only loaded when it's required
-      setup = function()
-        require("config.telescope_maps")
-      end,
-      config = function()
-        require("config.telescope")
-      end,
-      module = "telescope",
-      cmd = "Telescope",
-    })
-
-    -- FZF integration for telescope
-    use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-      after = "telescope.nvim",
-    })
-
     -- better quickfix window
     use({
       "kevinhwang91/nvim-bqf",
       config = [[require("config.bqf")]],
       ft = "qf",
-    })
-
-    -- file browser/picker
-    use({
-      "luukvbaal/nnn.nvim",
-      -- set up maps beforehand so that they can load nnn when required
-      setup = function()
-        local map = require("utils").map
-
-        map("n", "<space>n", "<cmd>NnnPicker<cr>", { desc = "toggles NNN picker" })
-      end,
-      config = function()
-        require("config.nnn")
-      end,
-      cmd = { "NnnPicker", "NnnExplorer" },
     })
 
     -- rename files in neovim
@@ -464,49 +436,6 @@ return require("packer").startup({
       config = function()
         require("config.which-key")
       end,
-    })
-
-    -- visual undo
-    use({
-      "simnalamburt/vim-mundo",
-      setup = function()
-        vim.g.mundo_width = 80
-        local map = require("utils").map
-
-        map("n", "<F9>", "<cmd>MundoToggle<cr>")
-      end,
-      cmd = { "MundoToggle", "MundoShow" },
-    })
-
-    -- yank manager
-    use({
-      "gbprod/yanky.nvim",
-      config = function()
-        require("yanky").setup({})
-        require("telescope").load_extension("yank_history")
-
-        local map = require("utils").map
-
-        map("n", "p", "<Plug>(YankyPutAfter)")
-        map("n", "P", "<Plug>(YankyPutBefore)")
-        map("x", "p", "<Plug>(YankyPutAfter)")
-        map("x", "P", "<Plug>(YankyPutBefore)")
-        map("n", "gp", "<Plug>(YankyGPutAfter)")
-        map("n", "gP", "<Plug>(YankyGPutBefore)")
-        map("x", "gp", "<Plug>(YankyGPutAfter)")
-        map("x", "gP", "<Plug>(YankyGPutBefore)")
-        map("n", "<c-n>", "<Plug>(YankyCycleForward)")
-        map("n", "<c-p>", "<Plug>(YankyCycleBackward)")
-        map("n", "y", "<Plug>(YankyYank)")
-        map("x", "y", "<Plug>(YankyYank)")
-
-        map("n", "<leader>p", function()
-          require("telescope").extensions.yank_history.yank_history(
-            require("telescope.themes").get_dropdown({ layout_config = { width = 0.5 } })
-          )
-        end)
-      end,
-      event = "BufEnter",
     })
 
     if is_bootstrap then

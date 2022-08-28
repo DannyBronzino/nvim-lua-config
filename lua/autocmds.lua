@@ -1,10 +1,10 @@
 local api = vim.api
-local au = vim.api.nvim_create_autocmd
+local autocmd = vim.api.nvim_create_autocmd
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
 local number_toggle = api.nvim_create_augroup("number_toggle", { clear = true })
 
-au({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
   callback = function()
     if vim.opt.number:get() == true then
       vim.opt.relativenumber = true
@@ -14,7 +14,7 @@ au({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
   desc = "set numbers to relative when entering Normal mode",
 })
 
-au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   callback = function()
     if vim.opt.number:get() == true then
       vim.opt.relativenumber = false
@@ -43,53 +43,85 @@ au({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- })
 
 -- Highlight on yank
--- local highlight_group = api.nvim_create_augroup("YankHighlight", { clear = true })
--- au("TextYankPost", {
--- callback = function()
--- vim.highlight.on_yank()
--- end,
--- group = highlight_group,
--- pattern = "*",
--- desc = "highlights on yank",
--- })
+autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  -- you can create the group here instead
+  group = api.nvim_create_augroup("YankHighlight", { clear = true }),
+  pattern = "*",
+  desc = "highlights on yank",
+})
+
+local resume_edit = function() end
 
 -- resume last insert position
-au("BufReadPost", {
+autocmd("BufReadPost", {
+  group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function()
-    local api = vim.api
     -- this only works in the current buffer
     local set_cursor = function(position)
       return api.nvim_win_set_cursor(0, position)
     end
 
-    -- get the mark
-    local last_insert_mark = api.nvim_buf_get_mark(0, "^")
     -- get the total lines
     local total_buf_lines = api.nvim_buf_line_count(0)
+
+    -- get the mark
+    local last_insert_mark = api.nvim_buf_get_mark(0, "^")
+    if last_insert_mark == { 0, 0 } then
+      return
+    end
 
     -- test to see if mark is outside of range
     -- if not, move to mark
     if pcall(set_cursor, last_insert_mark) then
-      set_cursor(last_insert_mark)
-
-      -- if mark is beyond last line, move cursor to last existing line
-    elseif last_insert_mark[1] > total_buf_lines then
-      set_cursor({ total_buf_lines, 0 })
-
-      -- if mark is past end of an existing line, then move cursor  to end of line
-    elseif pcall(set_cursor, { last_insert_mark[1], -1 }) then
-      set_cursor({ last_insert_mark[1], -1 })
-
-      -- if mark simply doesn't exist, e.g. first time opening file, place cursor on first character in buffer
-    else
-      set_cursor({ 1, 0 })
+      return set_cursor(last_insert_mark)
     end
 
-    -- position line two rows from the top of the screen
-    -- see similar mapping in mappings.lua
-    if api.nvim_win_get_cursor(0)[1] > 3 then
-      api.nvim_feedkeys("zt2k2j", "n", true)
+    -- if mark is beyond last line, move cursor to last existing line
+    if last_insert_mark[1] > total_buf_lines then
+      return set_cursor({ total_buf_lines, 0 })
+    end
+
+    -- if mark is past end of an existing line, then move cursor  to end of line
+    if pcall(set_cursor, { last_insert_mark[1], -1 }) then
+      return set_cursor({ last_insert_mark[1], -1 })
     end
   end,
   desc = "places cursor at last insert position",
+})
+
+autocmd({ "BufWritePre" }, {
+  pattern = "*",
+  group = api.nvim_create_augroup("auto_create_dir", { clear = true }),
+  callback = function(ctx)
+    local dir = vim.fn.fnamemodify(ctx.file, ":p:h")
+    vim.fn.mkdir(dir, "p")
+  end,
+  desc = "creates missing directories in save path",
+})
+
+autocmd({ "BufEnter" }, {
+  pattern = { "*.tex", "*.bib" },
+  group = api.nvim_create_augroup("tex_file", { clear = true }),
+  callback = function()
+    require("nvim-surround").buffer_setup({
+      surrounds = {
+        ["c"] = {
+          add = function()
+            local cmd = require("nvim-surround.config").get_input("Command: ")
+            return { { "\\" .. cmd .. "{" }, { "}" } }
+          end,
+        },
+        ["e"] = {
+          add = function()
+            local env = require("nvim-surround.config").get_input("Environment: ")
+            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
+          end,
+        },
+      },
+    })
+  end,
+  desc = "loads latex only surrounds",
 })
