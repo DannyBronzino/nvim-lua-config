@@ -66,16 +66,16 @@ local on_attach = function(client, bufnr)
 
   if providers.codeActionProvider then
     buf_map("n", "ga", function()
-      require("fzf-lua").lsp_code_actions({ winopts = { height = 0.33, width = 0.66 } })
+      require("fzf-lua").lsp_code_actions()
     end, { desc = "code action" })
   end
 
   buf_map("n", "go", function()
-    vim.diagnostic.open_float({ scope = "cursor" })
+    vim.diagnostic.open_float({ scope = "cursor", border = "rounded" })
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "gO", function()
-    vim.diagnostic.open_float({ scope = "line" })
+    vim.diagnostic.open_float({ scope = "line", border = "rounded" })
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "<space>d", function()
