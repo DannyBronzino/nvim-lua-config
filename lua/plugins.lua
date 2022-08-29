@@ -176,7 +176,6 @@ return require("packer").startup({
       config = function()
         require("config.lspconfig")
       end,
-      after = "ltex_extra.nvim",
     })
 
     -- icons used by everything
