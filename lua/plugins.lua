@@ -158,12 +158,12 @@ return require("packer").startup({
     })
 
     -- source for lsp completions
-    use({
-      "hrsh7th/cmp-nvim-lsp",
-      event = "InsertEnter",
-      after = "nvim-cmp",
-      module = "cmp_nvim_lsp",
-    })
+    -- use({
+    -- "hrsh7th/cmp-nvim-lsp",
+    -- event = "InsertEnter",
+    -- after = "nvim-cmp",
+    -- module = "cmp_nvim_lsp",
+    -- })
 
     use({
       "neovim/nvim-lspconfig",
