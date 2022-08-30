@@ -164,6 +164,7 @@ require("fzf-lua").setup({
     ["--height"] = "100%",
     ["--layout"] = "reverse",
     ["--border"] = "none",
+    ["--cycle"] = "",
   },
   -- fzf '--color=' options (optional)
   --[[ fzf_colors = {
