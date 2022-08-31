@@ -24,24 +24,6 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   desc = "set numbers to absolute when entering Insert mode",
 })
 
--- local cursorline_toggle = api.nvim_create_augroup("numbertoggle", { clear = true })
-
--- au("InsertEnter", {
---   callback = function()
---     vim.opt.cursorline = true
---   end,
---   group = cursorline_toggle,
---   desc = "enable cursorline when entering Insert"
--- })
-
--- au("InsertLeave", {
---   callback = function()
---     vim.opt.cursorline = false
---   end,
---   group = cursorline_toggle,
---   desc = "disable cursorline when entering Normal"
--- })
-
 -- Highlight on yank
 autocmd("TextYankPost", {
   callback = function()
@@ -53,10 +35,8 @@ autocmd("TextYankPost", {
   desc = "highlights on yank",
 })
 
-local resume_edit = function() end
-
 -- resume last insert position
-autocmd("BufReadPost", {
+autocmd("BufWinEnter", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function()
     -- this only works in the current buffer
@@ -100,28 +80,4 @@ autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(dir, "p")
   end,
   desc = "creates missing directories in save path",
-})
-
-autocmd({ "BufEnter" }, {
-  pattern = { "*.tex", "*.bib" },
-  group = api.nvim_create_augroup("tex_file", { clear = true }),
-  callback = function()
-    require("nvim-surround").buffer_setup({
-      surrounds = {
-        ["c"] = {
-          add = function()
-            local cmd = require("nvim-surround.config").get_input("Command: ")
-            return { { "\\" .. cmd .. "{" }, { "}" } }
-          end,
-        },
-        ["e"] = {
-          add = function()
-            local env = require("nvim-surround.config").get_input("Environment: ")
-            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
-          end,
-        },
-      },
-    })
-  end,
-  desc = "loads latex only surrounds",
 })
