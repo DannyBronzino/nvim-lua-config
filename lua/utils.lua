@@ -1,3 +1,14 @@
+---pretty print table or function result
+---@param item function|table
+function _G.inspect(item)
+  vim.pretty_print(item)
+end
+
+-- join all non-blank lines
+function _G.join_lines()
+  vim.cmd([[%!fmt -999]])
+end
+
 local M = {}
 
 ---easier vim.keymap.set syntax
