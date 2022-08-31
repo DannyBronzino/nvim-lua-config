@@ -14,22 +14,10 @@ local function diff_source()
   end
 end
 
-local function get_colorscheme()
-  local is_in_table = require("utils").is_in_table
-  local installed_colorschemes = vim.g.installed_colorschemes
-  local colorscheme = vim.api.nvim_exec("colorscheme", true)
-
-  if is_in_table(installed_colorschemes, colorscheme) then
-    return colorscheme
-  else
-    return "auto"
-  end
-end
-
 require("lualine").setup({
   options = {
     icons_enabled = false,
-    theme = get_colorscheme(),
+    theme = "catppuccin",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     disabled_filetypes = {},

@@ -279,13 +279,8 @@ return require("packer").startup({
       config = function()
         require("config.kanagawa")
       end,
+      disable = true,
     })
-
-    -- keep track of which colorschemes are installed
-    -- workaround for table insert
-    local tmp = vim.g.installed_colorschemes
-    table.insert(tmp, "kanagawa")
-    vim.g.installed_colorschemes = tmp
 
     use({
       "rmehri01/onenord.nvim",
@@ -293,11 +288,8 @@ return require("packer").startup({
       config = function()
         require("config.onenord")
       end,
+      disable = true,
     })
-
-    local tmp = vim.g.installed_colorschemes
-    table.insert(tmp, "onenord")
-    vim.g.installed_colorschemes = tmp
 
     use({
       "catppuccin/nvim",
@@ -307,10 +299,6 @@ return require("packer").startup({
       end,
     })
 
-    local tmp = vim.g.installed_colorschemes
-    table.insert(tmp, "catppuccin")
-    vim.g.installed_colorschemes = tmp
-
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
@@ -319,6 +307,8 @@ return require("packer").startup({
       end,
       after = vim.g.installed_colorschemes,
     })
+
+    vim.cmd([[colorscheme catppuccin]])
 
     -- tab bar and buffer switching
     use({
