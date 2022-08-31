@@ -229,8 +229,9 @@ return require("packer").startup({
     use({
       "kylechui/nvim-surround",
       config = function()
-        require("nvim-surround").setup()
+        require("config.nvim-surround")
       end,
+      event = "BufEnter",
     })
 
     --  buffer jumping like EasyMotion or Sneak
@@ -274,17 +275,29 @@ return require("packer").startup({
     -- colorscheme based on hokusai
     use({
       "rebelot/kanagawa.nvim",
+      as = "kanagawa",
       config = function()
         require("config.kanagawa")
       end,
     })
 
+    -- keep track of which colorschemes are installed
+    -- workaround for table insert
+    local tmp = vim.g.installed_colorschemes
+    table.insert(tmp, "kanagawa")
+    vim.g.installed_colorschemes = tmp
+
     use({
       "rmehri01/onenord.nvim",
+      as = "onenord",
       config = function()
         require("config.onenord")
       end,
     })
+
+    local tmp = vim.g.installed_colorschemes
+    table.insert(tmp, "onenord")
+    vim.g.installed_colorschemes = tmp
 
     use({
       "catppuccin/nvim",
@@ -294,13 +307,17 @@ return require("packer").startup({
       end,
     })
 
+    local tmp = vim.g.installed_colorschemes
+    table.insert(tmp, "catppuccin")
+    vim.g.installed_colorschemes = tmp
+
     -- status line
     use({
       "nvim-lualine/lualine.nvim",
       config = function()
         require("config.lualine")
       end,
-      after = "catppuccin",
+      after = vim.g.installed_colorschemes,
     })
 
     -- tab bar and buffer switching

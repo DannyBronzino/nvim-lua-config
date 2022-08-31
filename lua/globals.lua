@@ -34,3 +34,6 @@ vim.g.loaded_matchparen = 1
 -- folding
 vim.g.markdown_folding = 1
 vim.g.tex_fold_enabled = 1
+
+-- variable to keep track of installed colorschemes
+vim.g.installed_colorschemes = {}
