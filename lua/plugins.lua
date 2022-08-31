@@ -305,7 +305,7 @@ return require("packer").startup({
       config = function()
         require("config.lualine")
       end,
-      after = vim.g.installed_colorschemes,
+      after = "catppuccin",
     })
 
     vim.cmd([[colorscheme catppuccin]])
