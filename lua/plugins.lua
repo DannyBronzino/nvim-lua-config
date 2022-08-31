@@ -98,12 +98,6 @@ return require("packer").startup({
       },
     })
 
-    use({
-      "hrsh7th/cmp-omni",
-      event = "InsertEnter",
-      after = "nvim-cmp",
-    })
-
     -- completion for paths
     use({
       "hrsh7th/cmp-path",
@@ -158,12 +152,12 @@ return require("packer").startup({
     })
 
     -- source for lsp completions
-    -- use({
-    -- "hrsh7th/cmp-nvim-lsp",
-    -- event = "InsertEnter",
-    -- after = "nvim-cmp",
-    -- module = "cmp_nvim_lsp",
-    -- })
+    use({
+      "hrsh7th/cmp-nvim-lsp",
+      event = "InsertEnter",
+      after = "nvim-cmp",
+      module = "cmp_nvim_lsp",
+    })
 
     use({
       "neovim/nvim-lspconfig",
