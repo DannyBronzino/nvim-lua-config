@@ -92,10 +92,6 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = {
-        "CmdLineEnter",
-        "InsertEnter",
-      },
     })
 
     -- completion for paths
@@ -225,7 +221,6 @@ return require("packer").startup({
       config = function()
         require("config.nvim-surround")
       end,
-      event = "BufEnter",
     })
 
     --  buffer jumping like EasyMotion or Sneak
