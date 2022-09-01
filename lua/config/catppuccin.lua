@@ -102,3 +102,5 @@ require("catppuccin").setup({
     LeapMatch = { fg = colors.pink, bg = colors.surface0 },
   },
 })
+
+vim.cmd([[colorscheme catppuccin]])
