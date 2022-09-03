@@ -120,7 +120,7 @@ lspconfig.texlab.setup({
 lspconfig.ltex.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  filetypes = { "tex", "bib", "markdown" },
+  filetypes = { "tex", "bib" },
   settings = {
     ltex = {
       additionalRules = {
