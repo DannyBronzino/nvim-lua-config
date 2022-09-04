@@ -56,17 +56,23 @@ autocmd("BufWinEnter", {
     -- test to see if mark is outside of range
     -- if not, move to mark
     if pcall(set_cursor, last_insert_mark) then
-      return set_cursor(last_insert_mark)
+      set_cursor(last_insert_mark)
     end
 
     -- if mark is beyond last line, move cursor to last existing line
     if last_insert_mark[1] > total_buf_lines then
-      return set_cursor({ total_buf_lines, 0 })
+      set_cursor({ total_buf_lines, 0 })
     end
 
     -- if mark is past end of an existing line, then move cursor  to end of line
     if pcall(set_cursor, { last_insert_mark[1], -1 }) then
-      return set_cursor({ last_insert_mark[1], -1 })
+      set_cursor({ last_insert_mark[1], -1 })
+    end
+
+    -- moves marked line to top of screen minus 2
+    if vim.api.nvim_win_get_cursor(0)[1] > 3 then
+      local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
+      vim.api.nvim_feedkeys(esc .. "zt2k2j", "n", false)
     end
   end,
   desc = "places cursor at last insert position",
