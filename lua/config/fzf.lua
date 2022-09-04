@@ -144,6 +144,24 @@ require("fzf-lua").setup({
       ["ctrl-v"] = actions.file_vsplit,
       ["ctrl-t"] = actions.file_tabedit,
       ["alt-q"] = actions.file_sel_to_qf,
+      ["alt-y"] = function(selected, _)
+        local lines = {}
+
+        for _, item in pairs(selected) do
+          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
+        end
+
+        vim.fn.setreg([["]], lines, "c")
+      end,
+      ["alt-p"] = function(selected, _)
+        local lines = {}
+
+        for _, item in pairs(selected) do
+          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
+        end
+
+        vim.api.nvim_put(lines, "", true, true)
+      end,
     },
     buffers = {
       -- providers that inherit these actions:
@@ -152,6 +170,24 @@ require("fzf-lua").setup({
       ["ctrl-s"] = actions.buf_split,
       ["ctrl-v"] = actions.buf_vsplit,
       ["ctrl-t"] = actions.buf_tabedit,
+      ["alt-y"] = function(selected, _)
+        local lines = {}
+
+        for _, item in pairs(selected) do
+          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
+        end
+
+        vim.fn.setreg([["]], lines, "c")
+      end,
+      ["alt-p"] = function(selected, _)
+        local lines = {}
+
+        for _, item in pairs(selected) do
+          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
+        end
+
+        vim.api.nvim_put(lines, "", true, true)
+      end,
     },
   },
   fzf_opts = {
@@ -593,26 +629,12 @@ require("fzf-lua").setup({
 })
 
 local files_git_or_cwd = function()
-  local actions = {
-    -- puts currently selected line in default register
-    ["alt-y"] = function(selected, _)
-      -- strips out any icons or leading whitespace
-      local selection = string.match(selected[1], "[%a%d%p][%a%d%p%s]+[%a%d%p]")
-      vim.fn.setreg([["]], selection, "c")
-    end,
-    -- pastes currently selected line directly into buffer
-    ["alt-p"] = function(selected, _)
-      -- strips out any icons or leading whitespace
-      local selection = string.match(selected[1], "[%a%d%p][%a%d%p%s]+[%a%d%p]")
-      vim.api.nvim_paste(selection, true, -1)
-    end,
-  }
   -- version 2: uses `git ls-files` for git dirs
   -- change to `false` if you'd like to see a message when not in a git repo
   if require("fzf-lua.path").is_git_repo(vim.loop.cwd(), true) then
-    require("fzf-lua").git_files({ actions = actions })
+    require("fzf-lua").git_files()
   else
-    require("fzf-lua").files({ actions = actions })
+    require("fzf-lua").files()
   end
 end
 
