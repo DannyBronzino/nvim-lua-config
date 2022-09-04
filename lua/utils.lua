@@ -9,6 +9,19 @@ function _G.join_lines()
   vim.cmd([[%!fmt -999]])
 end
 
+---returns context of event
+---@param event string|table
+function _G.get_ctx(event)
+  vim.api.nvim_create_autocmd(event, {
+    group = vim.api.nvim_create_augroup("get_ctx", { clear = true }),
+    callback = function(ctx)
+      vim.pretty_print(ctx)
+    end,
+  })
+
+  vim.api.nvim_exec_autocmds(event, { group = "get_ctx" })
+end
+
 local M = {}
 
 ---easier vim.keymap.set syntax
