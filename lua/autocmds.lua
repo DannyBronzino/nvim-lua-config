@@ -24,24 +24,6 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   desc = "set numbers to absolute when entering Insert mode",
 })
 
--- local cursorline_toggle = api.nvim_create_augroup("numbertoggle", { clear = true })
-
--- au("InsertEnter", {
---   callback = function()
---     vim.opt.cursorline = true
---   end,
---   group = cursorline_toggle,
---   desc = "enable cursorline when entering Insert"
--- })
-
--- au("InsertLeave", {
---   callback = function()
---     vim.opt.cursorline = false
---   end,
---   group = cursorline_toggle,
---   desc = "disable cursorline when entering Normal"
--- })
-
 -- Highlight on yank
 autocmd("TextYankPost", {
   callback = function()
@@ -53,10 +35,8 @@ autocmd("TextYankPost", {
   desc = "highlights on yank",
 })
 
-local resume_edit = function() end
-
 -- resume last insert position
-autocmd("BufReadPost", {
+autocmd("BufWinEnter", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function()
     -- this only works in the current buffer
@@ -76,17 +56,23 @@ autocmd("BufReadPost", {
     -- test to see if mark is outside of range
     -- if not, move to mark
     if pcall(set_cursor, last_insert_mark) then
-      return set_cursor(last_insert_mark)
+      set_cursor(last_insert_mark)
     end
 
     -- if mark is beyond last line, move cursor to last existing line
     if last_insert_mark[1] > total_buf_lines then
-      return set_cursor({ total_buf_lines, 0 })
+      set_cursor({ total_buf_lines, 0 })
     end
 
     -- if mark is past end of an existing line, then move cursor  to end of line
     if pcall(set_cursor, { last_insert_mark[1], -1 }) then
-      return set_cursor({ last_insert_mark[1], -1 })
+      set_cursor({ last_insert_mark[1], -1 })
+    end
+
+    -- moves marked line to top of screen minus 2
+    if vim.api.nvim_win_get_cursor(0)[1] > 3 then
+      local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
+      vim.api.nvim_feedkeys(esc .. "zt2k2j", "n", false)
     end
   end,
   desc = "places cursor at last insert position",
@@ -100,28 +86,4 @@ autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(dir, "p")
   end,
   desc = "creates missing directories in save path",
-})
-
-autocmd({ "BufEnter" }, {
-  pattern = { "*.tex", "*.bib" },
-  group = api.nvim_create_augroup("tex_file", { clear = true }),
-  callback = function()
-    require("nvim-surround").buffer_setup({
-      surrounds = {
-        ["c"] = {
-          add = function()
-            local cmd = require("nvim-surround.config").get_input("Command: ")
-            return { { "\\" .. cmd .. "{" }, { "}" } }
-          end,
-        },
-        ["e"] = {
-          add = function()
-            local env = require("nvim-surround.config").get_input("Environment: ")
-            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
-          end,
-        },
-      },
-    })
-  end,
-  desc = "loads latex only surrounds",
 })

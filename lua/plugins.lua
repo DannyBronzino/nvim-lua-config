@@ -92,16 +92,6 @@ return require("packer").startup({
       config = function()
         require("config.cmp")
       end,
-      event = {
-        "CmdLineEnter",
-        "InsertEnter",
-      },
-    })
-
-    use({
-      "hrsh7th/cmp-omni",
-      event = "InsertEnter",
-      after = "nvim-cmp",
     })
 
     -- completion for paths
@@ -161,67 +151,21 @@ return require("packer").startup({
     use({
       "hrsh7th/cmp-nvim-lsp",
       event = "InsertEnter",
-      after = {
-        "nvim-cmp",
-        "navigator.lua",
-      },
-    })
-
-    use({
-      "williamboman/mason.nvim",
-      config = function()
-        require("mason").setup()
-      end,
-    })
-
-    use({
-      "williamboman/mason-lspconfig.nvim",
-      config = function()
-        require("mason-lspconfig").setup()
-      end,
-      after = "mason.nvim",
+      after = "nvim-cmp",
+      module = "cmp_nvim_lsp",
     })
 
     use({
       "neovim/nvim-lspconfig",
-      after = "mason-lspconfig.nvim",
-    })
-
-    use({
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      config = function()
-        require("mason-tool-installer").setup({
-          -- a list of all tools you want to ensure are installed upon
-          -- start; they should be the names Mason uses for each tool
-          ensure_installed = {
-            "texlab",
-            "ltex-ls",
-          },
-          auto_update = true,
-          run_on_start = true,
-          start_delay = 0,
-        })
-      end,
-      after = "mason-lspconfig.nvim",
-    })
-
-    use({
-      "barreiroleo/ltex_extra.nvim",
-      after = { "mason-tool-installer.nvim" },
-    })
-
-    use({
-      "ray-x/navigator.lua",
       requires = {
-        {
-          "ray-x/guihua.lua",
-          run = "cd lua/fzy && make",
-        },
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "barreiroleo/ltex_extra.nvim",
       },
       config = function()
-        require("config.navigator")
+        require("config.lspconfig")
       end,
-      after = { "nvim-treesitter", "ltex_extra.nvim" },
     })
 
     -- icons used by everything
@@ -275,7 +219,7 @@ return require("packer").startup({
     use({
       "kylechui/nvim-surround",
       config = function()
-        require("nvim-surround").setup()
+        require("config.nvim-surround")
       end,
     })
 
@@ -320,16 +264,20 @@ return require("packer").startup({
     -- colorscheme based on hokusai
     use({
       "rebelot/kanagawa.nvim",
+      as = "kanagawa",
       config = function()
         require("config.kanagawa")
       end,
+      disable = true,
     })
 
     use({
       "rmehri01/onenord.nvim",
+      as = "onenord",
       config = function()
         require("config.onenord")
       end,
+      disable = true,
     })
 
     use({
@@ -348,6 +296,8 @@ return require("packer").startup({
       end,
       after = "catppuccin",
     })
+
+    vim.cmd([[colorscheme catppuccin]])
 
     -- tab bar and buffer switching
     use({

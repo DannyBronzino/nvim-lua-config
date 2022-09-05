@@ -46,9 +46,8 @@ cmp.setup({
     ["<c-d>"] = cmp.mapping.scroll_docs(3),
   }),
   sources = cmp.config.sources({
-    { name = "omni" },
-    { name = "nvim_lsp" },
     { name = "luasnip" }, -- for luasnip
+    { name = "nvim_lsp" },
     { -- ripgrep completion
       name = "rg",
       max_item_count = 3,
@@ -73,9 +72,8 @@ cmp.setup({
       -- with_text = true,
       mode = "symbol",
       menu = {
-        omni = "[Omni]",
-        nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
+        nvim_lsp = "[LSP]",
         rg = "[RG]",
         path = "[Path]",
         latex_symbols = "[Symbols]",
