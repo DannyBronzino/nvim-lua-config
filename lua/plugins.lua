@@ -27,13 +27,19 @@ return require("packer").startup({
       opt = true,
     })
 
+    -- highlights matching pairs
+    use({
+      "andymass/vim-matchup",
+      setup = function()
+        require("config.matchup")
+      end,
+    })
+
     -- syntax highlighting, folding, and more...
     -- doesn't always load if you make it optional (i.e. use an event)
     use({
       "nvim-treesitter/nvim-treesitter",
       requires = {
-        -- highlights matching pairs
-        "andymass/vim-matchup",
         -- more textobjects
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
@@ -42,6 +48,7 @@ return require("packer").startup({
       end,
       -- first run this will throw an error you can ignore
       run = ":TSUpdate",
+      after = "vim-matchup",
     })
 
     -- vscode pictograms
