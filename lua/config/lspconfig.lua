@@ -69,22 +69,22 @@ local on_attach = function(client, bufnr)
   end
 
   buf_map("n", "go", function()
-    vim.diagnostic.open_float({ scope = "cursor", border = "rounded" })
+    vim.diagnostic.open_float({ scope = "cursor" })
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "gO", function()
-    vim.diagnostic.open_float({ scope = "line", border = "rounded" })
+    vim.diagnostic.open_float({ scope = "line" })
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "<space>d", function()
     require("fzf-lua").diagnostics_document()
   end, { desc = "show buffer diagnostics" })
 
-  buf_map("n", "gj", function()
+  buf_map("n", "gn", function()
     vim.diagnostic.goto_next()
   end, { desc = "next diagnostic" })
 
-  buf_map("n", "gk", function()
+  buf_map("n", "gp", function()
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
