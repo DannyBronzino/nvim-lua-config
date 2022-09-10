@@ -107,4 +107,7 @@ vim.cmd([[colorscheme catppuccin]])
 
 vim.diagnostic.config({
   virtual_text = false,
+  float = {
+    border = "rounded",
+  },
 })
