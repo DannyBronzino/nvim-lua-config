@@ -11,15 +11,17 @@ end
 
 ---returns context of event
 ---@param event string|table
+---@return table
 function _G.get_ctx(event)
   vim.api.nvim_create_autocmd(event, {
     group = vim.api.nvim_create_augroup("get_ctx", { clear = true }),
     callback = function(ctx)
-      vim.pretty_print(ctx)
+      Got_ctx = ctx
     end,
   })
 
   vim.api.nvim_exec_autocmds(event, { group = "get_ctx" })
+  return Got_ctx
 end
 
 local M = {}
