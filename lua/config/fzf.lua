@@ -628,6 +628,8 @@ require("fzf-lua").setup({
   -- nbsp = '\xc2\xa0',
 })
 
+-- LSP mappings found in config.lspconfig
+
 local files_git_or_cwd = function()
   -- version 2: uses `git ls-files` for git dirs
   -- change to `false` if you'd like to see a message when not in a git repo
@@ -644,34 +646,26 @@ map("n", "<leader>ff", function()
   files_git_or_cwd()
 end, { desc = "find files with fzf" })
 
-map("n", "<leader>b", function()
+map("n", "<leader><space>", function()
   require("fzf-lua").buffers()
 end, { desc = "show buffers with fzf" })
 
-map("n", "<leader>fp", function()
-  require("fzf-lua").lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
-end, { desc = "show workspace symbols with fzf" })
-
-map("n", "<leader>fd", function()
-  require("fzf-lua").lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
-end, { desc = "show document symbols with fzf" })
-
-map("n", "<leader>gw", function()
-  require("fzf-lua").grep_cword()
+map("n", "gw", function()
+  require("fzf-lua").grep_cword({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "grep for word under cursor with fzf" })
 
 map("n", "<leader>gp", function()
-  require("fzf-lua").grep_project()
+  require("fzf-lua").grep_project({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "live grep current project with fzf" })
 
 map("n", "<leader>gb", function()
   require("fzf-lua").grep_curbuf()
 end, { desc = "live grep current buffer with fzf" })
 
-map("n", "<leader><space>", function()
-  require("fzf-lua").oldfiles()
-end, { desc = "show list of old files with fzf" })
+-- map("n", "<leader><space>", function()
+-- require("fzf-lua").oldfiles()
+-- end, { desc = "show list of old files with fzf" })
 
-map("n", "<leader>q", function()
+map("n", "<leader>h", function()
   require("fzf-lua").help_tags()
 end, { desc = "show help tags with fzf" })

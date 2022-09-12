@@ -40,13 +40,13 @@ local on_attach = function(client, bufnr)
 
   if providers.documentSymbolProvider then
     buf_map("n", "g0", function()
-      require("fzf-lua").lsp_document_symbols()
+      require("fzf-lua").lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "document symbols" })
   end
 
   if providers.workspaceSymbolProvider then
-    buf_map("n", "gw", function()
-      require("fzf-lua").lsp_workspace_symbols()
+    buf_map("n", "gp", function()
+      require("fzf-lua").lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "workspace symbol live" })
   end
 
@@ -80,11 +80,11 @@ local on_attach = function(client, bufnr)
     require("fzf-lua").diagnostics_document()
   end, { desc = "show buffer diagnostics" })
 
-  buf_map("n", "gn", function()
+  buf_map("n", "<c-n>", function()
     vim.diagnostic.goto_next()
   end, { desc = "next diagnostic" })
 
-  buf_map("n", "gp", function()
+  buf_map("n", "<c-p>", function()
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
