@@ -62,6 +62,7 @@ cmp.setup({
     -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
   }),
   completion = {
+    autocomplete = true,
     keyword_length = 1,
   },
   experimental = {
