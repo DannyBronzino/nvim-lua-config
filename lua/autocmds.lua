@@ -36,9 +36,16 @@ autocmd("TextYankPost", {
 })
 
 -- resume last insert position
-autocmd("BufReadPost", {
+autocmd("FileType", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
-  callback = function()
+  callback = function(ctx)
+    local is_in_table = require("utils").is_in_table
+    local ft_blacklist = { "packer", "help", "gitcommit", "git", "fzf" }
+
+    if is_in_table(ft_blacklist, ctx.match) then
+      return
+    end
+
     -- this only works in the current buffer
     local set_cursor = function(position)
       return api.nvim_win_set_cursor(0, position)
