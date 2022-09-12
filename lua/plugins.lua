@@ -371,7 +371,6 @@ return require("packer").startup({
         -- commit current file
         vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>")
       end,
-      cmd = "Git",
     })
 
     -- better quickfix window
