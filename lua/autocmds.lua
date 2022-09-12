@@ -36,13 +36,15 @@ autocmd("TextYankPost", {
 })
 
 -- resume last insert position
-autocmd("FileType", {
+autocmd("BufReadPost", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function(ctx)
     local is_in_table = require("utils").is_in_table
     local ft_blacklist = { "packer", "help", "gitcommit", "git", "fzf" }
+    local ft = vim.filetype.match({ filename = ctx.match })
 
-    if is_in_table(ft_blacklist, ctx.match) then
+    -- unsure if actually necessary
+    if is_in_table(ft_blacklist, ft) then
       return
     end
 
@@ -63,24 +65,23 @@ autocmd("FileType", {
     -- test to see if mark is outside of range
     -- if not, move to mark
     if pcall(set_cursor, last_insert_mark) then
-      set_cursor(last_insert_mark)
+      return set_cursor(last_insert_mark)
     end
 
     -- if mark is beyond last line, move cursor to last existing line
     if last_insert_mark[1] > total_buf_lines then
-      set_cursor({ total_buf_lines, 0 })
+      return set_cursor({ total_buf_lines, 0 })
     end
 
     -- if mark is past end of an existing line, then move cursor  to end of line
     if pcall(set_cursor, { last_insert_mark[1], -1 }) then
-      set_cursor({ last_insert_mark[1], -1 })
+      return set_cursor({ last_insert_mark[1], -1 })
     end
 
     -- moves marked line to top of screen minus 2
-    if vim.api.nvim_win_get_cursor(0)[1] > 3 then
-      local esc = vim.api.nvim_replace_termcodes("<ESC>", true, true, true) -- sends ESC termcode instead of [[<ESC>]]
-      vim.api.nvim_feedkeys(esc .. "zt2k2j", "n", false)
-    end
+    -- if vim.api.nvim_win_get_cursor(0)[1] > 3 then
+    -- vim.api.nvim_feedkeys("zt", "m", true)
+    -- end
   end,
   desc = "places cursor at last insert position",
 })
