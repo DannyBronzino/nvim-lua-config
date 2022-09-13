@@ -57,6 +57,6 @@ require("lualine").setup({
   winbar = {},
   extensions = {
     "quickfix",
-    "fugitive",
+    "fzf",
   },
 })
