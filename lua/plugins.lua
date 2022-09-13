@@ -364,15 +364,6 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
-    -- git inside vim
-    use({
-      "tpope/vim-fugitive",
-      setup = function()
-        -- commit current file
-        vim.keymap.set("n", "<F12>", "<cmd>Git add % <bar> Git commit %<cr>")
-      end,
-    })
-
     -- better quickfix window
     use({
       "kevinhwang91/nvim-bqf",
