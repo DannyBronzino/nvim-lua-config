@@ -367,7 +367,9 @@ return require("packer").startup({
     -- better quickfix window
     use({
       "kevinhwang91/nvim-bqf",
-      config = [[require("config.bqf")]],
+      config = function()
+        require("config.bqf")
+      end,
       ft = "qf",
     })
 
