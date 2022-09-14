@@ -22,6 +22,8 @@ ls.add_snippets("all", {
 
   s({ trig = "Therese", name = "Thérèse", dscr = "Thérèse", wordTrig = false }, t("Thérèse")),
 
+  s({ trig = "Grainne", name = "Gráinne", dscr = "Gráinne", wordTrig = false }, t("Gráinne")),
+
   -- for when you fat finger the shift key
   s(
     { trig = "(%u)(%u+%l)", regTrig = true },
