@@ -15,7 +15,7 @@ require("fzf-lua").setup({
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
     height = 0.9, -- window height
-    width = 0.66, -- window width
+    width = 0.55, -- window width
     row = 0.2, -- window row position (0=top, 1=bottom)
     col = 0.5, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win(), also used
@@ -633,10 +633,12 @@ require("fzf-lua").setup({
 local files_git_or_cwd = function()
   -- version 2: uses `git ls-files` for git dirs
   -- change to `false` if you'd like to see a message when not in a git repo
+  local opts = { winopts = { height = 0.66, width = 0.5 } }
+
   if require("fzf-lua.path").is_git_repo(vim.loop.cwd(), true) then
-    require("fzf-lua").git_files()
+    require("fzf-lua").git_files(opts)
   else
-    require("fzf-lua").files()
+    require("fzf-lua").files(opts)
   end
 end
 
@@ -647,7 +649,7 @@ map("n", "<leader>ff", function()
 end, { desc = "find files with fzf" })
 
 map("n", "<leader><space>", function()
-  require("fzf-lua").buffers()
+  require("fzf-lua").buffers({ winopts = { height = 0.66, width = 0.5 } })
 end, { desc = "show buffers with fzf" })
 
 map("n", "gw", function()
