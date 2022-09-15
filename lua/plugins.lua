@@ -163,6 +163,17 @@ return require("packer").startup({
     })
 
     use({
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
+      config = function()
+        require("config.fzf")
+        -- replaces selection menus with fzf
+        -- second argument is 'silent' = true
+        require("fzf-lua").register_ui_select({}, true)
+      end,
+    })
+
+    use({
       "neovim/nvim-lspconfig",
       requires = {
         "williamboman/mason.nvim",
@@ -173,23 +184,13 @@ return require("packer").startup({
       config = function()
         require("config.lspconfig")
       end,
+      after = "fzf-lua",
     })
 
     -- icons used by everything
     use({
       "kyazdani42/nvim-web-devicons",
       module = "nvim-web-devicons",
-    })
-
-    use({
-      "ibhagwan/fzf-lua",
-      -- optional for icon support
-      config = function()
-        require("config.fzf")
-        -- replaces selection menus with fzf
-        -- second argument is 'silent' = true
-        require("fzf-lua").register_ui_select({}, true)
-      end,
     })
 
     -- allows using <tab> in Insert to jump out of brackets or quotes
