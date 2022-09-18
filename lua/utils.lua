@@ -81,10 +81,4 @@ function M.is_in_table(tbl, val)
   return false
 end
 
-function M.add_pack(name)
-  local status, error = pcall(vim.cmd, "packadd " .. name)
-
-  return status
-end
-
 return M
