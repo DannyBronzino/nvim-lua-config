@@ -68,7 +68,7 @@ require("catppuccin").setup({
     },
     which_key = true,
     indent_blankline = {
-      enabled = true,
+      enabled = false,
       colored_indent_levels = false,
     },
     dashboard = false,
