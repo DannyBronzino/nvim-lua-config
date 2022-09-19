@@ -132,12 +132,6 @@ return require("packer").startup({
       after = "nvim-cmp",
     })
 
-    use({
-      "dmitmel/cmp-cmdline-history",
-      event = "CmdLineEnter",
-      after = "nvim-cmp",
-    })
-
     -- completion for ripgrep
     use({
       "lukas-reineke/cmp-rg",

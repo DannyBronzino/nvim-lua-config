@@ -88,7 +88,6 @@ cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
     { name = "path" },
     { name = "cmdline" },
-    { name = "cmdline_history" },
   }),
 })
 
@@ -96,7 +95,6 @@ cmp.setup.cmdline("/", { -- search completion
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "buffer" },
-    { name = "cmdline_history" },
   }),
 })
 
@@ -104,7 +102,6 @@ cmp.setup.cmdline("?", { -- reverse search completion
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "buffer" },
-    { name = "cmdline_history" },
   }),
 })
 
