@@ -95,3 +95,16 @@ autocmd({ "BufWritePre" }, {
   end,
   desc = "creates missing directories in save path",
 })
+
+-- Create an autocmd User PackerCompileDone to update it every time packer is compiled
+vim.api.nvim_create_autocmd("User", {
+  pattern = "PackerCompileDone",
+  callback = function()
+    vim.cmd("CatppuccinCompile")
+    vim.defer_fn(function()
+      vim.cmd("colorscheme catppuccin")
+    end, 0) -- Defered for live reloading
+    vim.notify("Packer compiled!", "info")
+  end,
+  desc = "compiles catppuccin on packer compile",
+})
