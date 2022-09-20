@@ -102,3 +102,5 @@ vim.g.bufferline = {
   -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = nil,
 }
+
+vim.api.nvim_set_hl(0, "BufferTabPageFill", {})

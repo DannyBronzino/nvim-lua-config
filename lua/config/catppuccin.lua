@@ -50,7 +50,7 @@ require("catppuccin").setup({
     lsp_saga = false,
     gitgutter = false,
     gitsigns = true,
-    leap = true,
+    leap = false,
     telescope = false,
     nvimtree = {
       enabled = false,
@@ -80,7 +80,7 @@ require("catppuccin").setup({
     markdown = true,
     lightspeed = false,
     ts_rainbow = false,
-    hop = false,
+    hop = true,
     notify = true,
     telekasten = false,
     symbols_outline = false,
@@ -95,11 +95,10 @@ require("catppuccin").setup({
   custom_highlights = {
     WhichKeyValue = { fg = colors.rosewater },
     WhichKeyDesc = { fg = colors.flamingo },
-    BufferTabPageFill = {},
     -- Visual = { fg = colors.surface0, bg = colors.maroon },
     Comment = { fg = colors.subtext0 },
-    LeapLabelPrimary = { fg = colors.surface0, bg = colors.pink },
-    LeapMatch = { fg = colors.pink, bg = colors.surface0 },
+    -- LeapLabelPrimary = { fg = colors.surface0, bg = colors.pink },
+    -- LeapMatch = { fg = colors.pink, bg = colors.surface0 },
   },
 })
 
