@@ -305,8 +305,6 @@ return require("packer").startup({
       after = "catppuccin",
     })
 
-    vim.cmd([[colorscheme catppuccin]])
-
     -- tab bar and buffer switching
     use({
       "romgrk/barbar.nvim",
