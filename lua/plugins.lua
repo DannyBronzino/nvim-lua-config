@@ -292,6 +292,7 @@ return require("packer").startup({
       config = function()
         require("config.catppuccin")
       end,
+      event = "VimEnter",
     })
 
     -- status line
@@ -309,7 +310,6 @@ return require("packer").startup({
       config = function()
         require("config.barbar")
       end,
-      -- must be loaded after the colorscheme or it loads default vim colors
       after = "lualine.nvim",
     })
 
