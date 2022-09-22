@@ -97,7 +97,7 @@ autocmd({ "BufWritePre" }, {
 })
 
 -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
   pattern = "PackerCompileDone",
   callback = function()
     vim.cmd("CatppuccinCompile")
