@@ -5,7 +5,7 @@ require("hop").setup({
 
 local map = require("utils").map
 
-map("", "s", function()
+map({ "n", "v", "x" }, "s", function()
   require("hop").hint_char2()
 end, { desc = "2-char hop" })
 
