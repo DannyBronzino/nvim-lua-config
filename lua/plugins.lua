@@ -235,18 +235,7 @@ return require("packer").startup({
       "phaazon/hop.nvim",
       branch = "v2", -- optional but strongly recommended
       config = function()
-        -- you can configure Hop the way you like here; see :h hop-config
-        require("hop").setup({
-          keys = "etovxqpdygfblzhckisuran",
-          create_hl_autocmd = false,
-          multi_windows = true,
-        })
-
-        local map = require("utils").map
-
-        map("n", "s", function()
-          require("hop").hint_char2()
-        end, { desc = "2-char hop" })
+        require("config.hop")
       end,
       event = "BufEnter",
     })
