@@ -1,4 +1,5 @@
 require("hop").setup({
+  char2_fallback_key = "<CR>",
   create_hl_autocmd = false,
   multi_windows = true,
 })
