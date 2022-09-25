@@ -166,11 +166,16 @@ return require("packer").startup({
       "ibhagwan/fzf-lua",
       -- optional for icon support
       config = function()
-        require("config.fzf")
-        -- replaces selection menus with fzf
-        -- second argument is 'silent' = true
-        require("fzf-lua").register_ui_select({}, true)
+        require("config.fzf-lua")
       end,
+    })
+
+    use({
+      "stevearc/dressing.nvim",
+      config = function()
+        require("config.dressing")
+      end,
+      after = "fzf-lua",
     })
 
     use({
