@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
 
   if providers.referencesProvider then
     buf_map("n", "gr", function()
-      require("fzf-lua").lsp_references()
+      require("fzf-lua").lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "async reference" })
   end
 
@@ -52,7 +52,7 @@ local on_attach = function(client, bufnr)
 
   if providers.definitionProvider then
     buf_map("n", "gd", function()
-      require("fzf-lua").lsp_definitions()
+      require("fzf-lua").lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "definition preview" })
   end
 
@@ -64,8 +64,8 @@ local on_attach = function(client, bufnr)
 
   if providers.codeActionProvider then
     buf_map("n", "ga", function()
-      require("fzf-lua").lsp_code_actions()
-    end, { desc = "code action" })
+      vim.lsp.buf.code_action()
+    end, { desc = "show code action" })
   end
 
   buf_map("n", "go", function()
