@@ -91,14 +91,12 @@ cmp.setup.cmdline(":", {
   }),
 })
 
-for _, v in pairs({ "/", "?" }) do
-  cmp.setup.cmdline(v, { -- search completion
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = "buffer" },
-    }),
-  })
-end
+cmp.setup.cmdline({ "/", "?" }, { -- search completion
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "buffer" },
+  }),
+})
 
 --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
 -- vim.cmd([[
