@@ -124,7 +124,7 @@ lspconfig.ltex.setup({
   settings = {
     ltex = {
       additionalRules = {
-        enablePickyRules = true,
+        enablePickyRules = false,
         motherTongue = "en-US",
       },
     },
