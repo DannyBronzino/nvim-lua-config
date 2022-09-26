@@ -23,7 +23,7 @@ require("fzf-lua").setup({
     -- window, can be set to 'false' to remove all borders or to
     -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
     -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    border = "single",
+    border = "rounded",
     fullscreen = false, -- start fullscreen?
     -- highlights should optimally be set by the colorscheme using
     -- FzfLuaXXX highlights. If your colorscheme doesn't set these
