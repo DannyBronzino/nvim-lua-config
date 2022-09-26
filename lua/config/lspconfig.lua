@@ -15,7 +15,7 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
-  local providers = client.server_capabilities
+  local capabilities = client.server_capabilities
 
   if client.name == "ltex" then
     require("ltex_extra").setup({
@@ -32,39 +32,40 @@ local on_attach = function(client, bufnr)
     return require("utils").map(mode, left_hand_side, right_hand_side, opts)
   end
 
-  if providers.referencesProvider then
+  if capabilities.referencesProvider then
     buf_map("n", "gr", function()
       require("fzf-lua").lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "async reference" })
   end
 
-  if providers.documentSymbolProvider then
+  if capabilities.documentSymbolProvider then
     buf_map("n", "g0", function()
       require("fzf-lua").lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "document symbols" })
   end
 
-  if providers.workspaceSymbolProvider then
+  if capabilities.workspaceSymbolProvider then
     buf_map("n", "gp", function()
       require("fzf-lua").lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "workspace symbol live" })
   end
 
-  if providers.definitionProvider then
+  if capabilities.definitionProvider then
     buf_map("n", "gd", function()
       require("fzf-lua").lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "definition preview" })
   end
 
-  if providers.hoverProvider then
+  if capabilities.hoverProvider then
     buf_map("n", "K", function()
       vim.lsp.buf.hover()
     end, { desc = "hover" })
   end
 
-  if providers.codeActionProvider then
+  if capabilities.codeActionProvider then
     buf_map("n", "ga", function()
-      vim.lsp.buf.code_action()
+      -- vim.lsp.buf.code_action()
+      require("fzf-lua").lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
     end, { desc = "show code action" })
   end
 
@@ -80,23 +81,25 @@ local on_attach = function(client, bufnr)
     require("fzf-lua").diagnostics_document()
   end, { desc = "show buffer diagnostics" })
 
-  buf_map("n", "<c-n>", function()
+  buf_map("n", "gn", function()
     vim.diagnostic.goto_next()
   end, { desc = "next diagnostic" })
 
-  buf_map("n", "<c-p>", function()
+  buf_map("n", "gp", function()
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
-  if providers.documentFormattingProvider then
+  if capabilities.documentFormattingProvider then
     buf_map("n", "<Space>f", function()
       vim.lsp.buf.format()
     end, { desc = "format" })
   end
 
-  -- if providers.documentSymbolProvider then
-  -- require("nvim-navic").attach(client, bufnr)
-  -- end
+  if capabilities.renameProvider then
+    buf_map("n", "<F2>", function()
+      vim.lsp.buf.rename()
+    end, { desc = "rename" })
+  end
 
   -- send notification on server start
   local msg = string.format("Language server %s started!", client.name)
