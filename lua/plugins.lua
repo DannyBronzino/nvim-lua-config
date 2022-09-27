@@ -209,8 +209,11 @@ return require("packer").startup({
         local map = require("utils").map
 
         map("n", "<F2>", function()
-          vim.ui.input({ prompt = "Replace " .. vim.fn.expand("<cword>") .. " with: " }, function(input)
-            require("sad").Replace(nil, input)
+          vim.ui.input({ prompt = "Replace: ", default = vim.fn.expand("<cword>") }, function(input)
+            local find = input
+            vim.ui.input({ prompt = "With: " }, function(input)
+              require("sad").Replace(find, input)
+            end)
           end)
         end)
       end,
