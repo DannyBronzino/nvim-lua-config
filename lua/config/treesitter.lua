@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "latex", "bibtex", "markdown" },
+  ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline" },
   sync_install = true,
   highlight = {
     enable = true,
@@ -50,3 +50,6 @@ require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @cla
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- hides markdown stuff
+vim.wo.conceallevel = 2
