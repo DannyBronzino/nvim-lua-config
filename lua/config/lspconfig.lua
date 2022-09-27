@@ -95,11 +95,11 @@ local on_attach = function(client, bufnr)
     end, { desc = "format" })
   end
 
-  if capabilities.renameProvider then
-    buf_map("n", "<F2>", function()
-      vim.lsp.buf.rename()
-    end, { desc = "rename" })
-  end
+  -- if capabilities.renameProvider then
+  -- buf_map("n", "<F2>", function()
+  -- vim.lsp.buf.rename()
+  -- end, { desc = "rename" })
+  -- end
 
   -- send notification on server start
   local msg = string.format("Language server %s started!", client.name)
