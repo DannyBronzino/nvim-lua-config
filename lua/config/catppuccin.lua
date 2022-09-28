@@ -97,8 +97,8 @@ require("catppuccin").setup({
     WhichKeyDesc = { fg = colors.flamingo },
     -- Visual = { fg = colors.surface0, bg = colors.maroon },
     Comment = { fg = colors.subtext0 },
-    -- LeapLabelPrimary = { fg = colors.surface0, bg = colors.pink },
-    -- LeapMatch = { fg = colors.pink, bg = colors.surface0 },
+    LeapLabelPrimary = { fg = colors.surface0, bg = colors.pink },
+    LeapMatch = { fg = colors.pink, bg = colors.surface0 },
   },
 })
 

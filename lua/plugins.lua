@@ -263,14 +263,24 @@ return require("packer").startup({
       end,
     })
 
+    -- easymotion type thing
     use({
-      "phaazon/hop.nvim",
-      branch = "v2", -- optional but strongly recommended
+      "ggandor/leap.nvim",
+      requires = "tpope/vim-repeat",
       config = function()
-        require("config.hop")
+        require("config.leap")
       end,
       event = "BufEnter",
     })
+
+    -- use({
+    -- "phaazon/hop.nvim",
+    -- branch = "v2", -- optional but strongly recommended
+    -- config = function()
+    -- require("config.hop")
+    -- end,
+    -- event = "BufEnter",
+    -- })
 
     -- Show match number and index for search
     use({
