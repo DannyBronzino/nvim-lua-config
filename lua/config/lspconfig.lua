@@ -77,8 +77,38 @@ local on_attach = function(client, bufnr)
     vim.diagnostic.open_float({ scope = "line" })
   end, { desc = "show cursor diagnostics" })
 
+  local api = vim.api
+
+  api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      local float_opts = {
+        focusable = false,
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        border = "rounded",
+        source = "always", -- show source in diagnostic popup window
+        prefix = " ",
+      }
+
+      if not vim.b.diagnostics_pos then
+        vim.b.diagnostics_pos = { nil, nil }
+      end
+
+      local cursor_pos = api.nvim_win_get_cursor(0)
+      if
+        (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+        and #vim.diagnostic.get() > 0
+      then
+        vim.diagnostic.open_float({ scope = "cursor" }, float_opts)
+      end
+
+      vim.b.diagnostics_pos = cursor_pos
+    end,
+    desc = "show diagnostic on hover",
+  })
+
   buf_map("n", "<space>d", function()
-    require("fzf-lua").diagnostics_document()
+    require("fzf-lua").diagnostics_document({ fzf_cli_args = "--with-nth 2.." })
   end, { desc = "show buffer diagnostics" })
 
   buf_map("n", "gn", function()
