@@ -1,5 +1,5 @@
 vim.g.catppuccin_flavour = "mocha"
-Colors = require("catppuccin.palettes").get_palette() -- return vim.g.catppuccin_flavour palette
+Palette = require("catppuccin.palettes").get_palette() -- return vim.g.catppuccin_flavour palette
 
 require("catppuccin").setup({
   dim_inactive = {
@@ -50,7 +50,7 @@ require("catppuccin").setup({
     lsp_saga = false,
     gitgutter = false,
     gitsigns = true,
-    leap = false,
+    leap = true,
     telescope = false,
     nvimtree = {
       enabled = false,
@@ -93,19 +93,19 @@ require("catppuccin").setup({
   },
   color_overrides = {},
   custom_highlights = {
-    WhichKeyValue = { fg = Colors.rosewater },
-    WhichKeyDesc = { fg = Colors.flamingo },
+    WhichKeyValue = { fg = Palette.rosewater },
+    WhichKeyDesc = { fg = Palette.flamingo },
     -- Visual = { fg = colors.surface0, bg = colors.maroon },
-    Comment = { fg = Colors.subtext0 },
-    LeapLabelPrimary = { fg = Colors.surface0, bg = Colors.pink },
-    LeapMatch = { fg = Colors.pink, bg = Colors.surface0 },
-    LineNr = { fg = Colors.green },
-    LineNrAbove = { fg = Colors.blue },
+    Comment = { fg = Palette.subtext0 },
+    LeapLabelPrimary = { bg = "none", fg = Palette.pink, bold = true },
+    LeapMatch = { fg = Palette.teal, bg = "none", bold = true },
+    LineNr = { fg = Palette.green },
+    LineNrAbove = { fg = Palette.blue },
     LineNrBelow = { link = "LineNrAbove" },
-    DiagnosticUnderlineError = { fg = Colors.rosewater, italic = true, bold = true },
-    DiagnosticUnderlineHint = { fg = Colors.rosewater, italic = true, bold = true },
-    DiagnosticUnderlineWarn = { fg = Colors.rosewater, italic = true, bold = true },
-    DiagnosticUnderlineInfo = { fg = Colors.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineError = { fg = Palette.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineInfo = { fg = Palette.rosewater, italic = true, bold = true },
   },
 })
 
