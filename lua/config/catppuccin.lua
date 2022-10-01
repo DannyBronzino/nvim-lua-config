@@ -1,5 +1,5 @@
 vim.g.catppuccin_flavour = "mocha"
-local colors = require("catppuccin.palettes").get_palette() -- return vim.g.catppuccin_flavour palette
+Colors = require("catppuccin.palettes").get_palette() -- return vim.g.catppuccin_flavour palette
 
 require("catppuccin").setup({
   dim_inactive = {
@@ -30,7 +30,7 @@ require("catppuccin").setup({
   integrations = {
     treesitter = true,
     native_lsp = {
-      enabled = true,
+      enabled = false,
       virtual_text = {
         errors = { "italic" },
         hints = { "italic" },
@@ -38,10 +38,10 @@ require("catppuccin").setup({
         information = { "italic" },
       },
       underlines = {
-        errors = { "reverse" },
-        hints = { "reverse" },
-        warnings = { "reverse" },
-        information = { "reverse" },
+        errors = { "bold" },
+        hints = { "bold" },
+        warnings = { "bold" },
+        information = { "bold" },
       },
     },
     coc_nvim = false,
@@ -93,24 +93,24 @@ require("catppuccin").setup({
   },
   color_overrides = {},
   custom_highlights = {
-    WhichKeyValue = { fg = colors.rosewater },
-    WhichKeyDesc = { fg = colors.flamingo },
+    WhichKeyValue = { fg = Colors.rosewater },
+    WhichKeyDesc = { fg = Colors.flamingo },
     -- Visual = { fg = colors.surface0, bg = colors.maroon },
-    Comment = { fg = colors.subtext0 },
-    LeapLabelPrimary = { fg = colors.surface0, bg = colors.pink },
-    LeapMatch = { fg = colors.pink, bg = colors.surface0 },
-    LineNr = { fg = colors.rosewater },
+    Comment = { fg = Colors.subtext0 },
+    LeapLabelPrimary = { fg = Colors.surface0, bg = Colors.pink },
+    LeapMatch = { fg = Colors.pink, bg = Colors.surface0 },
+    LineNr = { fg = Colors.green },
+    LineNrAbove = { fg = Colors.blue },
+    LineNrBelow = { link = "LineNrAbove" },
+    DiagnosticUnderlineError = { fg = Colors.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineHint = { fg = Colors.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineWarn = { fg = Colors.rosewater, italic = true, bold = true },
+    DiagnosticUnderlineInfo = { fg = Colors.rosewater, italic = true, bold = true },
   },
 })
 
 vim.cmd([[colorscheme catppuccin]])
 
-vim.diagnostic.config({
-  virtual_text = false,
-  float = {
-    border = "rounded",
-  },
-})
 local color_palette = {
   rosewater = "#F5E0DC",
   flamingo = "#F2CDCD",

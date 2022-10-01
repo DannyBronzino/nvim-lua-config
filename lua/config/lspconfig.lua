@@ -10,6 +10,13 @@ require("mason-tool-installer").setup({
   start_delay = 0,
 })
 
+vim.diagnostic.config({
+  virtual_text = false,
+  float = {
+    border = "rounded",
+  },
+})
+
 local lspconfig = require("lspconfig")
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
