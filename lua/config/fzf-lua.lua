@@ -664,10 +664,14 @@ map("n", "<leader>gb", function()
   require("fzf-lua").grep_curbuf()
 end, { desc = "live grep current buffer with fzf" })
 
--- map("n", "<leader><space>", function()
--- require("fzf-lua").oldfiles()
--- end, { desc = "show list of old files with fzf" })
+map("n", '<space>"', function()
+  require("fzf-lua").registers()
+end, { desc = "show registers with fzf" })
 
-map("n", "<leader>h", function()
+map("n", "<space>'", function()
+  require("fzf-lua").marks()
+end, { desc = "show marks with fzf" })
+
+map("n", "<space>h", function()
   require("fzf-lua").help_tags()
 end, { desc = "show help tags with fzf" })
