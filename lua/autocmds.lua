@@ -2,27 +2,27 @@ local api = vim.api
 local autocmd = vim.api.nvim_create_autocmd
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
--- local number_toggle = api.nvim_create_augroup("number_toggle", { clear = true })
+local number_toggle = api.nvim_create_augroup("number_toggle", { clear = true })
 
--- autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
--- callback = function()
--- if vim.opt.number:get() == true then
--- vim.opt.relativenumber = true
--- end
--- end,
--- group = number_toggle,
--- desc = "set numbers to relative when entering Normal mode",
--- })
+autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+  callback = function()
+    if vim.opt.number:get() == true then
+      vim.opt.relativenumber = true
+    end
+  end,
+  group = number_toggle,
+  desc = "set numbers to relative when entering Normal mode",
+})
 
--- autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
--- callback = function()
--- if vim.opt.number:get() == true then
--- vim.opt.relativenumber = false
--- end
--- end,
--- group = number_toggle,
--- desc = "set numbers to absolute when entering Insert mode",
--- })
+autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+  callback = function()
+    if vim.opt.number:get() == true then
+      vim.opt.relativenumber = false
+    end
+  end,
+  group = number_toggle,
+  desc = "set numbers to absolute when entering Insert mode",
+})
 
 -- Highlight on yank
 autocmd("TextYankPost", {
