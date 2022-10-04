@@ -99,9 +99,7 @@ require("catppuccin").setup({
     Comment = { fg = Palette.subtext0 },
     LeapLabelPrimary = { bg = "none", fg = Palette.pink, bold = true },
     LeapMatch = { fg = Palette.teal, bg = "none", bold = true },
-    LineNr = { fg = Palette.green },
-    LineNrAbove = { fg = Palette.blue },
-    LineNrBelow = { link = "LineNrAbove" },
+    LineNr = { fg = Palette.overlay2 },
     DiagnosticUnderlineError = { fg = Palette.rosewater, italic = true, bold = true },
     DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
     DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
@@ -110,7 +108,6 @@ require("catppuccin").setup({
 })
 
 vim.cmd([[colorscheme catppuccin]])
-
 local color_palette = {
   rosewater = "#F5E0DC",
   flamingo = "#F2CDCD",

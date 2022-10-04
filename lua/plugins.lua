@@ -273,6 +273,22 @@ return require("packer").startup({
       event = "BufEnter",
     })
 
+    use({
+      "ggandor/flit.nvim",
+      config = function()
+        require("flit").setup({
+          keys = { f = "f", F = "F", t = "t", T = "T" },
+          -- A string like "nv", "nvo", "o", etc.
+          labeled_modes = "nvo",
+          multiline = true,
+          -- Like `leap`s similar argument (call-specific overrides).
+          -- E.g.: opts = { equivalence_classes = {} }
+          opts = {},
+        })
+      end,
+      after = "leap.nvim",
+    })
+
     -- use({
     -- "phaazon/hop.nvim",
     -- branch = "v2", -- optional but strongly recommended

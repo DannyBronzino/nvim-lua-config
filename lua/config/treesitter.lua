@@ -50,6 +50,3 @@ require("vim.treesitter.query").set_query("bibtex", "textobjects", "(entry) @cla
 -- let treesitter handle folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- hides markdown stuff
-vim.wo.conceallevel = 2
