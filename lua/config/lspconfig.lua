@@ -85,7 +85,7 @@ local on_attach = function(client, bufnr)
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "<space>d", function()
-    require("fzf-lua").diagnostics_document({ fzf_cli_args = "--with-nth 2.." })
+    require("fzf-lua").diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
   end, { desc = "show buffer diagnostics" })
 
   buf_map("n", "gn", function()
