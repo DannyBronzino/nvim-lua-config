@@ -1,4 +1,6 @@
-require("hlslens").setup({
+local hlslens = require("hlslens")
+
+hlslens.setup({
   calm_down = true,
   nearest_only = true,
 })
@@ -13,7 +15,7 @@ local activate_hlslens = function(direction)
     vim.api.nvim_echo({ { msg, "ErrorMsg" } }, false, {})
     return
   end
-  require("hlslens").start()
+  hlslens.start()
 end
 
 local map = require("utils").map
@@ -34,6 +36,16 @@ map("n", "N", "", {
   end,
 })
 
-map("n", "*", "<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>")
+map("n", "*", "", {
+  callback = function()
+    vim.fn.execute("normal! *N")
+    hlslens.start()
+  end,
+})
 
-map("n", "#", "<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>")
+map("n", "#", "", {
+  callback = function()
+    vim.fn.execute("normal! #N")
+    hlslens.start()
+  end,
+})

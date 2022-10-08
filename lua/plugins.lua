@@ -308,12 +308,6 @@ return require("packer").startup({
       event = "CmdLineEnter",
     })
 
-    -- asterisk improved
-    use({
-      "haya14busa/vim-asterisk",
-      after = "nvim-hlslens",
-    })
-
     -- colorscheme based on hokusai
     use({
       "rebelot/kanagawa.nvim",
