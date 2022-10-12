@@ -42,19 +42,19 @@ cmp.setup({
 
     ["<c-o>"] = cmp.mapping.confirm({ select = true }),
     ["<c-e>"] = cmp.mapping.abort(),
-    ["<c-f>"] = cmp.mapping.scroll_docs(-3),
-    ["<c-d>"] = cmp.mapping.scroll_docs(3),
+    ["<c-f>"] = cmp.mapping.scroll_docs(3),
+    ["<c-d>"] = cmp.mapping.scroll_docs(-3),
   }),
   sources = cmp.config.sources({
     { name = "luasnip" }, -- for luasnip
     { name = "nvim_lsp" },
     { -- ripgrep completion
       name = "rg",
-      max_item_count = 3,
+      -- max_item_count = 3,
       option = {
         additional_arguments = "--smart-case",
-        context_before = 3,
-        context_after = 3,
+        context_before = 5,
+        context_after = 5,
       },
     },
     { name = "path" }, -- for path completion
