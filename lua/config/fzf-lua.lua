@@ -657,6 +657,10 @@ map("n", "gw", function()
   fzf.grep_cword({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "grep for word under cursor with fzf" })
 
+map("n", "gW", function()
+  fzf.grep_cWORD({ fzf_cli_args = "--with-nth 1.." })
+end, { desc = "grep for word under cursor with fzf" })
+
 map("n", "<leader>gp", function()
   fzf.grep_project({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "live grep current project with fzf" })
