@@ -27,7 +27,7 @@ require("noice").setup({
     opts = { enter = true },
     filter = {
       event = { "msg_show", "notify" },
-      ["not"] = { kind = { "search_count", "echo" } },
+      ["not"] = { kind = { "search_count", "echo", "echomsg" } },
     },
   },
   notify = {
