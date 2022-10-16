@@ -1,5 +1,6 @@
-local actions = require("fzf-lua.actions")
-require("fzf-lua").setup({
+local fzf = require("fzf-lua")
+local actions = fzf.actions
+fzf.setup({
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
   -- https://github.com/lotabout/skim
   global_resume = true, -- enable global `resume`?
@@ -635,10 +636,10 @@ local files_git_or_cwd = function()
   -- change to `false` if you'd like to see a message when not in a git repo
   local opts = { winopts = { height = 0.66, width = 0.5 } }
 
-  if require("fzf-lua.path").is_git_repo(vim.loop.cwd(), true) then
-    require("fzf-lua").git_files(opts)
+  if fzf.path.is_git_repo(vim.loop.cwd(), true) then
+    fzf.git_files(opts)
   else
-    require("fzf-lua").files(opts)
+    fzf.files(opts)
   end
 end
 
@@ -649,29 +650,29 @@ map("n", "<leader>ff", function()
 end, { desc = "find files with fzf" })
 
 map("n", "<leader><space>", function()
-  require("fzf-lua").buffers({ winopts = { height = 0.66, width = 0.5 } })
+  fzf.buffers({ winopts = { height = 0.66, width = 0.5 } })
 end, { desc = "show buffers with fzf" })
 
 map("n", "gw", function()
-  require("fzf-lua").grep_cword({ fzf_cli_args = "--with-nth 1.." })
+  fzf.grep_cword({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "grep for word under cursor with fzf" })
 
 map("n", "<leader>gp", function()
-  require("fzf-lua").grep_project({ fzf_cli_args = "--with-nth 1.." })
+  fzf.grep_project({ fzf_cli_args = "--with-nth 1.." })
 end, { desc = "live grep current project with fzf" })
 
 map("n", "<leader>gb", function()
-  require("fzf-lua").grep_curbuf()
+  fzf.grep_curbuf()
 end, { desc = "live grep current buffer with fzf" })
 
 map("n", '<space>"', function()
-  require("fzf-lua").registers()
+  fzf.registers()
 end, { desc = "show registers with fzf" })
 
 map("n", "<space>'", function()
-  require("fzf-lua").marks()
+  fzf.marks()
 end, { desc = "show marks with fzf" })
 
 map("n", "<space>h", function()
-  require("fzf-lua").help_tags()
+  fzf.help_tags()
 end, { desc = "show help tags with fzf" })

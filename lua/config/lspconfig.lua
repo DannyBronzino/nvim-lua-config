@@ -44,27 +44,29 @@ local on_attach = function(client, bufnr)
     return require("utils").map(mode, left_hand_side, right_hand_side, opts)
   end
 
+  local fzf = require("fzf-lua")
+
   if capabilities.referencesProvider then
     buf_map("n", "gr", function()
-      require("fzf-lua").lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
+      fzf.lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "async reference" })
   end
 
   if capabilities.documentSymbolProvider then
     buf_map("n", "g0", function()
-      require("fzf-lua").lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
+      fzf.lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "document symbols" })
   end
 
   if capabilities.workspaceSymbolProvider then
-    buf_map("n", "gp", function()
-      require("fzf-lua").lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
+    buf_map("n", "<leader>g0", function()
+      fzf.lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "workspace symbol live" })
   end
 
   if capabilities.definitionProvider then
     buf_map("n", "gd", function()
-      require("fzf-lua").lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
+      fzf.lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "definition preview" })
   end
 
@@ -77,7 +79,7 @@ local on_attach = function(client, bufnr)
   if capabilities.codeActionProvider then
     buf_map("n", "ga", function()
       -- vim.lsp.buf.code_action()
-      require("fzf-lua").lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
+      fzf.lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
     end, { desc = "show code action" })
   end
 
@@ -90,7 +92,7 @@ local on_attach = function(client, bufnr)
   end, { desc = "show cursor diagnostics" })
 
   buf_map("n", "<space>d", function()
-    require("fzf-lua").diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
+    fzf.diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
   end, { desc = "show buffer diagnostics" })
 
   buf_map("n", "gn", function()
