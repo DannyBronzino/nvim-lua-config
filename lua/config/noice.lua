@@ -61,7 +61,15 @@ require("noice").setup({
     },
   }, -- @see the section on views below
   ---@type NoiceRouteConfig[]
-  routes = {}, -- @see the section on routes below
+  routes = {
+    {
+      filter = {
+        event = "msg_show",
+        kind = "search_count",
+      },
+      opts = { skip = true },
+    },
+  }, -- @see the section on routes below
   ---@type table<string, NoiceFilter>
   status = {}, --@see the section on statusline components below
   ---@type NoiceFormatOptions
