@@ -144,6 +144,7 @@ lspconfig.ltex.setup({
         enablePickyRules = false,
         motherTongue = "en-US",
       },
+      checkFrequency = "save",
     },
   },
 })
