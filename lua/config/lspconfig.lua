@@ -127,7 +127,7 @@ lspconfig.texlab.setup({
   settings = {
     texlab = {
       chktex = {
-        onEdit = true,
+        onEdit = false,
         onOpenAndSave = true,
       },
     },
