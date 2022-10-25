@@ -80,6 +80,37 @@ require("noice").setup({
       },
       opts = { skip = true },
     },
+    {
+      filter = {
+        event = "msg_show",
+        find = "VimTeX:",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        find = "Syntax highlighting.+Tree",
+      },
+      -- opts = { skip = true },
+      view = "mini",
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "written",
+      },
+      view = "mini",
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "%d+ change",
+      },
+      view = "mini",
+    },
   }, --- @see section on routes
   ---@type table<string, NoiceFilter>
   status = {}, --- @see section on statusline components
