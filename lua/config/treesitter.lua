@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline" },
+  ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline", "vim", "regex", "bash" },
   sync_install = true,
   highlight = {
     enable = true,
