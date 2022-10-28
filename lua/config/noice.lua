@@ -43,7 +43,7 @@ require("noice").setup({
   commands = {
     history = {
       -- options for the message history that you get with `:Noice`
-      view = "popup",
+      view = "split",
       opts = { enter = true, format = "details" },
       filter = {
         any = {
@@ -102,11 +102,11 @@ require("noice").setup({
     },
     override = {
       -- override the default lsp markdown formatter with Noice
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
       -- override the lsp markdown formatter with Noice
-      ["vim.lsp.util.stylize_markdown"] = true,
+      ["vim.lsp.util.stylize_markdown"] = false,
       -- override cmp documentation with Noice (needs the other options to work)
-      ["cmp.entry.get_documentation"] = true,
+      ["cmp.entry.get_documentation"] = false,
     },
     hover = {
       enabled = true,
