@@ -127,7 +127,7 @@ lspconfig.texlab.setup({
   settings = {
     texlab = {
       chktex = {
-        onEdit = true,
+        onEdit = false,
         onOpenAndSave = true,
       },
     },
@@ -144,6 +144,7 @@ lspconfig.ltex.setup({
         enablePickyRules = false,
         motherTongue = "en-US",
       },
+      checkFrequency = "save",
     },
   },
 })

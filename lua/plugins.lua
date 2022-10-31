@@ -167,15 +167,33 @@ return require("packer").startup({
       -- optional for icon support
       config = function()
         require("config.fzf-lua")
+        require("fzf-lua").register_ui_select()
       end,
     })
 
     use({
-      "stevearc/dressing.nvim",
+      "folke/noice.nvim",
+      requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        {
+          "rcarriga/nvim-notify",
+          config = function()
+            require("notify").setup({
+              -- Render style
+              render = "minimal",
+              -- Animation style
+              stages = "slide",
+              -- Default timeout for notifications
+              timeout = 300,
+            })
+          end,
+        },
+      },
       config = function()
-        require("config.dressing")
+        require("config.noice")
       end,
-      after = "fzf-lua",
+      event = "VimEnter",
     })
 
     use({
@@ -328,22 +346,22 @@ return require("packer").startup({
     })
 
     -- notification plugin
-    use({
-      "rcarriga/nvim-notify",
-      config = function()
-        local nvim_notify = require("notify")
-        nvim_notify.setup({
-          -- Render style
-          render = "minimal",
-          -- Animation style
-          stages = "slide",
-          -- Default timeout for notifications
-          timeout = 300,
-        })
+    -- use({
+    -- "rcarriga/nvim-notify",
+    -- config = function()
+    -- local nvim_notify = require("notify")
+    -- nvim_notify.setup({
+    -- -- Render style
+    -- render = "minimal",
+    -- -- Animation style
+    -- stages = "slide",
+    -- -- Default timeout for notifications
+    -- timeout = 300,
+    -- })
 
-        vim.notify = nvim_notify
-      end,
-    })
+    -- vim.notify = nvim_notify
+    -- end,
+    -- })
 
     -- exit Insert mode with jj or jk or whatever
     use({
