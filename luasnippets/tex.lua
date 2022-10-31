@@ -74,7 +74,7 @@ ls.add_snippets("tex", {
 })
 
 ls.add_snippets("tex", {
-  s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots")),
+  s({ trig = "...", name = "Ellipsis", dscr = "\\ldots", wordTrig = false }, t("\\ldots")),
 
   -- use csquotes package
   s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
