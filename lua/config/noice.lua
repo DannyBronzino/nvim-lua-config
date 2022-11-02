@@ -57,7 +57,7 @@ require("noice").setup({
     },
     -- :Noice last
     last = {
-      view = "popup",
+      view = "split",
       opts = { enter = true, format = "details" },
       filter = {
         any = {
