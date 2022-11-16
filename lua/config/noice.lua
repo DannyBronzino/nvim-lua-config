@@ -38,13 +38,20 @@ require("noice").setup({
     -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
     kind_icons = {}, -- set to `false` to disable icons
   },
+  -- default options for require('noice').redirect
+  -- see the section on Command Redirection
+  ---@type NoiceRouteConfig
+  redirect = {
+    view = "popup",
+    filter = { event = "msg_show" },
+  },
   -- You can add any custom commands below that will be available with `:Noice command`
   ---@type table<string, NoiceCommand>
   commands = {
     history = {
       -- options for the message history that you get with `:Noice`
-      view = "split",
-      opts = { enter = true, format = "details" },
+      view = "popup",
+      opts = { wrap = true, enter = true, format = "details" },
       filter = {
         any = {
           { event = "notify" },
@@ -57,7 +64,7 @@ require("noice").setup({
     },
     -- :Noice last
     last = {
-      view = "split",
+      view = "popup",
       opts = { enter = true, format = "details" },
       filter = {
         any = {
@@ -90,7 +97,7 @@ require("noice").setup({
   },
   lsp = {
     progress = {
-      enabled = true,
+      enabled = false,
       -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
       -- See the section on formatting for more details on how to customize.
       --- @type NoiceFormat|string
@@ -141,7 +148,7 @@ require("noice").setup({
         replace = true,
         render = "plain",
         format = { "{message}" },
-        win_options = { concealcursor = "n", conceallevel = 3 },
+        win_options = { wrap = true, concealcursor = "n", conceallevel = 3 },
       },
     },
   },
@@ -176,6 +183,7 @@ require("noice").setup({
     command_palette = false, -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
     inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
   },
   throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
   ---@type NoiceConfigViews
@@ -188,6 +196,38 @@ require("noice").setup({
       size = {
         width = "auto",
         height = "auto",
+      },
+    },
+    popup = {
+      position = {
+        row = "100%",
+        col = 0,
+      },
+      size = {
+        width = "99%",
+        height = "50%",
+      },
+    },
+    hover = {
+      view = "popup",
+      relative = "cursor",
+      zindex = 45,
+      enter = false,
+      anchor = "auto",
+      size = {
+        width = "auto",
+        height = "auto",
+        max_width = 60,
+        max_height = 20,
+      },
+      border = {
+        style = "rounded",
+        padding = { 0, 0 },
+      },
+      position = { row = 2, col = 2 },
+      win_options = {
+        wrap = true,
+        linebreak = true,
       },
     },
   }, ---@see section on views
@@ -230,3 +270,9 @@ require("noice").setup({
   ---@type NoiceFormatOptions
   format = {}, --- @see section on formatting
 })
+
+local map = require("utils").map
+
+map("c", "<S-Enter>", function()
+  require("noice").redirect(vim.fn.getcmdline())
+end, { desc = "Redirect Cmdline" })

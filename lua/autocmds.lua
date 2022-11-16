@@ -39,12 +39,11 @@ autocmd("TextYankPost", {
 autocmd("BufReadPost", {
   group = api.nvim_create_augroup("ResumeEdit", { clear = true }),
   callback = function(ctx)
-    local is_in_table = require("utils").is_in_table
-    local ft_blacklist = { "packer", "help", "gitcommit", "git", "fzf" }
+    local ft_blacklist = { "packer", "help", "gitcommit", "git", "fzf", "telescope" }
     local ft = vim.filetype.match({ filename = ctx.match })
 
     -- unsure if actually necessary
-    if is_in_table(ft_blacklist, ft) then
+    if vim.tbl_contains(ft_blacklist, ft) then
       return
     end
 
@@ -77,11 +76,6 @@ autocmd("BufReadPost", {
     if pcall(set_cursor, { last_insert_mark[1], -1 }) then
       return set_cursor({ last_insert_mark[1], -1 })
     end
-
-    -- moves marked line to top of screen minus 2
-    -- if vim.api.nvim_win_get_cursor(0)[1] > 3 then
-    -- vim.api.nvim_feedkeys("zt", "m", true)
-    -- end
   end,
   desc = "places cursor at last insert position",
 })
