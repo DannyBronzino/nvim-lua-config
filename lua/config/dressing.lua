@@ -38,6 +38,7 @@ require("dressing").setup({
     mappings = {
       n = {
         ["<Esc>"] = "Close",
+        ["<C-e>"] = "Close",
         ["<CR>"] = "Confirm",
       },
       i = {
