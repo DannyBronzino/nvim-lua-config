@@ -65,6 +65,7 @@ require("catppuccin").setup({
     DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
     DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
     DiagnosticUnderlineInfo = { fg = Palette.rosewater, italic = true, bold = true },
+    MiniTrailspace = { bg = Palette.red },
   },
 })
 

@@ -210,6 +210,17 @@ return require("packer").startup({
       after = "fzf-lua",
     })
 
+    use({
+      "utilyre/barbecue.nvim",
+      requires = {
+        "smiteshp/nvim-navic",
+      },
+      config = function()
+        require("barbecue").setup()
+      end,
+      after = "nvim-lspconfig",
+    })
+
     -- icons used by everything
     use({
       "kyazdani42/nvim-web-devicons",
@@ -236,8 +247,27 @@ return require("packer").startup({
     })
 
     -- additional powerful text object for vim, this plugin should be studied carefully to use its full power
+    -- use({
+    -- "wellle/targets.vim",
+    -- })
+
+    -- swiss army knife
     use({
-      "wellle/targets.vim",
+      "echasnovski/mini.nvim",
+      config = function()
+        require("mini.ai").setup({}) -- adds more textobjects
+        require("mini.misc").setup({}) -- miscellaneous functions
+        require("mini.trailspace").setup({}) -- identify and remove trailing spaces
+        vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+          pattern = "*",
+          group = vim.api.nvim_create_augroup("MiniTrailSpace", { clear = true }),
+          callback = function()
+            MiniTrailspace.trim()
+            MiniTrailspace.trim_last_lines()
+          end,
+          desc = "trim empty spaces and lines",
+        })
+      end,
     })
 
     -- divides words into smaller chunks
@@ -276,6 +306,14 @@ return require("packer").startup({
           -- E.g.: opts = { equivalence_classes = {} }
           opts = {},
         })
+      end,
+      after = "leap.nvim",
+    })
+
+    use({
+      "ggandor/leap-spooky.nvim",
+      config = function()
+        require("leap-spooky").setup()
       end,
       after = "leap.nvim",
     })
@@ -344,24 +382,6 @@ return require("packer").startup({
       end,
       after = "lualine.nvim",
     })
-
-    -- notification plugin
-    -- use({
-    -- "rcarriga/nvim-notify",
-    -- config = function()
-    -- local nvim_notify = require("notify")
-    -- nvim_notify.setup({
-    -- -- Render style
-    -- render = "minimal",
-    -- -- Animation style
-    -- stages = "slide",
-    -- -- Default timeout for notifications
-    -- timeout = 300,
-    -- })
-
-    -- vim.notify = nvim_notify
-    -- end,
-    -- })
 
     -- exit Insert mode with jj or jk or whatever
     use({

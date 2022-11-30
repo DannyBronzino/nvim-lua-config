@@ -16,7 +16,7 @@ require("dressing").setup({
     start_in_insert = true,
 
     -- These are passed to nvim_open_win
-    anchor = "NW",
+    anchor = "SW",
     border = "rounded",
     -- 'editor' and 'win' will default to being centered
     relative = "cursor",
@@ -116,7 +116,7 @@ require("dressing").setup({
       anchor = "NW",
       border = "rounded",
       -- 'editor' and 'win' will default to being centered
-      relative = "cursor",
+      relative = "editor",
 
       -- Window transparency (0-100)
       winblend = 10,
@@ -136,9 +136,8 @@ require("dressing").setup({
       -- Set to `false` to disable
       mappings = {
         ["<Esc>"] = "Close",
-        ["<C-e>"] = "Close",
+        ["<C-c>"] = "Close",
         ["<CR>"] = "Confirm",
-        ["<c-o>"] = "Confirm",
       },
 
       override = function(conf)
