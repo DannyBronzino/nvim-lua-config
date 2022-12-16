@@ -167,6 +167,7 @@ return require("packer").startup({
       -- optional for icon support
       config = function()
         require("config.fzf-lua")
+        require("config.fzf_mappings")
         require("fzf-lua").register_ui_select()
       end,
     })

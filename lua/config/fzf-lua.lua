@@ -1,6 +1,5 @@
-local fzf = require("fzf-lua")
-local actions = fzf.actions
-fzf.setup({
+local actions = require("fzf-lua.actions")
+require("fzf-lua").setup({
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
   -- https://github.com/lotabout/skim
   global_resume = true, -- enable global `resume`?
@@ -8,7 +7,7 @@ fzf.setup({
   -- `<any_function>.({ gl ... })`
   global_resume_query = true, -- include typed query in `resume`?
   winopts = {
-    -- split = "belowright new", -- open in a split instead?
+    -- split         = "belowright new",-- open in a split instead?
     -- "belowright new"  : split below
     -- "aboveleft new"   : split above
     -- "belowright vnew" : split right
@@ -23,8 +22,7 @@ fzf.setup({
     -- to manually draw the border characters around the preview
     -- window, can be set to 'false' to remove all borders or to
     -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
-    -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    border = "rounded",
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     fullscreen = false, -- start fullscreen?
     -- highlights should optimally be set by the colorscheme using
     -- FzfLuaXXX highlights. If your colorscheme doesn't set these
@@ -60,6 +58,7 @@ fzf.setup({
       flip_columns = 120, -- #cols to switch to horizontal on flex
       -- Only used with the builtin previewer:
       title = true, -- preview border title (file/buf)?
+      title_align = "left", -- left|center|right, title alignment
       scrollbar = "float", -- `false` or string:'float|border'
       -- float:  in-window floating border
       -- border: in-border chars (see below)
@@ -86,10 +85,6 @@ fzf.setup({
       -- can be used to add custom fzf-lua mappings, e.g:
       --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
       --     { silent = true, noremap = true })
-      local map = require("utils").map
-
-      map("t", "<c-o>", "<cr>", { buffer = 0 }) -- use <c-o> for default action
-      map("t", "<c-e>", "<esc>", { buffer = 0 }) -- use <c-e> to escape
     end,
   },
   keymap = {
@@ -115,7 +110,7 @@ fzf.setup({
       ["ctrl-z"] = "abort",
       ["ctrl-u"] = "unix-line-discard",
       ["ctrl-f"] = "half-page-down",
-      ["ctrl-d"] = "half-page-up",
+      ["ctrl-b"] = "half-page-up",
       ["ctrl-a"] = "beginning-of-line",
       ["ctrl-e"] = "end-of-line",
       ["alt-a"] = "toggle-all",
@@ -171,24 +166,6 @@ fzf.setup({
       ["ctrl-s"] = actions.buf_split,
       ["ctrl-v"] = actions.buf_vsplit,
       ["ctrl-t"] = actions.buf_tabedit,
-      ["alt-y"] = function(selected, _)
-        local lines = {}
-
-        for _, item in pairs(selected) do
-          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
-        end
-
-        vim.fn.setreg([["]], lines, "c")
-      end,
-      ["alt-p"] = function(selected, _)
-        local lines = {}
-
-        for _, item in pairs(selected) do
-          table.insert(lines, string.match(item, "[%a%d%p][%a%d%p%s]+[%a%d%p]"))
-        end
-
-        vim.api.nvim_put(lines, "", true, true)
-      end,
     },
   },
   fzf_opts = {
@@ -256,9 +233,8 @@ fzf.setup({
       -- will do nothing if `viu` isn't executable
       extensions = {
         -- neovim terminal only supports `viu` block output
-        -- viu looks bad
-        ["png"] = { "viu" },
-        ["jpg"] = { "viu" },
+        ["png"] = { "viu", "-b" },
+        ["jpg"] = { "ueberzug" },
       },
       -- if using `ueberzug` in the above extensions map
       -- set the default image scaler, possible scalers:
@@ -319,7 +295,7 @@ fzf.setup({
       color_icons = true,
       previewer = "git_diff",
       -- uncomment if you wish to use git-delta as pager
-      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
       actions = {
         -- actions inherit from 'actions.files' and merge
         ["right"] = { actions.git_unstage, actions.resume },
@@ -331,7 +307,7 @@ fzf.setup({
       cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset'",
       preview = "git show --pretty='%Cred%H%n%Cblue%an <%ae>%n%C(yellow)%cD%n%Cgreen%s' --color {1}",
       -- uncomment if you wish to use git-delta as pager
-      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
       actions = {
         ["default"] = actions.git_checkout,
       },
@@ -346,7 +322,7 @@ fzf.setup({
       cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset' <file>",
       preview = "git diff --color {1}~1 {1} -- <file>",
       -- uncomment if you wish to use git-delta as pager
-      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS"
+      --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
       actions = {
         ["default"] = actions.git_buf_edit,
         ["ctrl-s"] = actions.git_buf_split,
@@ -482,8 +458,9 @@ fzf.setup({
     },
     -- actions inherit from 'actions.buffers' and merge
     actions = {
-      ["default"] = { actions.buf_edit_or_qf },
-      ["alt-q"] = { actions.buf_sel_to_qf },
+      ["default"] = actions.buf_edit_or_qf,
+      ["alt-q"] = actions.buf_sel_to_qf,
+      ["alt-l"] = actions.buf_sel_to_ll,
     },
   },
   blines = {
@@ -499,8 +476,9 @@ fzf.setup({
     },
     -- actions inherit from 'actions.buffers' and merge
     actions = {
-      ["default"] = { actions.buf_edit_or_qf },
-      ["alt-q"] = { actions.buf_sel_to_qf },
+      ["default"] = actions.buf_edit_or_qf,
+      ["alt-q"] = actions.buf_sel_to_qf,
+      ["alt-l"] = actions.buf_sel_to_ll,
     },
   },
   tags = {
@@ -524,6 +502,7 @@ fzf.setup({
   btags = {
     prompt = "BTags❯ ",
     ctags_file = "tags",
+    ctags_autogen = false, -- dynamically generate ctags each call
     multiprocess = true,
     file_icons = true,
     git_icons = true,
@@ -559,7 +538,6 @@ fzf.setup({
     async_or_timeout = 5000, -- timeout(ms) or 'true' for async calls
     file_icons = true,
     git_icons = false,
-    ui_select = true, -- use 'vim.ui.select' for code actions
     -- settings for 'lsp_{document|workspace|lsp_live_workspace}_symbols'
     symbols = {
       async_or_timeout = true, -- symbols are async by default
@@ -576,6 +554,16 @@ fzf.setup({
       symbol_fmt = function(s)
         return "[" .. s .. "]"
       end,
+    },
+    code_actions = {
+      prompt = "Code Actions> ",
+      ui_select = true, -- use 'vim.ui.select'?
+      async_or_timeout = 5000,
+      winopts = {
+        row = 0.40,
+        height = 0.35,
+        width = 0.60,
+      },
     },
   },
   diagnostics = {
@@ -628,55 +616,3 @@ fzf.setup({
   -- 'EN SPACE' (U+2002), the below sets it to 'NBSP' (U+00A0) instead
   -- nbsp = '\xc2\xa0',
 })
-
--- LSP mappings found in config.lspconfig
-
-local files_git_or_cwd = function()
-  -- version 2: uses `git ls-files` for git dirs
-  -- change to `false` if you'd like to see a message when not in a git repo
-  local opts = { winopts = { height = 0.66, width = 0.5 } }
-
-  if fzf.path.is_git_repo(vim.loop.cwd(), true) then
-    fzf.git_files(opts)
-  else
-    fzf.files(opts)
-  end
-end
-
-local map = require("utils").map
-
-map("n", "<leader>ff", function()
-  files_git_or_cwd()
-end, { desc = "find files with fzf" })
-
-map("n", "<leader><space>", function()
-  fzf.buffers({ winopts = { height = 0.66, width = 0.5 } })
-end, { desc = "show buffers with fzf" })
-
-map("n", "gw", function()
-  fzf.grep_cword({ fzf_cli_args = "--with-nth 1.." })
-end, { desc = "grep for word under cursor with fzf" })
-
-map("n", "gW", function()
-  fzf.grep_cWORD({ fzf_cli_args = "--with-nth 1.." })
-end, { desc = "grep for word under cursor with fzf" })
-
-map("n", "<leader>gp", function()
-  fzf.grep_project({ fzf_cli_args = "--with-nth 1.." })
-end, { desc = "live grep current project with fzf" })
-
-map("n", "<leader>gb", function()
-  fzf.grep_curbuf()
-end, { desc = "live grep current buffer with fzf" })
-
-map("n", '<space>"', function()
-  fzf.registers()
-end, { desc = "show registers with fzf" })
-
-map("n", "<space>'", function()
-  fzf.marks()
-end, { desc = "show marks with fzf" })
-
-map("n", "<space>h", function()
-  fzf.help_tags()
-end, { desc = "show help tags with fzf" })
