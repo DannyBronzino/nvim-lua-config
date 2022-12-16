@@ -318,15 +318,6 @@ return require("packer").startup({
       after = "leap.nvim",
     })
 
-    -- use({
-    -- "phaazon/hop.nvim",
-    -- branch = "v2", -- optional but strongly recommended
-    -- config = function()
-    -- require("config.hop")
-    -- end,
-    -- event = "BufEnter",
-    -- })
-
     -- Show match number and index for search
     use({
       "kevinhwang91/nvim-hlslens",
@@ -435,6 +426,7 @@ return require("packer").startup({
         require("config.which-key")
       end,
     })
+
     use({
       "shortcuts/no-neck-pain.nvim",
       tag = "*",
