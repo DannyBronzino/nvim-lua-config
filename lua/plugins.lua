@@ -223,7 +223,7 @@ return require("packer").startup({
 
     -- icons used by everything
     use({
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
       module = "nvim-web-devicons",
     })
 
