@@ -435,6 +435,18 @@ return require("packer").startup({
         require("config.which-key")
       end,
     })
+    use({
+      "shortcuts/no-neck-pain.nvim",
+      tag = "*",
+      config = function()
+        require("no-neck-pain").setup({
+          width = 50,
+          buffers = {
+            left = false,
+          },
+        })
+      end,
+    })
 
     if is_bootstrap then
       require("packer").sync()

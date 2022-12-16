@@ -1,14 +1,6 @@
 local leap = require("leap")
 local map = require("utils").map
 
-map({ "x", "o" }, "z", function()
-  leap.leap({ offset = 1, inclusive_op = true })
-end, { desc = "leap forward to in visual and operator mode" })
-
-map({ "x", "o" }, "Z", function()
-  leap.leap({ backward = true })
-end, { desc = "leap backward to in visual and operator mode" })
-
 map("n", "gs", function()
   leap.leap({
     target_windows = vim.tbl_filter(function(win)

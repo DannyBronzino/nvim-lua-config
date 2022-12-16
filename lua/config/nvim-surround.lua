@@ -25,4 +25,18 @@ autocmd({ "BufEnter" }, {
   end,
   desc = "loads latex only surrounds",
 })
-require("nvim-surround").setup()
+
+require("nvim-surround").setup({
+  keymaps = {
+    insert = "<C-g>s",
+    insert_line = "<C-g>S",
+    normal = "yz",
+    normal_cur = "yzz",
+    normal_line = "yZ",
+    normal_cur_line = "yZZ",
+    visual = "Z",
+    visual_line = "gZ",
+    delete = "dz",
+    change = "cz",
+  },
+})
