@@ -107,6 +107,10 @@ map("n", "G", function()
   vim.api.nvim_feedkeys("Gzt2k2j", "n", true)
 end, { desc = "works like G, but places EOF 2 lines from the top of the screen" })
 
+map({ "n", "i" }, "<insert>", function()
+  vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
+end, { desc = "pastes system clipboard contents at cursor" })
+
 vim.cmd([[
 " Break inserted text into smaller undo units.
 for ch in [',', '.', '!', '?', ';', ':']
