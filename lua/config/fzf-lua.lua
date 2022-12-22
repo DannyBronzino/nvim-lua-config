@@ -136,6 +136,7 @@ require("fzf-lua").setup({
       -- to open all files whether single or multiple
       -- ["default"]     = actions.file_edit,
       ["default"] = actions.file_edit_or_qf,
+      ["ctrl-o"] = actions.file_edit_or_qf,
       ["ctrl-s"] = actions.file_split,
       ["ctrl-v"] = actions.file_vsplit,
       ["ctrl-t"] = actions.file_tabedit,
@@ -163,6 +164,7 @@ require("fzf-lua").setup({
       -- providers that inherit these actions:
       --   buffers, tabs, lines, blines
       ["default"] = actions.buf_edit,
+      ["ctrl-o"] = actions.buf_edit,
       ["ctrl-s"] = actions.buf_split,
       ["ctrl-v"] = actions.buf_vsplit,
       ["ctrl-t"] = actions.buf_tabedit,
@@ -325,6 +327,7 @@ require("fzf-lua").setup({
       --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
       actions = {
         ["default"] = actions.git_buf_edit,
+        ["ctrl-o"] = actions.git_buf_edit,
         ["ctrl-s"] = actions.git_buf_split,
         ["ctrl-v"] = actions.git_buf_vsplit,
         ["ctrl-t"] = actions.git_buf_tabedit,
@@ -436,6 +439,7 @@ require("fzf-lua").setup({
     actions = {
       -- actions inherit from 'actions.buffers' and merge
       ["default"] = actions.buf_switch,
+      ["ctrl-o"] = actions.buf_switch,
       ["ctrl-x"] = { actions.buf_del, actions.resume },
     },
     fzf_opts = {
@@ -459,6 +463,7 @@ require("fzf-lua").setup({
     -- actions inherit from 'actions.buffers' and merge
     actions = {
       ["default"] = actions.buf_edit_or_qf,
+      ["ctrl-o"] = actions.buf_edit_or_qf,
       ["alt-q"] = actions.buf_sel_to_qf,
       ["alt-l"] = actions.buf_sel_to_ll,
     },
@@ -477,6 +482,7 @@ require("fzf-lua").setup({
     -- actions inherit from 'actions.buffers' and merge
     actions = {
       ["default"] = actions.buf_edit_or_qf,
+      ["ctrl-o"] = actions.buf_edit_or_qf,
       ["alt-q"] = actions.buf_sel_to_qf,
       ["alt-l"] = actions.buf_sel_to_ll,
     },
@@ -519,7 +525,10 @@ require("fzf-lua").setup({
   colorschemes = {
     prompt = "Colorschemes❯ ",
     live_preview = true, -- apply the colorscheme on preview?
-    actions = { ["default"] = actions.colorscheme },
+    actions = {
+      ["default"] = actions.colorscheme,
+      ["ctrl-o"] = actions.colorscheme,
+    },
     winopts = { height = 0.55, width = 0.30 },
     post_reset_cb = function()
       -- reset statusline highlights after
