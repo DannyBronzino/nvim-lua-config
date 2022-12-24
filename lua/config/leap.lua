@@ -13,7 +13,7 @@ end, { desc = "search in all windows (including the current one) on the tab page
 -- executing a `normal!` command at each selected position (this could be even
 -- more useful if we'd pass in custom targets too).
 
-function paranormal(targets)
+function Paranormal(targets)
   -- Get the :normal sequence to be executed.
   local input = vim.fn.input("normal! ")
   if #input < 1 then
@@ -26,8 +26,8 @@ function paranormal(targets)
   -- commands that modify the positions of other targets (insert/change/delete).
   for _, target in ipairs(targets) do
     local line, col = unpack(target.pos)
-    id = vim.api.nvim_buf_set_extmark(0, ns, line - 1, col - 1, {})
-    target.extmark_id = id
+    Fd = vim.api.nvim_buf_set_extmark(0, ns, line - 1, col - 1, {})
+    target.extmark_id = Fd
   end
 
   -- Jump to each extmark (anchored to the "moving" targets), and execute the
@@ -47,7 +47,7 @@ end
 map("n", "<leader>s", function()
   leap.leap({
     target_windows = { vim.fn.win_getid() },
-    action = paranormal,
+    action = Paranormal,
     multiselect = true,
   })
 end)
