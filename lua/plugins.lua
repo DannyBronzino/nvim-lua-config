@@ -433,9 +433,9 @@ return require("packer").startup({
       tag = "*",
       config = function()
         require("no-neck-pain").setup({
-          width = 20,
+          width = 15,
           buffers = {
-            left = false,
+            left = { enabled = false },
           },
         })
       end,
