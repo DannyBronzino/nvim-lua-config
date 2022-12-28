@@ -258,6 +258,7 @@ return require("packer").startup({
       config = function()
         require("mini.ai").setup({}) -- adds more textobjects
         require("mini.misc").setup({}) -- miscellaneous functions
+        -- require("mini.animate").setup({}) -- animations
         require("mini.trailspace").setup({}) -- identify and remove trailing spaces
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {
           pattern = "*",
