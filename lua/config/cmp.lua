@@ -46,8 +46,8 @@ cmp.setup({
     ["<c-d>"] = cmp.mapping.scroll_docs(-3),
   }),
   sources = cmp.config.sources({
+    { name = "nvim_lsp" }, -- for lsp
     { name = "luasnip" }, -- for luasnip
-    { name = "nvim_lsp" },
     { -- ripgrep completion
       name = "rg",
       -- max_item_count = 3,
