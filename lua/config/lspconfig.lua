@@ -24,10 +24,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 local lspconfig = require("lspconfig")
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 local on_attach = function(client, bufnr)
-  local capabilities = client.server_capabilities
+  local abilities = client.server_capabilities
 
   if client.name == "ltex" then
     require("ltex_extra").setup({
@@ -46,37 +44,37 @@ local on_attach = function(client, bufnr)
 
   local fzf = require("fzf-lua")
 
-  if capabilities.referencesProvider then
+  if abilities.referencesProvider then
     buf_map("n", "gr", function()
       fzf.lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "async reference" })
   end
 
-  if capabilities.documentSymbolProvider then
+  if abilities.documentSymbolProvider then
     buf_map("n", "g0", function()
       fzf.lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "document symbols" })
   end
 
-  if capabilities.workspaceSymbolProvider then
+  if abilities.workspaceSymbolProvider then
     buf_map("n", "<leader>g0", function()
       fzf.lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
     end, { desc = "workspace symbol live" })
   end
 
-  if capabilities.definitionProvider then
+  if abilities.definitionProvider then
     buf_map("n", "gd", function()
       fzf.lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
     end, { desc = "definition preview" })
   end
 
-  if capabilities.hoverProvider then
+  if abilities.hoverProvider then
     buf_map("n", "K", function()
       vim.lsp.buf.hover()
     end, { desc = "hover" })
   end
 
-  if capabilities.codeActionProvider then
+  if abilities.codeActionProvider then
     buf_map("n", "ga", function()
       -- vim.lsp.buf.code_action()
       fzf.lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
@@ -103,7 +101,7 @@ local on_attach = function(client, bufnr)
     vim.diagnostic.goto_prev()
   end, { desc = "previous diagnostic" })
 
-  if capabilities.documentFormattingProvider then
+  if abilities.documentFormattingProvider then
     buf_map("n", "<Space>f", function()
       vim.lsp.buf.format()
     end, { desc = "format" })
@@ -120,8 +118,10 @@ local on_attach = function(client, bufnr)
   vim.notify(msg, "info")
 end
 
+local cmpabilities = require("cmp_nvim_lsp").default_capabilities() -- enables cmp source
+
 lspconfig.texlab.setup({
-  capabilities = capabilities,
+  capabilities = cmpabilities,
   on_attach = on_attach,
   filetypes = { "tex", "bib" },
   settings = {
@@ -135,7 +135,7 @@ lspconfig.texlab.setup({
 })
 
 lspconfig.ltex.setup({
-  capabilities = capabilities,
+  capabilities = cmpabilities,
   on_attach = on_attach,
   filetypes = { "tex", "bib" },
   settings = {
