@@ -46,6 +46,7 @@ cmp.setup({
     ["<c-d>"] = cmp.mapping.scroll_docs(-3),
   }),
   sources = cmp.config.sources({
+    { name = "omni" },
     { name = "nvim_lsp" }, -- for lsp
     { name = "luasnip" }, -- for luasnip
     { -- ripgrep completion
@@ -58,7 +59,7 @@ cmp.setup({
       },
     },
     { name = "path" }, -- for path completion
-    { name = "latex_symbols", max_item_count = 3 },
+    { name = "latex_symbols" },
     -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
   }),
   completion = {
@@ -72,6 +73,7 @@ cmp.setup({
       -- with_text = true,
       mode = "symbol",
       menu = {
+        omni = "[Omni]",
         luasnip = "[Snip]",
         nvim_lsp = "[LSP]",
         rg = "[RG]",

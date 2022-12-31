@@ -147,6 +147,13 @@ return require("packer").startup({
       disable = true,
     })
 
+    -- completions for omnifunc
+    use({
+      "hrsh7th/cmp-omni",
+      event = "InsertEnter",
+      after = "nvim-cmp",
+    })
+
     -- easy to enter symbols using latex codes
     use({
       "kdheepak/cmp-latex-symbols",
