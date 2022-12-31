@@ -118,10 +118,10 @@ local on_attach = function(client, bufnr)
   vim.notify(msg, "info")
 end
 
-local cmpabilities = require("cmp_nvim_lsp").default_capabilities() -- enables cmp source
+-- local cmpabilities = require("cmp_nvim_lsp").default_capabilities() -- enables cmp source
 
 lspconfig.texlab.setup({
-  capabilities = cmpabilities,
+  -- capabilities = cmpabilities,
   on_attach = on_attach,
   filetypes = { "tex", "bib" },
   settings = {
@@ -135,7 +135,7 @@ lspconfig.texlab.setup({
 })
 
 lspconfig.ltex.setup({
-  capabilities = cmpabilities,
+  -- capabilities = cmpabilities,
   on_attach = on_attach,
   filetypes = { "tex", "bib" },
   settings = {

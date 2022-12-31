@@ -46,24 +46,11 @@ cmp.setup({
     ["<c-d>"] = cmp.mapping.scroll_docs(-3),
   }),
   sources = cmp.config.sources({
-    { name = "omni" },
-    { name = "nvim_lsp" }, -- for lsp
-    { name = "luasnip" }, -- for luasnip
-    { -- ripgrep completion
-      name = "rg",
-      -- max_item_count = 3,
-      option = {
-        additional_arguments = "--smart-case",
-        context_before = 5,
-        context_after = 5,
-      },
-    },
     { name = "path" }, -- for path completion
-    { name = "latex_symbols" },
-    -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
+    { name = "buffer", keyword_length = 2 },
   }),
   completion = {
-    keyword_length = 1,
+    completeopt = "menu,noselect",
   },
   experimental = {
     ghost_text = true, -- adds ghost text that completes the word in buffer
@@ -76,12 +63,21 @@ cmp.setup({
         omni = "[Omni]",
         luasnip = "[Snip]",
         nvim_lsp = "[LSP]",
-        rg = "[RG]",
         path = "[Path]",
-        latex_symbols = "[Symbols]",
+        buffer = "[Buffer]",
         -- digraphs = "[Digraphs]",
       },
     }),
+  },
+})
+
+cmp.setup.filetype("tex", {
+  sources = {
+    { name = "omni" },
+    { name = "luasnip" }, -- for luasnip
+    { name = "buffer", keyword_length = 2 },
+    { name = "path" }, -- for path completion
+    -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
   },
 })
 

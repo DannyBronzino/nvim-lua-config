@@ -121,7 +121,7 @@ return require("packer").startup({
     -- completion for buffer contents
     use({
       "hrsh7th/cmp-buffer",
-      event = "CmdLineEnter",
+      event = { "InsertEnter", "CmdLineEnter" },
       after = "nvim-cmp",
     })
 
@@ -129,13 +129,6 @@ return require("packer").startup({
     use({
       "hrsh7th/cmp-cmdline",
       event = "CmdLineEnter",
-      after = "nvim-cmp",
-    })
-
-    -- completion for ripgrep
-    use({
-      "lukas-reineke/cmp-rg",
-      event = "InsertEnter",
       after = "nvim-cmp",
     })
 
@@ -154,19 +147,13 @@ return require("packer").startup({
       after = "nvim-cmp",
     })
 
-    -- easy to enter symbols using latex codes
-    use({
-      "kdheepak/cmp-latex-symbols",
-      event = "InsertEnter",
-      after = "nvim-cmp",
-    })
-
     -- source for lsp completions
     use({
       "hrsh7th/cmp-nvim-lsp",
       event = "InsertEnter",
       after = "nvim-cmp",
       module = "cmp_nvim_lsp",
+      disable = true,
     })
 
     use({
