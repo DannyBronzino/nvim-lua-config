@@ -220,6 +220,7 @@ return require("packer").startup({
         require("barbecue").setup()
       end,
       after = "nvim-lspconfig",
+      disable = true,
     })
 
     -- icons used by everything
