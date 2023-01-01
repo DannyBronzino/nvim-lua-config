@@ -3,7 +3,7 @@ local map = require("utils").map
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-map("i", "<c-BS>", "<Del>", { desc = "use <c-BS> for <DEL>" })
+map("i", "<c-d>", "<Del>", { desc = "use <c-d> for <DEL> in Insert" })
 
 map({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "allows for use of 'k' over wrapped lines" })
 
