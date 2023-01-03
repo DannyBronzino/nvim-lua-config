@@ -13,7 +13,7 @@
   "friendly-snippets": { "branch": "main", "commit": "1a6a02350568d6830bcfa167c72f9b6e75e454ae" },
   "fzf-lua": { "branch": "main", "commit": "7bb05a75eb04d3b7b74df0698a146c62877fc456" },
   "gitsigns.nvim": { "branch": "main", "commit": "2ab3bdf0a40bab53033048c6be75bda86316b55d" },
-  "lazy.nvim": { "branch": "main", "commit": "277a2ab10baeebf64548a6b5a606d7b82f8e3165" },
+  "lazy.nvim": { "branch": "main", "commit": "06db1ec3c6baa9460e42ef8ed4d2cc2613b194cb" },
   "leap-spooky.nvim": { "branch": "main", "commit": "748b2614e859704d8004e86be97401c9f3e28e80" },
   "leap.nvim": { "branch": "main", "commit": "e0145906c5f004b23eb6ec876fad55ffd3382ec9" },
   "lspkind-nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
@@ -41,6 +41,6 @@
   "vim-matchup": { "branch": "master", "commit": "db5120dd9887c988de7cd973ddb951e465d413e5" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-wordmotion": { "branch": "master", "commit": "5dd613ed68a0ecf0fc6c11cd4098c03583786bf0" },
-  "vimtex": { "branch": "master", "commit": "5e03d9052de30c8e4c2f4907600783112454028a" },
+  "vimtex": { "branch": "master", "commit": "e8c2c8087f810f0c67373d11d05b47c6a2800b98" },
   "which-key.nvim": { "branch": "main", "commit": "8682d3003595017cd8ffb4c860a07576647cc6f8" }
 }
