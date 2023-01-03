@@ -48,13 +48,13 @@ return {
   -- snippet engine
   {
     "L3MON4D3/LuaSnip",
-    lazy = true,
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
     config = function()
       require("config.luasnip")
     end,
+    event = "InsertEnter",
   },
 
   -- completion engine
@@ -85,7 +85,7 @@ return {
 
   {
     "ibhagwan/fzf-lua",
-    -- optional for icon support
+    lazy = false,
     config = function()
       require("config.fzf-lua")
       require("config.fzf_mappings")
@@ -95,6 +95,7 @@ return {
 
   {
     "folke/noice.nvim",
+    lazy = false,
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
@@ -177,6 +178,7 @@ return {
   -- e.g. camelCase becomes (camel) (Case) when using w motion
   {
     "chaoren/vim-wordmotion",
+    lazy = false,
   },
 
   -- surround stuff
@@ -190,6 +192,7 @@ return {
   -- easymotion type thing
   {
     "ggandor/leap.nvim",
+    lazy = false,
     dependencies = "tpope/vim-repeat",
     config = function()
       require("config.leap")
@@ -198,6 +201,7 @@ return {
 
   {
     "ggandor/flit.nvim",
+    lazy = false,
     dependencies = "leap.nvim",
     config = function()
       require("flit").setup({
@@ -214,6 +218,7 @@ return {
 
   {
     "ggandor/leap-spooky.nvim",
+    lazy = false,
     dependencies = "leap.nvim",
     config = true,
   },
@@ -236,6 +241,8 @@ return {
   -- colorscheme based on hokusai
   {
     "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
     name = "kanagawa",
     config = function()
       require("config.kanagawa")
@@ -245,6 +252,8 @@ return {
 
   {
     "rmehri01/onenord.nvim",
+    lazy = false,
+    priority = 1000,
     name = "onenord",
     config = function()
       require("config.onenord")
@@ -265,6 +274,7 @@ return {
   -- status line
   {
     "nvim-lualine/lualine.nvim",
+    lazy = false,
     config = function()
       require("config.lualine")
     end,
@@ -273,6 +283,7 @@ return {
   -- tab bar and buffer switching
   {
     "romgrk/barbar.nvim",
+    lazy = false,
     config = function()
       require("config.barbar")
     end,
@@ -299,6 +310,7 @@ return {
   -- git in the gutter
   {
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
   },
@@ -321,6 +333,7 @@ return {
   -- shows you which key comes next
   {
     "folke/which-key.nvim",
+    lazy = false,
     config = function()
       require("config.which-key")
     end,
@@ -335,5 +348,6 @@ return {
         left = { enabled = false },
       },
     },
+    cmd = "NoNeckPain",
   },
 }
