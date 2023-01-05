@@ -37,14 +37,3 @@ require("onenord").setup({
   }, -- Overwrite default highlight groups
   custom_colors = {}, -- Overwrite default colors
 })
-
----swap two highlight groups
----@param hl_group_1 string name of highlight group
----@param hl_group_2 string name of highlight group
-local swap_highlights = function(hl_group_1, hl_group_2)
-  local hl_1 = vim.api.nvim_get_hl_by_name(hl_group_1, true)
-  local hl_2 = vim.api.nvim_get_hl_by_name(hl_group_2, true)
-
-  vim.api.nvim_set_hl(0, hl_group_1, hl_2)
-  vim.api.nvim_set_hl(0, hl_group_2, hl_1)
-end
