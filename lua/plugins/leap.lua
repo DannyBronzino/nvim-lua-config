@@ -3,7 +3,6 @@ return {
   {
     "ggandor/leap.nvim",
     dependencies = "tpope/vim-repeat",
-    event = { "WinEnter", "InsertLeave" },
     config = function()
       local leap = require("leap")
       local map = require("utils").map
@@ -66,7 +65,6 @@ return {
   {
     "ggandor/flit.nvim",
     dependencies = "leap.nvim",
-    event = { "WinEnter", "InsertLeave" },
     config = {
       keys = { f = "f", F = "F", t = "t", T = "T" },
       -- A string like "nv", "nvo", "o", etc.
@@ -81,7 +79,6 @@ return {
   {
     "ggandor/leap-spooky.nvim",
     dependencies = "leap.nvim",
-    event = { "WinEnter", "InsertLeave" },
     config = true,
   },
 }
