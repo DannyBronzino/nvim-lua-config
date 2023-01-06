@@ -23,7 +23,7 @@ require("noice").setup({
     -- NOTE: If you enable messages, then the cmdline is enabled automatically.
     -- This is a current Neovim limitation.
     enabled = true, -- enables the Noice messages UI
-    view = "popup", -- default view for messages
+    view = "mini", -- default view for messages
     view_error = "popup", -- view for errors
     view_warn = "popup", -- view for warnings
     view_history = "popup", -- view for :messages
@@ -103,11 +103,11 @@ require("noice").setup({
     },
     override = {
       -- override the default lsp markdown formatter with Noice
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       -- override the lsp markdown formatter with Noice
-      ["vim.lsp.util.stylize_markdown"] = false,
+      ["vim.lsp.util.stylize_markdown"] = true,
       -- override cmp documentation with Noice (needs the other options to work)
-      ["cmp.entry.get_documentation"] = false,
+      ["cmp.entry.get_documentation"] = true,
     },
     hover = {
       enabled = true,
@@ -227,30 +227,6 @@ require("noice").setup({
         find = "VimTeX:",
       },
       opts = { skip = true },
-    },
-    {
-      filter = {
-        event = "msg_show",
-        find = "Syntax highlighting.+Tree",
-      },
-      -- opts = { skip = true },
-      view = "mini",
-    },
-    {
-      filter = {
-        event = "msg_show",
-        kind = "",
-        find = "written",
-      },
-      view = "mini",
-    },
-    {
-      filter = {
-        event = "msg_show",
-        kind = "",
-        find = "%d+ change",
-      },
-      view = "mini",
     },
   }, --- @see section on routes
   status = {}, --- @see section on statusline components

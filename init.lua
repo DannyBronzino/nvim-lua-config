@@ -11,6 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath) -- lua sources
 
+require("globals")
+require("options")
+
 -- set leader to comma
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
@@ -36,7 +39,11 @@ require("lazy").setup({
   },
 })
 
-require("options")
-require("globals")
-require("mappings")
-require("autocmds")
+-- autocmds and keymaps can wait to load
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("autocmds")
+    require("keymaps")
+  end,
+})
