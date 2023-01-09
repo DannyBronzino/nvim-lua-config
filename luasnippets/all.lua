@@ -26,9 +26,16 @@ ls.add_snippets("all", {
 
   -- for when you fat finger the shift key
   s(
-    { trig = "(%u)(%u+%l)", regTrig = true },
+    { trig = [[(%u)(%u+%l)]], regTrig = true },
     f(function(_, snip)
       return snip.captures[1] .. string.lower(snip.captures[2])
+    end, {})
+  ),
+  -- for when you don't take your finger off the shift key on [[I'm]] fast enough
+  s(
+    { trig = [[(%w+)"(%w)]], regTrig = true },
+    f(function(_, snip)
+      return snip.captures[1] .. "'" .. snip.captures[2]
     end, {})
   ),
 }, { type = "autosnippets" })
