@@ -7,7 +7,7 @@ return {
       "MunifTanjim/nui.nvim",
       {
         "rcarriga/nvim-notify",
-        config = {
+        opts = {
           -- Render style
           render = "minimal",
           -- Animation style

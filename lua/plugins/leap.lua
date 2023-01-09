@@ -65,7 +65,7 @@ return {
   {
     "ggandor/flit.nvim",
     dependencies = "leap.nvim",
-    config = {
+    opts = {
       keys = { f = "f", F = "F", t = "t", T = "T" },
       -- A string like "nv", "nvo", "o", etc.
       labeled_modes = "nvo",

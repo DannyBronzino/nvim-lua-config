@@ -25,7 +25,7 @@ return {
   -- exit Insert mode with jj or jk or whatever
   {
     "max397574/better-escape.nvim",
-    config = {
+    opts = {
       -- lua, default settings
       mapping = { "jk", "jj" },
       -- the time in which the keys must be hit in ms. Use option timeoutlen by default
@@ -51,7 +51,7 @@ return {
   -- better quickfix window
   {
     "kevinhwang91/nvim-bqf",
-    config = {
+    opts = {
       auto_resize_height = false,
       preview = {
         auto_preview = false,
@@ -69,7 +69,7 @@ return {
   {
     "shortcuts/no-neck-pain.nvim",
     version = "*",
-    config = {
+    opts = {
       width = 15,
       buffers = {
         left = { enabled = false },
