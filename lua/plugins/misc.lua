@@ -8,10 +8,10 @@ return {
   -- allows using <tab> in Insert to jump out of brackets or quotes
   {
     "abecodes/tabout.nvim",
-    config = function()
-      require("config.tabout")
-    end,
-    -- after = "nvim-treesitter",
+    dependencies = "nvim-treesitter",
+    opts = {
+      act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+    },
     event = "InsertEnter",
   },
 
