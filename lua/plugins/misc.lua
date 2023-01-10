@@ -5,6 +5,13 @@ return {
     lazy = true,
   },
 
+  -- file manager plugin
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    config = true,
+  },
+
   -- allows using <tab> in Insert to jump out of brackets or quotes
   {
     "abecodes/tabout.nvim",
@@ -58,12 +65,6 @@ return {
       },
     },
     ft = "qf",
-  },
-
-  -- rename files in neovim
-  {
-    "elihunter173/dirbuf.nvim",
-    cmd = { "Dirbuf", "DirbufQuit", "DirbufSync" },
   },
 
   {
