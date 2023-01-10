@@ -1,7 +1,4 @@
 local map = require("utils").map
--- set leader to comma
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
 
 map("i", "<c-d>", "<Del>", { desc = "use <c-d> for <DEL> in Insert" })
 
