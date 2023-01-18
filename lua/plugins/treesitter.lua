@@ -19,7 +19,7 @@ return {
   },
 
   -- syntax highlighting, folding, and more...
-  -- doesn't always load if you make it optional (i.e. use an event)
+  -- doesn't always load if you make it optional (e.g. use an event)
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
