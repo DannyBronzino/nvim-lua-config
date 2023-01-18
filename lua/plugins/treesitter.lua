@@ -29,7 +29,7 @@ return {
     },
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline", "vim", "regex", "bash" },
+        ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline", "vim", "regex", "bash", "lua" },
         sync_install = true,
         highlight = {
           enable = true,
