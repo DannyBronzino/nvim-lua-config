@@ -91,22 +91,65 @@ return {
             filter = {
               event = "msg_show",
               kind = "",
+              find = "written",
             },
-            opts = { skip = true },
+            view = "notify",
+          },
+          -- should take care of messages from undo/redo
+          {
+            filter = {
+              event = "msg_show",
+              kind = "",
+              find = "before #",
+            },
+            view = "notify",
           },
           {
             filter = {
               event = "msg_show",
+              kind = "",
+              find = "after #",
+            },
+            view = "notify",
+          },
+          {
+            filter = {
+              event = "msg_show",
+              kind = "",
+              find = "Already at oldest change",
+            },
+            view = "notify",
+          },
+          {
+            filter = {
+              event = "msg_show",
+              kind = "",
+              find = "Already at newest change",
+            },
+            view = "notify",
+          },
+          {
+            filter = {
+              event = "msg_show",
+              kind = "",
               find = "VimTeX:",
             },
-            opts = { skip = true },
+            view = "notify",
           },
           {
             filter = {
               event = "msg_show",
+              kind = "",
               find = "Syntax highlighting",
             },
-            opts = { skip = true },
+            view = "notify",
+          },
+          {
+            filter = {
+              event = "msg_show",
+              kind = "",
+            },
+            view = "popup",
           },
         },
       })
