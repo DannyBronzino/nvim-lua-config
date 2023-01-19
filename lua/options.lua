@@ -57,8 +57,6 @@ vim.opt.listchars = { -- characters for visually representing blank space
   tab = "▸ ",
 }
 
-vim.opt.shortmess:append({ c = true, s = true, S = true }) -- eliminate incsearch messages
-
 vim.opt.shiftround = true -- round indent to multiple of shiftwidth
 
 vim.opt.virtualedit = "block" -- allows for positioning of cursor on non-character space in visualblock mode
