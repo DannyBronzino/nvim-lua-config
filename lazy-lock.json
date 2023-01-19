@@ -1,5 +1,5 @@
 {
-  "LuaSnip": { "branch": "master", "commit": "45670282dc861b51c4e028e6930c75371fe0b88f" },
+  "LuaSnip": { "branch": "master", "commit": "af60ac12fa1349dbad479fc1e95d5aea977c0c37" },
   "barbar.nvim": { "branch": "master", "commit": "c1b5d351ccd8f88fd2729b90ade2ef5d333463de" },
   "better-escape.nvim": { "branch": "master", "commit": "6fed33809cde3b416087fc540ad9eb17ec470193" },
   "catppuccin": { "branch": "main", "commit": "b17cfa01cf0517cc3614602df39e8433dc116fab" },
