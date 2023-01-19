@@ -85,6 +85,9 @@ return {
               linebreak = true,
             },
           },
+          mini = {
+            position = { row = 0, col = "100%" },
+          },
         },
         routes = {
           {
@@ -100,7 +103,7 @@ return {
               kind = "",
               find = "written",
             },
-            view = "notify",
+            view = "mini",
           },
           -- should take care of messages from undo/redo
           {
@@ -109,7 +112,7 @@ return {
               kind = "",
               find = "before #",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -117,7 +120,7 @@ return {
               kind = "",
               find = "after #",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -125,7 +128,7 @@ return {
               kind = "",
               find = "Already at oldest change",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -133,7 +136,7 @@ return {
               kind = "",
               find = "Already at newest change",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -141,7 +144,7 @@ return {
               kind = "",
               find = "VimTeX:",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -149,7 +152,7 @@ return {
               kind = "",
               find = "Syntax highlighting",
             },
-            view = "notify",
+            view = "mini",
           },
           {
             filter = {
@@ -158,12 +161,18 @@ return {
             },
             view = "popup",
           },
+          {
+            filter = {
+              find = "--No lines in buffer--",
+            },
+            view = "mini",
+          },
         },
       })
 
       local map = require("utils").map
 
-      map("c", "<S-Enter>", function()
+      map("c", "<c-o>", function()
         require("noice").redirect(vim.fn.getcmdline())
       end, { desc = "Redirect Cmdline" })
     end,
