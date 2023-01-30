@@ -47,3 +47,13 @@ vim.api.nvim_create_autocmd("User", {
     require("config.keymaps")
   end,
 })
+
+-- run after :Lazy sync
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazySync",
+  callback = function()
+    local config = vim.fn.stdpath("config")
+    os.execute(config .. "/lazycommit")
+    vim.notify("lazy-lock.json up to date!", "info")
+  end,
+})

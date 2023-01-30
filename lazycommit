@@ -1,0 +1,5 @@
+#!/bin/bash
+[[ $DEBUG ]] || exec >/dev/null 2>&1
+cd ~/.config/nvim
+git commit lazy-lock.json -m 'update lazy-lock'
+git push
