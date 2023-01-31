@@ -11,6 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath) -- lua sources
 
+-- pull latest changes
+vim.fn.system("cd " .. vim.fn.stdpath("config") .. "; git pull")
+
 require("config.globals")
 require("config.options")
 
@@ -50,10 +53,8 @@ vim.api.nvim_create_autocmd("User", {
 
 -- run after :Lazy sync
 vim.api.nvim_create_autocmd("User", {
-  pattern = "LazySync",
+  pattern = { "LazySync", "LazyInstall", "LazyUpdate", "LazyClean" },
   callback = function()
-    local config = vim.fn.stdpath("config")
-    os.execute(config .. "/lazycommit")
-    vim.notify("lazy-lock.json up to date!", "info")
+    vim.fn.system("cd " .. vim.fn.stdpath("config") .. "; git commit 'lazy-lock.json' -m 'update lazy lock'; git push")
   end,
 })
