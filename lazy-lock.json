@@ -43,6 +43,5 @@
   "vim-matchup": { "branch": "master", "commit": "959e0e79ea240cdee29efbdd0d2e2e718931ccec" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-wordmotion": { "branch": "master", "commit": "5dd613ed68a0ecf0fc6c11cd4098c03583786bf0" },
-  "vimtex": { "branch": "master", "commit": "b8607084b324ab0c98892ca20f78433904aecef5" },
-  "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" }
+  "vimtex": { "branch": "master", "commit": "b8607084b324ab0c98892ca20f78433904aecef5" }
 }
