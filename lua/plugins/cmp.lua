@@ -103,9 +103,10 @@ return {
         },
       })
 
-      cmp.setup.filetype("tex", {
+      cmp.setup.filetype({ "tex", "bib" }, {
         sources = {
-          { name = "omni" },
+          { name = "nvim_lsp" },
+          -- { name = "omni" },
           { name = "luasnip" }, -- for luasnip
           { name = "buffer", keyword_length = 2 },
           { name = "path" }, -- for path completion
@@ -130,11 +131,11 @@ return {
     end,
   },
 
-  { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
 
   { "dmitmel/cmp-digraphs", event = "InsertEnter", enabled = false },
 
-  { "hrsh7th/cmp-omni", event = "InsertEnter" },
+  { "hrsh7th/cmp-omni", event = "InsertEnter", enaabled = false },
 
   { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdLineEnter" } },
 
