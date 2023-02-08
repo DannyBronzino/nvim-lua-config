@@ -9,11 +9,12 @@ return {
     config = function()
       local luasnip = require("luasnip")
       local map = require("utils").map
+
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my_snippets" } })
       require("luasnip.loaders.from_lua").lazy_load()
 
-      luasnip.filetype_extend("bib", { "tex" })
+      luasnip.filetype_extend("bibtex", { "latex" })
 
       luasnip.config.set_config({ enable_autosnippets = true })
 
@@ -103,7 +104,7 @@ return {
         },
       })
 
-      cmp.setup.filetype({ "tex", "bib" }, {
+      cmp.setup.filetype({ "latex", "bibtex" }, {
         sources = {
           { name = "nvim_lsp" },
           -- { name = "omni" },

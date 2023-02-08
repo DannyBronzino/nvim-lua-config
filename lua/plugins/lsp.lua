@@ -16,7 +16,7 @@ return {
         show_help = 0,
       }
     end,
-    ft = { "tex", "bib" },
+    ft = { "latex", "bibtex" },
     enabled = false,
   },
 
@@ -154,7 +154,7 @@ return {
       lspconfig.texlab.setup({
         capabilities = cmpabilities,
         on_attach = on_attach,
-        filetypes = { "tex", "bib" },
+        filetypes = { "latex", "bibtex" },
         settings = {
           texlab = {
             chktex = {
@@ -168,7 +168,7 @@ return {
       lspconfig.ltex.setup({
         -- capabilities = cmpabilities,
         on_attach = on_attach,
-        filetypes = { "tex", "bib" },
+        filetypes = { "latex", "bibtex" },
         settings = {
           ltex = {
             additionalRules = {
@@ -180,6 +180,6 @@ return {
         },
       })
     end,
-    ft = { "tex", "bib" },
+    ft = { "latex", "bibtex" },
   },
 }

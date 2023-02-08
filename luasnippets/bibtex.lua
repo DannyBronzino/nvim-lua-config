@@ -16,14 +16,14 @@ local m = require("luasnip.extras").m
 local lambda = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
 
-ls.add_snippets("bib", {
+ls.add_snippets("bibtex", {
   s({
     trig = "misc",
     name = "Miscellaneous Reference",
   }, {
     t("@misc{"),
     i(1, "citekey"),
-    t({ "", "" }),
+    t({ ",", "" }),
     t("\tauthor={"),
     i(2, "author"),
     t({ "},", "" }),
