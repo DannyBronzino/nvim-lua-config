@@ -84,6 +84,7 @@ return {
       -- let treesitter handle folding
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldenable = false -- turn off initial folding
     end,
 
     -- first run this will throw an error you can ignore
