@@ -56,7 +56,7 @@ return {
           action = Paranormal,
           multiselect = true,
         })
-      end)
+      end, { desc = "paranormal leap" })
 
       leap.add_default_mappings()
     end,
