@@ -92,7 +92,7 @@ return {
 
       local map = require("utils").map
 
-      map("c", "<c-o", function()
+      map("c", "<c-o>", function()
         require("noice").redirect(vim.fn.getcmdline())
       end, { desc = "Redirect Cmdline" })
     end,
