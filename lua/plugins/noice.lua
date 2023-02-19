@@ -3,13 +3,12 @@ return {
     "folke/noice.nvim",
     lazy = false,
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
       {
         "rcarriga/nvim-notify",
         opts = {
           -- Render style
-          render = "minimal",
+          render = "compact",
           -- Animation style
           stages = "slide",
           -- Default timeout for notifications
@@ -89,90 +88,11 @@ return {
             position = { row = 0, col = "100%" },
           },
         },
-        routes = {
-          {
-            filter = {
-              event = "msg_show",
-              kind = "search_count",
-            },
-            opts = { skip = true },
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "written",
-            },
-            view = "mini",
-          },
-          -- should take care of messages from undo/redo
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "before #",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "after #",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "Already at oldest change",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "Already at newest change",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "VimTeX:",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-              find = "Syntax highlighting",
-            },
-            view = "mini",
-          },
-          {
-            filter = {
-              event = "msg_show",
-              kind = "",
-            },
-            view = "popup",
-          },
-          {
-            filter = {
-              find = "--No lines in buffer--",
-            },
-            view = "mini",
-          },
-        },
       })
 
       local map = require("utils").map
 
-      map("c", "<c-o>", function()
+      map("c", "<c-o", function()
         require("noice").redirect(vim.fn.getcmdline())
       end, { desc = "Redirect Cmdline" })
     end,
