@@ -16,7 +16,7 @@ vim.api.nvim_create_user_command("SyncLazy", function()
   -- pull latest changes
   vim.fn.system("cd " .. vim.fn.stdpath("config") .. "; git pull")
   require("lazy").sync()
-end, {})
+end, { desc = "pulls changes from nvim config repo before running Lazy sync" })
 
 require("config.globals")
 require("config.options")
