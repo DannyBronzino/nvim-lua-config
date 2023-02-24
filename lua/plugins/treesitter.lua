@@ -54,7 +54,7 @@ return {
         },
         textobjects = {
           move = {
-            enable = false,
+            enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]]"] = "@class.outer", -- move to chapter/section in latex
