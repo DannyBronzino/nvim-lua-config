@@ -11,8 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath) -- lua sources
 
--- pull latest changes
-vim.fn.system("cd " .. vim.fn.stdpath("config") .. "; git pull")
+-- pulls this repo before syncing
+vim.api.nvim_create_user_command("SyncLazy", function()
+  -- pull latest changes
+  vim.fn.system("cd " .. vim.fn.stdpath("config") .. "; git pull")
+  require("lazy").sync()
+end, {})
 
 require("config.globals")
 require("config.options")
