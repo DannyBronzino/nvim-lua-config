@@ -12,9 +12,6 @@ map({ "n", "x" }, "L", "g$", { desc = "move to end of wrapped line" })
 
 map("n", "Y", "y$", { desc = "yank until end of line" })
 
-map("n", "<tab>", ">>", { desc = "use <tab> to indent in normal mode" })
-map("n", "<s-tab>", "<<", { desc = "use <s-tab> to dedent in normal mode" })
-
 map("x", "<tab>", ">gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 map("x", "<s-tab>", "<gv", { desc = "continuous visual shifting (does not exit Visual mode)" })
 
