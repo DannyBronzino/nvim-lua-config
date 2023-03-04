@@ -136,7 +136,7 @@ return {
 
   { "dmitmel/cmp-digraphs", event = "InsertEnter", enabled = false },
 
-  { "hrsh7th/cmp-omni", event = "InsertEnter", enaabled = false },
+  { "hrsh7th/cmp-omni", event = "InsertEnter", enabled = false },
 
   { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdLineEnter" } },
 
