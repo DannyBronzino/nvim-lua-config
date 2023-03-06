@@ -27,6 +27,12 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "barreiroleo/ltex_extra.nvim",
+      {
+        "onsails/diaglist.nvim",
+        config = function()
+          require("diaglist").init()
+        end,
+      },
     },
     config = function()
       require("mason").setup()
@@ -121,7 +127,8 @@ return {
         end, { desc = "show cursor diagnostics" })
 
         buf_map("n", "<space>d", function()
-          fzf.diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
+          -- fzf.diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
+          require("diaglist").open_all_diagnostics()
         end, { desc = "show buffer diagnostics" })
 
         buf_map("n", "gn", function()
