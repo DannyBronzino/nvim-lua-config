@@ -75,7 +75,7 @@ return {
       })
 
       -- override bibtex query
-      require("vim.treesitter.query").set_query(
+      require("vim.treesitter.query").set(
         "bibtex",
         "textobjects",
         "(entry) @class.outer (field) @statement.outer"
