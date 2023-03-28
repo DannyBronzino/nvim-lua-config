@@ -33,6 +33,7 @@
   "nvim-hlslens": { "branch": "main", "commit": "5e3e9088fba7508cee3612ee50b14dfdd3ab19af" },
   "nvim-lspconfig": { "branch": "master", "commit": "c5505c70571b094663745167d40388edd40f6450" },
   "nvim-notify": { "branch": "master", "commit": "50d037041ada0895aeba4c0215cde6d11b7729c4" },
+  "nvim-spider": { "branch": "main", "commit": "bad0b16588541f3616930bcabdc169c7ced9b372" },
   "nvim-surround": { "branch": "main", "commit": "50f667861fac75592fc9e482472c12672e1cd723" },
   "nvim-treesitter": { "branch": "master", "commit": "5a7a2ad172bcc40c53aa274dff05aacb5074b509" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "b55fe6175f0001347a433c9df358c8cbf8a4e90f" },
@@ -43,6 +44,5 @@
   "tabout.nvim": { "branch": "master", "commit": "c37ce26f316a2df693140450b8def41e89c0f57e" },
   "vim-matchup": { "branch": "master", "commit": "156367e4cbd123bc9a70eeabeaa16f7cf9239e12" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
   "which-key.nvim": { "branch": "main", "commit": "4b73390eec680b4c061ea175eb32c0ff3412271d" }
 }
