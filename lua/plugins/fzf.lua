@@ -685,6 +685,10 @@ return {
         fzf.help_tags()
       end, { desc = "show help tags with fzf" })
 
+      map("n", "<leader>o", function()
+        fzf.oldfiles()
+      end, { desc = "show old files with fzf" })
+
       require("fzf-lua").register_ui_select()
     end,
   },
