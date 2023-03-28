@@ -3,10 +3,12 @@ return {
   {
     "echasnovski/mini.nvim",
     lazy = false,
+    version = false,
     config = function()
       require("mini.ai").setup({}) -- adds more textobjects
       require("mini.misc").setup({}) -- miscellaneous functions
       require("mini.misc").setup_restore_cursor()
+      require("mini.move").setup({})
       -- require("mini.animate").setup({}) -- animations
       require("mini.trailspace").setup({}) -- identify and remove trailing spaces
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
