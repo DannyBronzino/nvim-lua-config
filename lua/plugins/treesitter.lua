@@ -75,11 +75,7 @@ return {
       })
 
       -- override bibtex query
-      require("vim.treesitter.query").set(
-        "bibtex",
-        "textobjects",
-        "(entry) @class.outer (field) @statement.outer"
-      )
+      require("vim.treesitter.query").set("bibtex", "textobjects", "(entry) @class.outer (field) @statement.outer")
 
       -- let treesitter handle folding
       vim.opt.foldmethod = "expr"
