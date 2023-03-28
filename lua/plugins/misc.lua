@@ -20,6 +20,7 @@ return {
       act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
     },
     event = "InsertEnter",
+    enabled = false,
   },
 
   -- divides words into smaller chunks
