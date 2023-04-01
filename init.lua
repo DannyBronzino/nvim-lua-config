@@ -26,10 +26,14 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 require("lazy").setup({
+  version = "*",
   spec = {
     { import = "plugins" },
   },
-  install = { colorscheme = { "catppuccin", "habamax" } },
+  install = {
+    missing = false, -- prevents lock-file from being inadvertently changed
+    colorscheme = { "catppuccin", "habamax" },
+  },
   performance = {
     rtp = {
       disabled_plugins = {
