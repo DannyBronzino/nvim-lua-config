@@ -28,6 +28,41 @@ return {
   {
     "chaoren/vim-wordmotion",
     lazy = false,
+    enabled = false,
+  },
+
+  {
+    "chrisgrieser/nvim-spider",
+    lazy = true,
+    config = {
+      skipInsignificantPunctuation = false,
+    },
+    keys = {
+      {
+        "w",
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "x", "o" },
+        desc = "Spider-w",
+      },
+      {
+        "b",
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { "n", "x", "o" },
+        desc = "Spider-b",
+      },
+      {
+        "e",
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { "n", "x", "o" },
+        desc = "Spider-e",
+      },
+      {
+        "ge",
+        "<cmd>lua require('spider').motion('ge')<CR>",
+        mode = { "n", "x", "o" },
+        desc = "Spider-ge",
+      },
+    },
   },
 
   -- exit Insert mode with jj or jk or whatever
