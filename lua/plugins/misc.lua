@@ -34,7 +34,7 @@ return {
   {
     "chrisgrieser/nvim-spider",
     lazy = true,
-    config = {
+    opts = {
       skipInsignificantPunctuation = false,
     },
     keys = {
