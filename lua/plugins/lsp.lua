@@ -166,7 +166,7 @@ return {
           texlab = {
             chktex = {
               onEdit = false,
-              onOpenAndSave = true,
+              onOpenAndSave = false,
             },
           },
         },
