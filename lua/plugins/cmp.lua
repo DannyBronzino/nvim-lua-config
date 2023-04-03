@@ -111,6 +111,12 @@ return {
           { name = "luasnip" }, -- for luasnip
           { name = "buffer", keyword_length = 2 },
           { name = "path" }, -- for path completion
+          {
+            name = "latex_symbols",
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
           -- { name = "digraphs" }, -- accented characters and the like that are inputed with <c-k>
         },
       })
@@ -136,7 +142,7 @@ return {
 
   { "dmitmel/cmp-digraphs", event = "InsertEnter", enabled = false },
 
-  { "hrsh7th/cmp-omni", event = "InsertEnter", enabled = false },
+  { "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
 
   { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdLineEnter" } },
 
