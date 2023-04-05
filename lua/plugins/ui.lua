@@ -1,4 +1,23 @@
+vim.api.nvim_create_autocmd("Colorscheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "BufferTabPageFill", {})
+  end,
+})
+
 return {
+  -- a vivid dark theme
+  {
+    "ray-x/aurora",
+    lazy = true,
+    config = function()
+      vim.g.aurora_italic = 1
+      vim.g.aurora_transparent = 1
+      vim.g.aurora_bold = 1
+      vim.g.aurora_darker = 0
+    end,
+  },
+
   -- colorscheme based on hokusai
   {
     "rebelot/kanagawa.nvim",
