@@ -62,18 +62,16 @@ return {
             },
           },
           move = {
-            enable = true,
+            enable = false,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]]"] = "@class.outer", -- move to chapter/section in latex
-              ["]s"] = "@statement.outer", -- move to commands
             },
             goto_next_end = {
               ["]["] = "@class.outer",
             },
             goto_previous_start = {
               ["[["] = "@class.outer",
-              ["[s"] = "@statement.outer",
             },
             goto_previous_end = {
               ["[]"] = "@class.outer",
