@@ -22,7 +22,7 @@ return {
           percentage = 0.15,
         },
         transparent_background = true,
-        term_colors = false,
+        term_colors = true,
         compile = {
           enabled = true,
           path = vim.fn.stdpath("cache") .. "/catppuccin",
@@ -65,6 +65,9 @@ return {
           markdown = true,
           notify = true,
           which_key = true,
+          mason = true,
+          noice = true,
+          mini = true,
         },
         color_overrides = {},
         custom_highlights = {
@@ -79,7 +82,7 @@ return {
           DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
           DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
           DiagnosticUnderlineInfo = { fg = Palette.rosewater, italic = true, bold = true },
-          MiniTrailspace = { bg = Palette.red },
+          -- MiniTrailspace = { bg = Palette.red },
         },
       })
       vim.cmd([[colorscheme catppuccin]])
