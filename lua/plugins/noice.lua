@@ -54,12 +54,12 @@ return {
           },
           popup = {
             position = {
-              row = "100%",
-              col = 0,
+              row = "90%",
+              col = "50%",
             },
             size = {
-              width = "99%",
-              height = "50%",
+              width = "95%",
+              height = "40%",
             },
           },
           hover = {
@@ -94,6 +94,8 @@ return {
 
       map("c", "<c-o>", function()
         require("noice").redirect(vim.fn.getcmdline())
+        local key = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+        vim.api.nvim_feedkeys(key, "n", true)
       end, { desc = "Redirect Cmdline" })
     end,
   },
