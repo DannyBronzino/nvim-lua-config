@@ -2,6 +2,7 @@ return {
   -- shows you which key comes next
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     lazy = false,
     config = function()
       vim.opt.timeoutlen = 1000 -- timeout before which-key appears
