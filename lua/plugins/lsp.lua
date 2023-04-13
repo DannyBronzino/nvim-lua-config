@@ -131,13 +131,13 @@ return {
           require("diaglist").open_all_diagnostics()
         end, { desc = "show buffer diagnostics" })
 
-        buf_map("n", "gn", function()
-          vim.diagnostic.goto_next()
-        end, { desc = "next diagnostic" })
+        -- buf_map("n", "gn", function()
+        -- vim.diagnostic.goto_next()
+        -- end, { desc = "next diagnostic" })
 
-        buf_map("n", "gp", function()
-          vim.diagnostic.goto_prev()
-        end, { desc = "previous diagnostic" })
+        -- buf_map("n", "gp", function()
+        -- vim.diagnostic.goto_prev()
+        -- end, { desc = "previous diagnostic" })
 
         if abilities.documentFormattingProvider then
           buf_map("n", "<Space>f", function()
