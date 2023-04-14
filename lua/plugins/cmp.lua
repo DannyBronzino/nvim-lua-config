@@ -81,6 +81,13 @@ return {
         sources = cmp.config.sources({
           { name = "path" }, -- for path completion
           { name = "buffer", keyword_length = 2 },
+          { name = "luasnip" }, -- for luasnip
+          {
+            name = "latex_symbols",
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
         }),
         completion = {
           completeopt = "menu,noselect",
