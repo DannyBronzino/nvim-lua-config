@@ -241,7 +241,7 @@ return {
             extensions = {
               -- neovim terminal only supports `viu` block output
               ["png"] = { "viu", "-b" },
-              ["jpg"] = { "ueberzug" },
+              ["jpg"] = { "viu", "-b" },
             },
             -- if using `ueberzug` in the above extensions map
             -- set the default image scaler, possible scalers:
