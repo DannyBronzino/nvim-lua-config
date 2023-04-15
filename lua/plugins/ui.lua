@@ -71,18 +71,13 @@ return {
         },
         color_overrides = {},
         custom_highlights = {
-          -- WhichKeyValue = { fg = Palette.rosewater },
-          -- WhichKeyDesc = { fg = Palette.flamingo },
-          -- Visual = { fg = colors.surface0, bg = colors.maroon },
           Comment = { fg = Palette.subtext0 },
-          -- LeapLabelPrimary = { bg = "none", fg = Palette.pink, bold = true },
-          -- LeapMatch = { fg = Palette.teal, bg = "none", bold = true },
           LineNr = { fg = Palette.overlay2 },
           DiagnosticUnderlineError = { fg = Palette.rosewater, italic = true, bold = true },
           DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
           DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
           DiagnosticUnderlineInfo = { fg = Palette.rosewater, italic = true, bold = true },
-          -- MiniTrailspace = { bg = Palette.red },
+          String = { fg = Palette.rosewater },
         },
       })
       vim.cmd([[colorscheme catppuccin]])
