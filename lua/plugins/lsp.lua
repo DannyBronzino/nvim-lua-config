@@ -22,10 +22,28 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    ft = { "latex", "bibtex" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      {
+        "williamboman/mason.nvim",
+        config = true,
+      },
+      {
+        "williamboman/mason-lspconfig.nvim",
+        config = true,
+      },
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = {
+          ensure_installed = {
+            "texlab",
+            "ltex-ls",
+          },
+          auto_update = true,
+          run_on_start = true,
+          start_delay = 0,
+        },
+      },
       "barreiroleo/ltex_extra.nvim",
       {
         "onsails/diaglist.nvim",
@@ -35,18 +53,6 @@ return {
       },
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
-      require("mason-tool-installer").setup({
-        ensure_installed = {
-          "texlab",
-          "ltex-ls",
-        },
-        auto_update = true,
-        run_on_start = true,
-        start_delay = 0,
-      })
-
       vim.diagnostic.config({
         virtual_text = false,
         float = {
@@ -58,15 +64,6 @@ return {
 
       local on_attach = function(client, bufnr)
         local abilities = client.server_capabilities
-
-        if client.name == "ltex" then
-          require("ltex_extra").setup({
-            load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
-            init_check = true, -- boolean : whether to load dictionaries on startup
-            path = nil, -- string : path to store dictionaries. Relative path uses current working directory
-            log_level = "none", -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
-          })
-        end
 
         local buf_map = function(mode, left_hand_side, right_hand_side, opts)
           opts.buffer = bufnr
@@ -167,21 +164,38 @@ return {
         },
       })
 
-      lspconfig.ltex.setup({
-        -- capabilities = cmpabilities,
-        on_attach = on_attach,
-        filetypes = { "latex", "bibtex" },
-        settings = {
-          ltex = {
-            additionalRules = {
-              enablePickyRules = false,
-              motherTongue = "en-US",
+      require("ltex_extra").setup({
+        load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
+        init_check = true, -- boolean : whether to load dictionaries on startup
+        path = ".ltex", -- string : path to store dictionaries. Relative path uses current working directory
+        server_opts = {
+          on_attach = on_attach,
+          filetypes = { "latex", "bibtex" },
+          settings = {
+            ltex = {
+              additionalRules = {
+                enablePickyRules = false,
+                motherTongue = "en-US",
+              },
             },
-            -- checkFrequency = "save",
           },
         },
       })
+
+      -- lspconfig.ltex.setup({
+      -- -- capabilities = cmpabilities,
+      -- on_attach = on_attach,
+      -- filetypes = { "latex", "bibtex" },
+      -- settings = {
+      -- ltex = {
+      -- additionalRules = {
+      -- enablePickyRules = false,
+      -- motherTongue = "en-US",
+      -- },
+      -- -- checkFrequency = "save",
+      -- },
+      -- },
+      -- })
     end,
-    ft = { "latex", "bibtex" },
   },
 }
