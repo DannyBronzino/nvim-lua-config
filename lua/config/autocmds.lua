@@ -1,13 +1,13 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
--- autocmd({ "BufEnter" }, {
--- pattern = "*",
--- callback = function()
--- vim.cmd("silent! lcd %:p:h")
--- end,
--- desc = "set window-local directory to file location",
--- })
+autocmd({ "BufEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent! lcd %:p:h")
+  end,
+  desc = "set window-local directory to file location",
+})
 
 -- set numbers to relative when in Normal mode, absolute when in Insert
 local number_toggle = augroup("number_toggle", { clear = true })
