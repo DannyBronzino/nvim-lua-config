@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   {
     "ibhagwan/fzf-lua",
@@ -646,8 +648,6 @@ return {
           fzf.files(opts)
         end
       end
-
-      local map = require("utils").map
 
       map("n", "<leader>ff", function()
         files_git_or_cwd()

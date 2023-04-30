@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   -- easymotion type thing
   {
@@ -5,7 +7,6 @@ return {
     dependencies = "tpope/vim-repeat",
     config = function()
       local leap = require("leap")
-      local map = require("utils").map
 
       map("n", "gs", function()
         leap.leap({

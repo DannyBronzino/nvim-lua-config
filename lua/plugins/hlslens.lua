@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   -- Show match number and index for search
   {
@@ -22,8 +24,6 @@ return {
         end
         hlslens.start()
       end
-
-      local map = require("utils").map
 
       map("n", "n", "", {
         noremap = true,

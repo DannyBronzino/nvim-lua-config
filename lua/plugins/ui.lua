@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 vim.api.nvim_create_autocmd("Colorscheme", {
   pattern = "*",
   callback = function()
@@ -177,8 +179,6 @@ return {
     enabled = false,
     lazy = false,
     config = function()
-      local map = require("utils").map
-
       -- Move to previous/next
       map("n", "<A-,>", ":BufferPrevious<CR>")
       map("n", "<A-.>", ":BufferNext<CR>")

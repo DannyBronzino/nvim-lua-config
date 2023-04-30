@@ -1,10 +1,10 @@
+local map = require("utils").map
+
 return {
   -- vimtex, for latex editing
   {
     "lervag/vimtex",
     config = function()
-      local map = require("utils").map
-
       -- open LaTeX documentation in browser
       map("n", "<c-k>", [[<plug>(vimtex-doc-package)]])
 

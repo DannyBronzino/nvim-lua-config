@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   {
     "folke/noice.nvim",
@@ -89,8 +91,6 @@ return {
           },
         },
       })
-
-      local map = require("utils").map
 
       map("c", "<c-o>", function()
         require("noice").redirect(vim.fn.getcmdline())

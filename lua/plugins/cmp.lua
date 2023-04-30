@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   -- snippet engine
   {
@@ -8,7 +10,6 @@ return {
     },
     config = function()
       local luasnip = require("luasnip")
-      local map = require("utils").map
 
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my_snippets" } })
