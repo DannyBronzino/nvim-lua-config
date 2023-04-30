@@ -105,6 +105,7 @@ return {
               nvim_lsp = "[LSP]",
               path = "[Path]",
               buffer = "[Buffer]",
+              latex_symbols = "[Symbol]",
               -- digraphs = "[Digraphs]",
             },
           }),
