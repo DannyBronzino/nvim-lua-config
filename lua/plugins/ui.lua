@@ -68,6 +68,11 @@ return {
           mason = true,
           noice = true,
           mini = true,
+          barbecue = {
+            dim_dirname = true,
+            bold_basename = true,
+            dim_context = false,
+          },
         },
         color_overrides = {},
         custom_highlights = {
@@ -116,15 +121,25 @@ return {
           globalstatus = true,
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = {
+            {
+              "mode",
+              -- fmt = function(str)
+              -- return str:sub(1, 1)
+              -- end,
+            },
+          },
           lualine_b = {
             { "b:gitsigns_head", icon = "" },
             { "diff", source = diff_source },
           },
-          lualine_c = { "filename" },
+          lualine_c = {},
           lualine_x = {
             { get_words },
-            "filetype",
+            {
+              "filetype",
+              icon_only = true,
+            },
           },
           lualine_y = {
             {
@@ -144,7 +159,9 @@ return {
           lualine_y = {},
           lualine_z = {},
         },
-        tabline = {},
+        tabline = {
+          lualine_c = { "buffers" },
+        },
         winbar = {},
         extensions = {
           "quickfix",
@@ -157,6 +174,7 @@ return {
   -- tab bar and buffer switching
   {
     "romgrk/barbar.nvim",
+    enabled = false,
     lazy = false,
     config = function()
       local map = require("utils").map
@@ -199,5 +217,19 @@ return {
       -- Set barbar's options
       require("bufferline").setup()
     end,
+  },
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+    },
+    opts = {
+      theme = "catppuccin",
+      show_dirname = false,
+      show_basename = false,
+    },
   },
 }
