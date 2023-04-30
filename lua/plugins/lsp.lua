@@ -174,7 +174,7 @@ return {
           settings = {
             ltex = {
               additionalRules = {
-                enablePickyRules = false,
+                enablePickyRules = true,
                 motherTongue = "en-US",
               },
             },
