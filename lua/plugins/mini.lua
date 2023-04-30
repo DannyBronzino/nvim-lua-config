@@ -1,3 +1,5 @@
+local map = require("utils").map
+
 return {
   -- swiss army knife
   {
@@ -12,6 +14,7 @@ return {
       require("mini.bracketed").setup()
       -- require("mini.animate").setup({}) -- animations
       require("mini.trailspace").setup() -- identify and remove trailing spaces
+
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = "*",
         group = vim.api.nvim_create_augroup("MiniTrailSpace", { clear = true }),
@@ -21,6 +24,12 @@ return {
         end,
         desc = "trim empty spaces and lines",
       })
+
+      require("mini.bufremove").setup({})
+
+      map("n", "<a-c>", function()
+        require("mini.bufremove").delete()
+      end, { desc = "delete buffer" })
     end,
   },
 }
