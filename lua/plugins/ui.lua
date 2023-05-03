@@ -114,7 +114,7 @@ return {
 
       require("lualine").setup({
         options = {
-          icons_enabled = false,
+          icons_enabled = true,
           theme = "catppuccin",
           section_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
@@ -161,10 +161,6 @@ return {
           lualine_y = {},
           lualine_z = {},
         },
-        tabline = {
-          lualine_c = { "buffers" },
-        },
-        winbar = {},
         extensions = {
           "quickfix",
           "fzf",
@@ -176,7 +172,6 @@ return {
   -- tab bar and buffer switching
   {
     "romgrk/barbar.nvim",
-    enabled = false,
     lazy = false,
     config = function()
       -- Move to previous/next
