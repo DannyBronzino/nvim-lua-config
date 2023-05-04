@@ -681,7 +681,7 @@ return {
         fzf.marks()
       end, { desc = "show marks with fzf" })
 
-      map("n", "<space>h", function()
+      map("n", "<leader>h", function()
         fzf.help_tags()
       end, { desc = "show help tags with fzf" })
 
