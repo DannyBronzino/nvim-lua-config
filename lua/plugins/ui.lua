@@ -175,42 +175,38 @@ return {
     lazy = false,
     config = function()
       -- Move to previous/next
-      map("n", "<A-,>", ":BufferPrevious<CR>")
-      map("n", "<A-.>", ":BufferNext<CR>")
+      map("n", "<A-,>", "<cmd>BufferPrevious<CR>")
+      map("n", "<A-.>", "<cmd>BufferNext<CR>")
       -- nostalgic combo
-      map("n", "gB", ":BufferPrevious<CR>")
-      map("n", "gb", ":BufferNext<CR>")
+      map("n", "gB", "<cmd>BufferPrevious<CR>")
+      map("n", "gb", "<cmd>BufferNext<CR>")
       -- Re-order to previous/next
-      map("n", "<A-<>", ":BufferMovePrevious<CR>")
-      map("n", "<A->>", " :BufferMoveNext<CR>")
+      map("n", "<A-<>", "<cmd>BufferMovePrevious<CR>")
+      map("n", "<A->>", " <cmd>BufferMoveNext<CR>")
+      -- Pin/unpin buffer
+      map("n", "<A-p>", "<Cmd>BufferPin<CR>")
+      -- buffer picker
+      map("n", "<C-p>", "<Cmd>BufferPick<CR>")
       -- Goto buffer in position...
-      map("n", "<A-1>", ":BufferGoto 1<CR>")
-      map("n", "<A-2>", ":BufferGoto 2<CR>")
-      map("n", "<A-3>", ":BufferGoto 3<CR>")
-      map("n", "<A-4>", ":BufferGoto 4<CR>")
-      map("n", "<A-5>", ":BufferGoto 5<CR>")
-      map("n", "<A-6>", ":BufferGoto 6<CR>")
-      map("n", "<A-7>", ":BufferGoto 7<CR>")
-      map("n", "<A-8>", ":BufferGoto 8<CR>")
-      map("n", "<A-9>", ":BufferGoto 9<CR>")
-      map("n", "<A-0>", ":BufferLast<CR>")
+      map("n", "<A-1>", "<cmd>BufferGoto 1<CR>")
+      map("n", "<A-2>", "<cmd>BufferGoto 2<CR>")
+      map("n", "<A-3>", "<cmd>BufferGoto 3<CR>")
+      map("n", "<A-4>", "<cmd>BufferGoto 4<CR>")
+      map("n", "<A-5>", "<cmd>BufferGoto 5<CR>")
+      map("n", "<A-6>", "<cmd>BufferGoto 6<CR>")
+      map("n", "<A-7>", "<cmd>BufferGoto 7<CR>")
+      map("n", "<A-8>", "<cmd>BufferGoto 8<CR>")
+      map("n", "<A-9>", "<cmd>BufferGoto 9<CR>")
+      map("n", "<A-0>", "<cmd>BufferLast<CR>")
       -- Close buffer
-      map("n", "<A-c>", ":BufferClose<CR>")
-      -- Wipeout buffer
-      --                 :BufferWipeout<CR>
-      -- Close commands
-      --                 :BufferCloseAllButCurrent<CR>
-      --                 :BufferCloseBuffersLeft<CR>
-      --                 :BufferCloseBuffersRight<CR>
-      -- Magic buffer-picking mode
-      -- map("n", "<C-p>", ":BufferPick<CR>")
-      -- Sort automatically by...
-      map("n", "<Space>bb", ":BufferOrderByBufferNumber<CR>")
-      map("n", "<Space>bd", ":BufferOrderByDirectory<CR>")
-      map("n", "<Space>bl", ":BufferOrderByLanguage<CR>")
+      map("n", "<A-c>", "<cmd>BufferClose<CR>")
 
       -- Set barbar's options
-      require("bufferline").setup()
+      require("bufferline").setup({
+        icons = {
+          button = "",
+        },
+      })
     end,
   },
 
