@@ -1,6 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "b4bc24c4925aeb05fd47d2ee9b24b7f73f5d7e32" },
-  "barbar.nvim": { "branch": "master", "commit": "de10307c2d49a1b567adc020448dbeac3f667bb0" },
+  "barbar.nvim": { "branch": "master", "commit": "4c549cd9ac30f0338e82d6b6582071412c4e3bd8" },
   "barbecue": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
   "better-escape.nvim": { "branch": "master", "commit": "7031dc734add47bb71c010e0551829fa5799375f" },
   "catppuccin": { "branch": "main", "commit": "b2f566d43e04557b1b83065cae706d461de04e66" },
