@@ -45,6 +45,6 @@
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "vim-matchup": { "branch": "master", "commit": "6c8909b682803d8c3a054259079f158a73a0e30f" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "which-key.nvim": { "branch": "main", "commit": "015fdf3e3e052d4a9fee997ca0aa387c2dd3731c" },
+  "which-key.nvim": { "branch": "main", "commit": "5a6c954a5a46023c19acc03a8b6d7c3e57964fc5" },
   "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" }
 }
