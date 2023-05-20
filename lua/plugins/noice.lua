@@ -20,9 +20,6 @@ return {
     },
     config = function()
       require("noice").setup({
-        popupmenu = {
-          backend = "cmp",
-        },
         commands = {
           history = {
             -- options for the message history that you get with `:Noice`
