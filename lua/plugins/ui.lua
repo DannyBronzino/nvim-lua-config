@@ -224,4 +224,152 @@ return {
       show_basename = false,
     },
   },
+
+  {
+    "folke/noice.nvim",
+    lazy = false,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          -- Render style
+          render = "compact",
+          -- Animation style
+          stages = "slide",
+          -- Default timeout for notifications
+          timeout = 300,
+        },
+      },
+    },
+    config = function()
+      require("noice").setup({
+        cmdline = {
+          enabled = false,
+        },
+        popupmenu = {
+          backend = "cmp",
+        },
+        commands = {
+          history = {
+            -- options for the message history that you get with `:Noice`
+            view = "popup",
+            opts = { wrap = true, enter = true, format = "details" },
+          },
+        },
+        lsp = {
+          progress = {
+            enabled = false,
+          },
+          override = {
+            -- override the default lsp markdown formatter with Noice
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            -- override the lsp markdown formatter with Noice
+            ["vim.lsp.util.stylize_markdown"] = true,
+            -- override cmp documentation with Noice (needs the other options to work)
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        views = {
+          cmdline_popup = {
+            position = {
+              row = 0,
+              col = "100%",
+            },
+            size = {
+              width = "auto",
+              height = "auto",
+            },
+          },
+          popup = {
+            position = {
+              row = "90%",
+              col = "50%",
+            },
+            size = {
+              width = "95%",
+              height = "40%",
+            },
+          },
+          hover = {
+            view = "popup",
+            relative = "cursor",
+            zindex = 45,
+            enter = false,
+            anchor = "auto",
+            size = {
+              width = "auto",
+              height = "auto",
+              max_width = 60,
+              max_height = 20,
+            },
+            border = {
+              style = "rounded",
+              padding = { 0, 0 },
+            },
+            position = { row = 2, col = 2 },
+            win_options = {
+              wrap = true,
+              linebreak = true,
+            },
+          },
+          mini = {
+            position = { row = 0, col = "100%" },
+          },
+        },
+      })
+
+      map("c", "<c-o>", function()
+        require("noice").redirect(vim.fn.getcmdline())
+        local key = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+        vim.api.nvim_feedkeys(key, "n", true)
+      end, { desc = "Redirect Cmdline" })
+    end,
+  },
+
+  {
+    "gelguy/wilder.nvim",
+    dependencies = "romgrk/fzy-lua-native",
+    config = function()
+      local wilder = require("wilder")
+      wilder.setup({ modes = { ":", "/", "?" } })
+      -- Disable Python remote plugin
+      wilder.set_option("use_python_remote_plugin", 0)
+
+      wilder.set_option("pipeline", {
+        wilder.branch(
+          wilder.cmdline_pipeline({
+            fuzzy = 1,
+            fuzzy_filter = wilder.lua_fzy_filter(),
+          }),
+          wilder.vim_search_pipeline()
+        ),
+      })
+
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
+          highlighter = wilder.lua_fzy_highlighter(),
+          highlights = {
+            accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 1 }, { a = 1 }, { foreground = Palette.red } }),
+          },
+          left = {
+            " ",
+            wilder.popupmenu_devicons(),
+          },
+          right = {
+            " ",
+            wilder.popupmenu_scrollbar(),
+          },
+          -- 'single', 'double', 'rounded' or 'solid'
+          -- can also be a list of 8 characters, see :h wilder#popupmenu_palette_theme() for more details
+          border = "rounded",
+          max_height = "75%", -- max height of the palette
+          min_height = 0, -- set to the same as 'max_height' for a fixed height window
+          prompt_position = "top", -- 'top' or 'bottom' to set the location of the prompt
+          reverse = 0, -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
+        }))
+      )
+    end,
+  },
 }
