@@ -31,7 +31,6 @@ require("lazy").setup({
     { import = "plugins" },
   },
   install = {
-    missing = false, -- prevents lock-file from being inadvertently changed
     colorscheme = { "catppuccin", "habamax" },
   },
   performance = {

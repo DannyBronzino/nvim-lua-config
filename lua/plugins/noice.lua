@@ -43,6 +43,9 @@ return {
             ["cmp.entry.get_documentation"] = true,
           },
         },
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+        },
         views = {
           cmdline_popup = {
             position = {
