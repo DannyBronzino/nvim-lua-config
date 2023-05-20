@@ -201,14 +201,13 @@ return {
       -- Close buffer
       map("n", "<A-c>", "<cmd>BufferClose<CR>")
 
+      vim.api.nvim_set_hl(0, "BufferTabPageFill", {})
       -- Set barbar's options
       require("bufferline").setup({
         icons = {
           button = "",
         },
       })
-
-      vim.api.nvim_set_hl(0, "BufferTabPageFill", {})
     end,
   },
 
