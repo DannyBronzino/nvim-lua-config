@@ -61,6 +61,7 @@ return {
       })
 
       local lspconfig = require("lspconfig")
+      local coq = require("coq")
 
       local on_attach = function(client, bufnr)
         local abilities = client.server_capabilities
@@ -148,10 +149,7 @@ return {
         vim.notify(msg, "info")
       end
 
-      local cmpabilities = require("cmp_nvim_lsp").default_capabilities() -- enables cmp source
-
-      lspconfig.texlab.setup({
-        capabilities = cmpabilities,
+      lspconfig.texlab.setup(coq.lsp_ensure_capabilities({
         on_attach = on_attach,
         filetypes = { "latex", "bibtex" },
         settings = {
@@ -162,7 +160,7 @@ return {
             },
           },
         },
-      })
+      }))
 
       require("ltex_extra").setup({
         load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
@@ -181,21 +179,6 @@ return {
           },
         },
       })
-
-      -- lspconfig.ltex.setup({
-      -- -- capabilities = cmpabilities,
-      -- on_attach = on_attach,
-      -- filetypes = { "latex", "bibtex" },
-      -- settings = {
-      -- ltex = {
-      -- additionalRules = {
-      -- enablePickyRules = false,
-      -- motherTongue = "en-US",
-      -- },
-      -- -- checkFrequency = "save",
-      -- },
-      -- },
-      -- })
     end,
   },
 }

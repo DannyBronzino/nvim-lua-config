@@ -60,7 +60,7 @@ return {
               information = { "bold" },
             },
           },
-          cmp = true,
+          cmp = false,
           gitsigns = true,
           leap = true,
           barbar = true,
@@ -248,7 +248,7 @@ return {
           enabled = false,
         },
         popupmenu = {
-          backend = "cmp",
+          backend = "nui",
         },
         commands = {
           history = {
@@ -267,7 +267,7 @@ return {
             -- override the lsp markdown formatter with Noice
             ["vim.lsp.util.stylize_markdown"] = true,
             -- override cmp documentation with Noice (needs the other options to work)
-            ["cmp.entry.get_documentation"] = true,
+            ["cmp.entry.get_documentation"] = false,
           },
         },
         views = {
