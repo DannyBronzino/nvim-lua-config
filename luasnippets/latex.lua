@@ -74,8 +74,19 @@ ls.add_snippets("latex", {
 })
 
 ls.add_snippets("latex", {
-  s({ trig = "...", name = "Ellipsis", dscr = "\\ldots", wordTrig = false }, t("\\ldots")),
+  -- s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots{}")),
 
+  s(
+    { trig = [[(%w*)%.%.%.]], regTrig = true },
+    f(function(_, snip)
+      local ellipsis = [[\ldots{}]]
+      if string.match(snip.captures[1], [[%w+]]) then
+        return snip.captures[1] .. " " .. ellipsis
+      else
+        return ellipsis
+      end
+    end, {})
+  ),
   -- use csquotes package
   s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
 
