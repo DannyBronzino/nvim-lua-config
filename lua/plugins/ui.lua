@@ -95,6 +95,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
+    enabled = false,
     config = function()
       -- show word count
       local function get_words()
@@ -173,6 +174,7 @@ return {
   {
     "romgrk/barbar.nvim",
     lazy = false,
+    enabled = false,
     config = function()
       -- Move to previous/next
       map("n", "<A-,>", "<cmd>BufferPrevious<CR>")
@@ -214,6 +216,7 @@ return {
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
+    lazy = false,
     version = "*",
     dependencies = {
       "SmiteshP/nvim-navic",

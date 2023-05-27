@@ -14,6 +14,11 @@ return {
       require("mini.bracketed").setup()
       -- require("mini.animate").setup({}) -- animations
       require("mini.trailspace").setup() -- identify and remove trailing spaces
+      require("mini.tabline").setup()
+      require("mini.bufremove").setup()
+      require("mini.statusline").setup({
+        set_vim_settings = false,
+      })
 
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = "*",
@@ -24,8 +29,6 @@ return {
         end,
         desc = "trim empty spaces and lines",
       })
-
-      require("mini.bufremove").setup({})
 
       map("n", "<a-c>", function()
         require("mini.bufremove").delete()
