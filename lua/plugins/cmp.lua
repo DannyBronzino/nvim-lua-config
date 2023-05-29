@@ -80,7 +80,7 @@ return {
           ["<c-d>"] = cmp.mapping.scroll_docs(-3),
         }),
         sources = cmp.config.sources({
-          { name = "path" }, -- for path completion
+          { name = "async_path" }, -- for path completion
           { name = "buffer", keyword_length = 2 },
           { name = "luasnip" }, -- for luasnip
           {
@@ -105,7 +105,7 @@ return {
               omni = "[Omni]",
               luasnip = "[Snip]",
               nvim_lsp = "[LSP]",
-              path = "[Path]",
+              async_path = "[Path]",
               buffer = "[Buffer]",
               latex_symbols = "[Symbol]",
               -- digraphs = "[Digraphs]",
@@ -120,7 +120,7 @@ return {
           -- { name = "omni" },
           { name = "luasnip" }, -- for luasnip
           { name = "buffer", keyword_length = 2 },
-          { name = "path" }, -- for path completion
+          { name = "async_path" }, -- for path completion
           {
             name = "latex_symbols",
             option = {
@@ -134,7 +134,7 @@ return {
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = "path" },
+          { name = "async_path" },
           { name = "cmdline" },
         }),
       })
@@ -154,7 +154,7 @@ return {
 
   { "kdheepak/cmp-latex-symbols", event = "InsertEnter" },
 
-  { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdLineEnter" } },
+  { "FelipeLema/cmp-async-path", event = { "InsertEnter", "CmdLineEnter" } },
 
   { "hrsh7th/cmp-cmdline", event = "CmdLineEnter" },
 
