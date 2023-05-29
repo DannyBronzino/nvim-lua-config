@@ -76,8 +76,4 @@ vim.cmd([[
 for ch in [',', '.', '!', '?', ';', ':']
   execute printf('inoremap %s %s<C-g>u', ch, ch)
 endfor
-
-" Move current visual-line selection up and down
-xnoremap <silent> <A-k> :<C-U>call utils#MoveSelection('up')<CR>
-xnoremap <silent> <A-j> :<C-U>call utils#MoveSelection('down')<CR>
 ]])
