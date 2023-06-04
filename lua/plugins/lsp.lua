@@ -22,7 +22,6 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    ft = { "latex", "bibtex" },
     dependencies = {
       {
         "williamboman/mason.nvim",
