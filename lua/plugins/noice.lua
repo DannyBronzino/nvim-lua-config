@@ -50,7 +50,7 @@ return {
               col = "100%",
             },
             size = {
-              width = "auto",
+              width = "66%",
               height = "auto",
             },
           },
