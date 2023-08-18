@@ -19,6 +19,7 @@ return {
       require("mini.statusline").setup({
         set_vim_settings = false,
       })
+      require("mini.files").setup()
 
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = "*",
@@ -33,6 +34,10 @@ return {
       map("n", "<a-c>", function()
         require("mini.bufremove").delete()
       end, { desc = "delete buffer" })
+
+      map("n", "<leader>fs", function()
+        require("mini.files").open()
+      end, { desc = "open MiniFiles" })
     end,
   },
 }
