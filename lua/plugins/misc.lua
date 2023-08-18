@@ -5,13 +5,6 @@ return {
     lazy = true,
   },
 
-  -- file manager plugin
-  {
-    "stevearc/oil.nvim",
-    lazy = false,
-    config = true,
-  },
-
   -- allows using <tab> in Insert to jump out of brackets or quotes
   {
     "abecodes/tabout.nvim",
