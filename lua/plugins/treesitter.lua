@@ -22,6 +22,7 @@ return {
   -- doesn't always load if you make it optional (e.g. use an event)
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     dependencies = {
       -- more textobjects
       "vim-matchup",

@@ -1,27 +1,9 @@
 local map = require("utils").map
 
 return {
-  -- vimtex, for latex editing
-  {
-    "lervag/vimtex",
-    config = function()
-      -- open LaTeX documentation in browser
-      map("n", "<c-k>", [[<plug>(vimtex-doc-package)]])
-
-      -- set up TOC
-      vim.g.vimtex_toc_config = {
-        layer_status = { include = 0 },
-        split_pos = "vert rightbelow",
-        split_width = 30,
-        show_help = 0,
-      }
-    end,
-    ft = { "latex", "bibtex" },
-    enabled = false,
-  },
-
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     dependencies = {
       {
         "williamboman/mason.nvim",

@@ -3,7 +3,7 @@ local map = require("utils").map
 return {
   {
     "folke/noice.nvim",
-    lazy = false,
+    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       {

@@ -3,7 +3,7 @@ local map = require("utils").map
 return {
   {
     "ibhagwan/fzf-lua",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       local actions = require("fzf-lua.actions")
       require("fzf-lua").setup({
