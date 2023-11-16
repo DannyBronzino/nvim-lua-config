@@ -81,8 +81,8 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "async_path" }, -- for path completion
-          { name = "buffer", keyword_length = 2 },
-          { name = "luasnip" }, -- for luasnip
+          -- { name = "buffer", keyword_length = 2 },
+          -- { name = "luasnip" }, -- for luasnip
           {
             name = "latex_symbols",
             option = {
@@ -118,8 +118,8 @@ return {
         sources = {
           { name = "nvim_lsp" },
           -- { name = "omni" },
-          { name = "luasnip" }, -- for luasnip
-          { name = "buffer", keyword_length = 2 },
+          -- { name = "luasnip" }, -- for luasnip
+          -- { name = "buffer", keyword_length = 2 },
           { name = "async_path" }, -- for path completion
           {
             name = "latex_symbols",
