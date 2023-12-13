@@ -62,13 +62,13 @@ return {
 
         if abilities.documentSymbolProvider then
           buf_map("n", "g0", function()
-            fzf.lsp_document_symbols({ fzf_cli_args = "--with-nth 2.." })
+            fzf.lsp_document_symbols()
           end, { desc = "document symbols" })
         end
 
         if abilities.workspaceSymbolProvider then
           buf_map("n", "<leader>g0", function()
-            fzf.lsp_workspace_symbols({ fzf_cli_args = "--with-nth 2.." })
+            fzf.lsp_workspace_symbols()
           end, { desc = "workspace symbol live" })
         end
 
