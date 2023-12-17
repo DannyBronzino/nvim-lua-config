@@ -94,7 +94,7 @@ return {
           completeopt = "menu,noselect",
         },
         experimental = {
-          ghost_text = { true }, -- adds ghost text that completes the word in buffer
+          ghost_text = { hl_group = "String" }, -- adds ghost text that completes the word in buffer
           -- for some reason this needs to be a table right now
         },
         formatting = {
