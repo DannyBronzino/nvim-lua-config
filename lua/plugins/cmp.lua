@@ -118,7 +118,7 @@ return {
         sources = {
           { name = "nvim_lsp" },
           -- { name = "omni" },
-          -- { name = "luasnip" }, -- for luasnip
+          { name = "luasnip" }, -- for luasnip
           -- { name = "buffer", keyword_length = 2 },
           { name = "async_path" }, -- for path completion
           {
