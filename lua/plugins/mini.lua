@@ -20,6 +20,15 @@ return {
         set_vim_settings = false,
       })
       require("mini.files").setup()
+      require("mini.pairs").setup()
+
+      local map_bs = function(lhs, rhs)
+        vim.keymap.set("i", lhs, rhs, { expr = true, replace_keycodes = false })
+      end
+
+      map_bs("<C-h>", "v:lua.MiniPairs.bs()")
+      map_bs("<C-w>", 'v:lua.MiniPairs.bs("\23")')
+      map_bs("<C-u>", 'v:lua.MiniPairs.bs("\21")')
 
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = "*",
