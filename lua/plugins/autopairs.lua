@@ -2,7 +2,7 @@ return {
   -- automatic pair insertion while typing
   {
     "windwp/nvim-autopairs",
-    enabled = false,
+    enabled = true,
     config = true,
     event = "InsertEnter",
   },
