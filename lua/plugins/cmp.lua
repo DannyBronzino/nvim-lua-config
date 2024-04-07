@@ -5,22 +5,36 @@ return {
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
+    version = "v2.*",
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
     config = function()
-      local luasnip = require("luasnip")
+      local ls = require("luasnip")
 
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my_snippets" } })
       require("luasnip.loaders.from_lua").lazy_load()
 
-      luasnip.filetype_extend("bibtex", { "latex" })
+      ls.filetype_extend("bibtex", { "latex" })
 
-      luasnip.config.set_config({ enable_autosnippets = true })
+      ls.config.set_config({ enable_autosnippets = true })
 
-      -- for changing choices in choiceNodes (not strictly necessary for a basic setup).
-      map({ "i", "s" }, "<c-l>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<c-l>'", { expr = true })
+      map({ "i", "s" }, "<c-n>", function()
+        ls.jump(1)
+      end, { silent = true })
+
+      map({ "i", "s" }, "<c-p>", function()
+        ls.jump(-1)
+      end, { silent = true })
+
+      map({ "i", "s" }, "<c-e>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, { silent = true })
     end,
   },
 
