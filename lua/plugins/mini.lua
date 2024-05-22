@@ -16,6 +16,8 @@ return {
       require("mini.trailspace").setup() -- identify and remove trailing spaces
       require("mini.tabline").setup()
       require("mini.bufremove").setup()
+      require("mini.git").setup()
+      require("mini.diff").setup()
       require("mini.statusline").setup({
         set_vim_settings = false,
       })
