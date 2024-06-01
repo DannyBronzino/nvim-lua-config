@@ -151,6 +151,7 @@ return {
         path = ".ltex", -- string : path to store dictionaries. Relative path uses current working directory
         server_opts = {
           on_attach = on_attach,
+          capabilities = cmpabilities,
           filetypes = { "latex", "bibtex" },
           settings = {
             ltex = {
@@ -162,21 +163,6 @@ return {
           },
         },
       })
-
-      -- lspconfig.ltex.setup({
-      -- -- capabilities = cmpabilities,
-      -- on_attach = on_attach,
-      -- filetypes = { "latex", "bibtex" },
-      -- settings = {
-      -- ltex = {
-      -- additionalRules = {
-      -- enablePickyRules = false,
-      -- motherTongue = "en-US",
-      -- },
-      -- -- checkFrequency = "save",
-      -- },
-      -- },
-      -- })
     end,
   },
 }
