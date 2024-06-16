@@ -71,6 +71,8 @@ map({ "n", "i" }, "<insert>", function()
   vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
 end, { desc = "pastes system clipboard contents at cursor" })
 
+map("n", "<a-q>", "<cmd>q<cr>", { desc = "quits" })
+
 vim.cmd([[
 " Break inserted text into smaller undo units.
 for ch in [',', '.', '!', '?', ';', ':']
