@@ -42,19 +42,7 @@ return {
   -- exit Insert mode with jj or jk or whatever
   {
     "max397574/better-escape.nvim",
-    opts = {
-      -- lua, default settings
-      mapping = { "jk", "jj" },
-      -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-      timeout = 300,
-      -- clear line after escaping if there is only whitespace
-      clear_empty_lines = false,
-      -- function for exiting
-      keys = function()
-        return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
-      end,
-    },
-    event = "InsertEnter",
+    config = true,
   },
 
   -- git in the gutter
