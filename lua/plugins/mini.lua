@@ -7,6 +7,7 @@ return {
     -- event = "VeryLazy",
     version = false,
     config = function()
+      require("mini.icons").setup() -- icons
       require("mini.ai").setup() -- adds more textobjects
       require("mini.misc").setup() -- miscellaneous functions
       require("mini.misc").setup_restore_cursor()
@@ -21,6 +22,7 @@ return {
       require("mini.statusline").setup({
         set_vim_settings = false,
       })
+      vim.api.nvim_set_hl(0, "MiniStatuslineFilename", {})
       -- require("mini.files").setup()
       -- require("mini.pairs").setup()
 
