@@ -62,7 +62,7 @@ return {
           },
           cmp = true,
           gitsigns = true,
-          leap = true,
+          leap = false,
           barbar = true,
           markdown = true,
           notify = true,
@@ -80,11 +80,12 @@ return {
         custom_highlights = {
           Comment = { fg = Palette.subtext0 },
           LineNr = { fg = Palette.overlay2 },
-          DiagnosticUnderlineError = { fg = Palette.rosewater, italic = true, bold = true },
-          DiagnosticUnderlineHint = { fg = Palette.rosewater, italic = true, bold = true },
-          DiagnosticUnderlineWarn = { fg = Palette.rosewater, italic = true, bold = true },
-          DiagnosticUnderlineInfo = { fg = Palette.rosewater, italic = true, bold = true },
+          DiagnosticUnderlineError = { fg = Palette.red, italic = true, bold = true },
+          DiagnosticUnderlineHint = { fg = Palette.red, italic = true, bold = true },
+          DiagnosticUnderlineWarn = { fg = Palette.red, italic = true, bold = true },
+          DiagnosticUnderlineInfo = { fg = Palette.red, italic = true, bold = true },
           String = { fg = Palette.rosewater },
+          Normal = { fg = Palette.flamingo },
         },
       })
       vim.cmd([[colorscheme catppuccin]])
