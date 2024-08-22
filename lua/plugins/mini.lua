@@ -16,12 +16,12 @@ return {
       -- require("mini.animate").setup({}) -- animations
       require("mini.trailspace").setup() -- identify and remove trailing spaces
       require("mini.tabline").setup()
+      vim.api.nvim_set_hl(0, "MiniTablineFill", {})
+      vim.api.nvim_set_hl(0, "MiniTablineCurrent", { bg = "NONE" })
       require("mini.bufremove").setup()
       require("mini.git").setup()
       require("mini.diff").setup()
-      require("mini.statusline").setup({
-        set_vim_settings = false,
-      })
+      require("mini.statusline").setup()
       vim.api.nvim_set_hl(0, "MiniStatuslineFilename", {})
       -- require("mini.files").setup()
       -- require("mini.pairs").setup()
