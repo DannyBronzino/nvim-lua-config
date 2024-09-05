@@ -14,7 +14,7 @@ return {
         -- `<any_function>.({ gl ... })`
         global_resume_query = true, -- include typed query in `resume`?
         winopts = {
-          -- split         = "belowright new",-- open in a split instead?
+          -- split = "belowright new", -- open in a split instead?
           -- "belowright new"  : split below
           -- "aboveleft new"   : split above
           -- "belowright vnew" : split right
@@ -29,29 +29,12 @@ return {
           -- to manually draw the border characters around the preview
           -- window, can be set to 'false' to remove all borders or to
           -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+          border = false,
+          backdrop = 66,
           fullscreen = false, -- start fullscreen?
           -- highlights should optimally be set by the colorscheme using
           -- FzfLuaXXX highlights. If your colorscheme doesn't set these
           -- or you wish to override its defaults use these:
-          --[[ hl = {
-      normal         = 'Normal',        -- window normal color (fg+bg)
-      border         = 'FloatBorder',   -- border color
-      help_normal    = 'Normal',        -- <F1> window normal
-      help_border    = 'FloatBorder',   -- <F1> window border
-      -- Only used with the builtin previewer:
-      cursor         = 'Cursor',        -- cursor highlight (grep/LSP matches)
-      cursorline     = 'CursorLine',    -- cursor line
-      cursorlinenr   = 'CursorLineNr',  -- cursor line number
-      search         = 'IncSearch',     -- search matches (ctags|help)
-      title          = 'Normal',        -- preview border title (file/buffer)
-      -- Only used with 'winopts.preview.scrollbar = 'float'
-      scrollfloat_e  = 'PmenuSbar',     -- scrollbar "empty" section highlight
-      scrollfloat_f  = 'PmenuThumb',    -- scrollbar "full" section highlight
-      -- Only used with 'winopts.preview.scrollbar = 'border'
-      scrollborder_e = 'FloatBorder',   -- scrollbar "empty" section highlight
-      scrollborder_f = 'FloatBorder',   -- scrollbar "full" section highlight
-    }, ]]
           preview = {
             -- default     = 'bat',           -- override the default previewer?
             -- default uses the 'builtin' previewer
@@ -451,7 +434,7 @@ return {
           },
           fzf_opts = {
             -- hide tabnr
-            ["--delimiter"] = "'[\\):]'",
+            ["--delimiter"] = "[\\):]",
             ["--with-nth"] = "2..",
           },
         },
@@ -463,7 +446,7 @@ return {
           fzf_opts = {
             -- do not include bufnr in fuzzy matching
             -- tiebreak by line no.
-            ["--delimiter"] = "'[\\]:]'",
+            ["--delimiter"] = "[\\]:]",
             ["--nth"] = "2..",
             ["--tiebreak"] = "index",
           },
