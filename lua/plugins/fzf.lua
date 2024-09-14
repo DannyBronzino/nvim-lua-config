@@ -7,29 +7,29 @@ return {
     config = function()
       local actions = require("fzf-lua.actions")
       require("fzf-lua").setup({
-        -- fzf_bin         = 'sk',            -- use skim instead of fzf?
+        -- fzf_bin = "sk", -- use skim instead of fzf?
         -- https://github.com/lotabout/skim
         global_resume = true, -- enable global `resume`?
         -- can also be sent individually:
         -- `<any_function>.({ gl ... })`
         global_resume_query = true, -- include typed query in `resume`?
         winopts = {
-          -- split = "belowright new", -- open in a split instead?
+          split = "belowright new", -- open in a split instead?
           -- "belowright new"  : split below
           -- "aboveleft new"   : split above
           -- "belowright vnew" : split right
           -- "aboveleft vnew   : split left
           -- Only valid when using a float window
           -- (i.e. when 'split' is not defined, default)
-          height = 0.9, -- window height
-          width = 0.55, -- window width
+          height = 0.8, -- window height
+          width = 0.5, -- window width
           row = 0.2, -- window row position (0=top, 1=bottom)
           col = 0.5, -- window col position (0=left, 1=right)
           -- border argument passthrough to nvim_open_win(), also used
           -- to manually draw the border characters around the preview
           -- window, can be set to 'false' to remove all borders or to
           -- 'none', 'single', 'double', 'thicc' or 'rounded' (default)
-          border = false,
+          border = "thicc",
           backdrop = 66,
           fullscreen = false, -- start fullscreen?
           -- highlights should optimally be set by the colorscheme using
@@ -70,12 +70,6 @@ return {
               foldmethod = "manual",
             },
           },
-          on_create = function()
-            -- called once upon creation of the fzf main window
-            -- can be used to add custom fzf-lua mappings, e.g:
-            --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
-            --     { silent = true, noremap = true })
-          end,
         },
         keymap = {
           -- These override the default tables completely
