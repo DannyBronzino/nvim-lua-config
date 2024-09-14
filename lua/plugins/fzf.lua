@@ -620,12 +620,8 @@ return {
 
       local fzf = require("fzf-lua")
 
-      local files_git_or_cwd = function()
-        -- version 2: uses `git ls-files` for git dirs
-        -- change to `false` if you'd like to see a message when not in a git repo
-        local opts = { winopts = { height = 0.66, width = 0.5 } }
-
-        if fzf.path.is_git_repo(vim.loop.cwd(), true) then
+      local files_git_or_cwd = function(opts)
+        if fzf.path.git_root(opts) then
           fzf.git_files(opts)
         else
           fzf.files(opts)
