@@ -94,8 +94,6 @@ return {
 
       map("c", "<c-o>", function()
         require("noice").redirect(vim.fn.getcmdline())
-        local key = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
-        vim.api.nvim_feedkeys(key, "n", true)
       end, { desc = "Redirect Cmdline" })
     end,
   },
