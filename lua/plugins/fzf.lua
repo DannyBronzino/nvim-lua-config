@@ -14,7 +14,7 @@ return {
         -- `<any_function>.({ gl ... })`
         global_resume_query = true, -- include typed query in `resume`?
         winopts = {
-          split = "belowright new", -- open in a split instead?
+          -- split = "belowright new", -- open in a split instead?
           -- "belowright new"  : split below
           -- "aboveleft new"   : split above
           -- "belowright vnew" : split right
@@ -615,7 +615,8 @@ return {
       local fzf = require("fzf-lua")
 
       local files_git_or_cwd = function(opts)
-        if fzf.path.git_root(opts) then
+        local opts = opts or {}
+        if fzf.path.git_root(opts, true) then
           fzf.git_files(opts)
         else
           fzf.files(opts)
