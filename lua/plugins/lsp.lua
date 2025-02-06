@@ -18,7 +18,6 @@ return {
         opts = {
           ensure_installed = {
             "texlab",
-            "ltex-ls",
           },
           auto_update = true,
           run_on_start = true,
@@ -129,7 +128,9 @@ return {
         vim.notify(msg, "info")
       end
 
-      local cmpabilities = require("cmp_nvim_lsp").default_capabilities() -- enables cmp source
+      local cmpabilities = require("blink.cmp").get_lsp_capabilities({
+        textDocument = { completion = { completionItem = { snippetSupport = true } } },
+      })
 
       lspconfig.texlab.setup({
         capabilities = cmpabilities,
@@ -150,6 +151,7 @@ return {
         init_check = true, -- boolean : whether to load dictionaries on startup
         path = ".ltex", -- string : path to store dictionaries. Relative path uses current working directory
         server_opts = {
+          cmd = { "ltex-ls-plus" },
           on_attach = on_attach,
           capabilities = cmpabilities,
           filetypes = { "latex", "bibtex" },
