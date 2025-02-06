@@ -91,10 +91,6 @@ return {
           },
         },
       })
-
-      map("c", "<c-o>", function()
-        require("noice").redirect(vim.fn.getcmdline())
-      end, { desc = "Redirect Cmdline" })
     end,
   },
 }
