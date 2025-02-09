@@ -128,12 +128,12 @@ return {
         vim.notify(msg, "info")
       end
 
-      local cmpabilities = require("blink.cmp").get_lsp_capabilities({
+      local capabilities = require("blink.cmp").get_lsp_capabilities({
         textDocument = { completion = { completionItem = { snippetSupport = true } } },
       })
 
       lspconfig.texlab.setup({
-        capabilities = cmpabilities,
+        capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "latex", "bibtex" },
         settings = {
@@ -153,7 +153,7 @@ return {
         server_opts = {
           cmd = { "ltex-ls-plus" },
           on_attach = on_attach,
-          capabilities = cmpabilities,
+          capabilities = capabilities,
           filetypes = { "latex", "bibtex" },
           settings = {
             ltex = {

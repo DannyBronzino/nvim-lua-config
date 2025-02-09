@@ -60,7 +60,7 @@ return {
               information = { "bold" },
             },
           },
-          cmp = true,
+          blink_cmp = true,
           gitsigns = true,
           leap = false,
           barbar = true,
