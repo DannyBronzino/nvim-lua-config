@@ -7,32 +7,22 @@ return {
     -- event = "VeryLazy",
     version = false,
     config = function()
-      require("mini.icons").setup() -- icons
       require("mini.ai").setup() -- adds more textobjects
+      require("mini.bracketed").setup()
+      require("mini.bufremove").setup()
+      require("mini.diff").setup()
+      require("mini.git").setup()
+      require("mini.icons").setup() -- icons
       require("mini.misc").setup() -- miscellaneous functions
       require("mini.misc").setup_restore_cursor()
       require("mini.move").setup()
-      require("mini.bracketed").setup()
-      -- require("mini.animate").setup({}) -- animations
-      require("mini.trailspace").setup() -- identify and remove trailing spaces
-      require("mini.tabline").setup()
-      vim.api.nvim_set_hl(0, "MiniTablineFill", {})
-      vim.api.nvim_set_hl(0, "MiniTablineCurrent", { bg = "NONE" })
-      require("mini.bufremove").setup()
-      require("mini.git").setup()
-      require("mini.diff").setup()
       require("mini.statusline").setup()
+      require("mini.tabline").setup()
+      require("mini.trailspace").setup() -- identify and remove trailing spaces
+
       vim.api.nvim_set_hl(0, "MiniStatuslineFilename", {})
-      -- require("mini.files").setup()
-      -- require("mini.pairs").setup()
-
-      -- local map_bs = function(lhs, rhs)
-      -- vim.keymap.set("i", lhs, rhs, { expr = true, replace_keycodes = false })
-      -- end
-
-      -- map_bs("<C-h>", "v:lua.MiniPairs.bs()")
-      -- map_bs("<C-w>", 'v:lua.MiniPairs.bs("\23")')
-      -- map_bs("<C-u>", 'v:lua.MiniPairs.bs("\21")')
+      vim.api.nvim_set_hl(0, "MiniTablineCurrent", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", {})
 
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = "*",
@@ -47,10 +37,6 @@ return {
       map("n", "<a-c>", function()
         require("mini.bufremove").delete()
       end, { desc = "delete buffer" })
-
-      -- map("n", "<leader>fs", function()
-      -- require("mini.files").open()
-      -- end, { desc = "open MiniFiles" })
     end,
   },
 }

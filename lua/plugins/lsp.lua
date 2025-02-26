@@ -51,31 +51,31 @@ return {
           return require("utils").map(mode, left_hand_side, right_hand_side, opts)
         end
 
-        local fzf = require("fzf-lua")
+        -- local fzf = require("fzf-lua")
 
-        if abilities.referencesProvider then
-          buf_map("n", "gr", function()
-            fzf.lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
-          end, { desc = "async reference" })
-        end
+        -- if abilities.referencesProvider then
+        -- buf_map("n", "gr", function()
+        -- fzf.lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
+        -- end, { desc = "async reference" })
+        -- end
 
-        if abilities.documentSymbolProvider then
-          buf_map("n", "g0", function()
-            fzf.lsp_document_symbols()
-          end, { desc = "document symbols" })
-        end
+        -- if abilities.documentSymbolProvider then
+        -- buf_map("n", "g0", function()
+        -- fzf.lsp_document_symbols()
+        -- end, { desc = "document symbols" })
+        -- end
 
-        if abilities.workspaceSymbolProvider then
-          buf_map("n", "<leader>g0", function()
-            fzf.lsp_workspace_symbols()
-          end, { desc = "workspace symbol live" })
-        end
+        -- if abilities.workspaceSymbolProvider then
+        -- buf_map("n", "<leader>g0", function()
+        -- fzf.lsp_workspace_symbols()
+        -- end, { desc = "workspace symbol live" })
+        -- end
 
-        if abilities.definitionProvider then
-          buf_map("n", "gd", function()
-            fzf.lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
-          end, { desc = "definition preview" })
-        end
+        -- if abilities.definitionProvider then
+        -- buf_map("n", "gd", function()
+        -- fzf.lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
+        -- end, { desc = "definition preview" })
+        -- end
 
         if abilities.hoverProvider then
           buf_map("n", "K", function()
@@ -85,8 +85,8 @@ return {
 
         if abilities.codeActionProvider then
           buf_map("n", "ga", function()
-            -- vim.lsp.buf.code_action()
-            fzf.lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
+            vim.lsp.buf.code_action()
+            -- fzf.lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
           end, { desc = "show code action" })
         end
 
