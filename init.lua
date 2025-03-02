@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd("User", {
   callback = function()
     require("config.autocmds")
     require("config.keymaps")
+    vim.g.snacks_animate = false
   end,
 })
 
