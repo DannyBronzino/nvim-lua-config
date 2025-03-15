@@ -29,5 +29,12 @@ return {
       end,
       desc = "Open All Pickers",
     },
+    {
+      "<leader>g",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "Open Lazygit",
+    },
   },
 }
