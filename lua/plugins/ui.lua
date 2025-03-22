@@ -86,7 +86,7 @@ return {
           DiagnosticUnderlineWarn = { fg = Palette.red, italic = true, bold = true },
           DiagnosticUnderlineInfo = { fg = Palette.red, italic = true, bold = true },
           String = { fg = Palette.rosewater },
-          -- Normal = { fg = Palette.flamingo },
+          Normal = { fg = Palette.yellow },
         },
       })
       vim.cmd([[colorscheme catppuccin]])
