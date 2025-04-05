@@ -17,7 +17,7 @@ local lambda = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
 local utils = require("utils")
 
-ls.add_snippets("latex", {
+ls.add_snippets("tex", {
   s({
     trig = "autocite",
     name = "Full Autocite",
@@ -73,7 +73,7 @@ ls.add_snippets("latex", {
   }),
 })
 
-ls.add_snippets("latex", {
+ls.add_snippets("tex", {
   -- s({ trig = "...", name = "Ellipsis", dscr = "\\ldots{}", wordTrig = false }, t("\\ldots{}")),
 
   s(

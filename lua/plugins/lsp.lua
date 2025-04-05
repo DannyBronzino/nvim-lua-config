@@ -135,7 +135,7 @@ return {
       lspconfig.texlab.setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        filetypes = { "latex", "bibtex" },
+        filetypes = { "tex", "bibtex" },
         settings = {
           texlab = {
             chktex = {
@@ -154,7 +154,7 @@ return {
           cmd = { "ltex-ls-plus" },
           on_attach = on_attach,
           capabilities = capabilities,
-          filetypes = { "latex", "bibtex" },
+          filetypes = { "tex", "bibtex" },
           settings = {
             ltex = {
               additionalRules = {
