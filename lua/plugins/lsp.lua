@@ -18,6 +18,9 @@ return {
         opts = {
           ensure_installed = {
             "texlab",
+            "ltex-ls-plus",
+            "bibtex-tidy",
+            "latexindent",
           },
           auto_update = true,
           run_on_start = true,
@@ -39,8 +42,6 @@ return {
           border = "rounded",
         },
       })
-
-      local lspconfig = require("lspconfig")
 
       local on_attach = function(client, bufnr)
         local abilities = client.server_capabilities
@@ -132,7 +133,9 @@ return {
         textDocument = { completion = { completionItem = { snippetSupport = true } } },
       })
 
-      lspconfig.texlab.setup({
+      vim.lsp.enable("texlab")
+
+      vim.lsp.config("texlab", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "tex", "bibtex" },
