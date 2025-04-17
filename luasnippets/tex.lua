@@ -88,8 +88,8 @@ ls.add_snippets("tex", {
     end, {})
   ),
   -- use csquotes package
-  s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), i(0), t("}") }),
+  s({ trig = "\\tq", name = "Text Quote", dscr = "\\textquote" }, { t("\\textquote{"), i(1), t("}"), i(2) }),
 
   -- add this to preampble: \newcommand{\mentalquote}[1]{«{#1}»}
-  s({ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" }, { t("\\mentalquote{"), i(1), i(0), t("}") }),
+  s({ trig = "\\mq", name = "Mental Quote", dscr = "\\mentalquote" }, { t("\\mentalquote{"), i(1), t("}", i(0)) }),
 }, { type = "autosnippets" })
