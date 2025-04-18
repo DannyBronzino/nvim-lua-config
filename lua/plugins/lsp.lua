@@ -29,10 +29,10 @@ return {
       },
       "barreiroleo/ltex_extra.nvim",
       {
-        "onsails/diaglist.nvim",
-        config = function()
-          require("diaglist").init()
-        end,
+
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
       },
     },
     config = function()
@@ -99,18 +99,12 @@ return {
           vim.diagnostic.open_float({ scope = "line" })
         end, { desc = "show cursor diagnostics" })
 
-        buf_map("n", "<space>d", function()
-          -- fzf.diagnostics_document({ fzf_cli_args = "--delimiter=':' --with-nth='2..'" })
-          require("diaglist").open_all_diagnostics()
-        end, { desc = "show buffer diagnostics" })
-
-        -- buf_map("n", "gn", function()
-        -- vim.diagnostic.goto_next()
-        -- end, { desc = "next diagnostic" })
-
-        -- buf_map("n", "gp", function()
-        -- vim.diagnostic.goto_prev()
-        -- end, { desc = "previous diagnostic" })
+        buf_map(
+          "n",
+          "<space>d",
+          "<cmd>Trouble diagnostics toggle focus = false<cr>",
+          { desc = "show buffer diagnostics" }
+        )
 
         if abilities.documentFormattingProvider then
           buf_map("n", "<Space>f", function()
