@@ -52,32 +52,6 @@ return {
           return require("utils").map(mode, left_hand_side, right_hand_side, opts)
         end
 
-        -- local fzf = require("fzf-lua")
-
-        -- if abilities.referencesProvider then
-        -- buf_map("n", "gr", function()
-        -- fzf.lsp_references({ winopts = { preview = { hidden = "nohidden" } } })
-        -- end, { desc = "async reference" })
-        -- end
-
-        -- if abilities.documentSymbolProvider then
-        -- buf_map("n", "g0", function()
-        -- fzf.lsp_document_symbols()
-        -- end, { desc = "document symbols" })
-        -- end
-
-        -- if abilities.workspaceSymbolProvider then
-        -- buf_map("n", "<leader>g0", function()
-        -- fzf.lsp_workspace_symbols()
-        -- end, { desc = "workspace symbol live" })
-        -- end
-
-        -- if abilities.definitionProvider then
-        -- buf_map("n", "gd", function()
-        -- fzf.lsp_definitions({ winopts = { preview = { hidden = "nohidden" } } })
-        -- end, { desc = "definition preview" })
-        -- end
-
         if abilities.hoverProvider then
           buf_map("n", "K", function()
             vim.lsp.buf.hover()
@@ -87,7 +61,6 @@ return {
         if abilities.codeActionProvider then
           buf_map("n", "ga", function()
             vim.lsp.buf.code_action()
-            -- fzf.lsp_code_actions({ winopts = { height = 0.33, width = 0.4 } })
           end, { desc = "show code action" })
         end
 
@@ -111,12 +84,6 @@ return {
             vim.lsp.buf.format()
           end, { desc = "format" })
         end
-
-        -- if capabilities.renameProvider then
-        -- buf_map("n", "<F2>", function()
-        -- vim.lsp.buf.rename()
-        -- end, { desc = "rename" })
-        -- end
 
         -- send notification on server start
         local msg = string.format("Language server %s started!", client.name)
@@ -143,21 +110,25 @@ return {
         },
       })
 
-      require("ltex_extra").setup({
-        load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
-        init_check = true, -- boolean : whether to load dictionaries on startup
-        path = ".ltex", -- string : path to store dictionaries. Relative path uses current working directory
-        server_opts = {
-          cmd = { "ltex-ls-plus" },
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = { "tex", "bibtex" },
-          settings = {
-            ltex = {
-              additionalRules = {
-                enablePickyRules = true,
-                motherTongue = "en-US",
-              },
+      vim.lsp.enable("ltex_plus")
+
+      vim.lsp.config("ltex_plus", {
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
+          require("ltex_extra").setup({
+
+            load_langs = { "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
+            init_check = true, -- boolean : whether to load dictionaries on startup
+            path = ".ltex", -- string : path to store dictionaries. Relative path uses current working directory
+          })
+        end,
+        filetypes = { "tex", "bibtex" },
+        settings = {
+          ltex = {
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en-US",
             },
           },
         },
