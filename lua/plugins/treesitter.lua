@@ -22,6 +22,7 @@ return {
   -- doesn't always load if you make it optional (e.g. use an event)
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     lazy = false,
     dependencies = {
       -- more textobjects
