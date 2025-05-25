@@ -22,15 +22,21 @@ return {
   -- doesn't always load if you make it optional (e.g. use an event)
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main",
     lazy = false,
+    branch = "main",
+    build = ":TSUpdate",
     dependencies = {
-      -- more textobjects
+      -- matching bracket highlights
       "vim-matchup",
-      "nvim-treesitter/nvim-treesitter-textobjects",
+      -- more textobjects
+      -- {
+      --   "nvim-treesitter/nvim-treesitter-textobjects",
+      --   branch = "main",
+      -- },
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
         ensure_installed = { "latex", "bibtex", "markdown", "markdown_inline", "vim", "regex", "bash", "lua" },
         sync_install = true,
         highlight = {
@@ -90,8 +96,5 @@ return {
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       vim.opt.foldenable = false -- turn off initial folding
     end,
-
-    -- first run this will throw an error you can ignore
-    build = ":TSUpdate",
   },
 }
