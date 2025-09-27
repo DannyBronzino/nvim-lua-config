@@ -4,7 +4,7 @@ return {
   -- swiss army knife
   {
     "echasnovski/mini.nvim",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     version = false,
     config = function()
       require("mini.ai").setup() -- adds more textobjects
