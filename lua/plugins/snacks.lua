@@ -10,6 +10,7 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
+    git = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
     lazygit = { enabled = true },
@@ -32,7 +33,7 @@ return {
     {
       "<leader>g",
       function()
-        Snacks.lazygit()
+        Snacks.lazygit({ cwd = Snacks.git.get_root() })
       end,
       desc = "Open Lazygit",
     },
