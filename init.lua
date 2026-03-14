@@ -31,7 +31,7 @@ require("lazy").setup({
     { import = "plugins" },
   },
   install = {
-    colorscheme = { "catppuccin", "habamax" },
+    colorscheme = { "catppuccin-nvim", "habamax" },
   },
   performance = {
     rtp = {

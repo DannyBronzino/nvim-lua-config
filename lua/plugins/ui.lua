@@ -89,7 +89,7 @@ return {
           Normal = { fg = Palette.yellow },
         },
       })
-      vim.cmd([[colorscheme catppuccin]])
+      vim.cmd([[colorscheme catppuccin-nvim]])
     end,
   },
 
