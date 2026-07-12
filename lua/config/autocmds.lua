@@ -27,7 +27,7 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
 -- Highlight on yank
 autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.hl_op()
   end,
   -- you can create the group here instead
   group = augroup("YankHighlight", { clear = true }),
